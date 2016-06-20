@@ -1,1 +1,1 @@
-# culqi-woocommerce
+# Culqi WooCommerce Plugin
