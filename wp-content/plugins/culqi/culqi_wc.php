@@ -17,13 +17,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * Comprobar si WooCommerce está activo.
- **/
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
 
-
-    //cargar plugin
     add_action('plugins_loaded', 'init_wc_culqi_payment_gateway', 0);
 
     add_action('woocommerce_checkout_process', 'some_custom_checkout_field_process');
@@ -86,25 +81,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     function init_wc_culqi_payment_gateway()
     {
 
-        //salir si no esta activa la clase
         if (!class_exists('WC_Payment_Gateway')) {
             return;
         }
 
-        //definir ruta del plugin
         DEFINE('PLUGIN_DIR', plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__)) . '/');
 
-        /**
-         * Pasarela pago: Culqi
-         *
-         * Proporciona a culqi un Estándar de pasarela de pago.
-         *
-         * @class       WC_culqi
-         * @extends     WC_Payment_Gateway
-         * @version     2.1
-         * @package
-         * @author      Culqi
-         */
         class WC_culqi extends WC_Payment_Gateway
         {
 
@@ -115,45 +97,31 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 $this->includes();
                 $this->id = 'culqi';
-                //$this->icon = plugins_url( 'Culqi-WooCommerce/assets/images/cards.png', dirname( __FILE__ ) );
                 $this->icon = home_url() . '/wp-content/plugins/' . dirname(plugin_basename(__FILE__)) . '/assets/images/cards.png';
                 $this->method_title = __('Culqi', 'WC_culqi');
                 $this->method_description = __('Acepta tarjetas de crédito, débito o prepagadas.', 'WC_culqi');
-                //boton para seleccionar culqi enz la lista de pasarelas de pago
                 $this->order_button_text = __('Pagar', 'WC_culqi');
                 $this->has_fields = false;
                 $this->supports = array(
                     'products',
                     'refunds'
                 );
-                //Cargue los campos de formulario.
                 $this->init_form_fields();
-
-                //Cargue los ajustes.
                 $this->init_settings();
-
-                // definicion de variables
                 $this->title = 'Tarjeta de crédito o débito';
                 $this->description = 'Paga con tarjeta de crédito, débito o prepagada de todas las marcas.';
-                $this->sp_idSocio = $this->get_option('sp_idSocio');
-                $this->sp_key = $this->get_option('sp_key');
-                $this->sp_modo = $this->get_option('sp_modo');
-                $this->sp_nombre_comercio = get_bloginfo('name');
-                //$this->sp_valid_vence = $this->get_option('sp_valid_vence');
-                //$this->sp_vence = $this->get_option('sp_vence');
-
-                //add_action('woocommerce_checkout_process', 'my_custom_checkout_field_process');
+                $this->culqi_codigoComercio = $this->get_option('culqi_codigoComercio');
+                $this->culqi_key = $this->get_option('culqi_key');
+                $this->culqi_modo = $this->get_option('culqi_modo');
+                $this->culqi_nombre_comercio = get_bloginfo('name');
+                
                 add_action('woocommerce_api_' . strtolower(get_class($this)), array($this, 'check_response'));//1
-                /** Process the checkout **/
-                //add_action('woocommerce_after_order_notes', array($this, 'my_custom_checkout_field'));
-                //add_action('woocommerce_checkout_process', array($this, 'some_custom_checkout_field_process'));
                 add_action('woocommerce_receipt_culqi', array(&$this, 'receipt_page'));
                 add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
 
                 if (!$this->is_valid_for_use()) $this->enabled = false;
 
-                // Active logs.
-                if ('test' == $this->sp_modo) {
+                if ('test' == $this->culqi_modo) {
                     if (class_exists('WC_Logger')) {
                         $this->log = new WC_Logger();
                     } else {
@@ -162,15 +130,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
             }
 
-            /////CUSTOM////
-
             public function process_refund( $order_id, $amount = null ) {
+            
                 // Do your refund here. Refund $amount for the order with ID $order_id
 
-                Culqi::$llaveSecreta = $this->sp_key;
-                Culqi::$codigoComercio = $this->sp_idSocio;
+                Culqi::$llaveSecreta = $this->culqi_key;
+                Culqi::$codigoComercio = $this->culqi_codigoComercio;
 
-                if ($this->sp_modo == 'prod') {
+                if ($this->culqi_modo == 'prod') {
                     Culqi::$servidorBase = 'https://pago.culqi.com';
                 } else {
                     Culqi::$servidorBase = 'https://integ-pago.culqi.com';
@@ -203,8 +170,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             }
 
-            /////////
-
 
             public function pathModule()
             {
@@ -214,48 +179,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             public function log_payment($mensaje = '')
             {
-                $this->log->add($this->id, 'Respuesta no válida Recibido de Culqi. Error: ' . $mensaje);
-                return "error al recepcionar los datos";
+                $this->log->add($this->id, 'Respuesta de Culqi. Error: ' . $mensaje);
+                return "Error";
             }
 
-            /**
-             * Respuesta Inmediata
-             *
-             * @access public
-             * @param  nothing
-             * @return string
-             */
-            // public function custom_thankyou_page()
-            // {
-            //$order = new WC_Order($id_order);
-
-            // $order    = new WC_Order( $id_order );
-
-
-            // $usuario = $order->billing_first_name;
-            // $nombre_comercio = $this->sp_nombre_comercio;
-
-            // if (!isset($order->id))
-            //     $mensaje = $this->log_payment("numero de orden invalido");
-
-            // if ($order->get_status() <> 'pending')
-            //     $mensaje = $this->log_payment("estado de pedido");
-
-            // if ($order->get_total() <> $data['importe'])
-            //     $mensaje = $this->log_payment("importe del pedido");
-
-            // /**
-            //  * Validar aquí el vencimiento del pago.
-            //  */
-            // //$data['fecha_vencimiento']
-
-            // if ('PEN' <> $order->get_order_currency())
-            //     $mensaje = $this->log_payment("moneda del pedido");
-
-            // $woocommerce->cart->empty_cart();
-            // }
-
-
+            
             public function mailNotifyPayment($id_order, $email, $status, $message)
             {
                 $wc_sp = new Culqi();
@@ -274,8 +202,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $msg_status = 'Información de Orden';
                         break;
                 }
-                //include_once('CULQI_mail_sp.php');
-                $subject = $this->sp_nombre_comercio . ' -  ' . $msg_status;
+                $subject = $this->culqi_nombre_comercio . ' -  ' . $msg_status;
                 add_filter('wp_mail_content_type', create_function('', 'return "text/html";'));
 
                 wp_mail($email, $subject, $body, 'header');
@@ -291,84 +218,30 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
             }
 
-            /**
-             * Includes.
-             *
-             * @return void
-             */
             private function includes()
             {
                 include_once("culqi.php");
             }
 
-            /**
-             * Comprueba la respuesta del API.
-             * Diferido
-             *
-             * @access public
-             * @param  nothing
-             * @return void
-             */
+
             function check_response()
             {
                 if (isset($_POST['respuesta'])) {
 
                     global $wpdb;
 
-                    Culqi::$llaveSecreta = $this->sp_key;
-                    Culqi::$codigoComercio = $this->sp_idSocio;
+                    Culqi::$llaveSecreta = $this->culqi_key;
+                    Culqi::$codigoComercio = $this->culqi_codigoComercio;
 
                     $respuesta = json_decode(Culqi::decifrar($_POST['respuesta']), TRUE);
 
                     error_log("Respuesta del checkout: ". json_encode($respuesta));
-
-                    //$respuesta = json_encode($respuesta);
 
                     error_log("Número de pedido: ". $respuesta["numero_pedido"]);
 
                     $pos = stripos($respuesta["numero_pedido"], '-') + 1;
                     $orderId = substr($respuesta["numero_pedido"], $pos);
                     $order    = new WC_Order( $orderId );
-
-
-                    //Save to DB
-                    /*
-                    $table_name = $wpdb->prefix.'wp_culqi_order';
-                    if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-                        //table not in database. Create new table
-
-                        $sql = "CREATE TABLE `wp_culqi_order` (
-	                      `id` int(10) NOT NULL auto_increment,
-	                      `id_transaccion` varchar(255),
-	                      `numero_pedido` varchar(255),
-	                      `codigo_respuesta` varchar(255),
-	                      `mensaje_respuesta` varchar(255),
-	                      `token` varchar(255),
-	                      `referencia_transaccion` varchar(255),
-	                      `codigo_autorizacion` varchar(255),
-	                      PRIMARY KEY( `id` )
-                        );";
-
-                        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-                        dbDelta( $sql );
-                    }
-                    else{
-
-                        $wpdb->insert(
-                            'wp_culqi_order',
-                            array(
-                                'id_transaccion' => $respuesta["id_transaccion"],
-                                'numero_pedido' => $orderId,
-                                'codigo_respuesta' => $respuesta["codigo_respuesta"],
-                                'mensaje_respuesta' => $respuesta["mensaje_respuesta"],
-                                'token' => $respuesta["ticket"],
-                                'referencia_transaccion' => $respuesta["referencia_transaccion"],
-                                'codigo_autorizacion' => $respuesta["codigo_autorizacion"]
-                            )
-                        );
-                    }
-*/
-                    //
 
                     $dataIdTran = $respuesta["id_transaccion"];
                     $dataBancoEm = $respuesta["nombre_emisor"];
@@ -377,7 +250,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $dataCodigoAutor = $respuesta["codigo_autorizacion"];
                     $dataTicket = $respuesta["ticket"];
                     $dataMarca = $respuesta["marca"];
-
 
                     $data['idTran'] = $orderId;
                     $data['numTH'] = $respuesta["numero_tarjeta"];
@@ -390,9 +262,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $data['mensajeRespuesta'] = $respuesta["mensaje_respuesta_usuario"];
                     $data['dataTicket'] =  $dataTicket;
 
-
                     $message = array(
-                        'shop_name'          => $this->sp_nombre_comercio,
+                        'shop_name'          => $this->culqi_nombre_comercio,
                         'shop_url'           => $_SERVER['SERVER_NAME'],
                         'user'               => $order->billing_first_name,
                         'id_order'           => $order->id,
@@ -407,7 +278,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         'my_account_url'     => $_SERVER['SERVER_NAME'],
                         'guest_tracking_url' => $_SERVER['SERVER_NAME']
                     );
-
 
                     if ($dataCodRespuesta == "venta_exitosa") {
                         error_log("Venta Exitosa");
@@ -438,12 +308,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             }
 
-            /**
-             * Compruebe si este pasarela de pago está habilitada y disponible en el país del usuario
-             *
-             * @access public
-             * @return bool
-             */
             function is_valid_for_use()
             {
                 if (!in_array(get_woocommerce_currency(), array('PEN', 'USD'))) return false;
@@ -451,20 +315,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             }
 
-            /**
-             * Las opciones del panel de administración
-             *
-             * @since 1.0.0
-             */
             public function admin_options()
             {
-                //configuracion por woocomerce
                 ?>
                 <h3><?php _e('Culqi', 'wc_culqi_payment_gateway'); ?></h3>
                 <table class="form-table">
                     <?php
                     if ($this->is_valid_for_use()) :
-                        // Generate the HTML For the settings form
                         $this->generate_settings_html();
                     else :
                         ?>
@@ -473,22 +330,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 <strong>
                                     <?php _e('Gateway Disabled', 'wc_culqi_payment_gateway'); ?>
                                 </strong>:
-                                <?php _e('Realizar la configuraci&oacute;n correcta: Moneda, Comercio, Llave Comercio..', 'wc_culqi_payment_gateway'); ?>
+                                <?php _e('Error en la configuración.', 'wc_culqi_payment_gateway'); ?>
                             </p>
                         </div>
                         <?php
                     endif;
                     ?>
-                </table><!--/.form-table-->
+                </table><
                 <?php
             }
 
-            /**
-             * Inicializar configuración de la pasarela de pago. Los campos de formulario
-             *
-             * @access public
-             * @return void
-             */
             function init_form_fields()
             {
                 global $woocommerce;
@@ -501,7 +352,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         'label' => __('Habilitar Culqi', 'wc_culqi_payment_gateway'),
                         'default' => 'yes'
                     ),
-                    'sp_idSocio' => array
+                    'culqi_codigoComercio' => array
                     (
                         'title' => __('Código de comercio', 'wc_culqi_payment_gateway'),
                         'type' => 'text',
@@ -509,7 +360,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         'description' => __('Ingresar código de comercio en Culqi.', 'wc_culqi_payment_gateway'),
                         'default' => ''
                     ),
-                    'sp_key' => array
+                    'culqi_key' => array
                     (
                         'title' => __('Llave de cifrado', 'wc_culqi_payment_gateway'),
                         'type' => 'text',
@@ -517,7 +368,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         'description' => __('Ingresar llave secreta para el cifrado y descifrado.', 'wc_culqi_payment_gateway'),
                         'default' => ''
                     ),
-                    'sp_modo' => array
+                    'culqi_modo' => array
                     (
                         'title' => __('Ambiente', 'wc_culqi_payment_gateway'),
                         'type' => 'select',
@@ -528,35 +379,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             'test' => __('Integración', 'wc_culqi_payment_gateway'),
                             'prod' => __('Producción', 'wc_culqi_payment_gateway'),
                         ),
-                    )/*,
-                    'sp_vence' => array(
-                        'title' => __('Tiempo vencimiento', 'wc_culqi_payment_gateway'),
-                        'type' => 'text',
-                        'required' => true,
-                        'description' => __('Indicar la cantidad de horas para la fecha de vencimiento', 'wc_culqi_payment_gateway'),
-                        'default' => '4'
-                    ),*/
-                    /*'sp_valid_vence' => array(
-                        'title' => __('Validar hora vencimiento', 'wc_culqi_payment_gateway'),
-                        'type' => 'select',
-                        'required' => true,
-                        'description' => __('Activar vencimiento de una orden.', 'wc_culqi_payment_gateway'),
-                        'default' => 'si',
-                        'options' => array(
-                            '0' => __('Si', 'wc_culqi_payment_gateway'),
-                            '1' => __('No', 'wc_culqi_payment_gateway'),
-                        ),
-                    )*/
+                    )
                 );
             }
 
-            /**
-             * Checkout: Procesar el pago y devolver el resultado
-             *
-             * @access public
-             * @param int $order_id
-             * @return array
-             */
             function process_payment($order_id)
             {
                 $order = new WC_Order($order_id);
@@ -568,25 +394,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 );
             }
 
-
-            /**
-             * Envio de la trama a Culqi
-             *
-             * @param  $order_id Order ID.
-             * @return string
-             */
             function receipt_page($order_id)
             {
 
                 $order = new WC_Order($order_id);
                 $numeroPedido = str_pad($order->id, 2, "0", STR_PAD_LEFT);
 
-//                $wcCulqui = new Culqi();
+                Culqi::$llaveSecreta = $this->culqi_key;
+                Culqi::$codigoComercio = $this->culqi_codigoComercio;
 
-                Culqi::$llaveSecreta = $this->sp_key;
-                Culqi::$codigoComercio = $this->sp_idSocio;
-
-                if ($this->sp_modo == 'prod') {
+                if ($this->culqi_modo == 'prod') {
                     Culqi::$servidorBase = 'https://pago.culqi.com';
 			$entornoPago = 	'https://pago.culqi.com';	
 
@@ -712,11 +529,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 $respuesta = $data["mensaje_respuesta"];
 
-                //$respuesta_usuario = $data["mensaje_respuesta_usuario"];
-
                 error_log("Respuesta Venta:" . $codigoRespuesta);
                 error_log($respuesta);
-                //error_log("Respuesta Usuario:" . $respuesta_usuario);
 
                 ?>
                 <div id="info_payment">
@@ -729,7 +543,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
                 <script>
-                    checkout.codigo_comercio = "<?php echo $this->sp_idSocio ?>";
+                    checkout.codigo_comercio = "<?php echo $this->culqi_codigoComercio ?>";
                     checkout.informacion_venta = "<?php echo $informacionVenta ?>";
                     var intentos = 3;
 
@@ -737,7 +551,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                         $(' div.woocommerce').prepend("<h1 style='text-align: center;' id='title-result'></h1>");
 
-                        $("#info_payment").on('click','#actualizar-now', function(){
+                        $("#info_payment").on('click','#refresh', function(){
                             var url = '<?php echo WC_Cart::get_checkout_url(); ?>';
                             window.location.replace(url);
                         });
@@ -814,7 +628,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                             var actualizar = $("#info_payment");
                                             actualizar.empty();
                                             actualizar.html("<span><strong>" + obj.mensajeRespuesta + "</strong></span><br>" +
-                                                "<br><span>Superaste el número de intentos.<br></span><button id='actualizar-now'>Regresar</button>");
+                                                "<br><span>Superaste el número de intentos.<br></span><button id='refresh'>Regresar</button>");
 
                                         } else if (intentos == 1) {
                                             $('#notify').html("<strong>" + obj.mensajeRespuesta + "</strong><br><br>");
@@ -843,7 +657,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             var actualizar = $("#info_payment");
                             actualizar.empty();
                             actualizar.html("<span><strong>" + "La venta ha expirado, regresa al paso anterior para que puedas terminar la compra." + "</strong></span><br>" +
-                                "<br><span><br></span><button id='actualizar-now'>Regresar</button>");
+                                "<br><span><br></span><button id='refresh'>Regresar</button>");
                             $('#notify').html("");
 
 
@@ -856,7 +670,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             var actualizar = $("#info_payment");
                             actualizar.empty();
                             actualizar.html("<span><strong>" + "Ocurrió un error inesperado, regresa al paso anterior para que puedas terminar la compra." + "</strong></span><br>" +
-                                "<br><span><br></span><button id='actualizar-now'>Regresar</button>");
+                                "<br><span><br></span><button id='refresh'>Regresar</button>");
                             $('#notify').html("");
 
                         }
@@ -904,13 +718,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             }
         }
 
-        /**
-         * añadir pasarela de pago a WooCommerce.
-         *
-         * @param   array $methods Métodos de pago WooCommerce.
-         *
-         * @return  array          metodos de pago con culqi
-         */
         function woocommerce_culqi_add_gateway($methods)
         {
             $methods[] = 'WC_culqi';
