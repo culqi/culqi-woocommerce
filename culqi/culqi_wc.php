@@ -336,7 +336,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         <?php
                     endif;
                     ?>
-                </table><
+                </table>
                 <?php
             }
 
@@ -680,9 +680,9 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 <?php
 
-                get_footer();
+                // get_footer();
 
-                exit;
+                // exit;
             }
 
             function generateRandomString($length = 10)
