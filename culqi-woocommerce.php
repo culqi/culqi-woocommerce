@@ -838,25 +838,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 <script>
 
-								;(function() {
-		  let isLinkClicked = false
-		  window.addEventListener('beforeunload', event => {
-		    const confirmationText = 'Estás seguro?'
-		    if (!isLinkClicked) {
-		      event.returnValue = confirmationText  // Gecko, Trident, Chrome 34+
-		      return confirmationText               // Gecko, WebKit, Chrome <34
-		    } else {
-		      // Set flag back to false, just in case
-		      // user stops loading page after clicking a link.
-		      isLinkClicked = false
-		    }
-		  })
-		  document.addEventListener('click', event => {
-		    if (event.target.tagName.toLowerCase() === 'a') {
-		      isLinkClicked = true
-		    }
-		  })
-		}())
 
                     Culqi.codigoComercio = '<?php echo $this->culqi_codigoComercio ?>';
 
