@@ -74,6 +74,8 @@ class Culqi_Woocommerce_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/culqi-woocommerce-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/waitMe.css', array(), $this->version, 'all' );
+
 
 	}
 
@@ -97,6 +99,8 @@ class Culqi_Woocommerce_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/culqi-woocommerce-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/waitMe.js', array( 'jquery' ), $this->version, false );
+
 
 	}
 

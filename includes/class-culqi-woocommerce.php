@@ -78,7 +78,7 @@ class Culqi_Woocommerce {
 	public function __construct() {
 
 		$this->plugin_name = 'culqi-woocommerce';
-		$this->version = '1.0.4';
+		$this->version = '1.0.0';
 		$this->sdk_version = '1.2.2';
 
 
