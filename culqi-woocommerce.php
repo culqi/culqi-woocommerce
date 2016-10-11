@@ -886,7 +886,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 														});
 
                             $.ajax({
-                              url: "/index.php?wc-api=WC_culqi",
+                              url: "index.php?wc-api=WC_culqi",
                               type: "POST",
                               data: {token_id: Culqi.token.id, order_id: "<?php echo $numeroPedido ?>" },
                               success: function(data) {
@@ -912,7 +912,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 																// Procesar Venta en WooCommerce
 																$.ajax({
-															url: "/index.php?wc-api=WC_culqi",
+															url: "index.php?wc-api=WC_culqi",
 																					type: "POST",
 																					data: {emptyCart: 1},
 																					success: function (data) {
