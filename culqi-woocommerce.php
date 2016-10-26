@@ -26,7 +26,6 @@
  */
 
 
-date_default_timezone_set('America/Lima');
 
 
 // If this file is called directly, abort.
