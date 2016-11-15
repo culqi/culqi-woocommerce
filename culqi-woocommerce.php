@@ -837,6 +837,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 <script>
 
+                    var $j = jQuery.noConflict();
 
                     Culqi.codigoComercio = '<?php echo $this->culqi_codigoComercio ?>';
 
@@ -857,14 +858,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             // Mostramos JSON de objeto error en consola
                             console.log(Culqi.error);
 
-														$('#culqi_notify').html(Culqi.error.mensaje);
+														$j('#culqi_notify').html(Culqi.error.mensaje);
                           }
                           else{
 
                             console.log(Culqi.token.id);
 
 														function run_waitMe(){
-															$('#info_payment').waitMe({
+															$j('#info_payment').waitMe({
 																effect: 'orbit',
 																text: 'Procesando pago...',
 																bg: 'rgba(255,255,255,0.7)',
@@ -873,18 +874,18 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 														}
 
 
-														$(document).ajaxStart(function(){
-															$('#culqi_notify').empty();
+														$j(document).ajaxStart(function(){
+															$j('#culqi_notify').empty();
 
 															run_waitMe();
 
 														});
-														$(document).ajaxComplete(function(){
+														$j(document).ajaxComplete(function(){
 
-															$('#info_payment').waitMe('hide');
+															$j('#info_payment').waitMe('hide');
 														});
 
-                            $.ajax({
+                            $j.ajax({
                               url: "index.php?wc-api=WC_culqi",
                               type: "POST",
                               data: {token_id: Culqi.token.id, order_id: "<?php echo $numeroPedido ?>" },
@@ -896,21 +897,21 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 															if (obj.objeto === "error") {
 																// Mostrar error
-																$('#culqi_notify').html('<p style="color:#e54848; font-weight:bold">'+ obj.mensaje_usuario+ '</p>');
+																$j('#culqi_notify').html('<p style="color:#e54848; font-weight:bold">'+ obj.mensaje_usuario+ '</p>');
 
 															}
 															else if (obj.objeto === "cargo") {
 
-																$('#notify').empty();
-																$("#info_payment").remove();
+																$j('#notify').empty();
+																$j("#info_payment").remove();
 
 
-																$('div.woocommerce').append("<h1 style='text-align: center;'>Pago Exitoso</h1>" +
+																$j('div.woocommerce').append("<h1 style='text-align: center;'>Pago Exitoso</h1>" +
 																            "<p style='color:#46e6aa; font-weight:bold'>Pago realizado exitosamente</p>" +
                                             "<br><button id='home'>Seguir comprando</button>");
 
 																// Procesar Venta en WooCommerce
-																$.ajax({
+																$j.ajax({
 															url: "index.php?wc-api=WC_culqi",
 																					type: "POST",
 																					data: {emptyCart: 1},
@@ -926,8 +927,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                               },
                               error: function() {
-                                 $('#culqi_notify').empty();
-																 $('#culqi_notify').html('Hubo algún problema en el procesamiento de la compra. Intenta nuevamente por favor.');
+                                 $j('#culqi_notify').empty();
+																 $j('#culqi_notify').html('Hubo algún problema en el procesamiento de la compra. Intenta nuevamente por favor.');
 
                               }
                             });
@@ -940,28 +941,28 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     // End culqi()
 
 
-                    $(document).ready(function() {
+                    $j(document).ready(function() {
 
 
 
-                        $(' div.woocommerce').prepend("<h1 style='text-align: center;' id='title-result'></h1>");
+                        $j('div.woocommerce').prepend("<h1 style='text-align: center;' id='title-result'></h1>");
 
-                        $("#info_payment").on('click','#refresh', function(){
+                        $j("#info_payment").on('click','#refresh', function(){
                             var url = '<?php echo WC_Cart::get_checkout_url(); ?>';
                             window.location.replace(url);
                         });
 
-                        $("div.woocommerce").on('click','#home', function(){
+                        $j("div.woocommerce").on('click','#home', function(){
                             var url = '<?php echo home_url(); ?>';
                             window.location.replace(url);
                         });
 
-                        $('#pagar-now').on('click', function (e) {
+                        $j('#pagar-now').on('click', function (e) {
                             Culqi.abrir();
-														$('#culqi_notify').empty();
+														$j('#culqi_notify').empty();
                             e.preventDefault();
                         });
-                        $('#btn-back').on('click', function(e){
+                        $j('#btn-back').on('click', function(e){
                             var url = '<?php echo WC_Cart::get_checkout_url(); ?>';
                             window.location.replace(url);
                         });
