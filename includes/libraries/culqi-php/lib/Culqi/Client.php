@@ -4,36 +4,23 @@ namespace Culqi;
 use Culqi\Error as Errors;
 
 
-class Client
-{
-    /**
-    * La versión de API usada
-    */
-    const API_VERSION = "v1.2";
-
-    /**
-     * La URL Base por defecto
-     */
-    const BASE_URL = "https://integ-pago.culqi.com/api/v1";
-
+class Client {
 
     public function request($method, $url, $api_key, $data = NULL, $headers= array("Content-Type" => "application/json", "Accept" => "application/json") ) {
         try {
             $options = array(
                 'auth' => new AuthBearer($api_key),
- +              'timeout' => 120,
+                'timeout' => 120
             );
             if($method == "GET") {
                 $url_params = is_array($data) ? '?' . http_build_query($data) : '';
-                $response = \Requests::get(Culqi::$api_base . $url . $url_params, $headers, $options);
+                $response = \Requests::get(Culqi::BASE_URL. $url . $url_params, $headers, $options);
             } else if($method == "POST") {
-                $response = \Requests::post(Culqi::$api_base . $url, $headers, json_encode($data), $options);
-
-
+                $response = \Requests::post(Culqi::BASE_URL . $url, $headers, json_encode($data), $options);
             } else if($method == "PATCH") {
-                $response = \Requests::patch(Culqi::$api_base . $url, $headers, json_encode($data), $options);
+                $response = \Requests::patch(Culqi::BASE_URL . $url, $headers, json_encode($data), $options);
             } else if($method == "DELETE") {
-                $response = \Requests::delete(Culqi::$api_base . $url, $headers, $options);
+                $response = \Requests::delete(Culqi::BASE_URL, $options);
             }
         } catch (\Exception $e) {
             throw new Errors\UnableToConnect();
@@ -47,14 +34,8 @@ class Client
         if ($response->status_code == 400) {
             $code = 0;
             $message = "";
-            try {
-                $error = (array) json_decode($response->body)->errors[0];
-                $code = key($error);
-                $message = current($error);
-            } catch (\Exception $e) {
-                throw new Errors\UnhandledError($response->body, $response->status_code);
-            }
-            throw new Errors\InputValidationError($message, $code);
+
+            throw new Errors\UnhandledError($response->body, $response->status_code);
         }
         if ($response->status_code == 401) {
             throw new Errors\AuthenticationError();

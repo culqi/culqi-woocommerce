@@ -16,16 +16,14 @@
  * Plugin Name:       Culqi WooCommerce
  * Plugin URI:        http://developers.culqi.com
  * Description:       Plugin Culqi WooCommerce. Acepta tarjetas de crédito y débito en tu tienda online.
- * Version:           1.0.4
- * Author:            Brayan Cruces
+ * Version:           2.0.0
+ * Author:            Brayan Cruces, Willy Aguirre
  * Author URI:        http://culqi.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       culqi-woocommerce
  * Domain Path:       /languages
  */
-
-
 
 
 // If this file is called directly, abort.
@@ -42,7 +40,6 @@ function wc_culqi_styles()
 	// For either a plugin or a theme, you can then enqueue the style:
 	wp_enqueue_style( 'custom-style' );
 }
-
 
 
 function wc_culqi_scripts()
@@ -132,8 +129,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             wc_add_notice('Por favor, ingresa una <strong>dirección </strong>válida.', 'error' );
         }
 
-
-
     }
 
     function init_wc_culqi_payment_gateway()
@@ -172,10 +167,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 // Obtener credenciales y entorno
                 $this->culqi_codigoComercio = $this->get_option('culqi_codigoComercio');
                 $this->culqi_key = $this->get_option('culqi_key');
-                $this->culqi_modo = $this->get_option('culqi_modo');
                 $this->culqi_nombre_comercio = get_bloginfo('name');
-
-              //  add_action('woocommerce_api_' . strtolower(get_class($this)), array($this, 'check_response'));//1
 
                 add_action('woocommerce_api_' . strtolower(get_class($this)), array($this, 'crear_cargo'));// Crear Cargo
 
@@ -184,68 +176,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                 if (!$this->is_valid_for_use()) $this->enabled = false;
 
-                if ('test' == $this->culqi_modo) {
-                    if (class_exists('WC_Logger')) {
-                        $this->log = new WC_Logger();
-                    } else {
-                        $this->log = WC_culqi::woocommerce_instance()->logger();
-                    }
-                }
             }
-
-            // public function process_refund( $order_id, $amount = null ) {
-            //
-            //     // Do your refund here. Refund $amount for the order with ID $order_id
-            //
-            //     Culqi::$llaveSecreta = $this->culqi_key;
-            //     Culqi::$codigoComercio = $this->culqi_codigoComercio;
-            //
-            //     if ($this->culqi_modo == 'prod') {
-            //         Culqi::$servidorBase = 'https://pago.culqi.com';
-            //     } else {
-            //         Culqi::$servidorBase = 'https://integ-pago.culqi.com';
-            //     }
-            //
-            //     error_log("ID de la transaccion: ". get_post_meta( $order_id, '_transaction_id', true ));
-            //
-            //     try {
-            //
-            //         $anulacion= Pago::anular(get_post_meta( $order_id, '_transaction_id', true ));
-            //
-            //         error_log("Respuesta de anulación: ". $anulacion["codigo_respuesta"]);
-            //
-            //         if ($anulacion["codigo_respuesta"] == "devolucion_exitosa") {
-            //
-            //             return true;
-            //
-            //         } else {
-            //
-            //             return false;
-            //
-            //         }
-            //
-            //     } catch (InvalidParamsException $e) {
-            //
-            //         error_log("Error en la anulación: ". $e->getMessage());
-            //
-            //         return false;
-            //     }
-            //
-            // }
-
 
             public function pathModule()
             {
                 $dir = home_url() . '/wp-content/plugins/' . dirname(plugin_basename(__FILE__)) . '/';
                 return $dir;
             }
-
-            public function log_payment($mensaje = '')
-            {
-                $this->log->add($this->id, 'Respuesta de Culqi. Error: ' . $mensaje);
-                return "Error";
-            }
-
 
             /**
              * Enviar correos
@@ -301,8 +238,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 								// CSS
 
 								// JS
-
-
 
             }
 
@@ -411,16 +346,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                     $culqi = new Culqi\Culqi(array('api_key' => $this->culqi_key));
 
-                    if ($this->culqi_modo == 'prod') {
-                      // Entorno: Producción
-                      $culqi->setEnv('PRODUC');
-
-
-                    } else {
-                      // Entorno: Integración (pruebas)
-                      $culqi->setEnv('INTEG');
-
-                    }
 
                 // Generamos un Código de pedido único (ejemplo)
                 $pedidoId = $this->generateRandomString(4)."-".$numeroPedido;
@@ -491,19 +416,21 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 // Creando Cargo
                 try {
                   $cargo = $culqi->Cargos->create(array(
-                    "moneda"=> get_woocommerce_currency(),
-                    "monto"=> $total,
-                    "usuario"=> $datos_correo,
-                    "descripcion"=> $descripcion,
-                    "pedido"=> $pedidoId,
-                    "codigo_pais"=> $order->billing_country,
-                    "direccion"=> $datos_direccion,
-                    "ciudad"=> $datos_ciudad,
-                    "telefono"=> $datos_telefono,
-                    "nombres"=> $datos_nombre,
-                    "apellidos"=> $datos_apellido,
-                    "correo_electronico"=> $datos_correo,
-                    "token"=> $_POST['token_id']
+										"address" => $datos_direccion,
+					          "address_city" => $datos_ciudad,
+					          "amount" => $total,
+					          "country_code" => $order->billing_country,
+					          "currency_code" => $order->order_currency,
+					          //"cvv" => "",
+					          "email" => $datos_correo,
+					          "first_name" => $datos_nombre,
+					          "installments" => 0,
+					          "last_name" => $datos_apellido,
+					          //"metadata" => "",
+					          "order_id" => $pedidoId,
+					          "phone_number" => $datos_telefono,
+					          "product_description" => $descripcion,
+					          "token_id" => $_POST['token_id']
                   ));
 
                   $data = $cargo;
@@ -537,78 +464,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $woocommerce->cart->empty_cart();
                 }
                exit;
-
-
-                //     $respuesta = json_decode(Culqi::decifrar($_POST['token']), TRUE);
-                //
-                //     error_log("Respuesta del checkout: ". json_encode($respuesta));
-                //     error_log("Número de pedido: ". $respuesta["numero_pedido"]);
-                //
-                //     $pos = stripos($respuesta["numero_pedido"], '-') + 1;
-                //     $orderId = substr($respuesta["numero_pedido"], $pos);
-                //     $order    = new WC_Order( $orderId );
-                //
-                //     $dataIdTran = $respuesta["id_transaccion"];
-                //     $dataBancoEm = $respuesta["nombre_emisor"];
-                //     $dataEstado =  $respuesta["codigo_respuesta"];
-                //     $dataCodRespuesta = $respuesta["codigo_respuesta"];
-                //     $dataCodigoAutor = $respuesta["codigo_autorizacion"];
-                //     $dataTicket = $respuesta["ticket"];
-                //     $dataMarca = $respuesta["marca"];
-                //
-                //     $data['idTran'] = $orderId;
-                //     $data['numTH'] = $respuesta["numero_tarjeta"];
-                //     $data['nombreTH'] = $respuesta["nombre_tarjeta_habiente"] . " " . $respuesta["apellido_tarjeta_habiente"];
-                //     $data['bancoEm'] = $dataBancoEm;
-                //     $data['trnEstado'] = $dataEstado;
-                //     $data['trnCodAutor'] = $dataCodigoAutor;
-                //     $data['marcaTarjeta'] = $dataMarca;
-                //     $data['trnCodRespueta'] = $dataCodRespuesta;
-                //     $data['mensajeRespuesta'] = $respuesta["mensaje_respuesta_usuario"];
-                //     $data['dataTicket'] =  $dataTicket;
-                //
-                //     $message = array(
-                //         'shop_name'          => $this->culqi_nombre_comercio,
-                //         'shop_url'           => $_SERVER['SERVER_NAME'],
-                //         'user'               => $order->billing_first_name,
-                //         'id_order'           => $order->id,
-                //         'resultado'          => $dataEstado,
-                //         'num_transaccion'    => $dataTicket,
-                //         'descripcion_trn'    => $respuesta["mensaje_respuesta_usuario"],
-                //         'tarjeta_marca'      => $dataMarca,
-                //         'moneda'             => $order->get_order_currency(),
-                //         'num_aut'            => $dataCodigoAutor,
-                //         'total_importe'      => number_format($order->get_total(), 2, '.', ''),
-                //         'history_url'        => $_SERVER['SERVER_NAME'].'/mi-cuenta/',
-                //         'my_account_url'     => $_SERVER['SERVER_NAME'],
-                //         'guest_tracking_url' => $_SERVER['SERVER_NAME']
-                //     );
-                //
-                //     if ($dataCodRespuesta == "venta_exitosa") {
-                //         error_log("Venta Exitosa");
-                //
-                //         $order->payment_complete($dataTicket);
-                //
-                //         $this->mailNotifyPayment($order->id, $order->billing_email, "success", $message);
-                //
-                //     } else {
-                //
-                //         error_log("Venta Denegada");
-                //
-                //         $order->update_status( 'cancelled' );
-                //
-                //         $this->restore_order_stock($order->id);
-                //
-                //         $this->mailNotifyPayment($order->id, $order->billing_email, "cancelled", $message);
-                //     }
-                //
-                //     echo json_encode($data);
-                //
-                // }else{
-                //     global $woocommerce;
-                //     $woocommerce->cart->empty_cart();
-                // }
-
 
             }
 
@@ -671,18 +526,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         'required' => true,
                         'description' => __('Ingresar llave secreta para el cifrado y descifrado.', 'wc_culqi_payment_gateway'),
                         'default' => ''
-                    ),
-                    'culqi_modo' => array
-                    (
-                        'title' => __('Ambiente', 'wc_culqi_payment_gateway'),
-                        'type' => 'select',
-                        'required' => true,
-                        'description' => __('Seleccionar ambiente de integración o producción', 'wc_culqi_payment_gateway'),
-                        'default' => 'test',
-                        'options' => array(
-                            'test' => __('Integración', 'wc_culqi_payment_gateway'),
-                            'prod' => __('Producción', 'wc_culqi_payment_gateway'),
-                        ),
                     )
                 );
             }
@@ -704,23 +547,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $order = new WC_Order($order_id);
                 $numeroPedido = str_pad($order->id, 2, "0", STR_PAD_LEFT);
 
-              //  Culqi::$llaveSecreta = $this->culqi_key;
-              //  Culqi::$codigoComercio = $this->culqi_codigoComercio;
-
-
-
-                if ($this->culqi_modo == 'prod') {
-                  // Entorno: Producción
-
-                  $entornoPago = 	'https://pago.culqi.com';
-
-                } else {
-                  // Entorno: Integración (pruebas)
-
-                  $entornoPago = 	'https://integ-pago.culqi.com';
-                }
-
-
                 /**
                  * Datos de la compra
                  *
@@ -741,11 +567,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
 
                 if(strlen ($descripcion)>5 && strlen ($descripcion)<60) {
-
                     error_log("Descripción correcto");
-
                 } else {
-
                     $descripcion = "Compra";
                 }
                 $datos_ciudad = "";
@@ -790,34 +613,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $datos_direccion = $order->billing_address_1;
                 }
 
-
-                /*  Crear Cargo  */
-        //         $data = Pago::crearDatospago(array(
-        //             Pago::PARAM_NUM_PEDIDO => $this->generateRandomString(4)."-".$numeroPedido,
-        //             Pago::PARAM_MONEDA => get_woocommerce_currency(),
-        //             Pago::PARAM_MONTO => $total,
-        //             Pago::PARAM_DESCRIPCION => $descripcion,
-        //             Pago::PARAM_COD_PAIS => "PE",
-        //             Pago::PARAM_CIUDAD => "Lima",
-        //             Pago::PARAM_DIRECCION => $datos_direccion,
-        //             Pago::PARAM_NUM_TEL => $datos_telefono,
-        //             "correo_electronico" => $datos_correo,
-        //             "id_usuario_comercio" => $datos_correo,
-        //             "nombres" => $datos_nombre,
-        //             "apellidos" => $datos_apellido,
-		    // "plugin_culqi" => "{'plataforma': 'WooCommerce','version': '1.0.4'}"
-        //         ));
-        //
-        //         $informacionVenta = $data[Pago::PARAM_INFO_VENTA];
-        //
-        //         $codigoRespuesta = $data["codigo_respuesta"];
-        //
-        //         $respuesta = $data["mensaje_respuesta"];
-        //
-        //         error_log("Respuesta Venta:" . $codigoRespuesta);
-        //         error_log($respuesta);
-
-
                 /*  End Crear Cargo  */
 
                 ?>
@@ -827,12 +622,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     <div id="culqi_notify" style="padding:10px 0px;"></div>
 								</div>
 
-                <script src="<?php echo $entornoPago?>/js/v1"></script>
+                <script src="https://checkout.culqi.com/js/v2"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 								<script src="<?php echo plugins_url("/assets/js/waitMe.js", __FILE__ ) ?>"></script>
 								<link rel='stylesheet' href='<?php echo plugins_url("/assets/css/waitMe.css", __FILE__ ) ?>' type='text/css' media='all' />
-
-
 
 
                 <script>
@@ -895,12 +688,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 																var obj = JSON.parse(data);
 
 
-															if (obj.objeto === "error") {
+															if (obj.object === "error") {
 																// Mostrar error
-																$j('#culqi_notify').html('<p style="color:#e54848; font-weight:bold">'+ obj.mensaje_usuario+ '</p>');
+																var message = (obj.user_message === "")? obj.message : obj.user_message;
+																$j('#culqi_notify').html('<p style="color:#e54848; font-weight:bold">'+ message + '</p>');
 
 															}
-															else if (obj.objeto === "cargo") {
+															else if (obj.object === "charge") {
 
 																$j('#notify').empty();
 																$j("#info_payment").remove();
@@ -912,7 +706,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 																// Procesar Venta en WooCommerce
 																$j.ajax({
-															url: "index.php?wc-api=WC_culqi",
+																	  url: "index.php?wc-api=WC_culqi",
 																					type: "POST",
 																					data: {emptyCart: 1},
 																					success: function (data) {
@@ -921,9 +715,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 																			});
 
 															}
-
-
-
 
                               },
                               error: function() {
@@ -938,12 +729,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
                       };
+
                     // End culqi()
 
 
                     $j(document).ready(function() {
-
-
 
                         $j('div.woocommerce').prepend("<h1 style='text-align: center;' id='title-result'></h1>");
 
@@ -968,118 +758,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         });
                     });
 
-                    // function culqi(checkout) {
-                    //     console.log(checkout.respuesta);
-                    //     if (checkout.respuesta != "checkout_cerrado" &&
-                    //         checkout.respuesta != "venta_expirada" &&
-                    //         checkout.respuesta != "error" &&
-                    //         checkout.respuesta != "parametro_invalido")
-                    //     {
-                    //         $.ajax({
-                    //             url: "/index.php?wc-api=WC_culqi",
-                    //             type: "POST",
-                    //             data: {respuesta: checkout.respuesta},
-                    //             success: function (data) {
-                    //                 console.log(data);
-                    //                 var obj = JSON.parse(data);
-                    //                 checkout.cerrar();
-                    //                 if (obj.trnEstado == "venta_exitosa") {
-                    //                     $('.order_details').empty();
-                    //                     $('#notify').empty();
-                    //                     $("#info_payment").remove();
-                    //                     $(' span.title-checkout ').removeClass("title-checkout");
-                    //                     $(' span.title-thankyou ').removeClass("title-thankyou").addClass("title-checkout");
-                    //
-                    //                     $(' div.woocommerce ').append("<h1 style='text-align: center;'>Pago Exitoso</h1>" +
-                    //                         "<table>" +
-                    //                         "<thead><tr><th colspan='2' style='text-align: center;'>Detalle de la compra</th></tr></thead>" +
-                    //                         "<tbody>" +
-                    //                         "<tr><td>N&uacute;mero de Transacci&oacute;n:</td>" +
-                    //                         "<td>" + obj.idTran + "</td></tr> " +
-                    //                         "<tr><td>Nombre del Tarjeta Habiente:</td>" +
-                    //                         "<td>" + obj.nombreTH + "</td> </tr> <tr> <td>N&uacute;mero del Tarjeta Habiente:</td> " +
-                    //                         "<td>" + obj.numTH + "</td> </tr> <tr> <td>Marca Tarjeta:</td>" +
-                    //                         "<td>" + obj.marcaTarjeta + "</td> </tr> <tr> <td>Detalle de la Transacci&oacute;n:</td>" +
-                    //                         "<td>" + obj.mensajeRespuesta + "</td></tbody> </table>" +
-                    //                         "<br><button id='home'>Seguir comprando</button>");
-                    //
-                    //                     $.ajax({
-                    //             url: "/index.php?wc-api=WC_culqi",
-                    //                         type: "POST",
-                    //                         data: {emptyCart: 1},
-                    //                         success: function (data) {
-                    //                             // console.log(data);
-                    //                         }
-                    //                     });
-                    //
-                    //                 } else {
-                    //                     intentos--;
-                    //
-                    //                     $("div.woocommerce").on('click', '#home', function () {
-                    //                         var url = '<?php echo home_url(); ?>';
-                    //                         window.location.replace(url);
-                    //                     });
-                    //
-                    //                     var texto = '';
-                    //                     if (intentos == 0) {
-                    //                         var actualizar = $("#info_payment");
-                    //                         actualizar.empty();
-                    //                         actualizar.html("<span><strong>" + obj.mensajeRespuesta + "</strong></span><br>" +
-                    //                             "<br><span>Superaste el número de intentos.<br></span><button id='refresh'>Regresar</button>");
-                    //
-                    //                     } else if (intentos == 1) {
-                    //                         $('#notify').html("<strong>" + obj.mensajeRespuesta + "</strong><br><br>");
-                    //                     } else {
-                    //                         $('#notify').html("<strong>" + obj.mensajeRespuesta + "</strong><br><br>");
-                    //                     }
-                    //                 }
-                    //
-                    //             }
-                    //         });
-                    //
-                    //     } else if (checkout.respuesta == "checkout_cerrado") {
-                    //         $("div.woocommerce").on('click', '#home', function () {
-                    //             var url = '<?php echo home_url(); ?>';
-                    //             window.location.replace(url);
-                    //         });
-                    //
-                    //         $('#notify').html("<strong>" + "Cerraste el formulario de pago" + "</strong><br><br>");
-                    //
-                    //     } else if (checkout.respuesta == "venta_expirada") {
-                    //         $("div.woocommerce").on('click', '#home', function () {
-                    //             var url = '<?php echo home_url(); ?>';
-                    //             window.location.replace(url);
-                    //         });
-                    //
-                    //         var actualizar = $("#info_payment");
-                    //         actualizar.empty();
-                    //         actualizar.html("<span><strong>" + "La venta ha expirado, regresa al paso anterior para que puedas terminar la compra." + "</strong></span><br>" +
-                    //             "<br><span><br></span><button id='refresh'>Regresar</button>");
-                    //         $('#notify').html("");
-                    //
-                    //
-                    //     } else if (checkout.respuesta == "error" || checkout.respuesta == "parametro_invalido") {
-                    //         $("div.woocommerce").on('click', '#home', function () {
-                    //             var url = '<?php echo home_url(); ?>';
-                    //             window.location.replace(url);
-                    //         });
-                    //
-                    //         var actualizar = $("#info_payment");
-                    //         actualizar.empty();
-                    //         actualizar.html("<span><strong>" + "Ocurrió un error inesperado, regresa al paso anterior para que puedas terminar la compra." + "</strong></span><br>" +
-                    //             "<br><span><br></span><button id='refresh'>Regresar</button>");
-                    //         $('#notify').html("");
-                    //
-                    //     }
-                    // }
-
                 </script>
 
                 <?php
 
-                // get_footer();
-
-                // exit;
             }
 
             function generateRandomString($length = 10)
