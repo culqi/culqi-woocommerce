@@ -156,8 +156,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $this->order_button_text = __('Pagar', 'WC_culqi');
                 $this->has_fields = false;
                 $this->supports = array(
-                    'products'/*,
-                    'refunds'*/
+                    'products'
                 );
                 $this->init_form_fields();
                 $this->init_settings();
@@ -241,92 +240,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             }
 
-
-            function check_response()
-            {
-                if (isset($_POST['respuesta'])) {
-
-                    global $wpdb;
-
-                    Culqi::$llaveSecreta = $this->culqi_key;
-                    Culqi::$codigoComercio = $this->culqi_codigoComercio;
-
-                    $respuesta = json_decode(Culqi::decifrar($_POST['respuesta']), TRUE);
-
-                    error_log("Respuesta del checkout: ". json_encode($respuesta));
-
-                    error_log("Número de pedido: ". $respuesta["numero_pedido"]);
-
-                    $pos = stripos($respuesta["numero_pedido"], '-') + 1;
-                    $orderId = substr($respuesta["numero_pedido"], $pos);
-                    $order    = new WC_Order( $orderId );
-
-                    $dataIdTran = $respuesta["id_transaccion"];
-                    $dataBancoEm = $respuesta["nombre_emisor"];
-                    $dataEstado =  $respuesta["codigo_respuesta"];
-                    $dataCodRespuesta = $respuesta["codigo_respuesta"];
-                    $dataCodigoAutor = $respuesta["codigo_autorizacion"];
-                    $dataTicket = $respuesta["ticket"];
-                    $dataMarca = $respuesta["marca"];
-
-                    $data['idTran'] = $orderId;
-                    $data['numTH'] = $respuesta["numero_tarjeta"];
-                    $data['nombreTH'] = $respuesta["nombre_tarjeta_habiente"] . " " . $respuesta["apellido_tarjeta_habiente"];
-                    $data['bancoEm'] = $dataBancoEm;
-                    $data['trnEstado'] = $dataEstado;
-                    $data['trnCodAutor'] = $dataCodigoAutor;
-                    $data['marcaTarjeta'] = $dataMarca;
-                    $data['trnCodRespueta'] = $dataCodRespuesta;
-                    $data['mensajeRespuesta'] = $respuesta["mensaje_respuesta_usuario"];
-                    $data['dataTicket'] =  $dataTicket;
-
-                    $message = array(
-                        'shop_name'          => $this->culqi_nombre_comercio,
-                        'shop_url'           => $_SERVER['SERVER_NAME'],
-                        'user'               => $order->billing_first_name,
-                        'id_order'           => $order->id,
-                        'resultado'          => $dataEstado,
-                        'num_transaccion'    => $dataTicket,
-                        'descripcion_trn'    => $respuesta["mensaje_respuesta_usuario"],
-                        'tarjeta_marca'      => $dataMarca,
-                        'moneda'             => $order->get_order_currency(),
-                        'num_aut'            => $dataCodigoAutor,
-                        'total_importe'      => number_format($order->get_total(), 2, '.', ''),
-                        'history_url'        => $_SERVER['SERVER_NAME'].'/mi-cuenta/',
-                        'my_account_url'     => $_SERVER['SERVER_NAME'],
-                        'guest_tracking_url' => $_SERVER['SERVER_NAME']
-                    );
-
-                    if ($dataCodRespuesta == "venta_exitosa") {
-                        error_log("Venta Exitosa");
-
-                        $order->payment_complete($dataTicket);
-
-                        $this->mailNotifyPayment($order->id, $order->billing_email, "success", $message);
-
-                    } else {
-
-                        error_log("Venta Denegada");
-
-                        $order->update_status( 'cancelled' );
-
-                        $this->restore_order_stock($order->id);
-
-                        $this->mailNotifyPayment($order->id, $order->billing_email, "cancelled", $message);
-                    }
-
-                    echo json_encode($data);
-
-                }else{
-                    global $woocommerce;
-                    $woocommerce->cart->empty_cart();
-                }
-                exit;
-
-
-            }
-
-
             /**
              * Crear Cargo (recibe token y procesa venta)
              * Via WC_API
@@ -347,122 +260,109 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $culqi = new Culqi\Culqi(array('api_key' => $this->culqi_key));
 
 
-                // Generamos un Código de pedido único (ejemplo)
-                $pedidoId = $this->generateRandomString(4)."-".$numeroPedido;
+		                // Generamos un Código de pedido único (ejemplo)
+		                $pedidoId = $this->generateRandomString(4)."-".$numeroPedido;
 
-                error_log("Número de pedido: ". $pedidoId);
-                error_log("Token: ". $_POST['token_id'] );
-
-
-								/**
-								 * Validando y formateando datos (one more time)							 *
-								 *
-								 */
-								 $dataUser = $order->get_user();
-							 $fono = $dataUser->billing_phone;
-							 $descripcion = '';
-							 $i = 1;
-							 $separador = ' - ';
-							 foreach ($order->get_items() as $product ){
-									 if($i == count($order->get_items())){
-											 $separador = '';
-									 }
-									 $descripcion .= $product['name'].$separador;
-									 $i++;
-							 }
-							 if(strlen ($descripcion)>5 && strlen ($descripcion)<60) {
-									 error_log("Descripción correcto");
-							 } else {
-									 $descripcion = "Compra";
-							 }
-							 $datos_ciudad = "";
-							 $datos_correo = "";
-							 $datos_apellido = "";
-							 $datos_nombre = "";
-							 $datos_telefono = "";
-							 $datos_direccion = "";
-							 if ($order->billing_city == null) {
-									 $datos_ciudad = "Ciudad";
-							 } else {
-									 $datos_ciudad = $order->billing_city;
-							 }
-							 if ($order->billing_first_name == null){
-									 $datos_nombre = "Nombre";
-							 }else {
-									 $datos_nombre = $order->billing_first_name;
-							 }
-							 if ($order->billing_last_name == null){
-									 $datos_apellido = "Apellido";
-							 }else {
-									 $datos_apellido = $order->billing_last_name;
-							 }
-							 if ($order->billing_email == null){
-									 $datos_correo = "correo@tienda.com";
-							 } else {
-									 $datos_correo = $order->billing_email;
-							 }
-							 if ($order->billing_phone == null){
-									 $datos_telefono = "12313123";
-							 } else {
-									 $datos_telefono = $order->billing_phone;
-							 }
-							 if ($order->billing_address_1 == null) {
-									 $datos_direccion = "Avenida 123";
-							 } else {
-									 $datos_direccion = $order->billing_address_1;
-							 }
+		                error_log("Número de pedido: ". $pedidoId);
+		                error_log("Token: ". $_POST['token_id'] );
 
 
-                // Creando Cargo
-                try {
-                  $cargo = $culqi->Cargos->create(array(
-										"address" => $datos_direccion,
-					          "address_city" => $datos_ciudad,
-					          "amount" => $total,
-					          "country_code" => $order->billing_country,
-					          "currency_code" => $order->order_currency,
-					          //"cvv" => "",
-					          "email" => $datos_correo,
-					          "first_name" => $datos_nombre,
-					          "installments" => 0,
-					          "last_name" => $datos_apellido,
-					          //"metadata" => "",
-					          "order_id" => $pedidoId,
-					          "phone_number" => $datos_telefono,
-					          "product_description" => $descripcion,
-					          "token_id" => $_POST['token_id']
-                  ));
+										/**
+										 * Validando y formateando datos (one more time)							 *
+										 *
+										 */
+										 $dataUser = $order->get_user();
+										 $fono = $dataUser->billing_phone;
+										 $descripcion = '';
+										 $i = 1;
+										 $separador = ' - ';
+										 foreach ($order->get_items() as $product ){
+												 if($i == count($order->get_items())){
+														 $separador = '';
+												 }
+												 $descripcion .= $product['name'].$separador;
+												 $i++;
+										 }
+										 if(strlen ($descripcion)>5 && strlen ($descripcion)<60) {
+												 error_log("Descripción correcto");
+										 } else {
+												 $descripcion = "Compra";
+										 }
+										 $datos_ciudad = "";
+										 $datos_correo = "";
+										 $datos_apellido = "";
+										 $datos_nombre = "";
+										 $datos_telefono = "";
+										 $datos_direccion = "";
+										 if ($order->billing_city == null) {
+												 $datos_ciudad = "Ciudad";
+										 } else {
+												 $datos_ciudad = $order->billing_city;
+										 }
+										 if ($order->billing_first_name == null){
+												 $datos_nombre = "Nombre";
+										 } else {
+												 $datos_nombre = $order->billing_first_name;
+										 }
+										 if ($order->billing_last_name == null){
+												 $datos_apellido = "Apellido";
+										 } else {
+												 $datos_apellido = $order->billing_last_name;
+										 }
+										 if ($order->billing_email == null){
+												 $datos_correo = "correo@tienda.com";
+										 } else {
+												 $datos_correo = $order->billing_email;
+										 }
+										 if ($order->billing_phone == null){
+												 $datos_telefono = "12313123";
+										 } else {
+												 $datos_telefono = $order->billing_phone;
+										 }
+										 if ($order->billing_address_1 == null) {
+												 $datos_direccion = "Avenida 123";
+										 } else {
+												 $datos_direccion = $order->billing_address_1;
+										 }
 
-                  $data = $cargo;
-                  error_log("Venta exitosa");
+			                // Creando Cargo
+			                try {
+			                  $cargo = $culqi->Cargos->create(array(
+													"address" => $datos_direccion,
+								          "address_city" => $datos_ciudad,
+								          "amount" => $total,
+								          "country_code" => $order->billing_country,
+								          "currency_code" => $order->order_currency,
+								          "email" => $datos_correo,
+								          "first_name" => $datos_nombre,
+								          "installments" => 0,
+								          "last_name" => $datos_apellido,
+								          "order_id" => $pedidoId,
+								          "phone_number" => $datos_telefono,
+								          "product_description" => $descripcion,
+								          "token_id" => $_POST['token_id']
+			                  ));
 
-									$order->payment_complete();
+			                  $data = $cargo;
+			                  error_log("Venta exitosa");
 
-                  echo json_encode($data);
+												$order->payment_complete();
 
+			                  echo json_encode($data);
 
-									//$order    = new WC_Order( $orderId );
+			                } catch(Exception $e) {
+			                  // ERROR: El cargo tuvo algún error o fue rechazado
+			                  error_log($e->getMessage());
+			                  $data = $e->getMessage();
 
-									// $order->payment_complete($dataTicket);
+												//echo 'Se dio una excepcion';
+			                  echo $data;
+			                }
 
-
-                } catch(Exception $e) {
-                  // ERROR: El cargo tuvo algún error o fue rechazado
-                  error_log($e->getMessage());
-                  $data = $e->getMessage();
-
-									//echo 'Se dio una excepcion';
-                  echo $data;
-
-
-                }
-
-               }
-
-							 else{
+               } else {
                     global $woocommerce;
                     $woocommerce->cart->empty_cart();
-                }
+               }
                exit;
 
             }
@@ -726,7 +626,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
                           }
-
 
                       };
 
