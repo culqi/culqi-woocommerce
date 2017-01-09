@@ -16,8 +16,8 @@
  * Plugin Name:       Culqi WooCommerce
  * Plugin URI:        http://developers.culqi.com
  * Description:       Plugin Culqi WooCommerce. Acepta tarjetas de crédito y débito en tu tienda online.
- * Version:           1.0.4
- * Author:            Brayan Cruces
+ * Version:           1.0.5
+ * Author:            Brayan Cruces, Willy Aguirre
  * Author URI:        http://culqi.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -832,9 +832,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 								<script src="<?php echo plugins_url("/assets/js/waitMe.js", __FILE__ ) ?>"></script>
 								<link rel='stylesheet' href='<?php echo plugins_url("/assets/css/waitMe.css", __FILE__ ) ?>' type='text/css' media='all' />
 
-
-
-
                 <script>
 
                     var $j = jQuery.noConflict();
@@ -948,7 +945,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $j('div.woocommerce').prepend("<h1 style='text-align: center;' id='title-result'></h1>");
 
                         $j("#info_payment").on('click','#refresh', function(){
-                            var url = '<?php echo WC_Cart::get_checkout_url(); ?>';
+                            var url = '<?php echo wc_get_checkout_url(); ?>';
                             window.location.replace(url);
                         });
 
@@ -963,7 +960,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             e.preventDefault();
                         });
                         $j('#btn-back').on('click', function(e){
-                            var url = '<?php echo WC_Cart::get_checkout_url(); ?>';
+                            var url = '<?php echo wc_get_checkout_url(); ?>';
                             window.location.replace(url);
                         });
                     });
