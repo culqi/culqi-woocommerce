@@ -637,7 +637,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $j('div.woocommerce').prepend("<h1 style='text-align: center;' id='title-result'></h1>");
 
                         $j("#info_payment").on('click','#refresh', function(){
-                            var url = '<?php echo WC_Cart::get_checkout_url(); ?>';
+                            var url = '<?php echo wc_get_checkout_url(); ?>';
                             window.location.replace(url);
                         });
 
@@ -652,7 +652,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             e.preventDefault();
                         });
                         $j('#btn-back').on('click', function(e){
-                            var url = '<?php echo WC_Cart::get_checkout_url(); ?>';
+                            var url = '<?php echo wc_get_checkout_url(); ?>';
                             window.location.replace(url);
                         });
                     });
