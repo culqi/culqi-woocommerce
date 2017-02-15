@@ -1,6 +1,14 @@
 <?php
+
 namespace Culqi;
 
+use Culqi\Error as Errors;
+
+/**
+ * Class Culqi
+ *
+ * @package Culqi
+ */
 class Culqi
 {
 
@@ -16,12 +24,21 @@ class Culqi
      */
     const BASE_URL = "https://api.culqi.com/v2";
 
-    // Constructor
+    /**
+     * Constructor.
+     *
+     * @param array|null $options
+     *
+     * @throws Error\InvalidApiKey
+     *
+     * @example array('api_key' => "{api_key}")
+     *
+     */
     public function __construct($options)
     {
         $this->api_key = $options["api_key"];
         if (!$this->api_key) {
-          throw new InvalidApiKey();
+          throw new Errors\InvalidApiKey();
         }
 
         $this->Tokens = new Tokens($this);
