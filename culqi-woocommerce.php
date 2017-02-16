@@ -16,7 +16,7 @@
  * Plugin Name:       Culqi WooCommerce
  * Plugin URI:        http://developers.culqi.com
  * Description:       Plugin Culqi WooCommerce. Acepta tarjetas de crédito y débito en tu tienda online.
- * Version:           2.0.1
+ * Version:           2.1.0
  * Author:            Brayan Cruces, Willy Aguirre
  * Author URI:        http://culqi.com
  * License:           GPL-2.0+
@@ -315,12 +315,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             $order->payment_complete();
                         }
 
-                        echo json_encode($charge);
+                        echo wp_send_json($charge);
 
                     } catch(Exception $e) {
                         // ERROR: El cargo tuvo algún error o fue rechazado
                         //echo 'Se dio una excepcion';
-                        echo json_encode($e->getMessage());
+                        echo wp_send_json($e->getMessage());
                     }
 
                } else {
@@ -480,7 +480,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     <div id="culqi_notify" style="padding:10px 0px;"></div>
 				</div>
 
-                <script src="https://checkout.culqi.com/v2"></script>
+                <script src="https://checkout.culqi.com/plugins/v2/"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 				<script src="<?php echo plugins_url("/assets/js/waitMe.js", __FILE__ ) ?>"></script>
 				<link rel='stylesheet' href='<?php echo plugins_url("/assets/css/waitMe.css", __FILE__ ) ?>' type='text/css' media='all' />
@@ -529,30 +529,40 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 url: "index.php?wc-api=WC_culqi",
                                 type: "POST",
                                 data: {token_id: Culqi.token.id, order_id: "<?php echo $numeroPedido ?>", installments: Culqi.token.metadata.installments },
+                                dataType: 'json',
                                 success: function(data) {
-                                    var result = JSON.parse(data);
-
+									var result = "";
+                                    if(data.constructor == String){
+                                        result = JSON.parse(data);
+                                    }
+                                    if(data.constructor == Object){
+                                        result = JSON.parse(JSON.stringify(data));
+                                    }
                                     if (result.object === "error") {
                                         // Mostrar error
                                         var message = result.user_message;
                                         $j('#info_payment > #culqi_notify').html('<p style="color:#e54848; font-weight:bold">'+ message + '</p>');
-                                    } else if (result.object === "charge") {
-                                        $j('#notify').empty();
-                                        $j("#info_payment").remove();
-                                        $j('div.woocommerce').append("<h1 style='text-align: center;'>Pago Exitoso</h1>" +
-                                        "<p style='color:#46e6aa; font-weight:bold'>Pago realizado exitosamente</p>" +
-                                        "<br><button id='home'>Seguir comprando</button>");
+                                    } else {
+										if (result.object === "charge") {
+	                                        $j('#notify').empty();
+	                                        $j("#info_payment").remove();
+	                                        $j('div.woocommerce').append("<h1 style='text-align: center;'>Pago Exitoso</h1>" +
+	                                        "<p style='color:#46e6aa; font-weight:bold'>Pago realizado exitosamente</p>" +
+	                                        "<br><button id='home'>Seguir comprando</button>");
 
-                                        // Procesar Venta en WooCommerce
-                                        $j.ajax({
-                                            url: "index.php?wc-api=WC_culqi",
-                                            type: "POST",
-                                            data: {emptyCart: 1},
-                                            success: function (data) {
-                                                // console.log(data);
-                                            }
-                                        });
-                                    }
+	                                        // Procesar Venta en WooCommerce
+	                                        $j.ajax({
+	                                            url: "index.php?wc-api=WC_culqi",
+	                                            type: "POST",
+	                                            data: {emptyCart: 1},
+	                                            success: function (data) {
+	                                                // console.log(data);
+	                                            }
+	                                        });
+	                                    } else {
+											$j('#info_payment > #culqi_notify').html('<p style="color:#e54848; font-weight:bold">ERROR EN LA RESPUESTA JSON</p>');
+										}
+									}
 
                                 },
                                 error: function() {
