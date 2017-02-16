@@ -1,28 +1,41 @@
 <?php
+
 namespace Culqi;
 
-class Tokens extends Resource
-{
+/**
+ * Class Tokens
+ *
+ * @package Culqi
+ */
+class Tokens extends Resource {
+
+    const URL_TOKENS = "/tokens/";
+
     /**
-     * @param string $id La ID del token a devolver.
-     * @param array|string|null $opts
+     * @param array|null $options
      *
-     * @return Token
+     * @return all Tokens.
      */
-    public static function retrieve($id, $opts = null)
-    {
-        return self::_retrieve($id, $opts);
+    public function getList($options = NULL) {
+        return $this->request("GET", self::URL_TOKENS, $api_key = $this->culqi->api_key, $options);
     }
+
     /**
-     * @param array|null $params
-     * @param array|string|null $opts
+     * @param array|null $options
      *
-     * @return Token Token creado
-     * ATENCIÓN: Solo para desarollo. Lo ideal es usar el CULQI.JS.
-     *
+     * @return create Token response.
      */
-    public static function create($params = null, $opts = null)
-    {
-        return self::_create($params, $opts);
+    public function create($options = NULL) {
+        return $this->request("POST", self::URL_TOKENS, $api_key = $this->culqi->api_key, $options);
     }
+
+    /**
+     * @param string|null $id
+     *
+     * @return get a Token.
+     */
+    public function get($id = NULL) {
+        return $this->request("GET", self::URL_TOKENS . $id . "/", $api_key = $this->culqi->api_key);
+    }
+
 }
