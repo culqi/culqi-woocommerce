@@ -434,7 +434,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         if(Culqi.error) {
                             // Mostramos JSON de objeto error en consola
                             console.log(Culqi.error);
-                            $j('#culqi_notify').html(Culqi.error.mensaje);
+							$j('#info_payment > #culqi_notify').html('<p style="color:#e54848; font-weight:bold">'+ Culqi.error.user_message + '</p>');
                         } else {
                             console.log(Culqi.token.id);
                             $j(document).ajaxStart(function(){
