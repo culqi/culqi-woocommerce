@@ -1,4 +1,4 @@
-# Culqi WooCommerce Plugin v1.0.5
+# Culqi WooCommerce Plugin v2.1.0
 
 <table>
   <tr>
