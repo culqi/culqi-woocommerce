@@ -238,7 +238,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 					 }
                     // Creando Cargo
                     try {
-						$charge = $culqi->Charges->create(array(
+											$charge = $culqi->Charges->create(array(
                             "amount" => $total,
                             "antifraud_details" => array(
                                 "address" => $datos_direccion,
@@ -312,18 +312,18 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     ),
                     'culqi_codigoComercio' => array
                     (
-                        'title' => __('Código de comercio', 'wc_culqi_payment_gateway'),
+                        'title' => __('Llave Pública', 'wc_culqi_payment_gateway'),
                         'type' => 'text',
                         'required' => true,
-                        'description' => __('Ingresar código de comercio en Culqi.', 'wc_culqi_payment_gateway'),
+                        'description' => __('Ingresar Llave Pública', 'wc_culqi_payment_gateway'),
                         'default' => ''
                     ),
                     'culqi_key' => array
                     (
-                        'title' => __('Llave de cifrado', 'wc_culqi_payment_gateway'),
+                        'title' => __('Llave Secreta', 'wc_culqi_payment_gateway'),
                         'type' => 'text',
                         'required' => true,
-                        'description' => __('Ingresar llave secreta para el cifrado y descifrado.', 'wc_culqi_payment_gateway'),
+                        'description' => __('Ingresar Llave Secreta', 'wc_culqi_payment_gateway'),
                         'default' => ''
                     )
                 );
@@ -405,12 +405,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     <span>Realiza la compra presionando <strong>Pagar</strong><br>Si deseas cambiar de medio de pago presiona <strong>Cancelar</strong></span><br><br>
                     <button id="pagar-now">Pagar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="btn-back">Cancelar</button>
                     <div id="culqi_notify" style="padding:10px 0px;"></div>
-				</div>
+							  </div>
 
                 <script src="https://checkout.culqi.com/plugins/v2/"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-				<script src="<?php echo plugins_url("/assets/js/waitMe.js", __FILE__ ) ?>"></script>
-				<link rel='stylesheet' href='<?php echo plugins_url("/assets/css/waitMe.css", __FILE__ ) ?>' type='text/css' media='all' />
+								<script src="<?php echo plugins_url("/assets/js/waitMe.js", __FILE__ ) ?>"></script>
+								<link rel='stylesheet' href='<?php echo plugins_url("/assets/css/waitMe.css", __FILE__ ) ?>' type='text/css' media='all' />
 
                 <script>
                     var $j = jQuery.noConflict();
@@ -450,7 +450,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 data: {token_id: Culqi.token.id, order_id: "<?php echo $numeroPedido ?>", installments: Culqi.token.metadata.installments },
                                 dataType: 'json',
                                 success: function(data) {
-									var result = "";
+																	if(data === "Error de autenticación") {
+																		var err_msg = data + ": verificar si su Llave Secreta es la correcta";
+																		$j('#info_payment > #culqi_notify').html('<p style="color:#e54848; font-weight:bold">'+ err_msg + '</p>');
+																	} else {
+																		var result = "";
                                     if(data.constructor == String){
                                         result = JSON.parse(data);
                                     }
@@ -462,7 +466,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                         var message = result.user_message;
                                         $j('#info_payment > #culqi_notify').html('<p style="color:#e54848; font-weight:bold">'+ message + '</p>');
                                     } else {
-										if (result.object === "charge") {
+										                    if (result.object === "charge") {
 	                                        $j('#notify').empty();
 	                                        $j("#info_payment").remove();
 	                                        $j('div.woocommerce').append("<h1 style='text-align: center;'>Pago Exitoso</h1>" +
@@ -477,10 +481,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 	                                                // console.log(data);
 	                                            }
 	                                        });
-	                                    } else {
-											$j('#info_payment > #culqi_notify').html('<p style="color:#e54848; font-weight:bold">ERROR EN LA RESPUESTA JSON</p>');
-										}
-									}
+		                                    } else {
+												                   $j('#info_payment > #culqi_notify').html('<p style="color:#e54848; font-weight:bold">ERROR EN LA RESPUESTA JSON</p>');
+																				}
+																		  }
+																	 }
                                 },
                                 error: function() {
                                     $j('#culqi_notify').empty();
