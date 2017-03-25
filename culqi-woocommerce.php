@@ -13,7 +13,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Culqi WooCommerce
- * Plugin URI:        http://developers.culqi.com
+ * Plugin URI:        https://www.culqi.com/docs/
  * Description:       Plugin Culqi WooCommerce. Acepta tarjetas de crédito y débito en tu tienda online.
  * Version:           2.1.1
  * Author:            Brayan Cruces, Willy Aguirre
