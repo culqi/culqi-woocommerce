@@ -448,7 +448,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 $('#info_payment').waitMe('hide');
                             });
                             $.ajax({
-                                url: "index.php?wc-api=WC_culqi",
+                                url: "?wc-api=WC_culqi",
                                 type: "POST",
                                 data: {token_id: Culqi.token.id, order_id: "<?php echo $numeroPedido ?>", installments: Culqi.token.metadata.installments },
                                 dataType: 'json',
