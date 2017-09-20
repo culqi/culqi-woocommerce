@@ -1,4 +1,4 @@
-# Culqi Checkout - ( Wordpress & Woocommerce )
+# Culqi v2 Checkout - ( Wordpress & Woocommerce )
 
 ### Pasos para la Integración del Plugin de Culqi:
 
