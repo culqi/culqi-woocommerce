@@ -1,11 +1,11 @@
 # Culqi v2 Checkout - ( Wordpress & Woocommerce )
 
-### Pasos para la Integración del Plugin de Culqi:
+### Pasos para la integración del Plugin de Culqi:
 
 #### 1. Registrarse en Culqi   `<link>` : <https://www.culqi.com/>
 
-Asi podras tener acceso al ambiente de pruebas de Culqi `<link>` : <https://integ-panel.culqi.com/>
-donde encontraras tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarrollo/llaves/> 
+Así podrás tener acceso al ambiente de pruebas de Culqi `<link>` : <https://integ-panel.culqi.com/>
+donde encontrarás tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarrollo/llaves/> 
 
 `Llave publica: pk_test_xxxxxxxxxxxxxx`
 
@@ -32,7 +32,7 @@ donde encontraras tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarro
 
 ##### 4.1
 ![Imgur](https://i.imgur.com/4vZDmFJ.png)
-> Aqui van tus llaves que mencionabamos en el paso 1 ( Registrarse en Culqi ).
+> Aquí van tus llaves que mencionabamos en el paso 1 ( Registrarse en Culqi ).
 
 ### Finalmente debes tener a Culqi como pasarela de pago de esta manera:
 
@@ -44,7 +44,7 @@ donde encontraras tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarro
 
 ### Pase a producción:
 
-#### 1. Cumplir con los requisitos tecnicos
+#### 1. Cumplir con los requisitos técnicos
 
 `<link>` : < https://culqi.com/docs/#/desarrollo/produccion/> 
 
@@ -52,7 +52,7 @@ donde encontraras tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarro
 
 ![Imgur](https://i.imgur.com/wVOz6cc.png)
 
-> Si tienes mas dudas con respecto al procesos de "Activación de comercio" escribenos a unete@culqi.com
+> Si tienes más dudas con respecto al proceso de "Activación de comercio" escribenos a unete@culqi.com
 
 Cuando te envien los accesos a tu panel de producción de Culqi debes reemplazar
 tus llaves de pruebas por tus llaves de producción como en el paso 4.2 
@@ -61,9 +61,9 @@ tus llaves de pruebas por tus llaves de producción como en el paso 4.2
 
 `Llave privada: sk_live_xxxxxxxxxxxxxx`
 
-> Donde podras comenzar a usar tarjetas reales.
+> En el ambiente de producción podrás comenzar a usar tarjetas reales.
 
 
-### Si tienes dudas de Integración escribenos a integrate@culqi.com
+### Si tienes dudas de integración escríbenos a integrate@culqi.com
 
-### Si tienes dudas comerciales escribenos a unete@culqi.com
+### Si tienes dudas comerciales escríbenos a unete@culqi.com
