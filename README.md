@@ -4,8 +4,8 @@
 
 #### 1. Registrarse en Culqi   `<link>` : <https://www.culqi.com/>
 
-Así podras tener acceso al ambiente de pruebas de Culqi `<link>` : <https://integ-panel.culqi.com/>
-donde encontraras tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarrollo/llaves/> 
+Así podrás tener acceso al ambiente de pruebas de Culqi `<link>` : <https://integ-panel.culqi.com/>
+donde encontrarás tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarrollo/llaves/> 
 
 `Llave publica: pk_test_xxxxxxxxxxxxxx`
 
@@ -61,9 +61,9 @@ tus llaves de pruebas por tus llaves de producción como en el paso 4.2
 
 `Llave privada: sk_live_xxxxxxxxxxxxxx`
 
-> En el ambiente de producción podras comenzar a usar tarjetas reales.
+> En el ambiente de producción podrás comenzar a usar tarjetas reales.
 
 
-### Si tienes dudas de integración escribenos a integrate@culqi.com
+### Si tienes dudas de integración escríbenos a integrate@culqi.com
 
-### Si tienes dudas comerciales escribenos a unete@culqi.com
+### Si tienes dudas comerciales escríbenos a unete@culqi.com
