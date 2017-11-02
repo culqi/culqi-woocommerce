@@ -31,6 +31,7 @@ class Client {
                 $response = \Requests::delete(Culqi::BASE_URL, $options);
             }
         } catch (\Exception $e) {
+            error_log($e);
             throw new Errors\UnableToConnect();
         }
         if ($response->status_code >= 200 && $response->status_code <= 206) {
