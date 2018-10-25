@@ -16,7 +16,7 @@ class Charges extends Resource {
      *
      * @return all Charges.
      */
-    public function getList($options = NULL) {
+    public function all($options = NULL) {
         return $this->request("GET", self::URL_CHARGES, $api_key = $this->culqi->api_key, $options);
     }
 
@@ -41,18 +41,9 @@ class Charges extends Resource {
     /**
      * @param string|null $id
      *
-     * @return delete a Charge response.
-     */
-    public function delete($id = NULL) {
-        return $this->request("DELETE", self::URL_CHARGES . $id . "/", $api_key = $this->culqi->api_key);
-    }
-
-    /**
-     * @param string|null $id
-     *
      * @return get a capture of Charge.
      */
-    public function getCapture($id = NULL) {
+    public function capture($id = NULL) {
         return $this->request("POST", self::URL_CHARGES . $id . "/capture/", $api_key = $this->culqi->api_key);
     }
 
