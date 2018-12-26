@@ -287,13 +287,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             ),
                             "source_id" => $_POST['token_id']
                         ));
-                        if($charge->object == "charge") {
+                        if($charge->object == "charge") { 
+                            $order->update_meta_data('_culqi_finished_payment', "true"); 
+                            $order->save();
                             $order->payment_complete();
                         }
                         echo wp_send_json($charge);
                     } catch(Exception $e) {
                         // ERROR: El cargo tuvo algún error o fue rechazado
                         //echo 'Se dio una excepcion';
+                        
                         echo wp_send_json($e->getMessage());
                     }
                } else {
@@ -344,11 +347,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                    $foundPostId = $this->get_post_id_by_meta_key_and_value('_culqi_order_id', $data->id);
                    
-                   if($foundPostId) {
+                   if($foundPostId) { 
+                      error_log('Order encontrada: '. $foundPostId);
 
-                      error_log('Order encontrada: '. $foundPostId);                       
-                      
-                      if($data->state == 'paid') {
+                     if(get_metadata('post',$foundPostId, '_culqi_finished_payment', true) != 'true') {
+
+                       if($data->state == 'paid') {
                          error_log('Estado: Pagada'); 
  
                          $order = new WC_Order($foundPostId);                       
@@ -357,20 +361,29 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                          echo wp_send_json( array(
                             'result'    => 'success'
                          ));
-                      } 
+                       } 
 
-                      if($data->state == 'expired') {
+                       if($data->state == 'expired') {
                          error_log('Estado: Expirada');
 
-                         $order = new WC_Order($foundPostId);  
+                         $order = new WC_Order($foundPostId);   
+
+                         error_log($order->get_status());
 
                          $order->update_status( 'cancelled', 'La orden no fue pagada a tiempo.' );
+ 
+                         echo wp_send_json( array(
+                             'result'    => 'success'
+                         ));                          
+                       } 
 
-                        echo wp_send_json( array(
-                            'result'    => 'success'
-                         ));
-                          
-                      }                     
+
+                     }                 
+                     else {
+                         error_log("No se realizó ninguna acción.");
+                     }
+                      
+                                         
                      
                    }
 
@@ -625,6 +638,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         amount: <?php echo $total; ?>,  
                         <?php if ($this->enabled_multipayment == 'yes') { ?>                   
 			            order: '<?php echo trim($culqi_order_id); ?>' <?php }  ?>
+                    }); 
+
+                    Culqi.options({ 
+                        installments: true
                     });
 
                     function run_waitMe(){
