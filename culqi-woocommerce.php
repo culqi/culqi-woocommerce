@@ -583,7 +583,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $orderResponse = $culqi->Orders->create(
                             array(
                                 "amount" => (int) $total,
-                                "currency_code" => "PEN",
+                                "currency_code" => $order->get_currency(),
                                 "description" => 'Venta desde Plugin WooCommerce',        
                                 "order_number" => "woo-".rand(1, 99999),  
                                 "client_details" => array( 
