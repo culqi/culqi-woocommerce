@@ -1,4 +1,6 @@
-# Culqi v2 Checkout - ( Wordpress & Woocommerce )
+# Culqi WooCommerce( Wordpress & Woocommerce )
+
+Version: 2.2.0  
 
 ### Pasos para la integración del Plugin de Culqi:
 
@@ -11,9 +13,9 @@ donde encontrarás tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarr
 
 `Llave privada: sk_test_xxxxxxxxxxxxxx`
 
-#### 2. Descargar  el Plugin de Culqi 2.1.1 
+#### 2. Descargar  el Plugin de Culqi 2.2.0 
 
-`<link>` : <https://github.com/culqi/culqi-woocommerce/releases/tag/v2.1.1> 
+`<link>` : <https://github.com/culqi/culqi-woocommerce/releases/tag/v2.2.0> 
 
 ![Imgur](https://i.imgur.com/5jnekNE.png)
 
@@ -64,6 +66,4 @@ tus llaves de pruebas por tus llaves de producción como en el paso 4.2
 > En el ambiente de producción podrás comenzar a usar tarjetas reales.
 
 
-### Si tienes dudas de integración escríbenos a integrate@culqi.com
-
-### Si tienes dudas comerciales escríbenos a unete@culqi.com
+ Si tienes dudas de integración escríbenos a https://culqi.com/soporte
