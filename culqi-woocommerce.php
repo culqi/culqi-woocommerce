@@ -699,7 +699,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 	                                        "<p style='color:#46e6aa; font-weight:bold'>Pago realizado exitosamente</p>" +
 	                                        "<br><button id='home'>Seguir comprando</button>"); 
                                             
-                                            Culqi.close();
+                                           
 	                                        // Procesar Venta en WooCommerce
 	                                        $.ajax({
 	                                            url: "index.php?wc-api=WC_culqi",
@@ -708,7 +708,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 	                                            success: function (data) {
 	                                                // console.log(data);
 	                                            }
-	                                        });
+	                                        }); 
+                                            
+                                             Culqi.close();
+                                            
 		                                    } else {
 					                   			$('#info_payment > #culqi_notify').html('<p style="color:#e54848; font-weight:bold">ERROR EN LA RESPUESTA JSON</p>');
 											}
