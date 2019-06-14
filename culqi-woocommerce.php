@@ -15,7 +15,7 @@
  * Plugin Name:       Culqi WooCommerce
  * Plugin URI:        https://www.culqi.com/docs/
  * Description:       Plugin Culqi WooCommerce. Acepta tarjetas de crédito y débito en tu tienda online.
- * Version:           2.2.0
+ * Version:           2.2.1
  * Author:            Brayan Cruces, Willy Aguirre
  * Author URI:        http://culqi.com
  * License:           GPL-2.0+
@@ -27,6 +27,26 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
+function woo_change_order_received_text( $str, $order ) { 
+     
+    $cip = $order->get_meta('_culqi_order_cip'); 
+    $is_finished_payment =  $order->get_meta('_culqi_finished_payment');  
+    
+    // Si la orden fue pagada mediante pago efectivo 
+    
+    if(!$is_finished_payment && isset($cip)) {
+        $new_str = $str . ' Para finalizar esta compra debes acercarte a pagar con el siguiente código de pago:  
+        <b>' . $cip . '</b>. ¡Hazlo antes que se acabe el tiempo de expiración! Te enviamos a tu correo la información detallada para que realices el pago.'; 
+     return $new_str; 
+        
+    }
+}
+
+
+add_filter('woocommerce_thankyou_order_received_text', 'woo_change_order_received_text', 10, 2 );
+
+
 function wc_culqi_styles()
 {
 	// Register the style like this for a plugin:
@@ -309,15 +329,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
            function procesar_orden () {
                
-               if (isset($_POST['order_id'])) { 
+               if (isset($_POST['order_id']) && isset($_POST['cip']) ) { 
                    global $wpdb, $woocommerce;
-				   $order = new WC_Order($_POST['order_id']);                 
-
-                  
-                   $order->update_status( 'on-hold', 'Se eligio Pago en efectivo via Culqi.' );       
-
+				   $order = new WC_Order($_POST['order_id']);
+				   $order->update_status( 'on-hold', 'Se eligio Pago en efectivo via Culqi.' );
+				   $order->update_meta_data('_culqi_order_cip', $_POST['cip']); 
+                   $order->save();           
                    $order->reduce_order_stock();
-
                    $woocommerce->cart->empty_cart();
 
                     // Return 
@@ -401,8 +419,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
             function is_valid_for_use() {
-                if (!in_array(get_woocommerce_currency(), array('PEN', 'USD'))) return false;
-                return true;
+                return in_array(get_woocommerce_currency(), array('PEN', 'USD'));
             }
             public function admin_options() {
                 ?>
@@ -462,7 +479,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         'type' => 'text',
                         'required' => true,
                         'description' => __('Ingresar Llave Pública', 'wc_culqi_payment_gateway'),
-                        'default' => ''
+                        'default' => '', 
+                        'max-length' => 30
                     ),
                     'culqi_key' => array
                     (
@@ -743,7 +761,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 	                           $.ajax({
 	                              url: "index.php?wc-api=process_order",
 	                              type: "POST",
-	                              data: {order_id: "<?php echo $order->id ?>"},
+	                              data: {order_id: "<?php echo $order->id ?>", cip: Culqi.order.payment_code},
 	                              success: function (data) {
 	                                console.log(data);                                    
                                     window.location.replace(data.redirect);

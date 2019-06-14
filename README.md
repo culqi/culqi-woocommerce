@@ -1,6 +1,6 @@
 # Culqi WooCommerce( Wordpress & Woocommerce )
 
-Version: 2.2.0  
+Version: 2.2.1  
 
 ### Pasos para la integración del Plugin de Culqi:
 
