@@ -14,10 +14,10 @@
  * @wordpress-plugin
  * Plugin Name:       Culqi WooCommerce
  * Plugin URI:        https://www.culqi.com/docs/
- * Description:       Plugin Culqi WooCommerce. Acepta tarjetas de crédito y débito en tu tienda online.
+ * Description:       Plugin Culqi WooCommerce. Acepta tarjetas de crédito/débito y PagoEfectivo (¡Nuevo!) en tu tienda online.
  * Version:           2.2.1
- * Author:            Brayan Cruces, Willy Aguirre
- * Author URI:        http://culqi.com
+ * Author:            Brayan Cruces
+ * Author URI:        https://culqi.com
  * License:           GPL-2.0+
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:       culqi-woocommerce
@@ -35,7 +35,7 @@ function woo_change_order_received_text( $str, $order ) {
     
     // Si la orden fue pagada mediante pago efectivo 
     
-    if(!$is_finished_payment && isset($cip)) {
+    if(!$is_finished_payment && isset($cip) && !empty($cip)) {
         $new_str = $str . ' Para finalizar esta compra debes acercarte a pagar con el siguiente código de pago:  
         <b>' . $cip . '</b>. ¡Hazlo antes que se acabe el tiempo de expiración! Te enviamos a tu correo la información detallada para que realices el pago.'; 
      return $new_str; 
@@ -117,18 +117,20 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 global $woocommerce;
                 $this->includes();
                 $this->id = 'culqi';
+                $this->title = 'Tarjeta de crédito/débito';
+                $this->description = 'Paga con tu tarjeta de crédito/débito a través de Culqi';
                 $this->icon = home_url() . '/wp-content/plugins/' . dirname(plugin_basename(__FILE__)) . '/assets/images/cards.png';
                 $this->method_title = __('Culqi', 'WC_culqi');
-                $this->method_description = __('Acepta tarjetas de crédito, débito o prepagadas. ¡Y ahora, pagos en efectivo!.', 'WC_culqi');
+                $this->method_description = __('Acepta tarjetas de crédito, débito o prepagadas. ¡Y ahora, PagoEfectivo!.', 'WC_culqi');
                 $this->order_button_text = __('Pagar', 'WC_culqi');
                 $this->has_fields = false;
                 $this->supports = array(
                     'products'
                 );
                 $this->init_form_fields();
-                $this->init_settings();
-                $this->title = 'Tarjeta de crédito/débito o paga con efectivo';
-                $this->description = 'Paga con tarjeta de crédito, débito o paga en efectivo (nuevo).';
+                $this->init_settings(); 
+                
+                
 
                 // Obtener credenciales y entorno
                 $this->culqi_codigoComercio = $this->get_option('culqi_codigoComercio');
@@ -136,17 +138,21 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 
                 // Orders
                 $this->enabled_multipayment = $this->get_option('enabled_multipayment');  
-                $this->orders_expiration_default = $this->get_option('orders_expiration_default');  
+                $this->orders_expiration_default = $this->get_option('orders_expiration_default');    
                 
+                if($this->enabled_multipayment  == 'yes') {
+                $this->title = 'Tarjeta de crédito/débito o PagoEfectivo';
+                $this->description = 'Paga con tu tarjeta de crédito/débito  o PagoEfectivo (nuevo) a través de Culqi. ¡Elige el medio de pago que más te convenga!';
+                $this->icon = home_url() . '/wp-content/plugins/' . dirname(plugin_basename(__FILE__)) . '/assets/images/cards_with_pagoefectivo.png';
+                    
+                }
 
 
                 $this->culqi_nombre_comercio = get_bloginfo('name');
+                
                 add_action('woocommerce_api_' . strtolower(get_class($this)), array($this, 'crear_cargo'));// Crear Cargo 
-
                 add_action('woocommerce_api_process_order', array($this, 'procesar_orden')); // Pasar a estado pendiente
                 add_action('woocommerce_api_cq_webhook', array($this, 'actualizar_orden')); // Actualizar estado 
-               
-
                 add_action('woocommerce_receipt_culqi', array(&$this, 'receipt_page'));
                 add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
                 if (!$this->is_valid_for_use()) $this->enabled = false;

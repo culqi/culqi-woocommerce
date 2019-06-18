@@ -13,9 +13,9 @@ donde encontrarás tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarr
 
 `Llave privada: sk_test_xxxxxxxxxxxxxx`
 
-#### 2. Descargar  el Plugin de Culqi 2.2.0 
+#### 2. Descargar  el Plugin de Culqi 2.2.1 
 
-`<link>` : <https://github.com/culqi/culqi-woocommerce/releases/tag/v2.2.0> 
+`<link>` : <https://github.com/culqi/culqi-woocommerce/releases/tag/v2.2.1> 
 
 ![Imgur](https://i.imgur.com/5jnekNE.png)
 
