@@ -695,7 +695,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 $('#info_payment').waitMe('hide');
                             });
                             $.ajax({
-                                url: "index.php?wc-api=WC_culqi",
+                                url: "<?php echo add_query_arg('wc-api', 'WC_culqi', site_url('/')); ?>",
                                 type: "POST",
                                 data: {token_id: Culqi.token.id, order_id: "<?php echo $numeroPedido ?>", installments: Culqi.token.metadata.installments },
                                 dataType: 'json',
@@ -726,7 +726,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                            
 	                                        // Procesar Venta en WooCommerce
 	                                        $.ajax({
-	                                            url: "index.php?wc-api=WC_culqi",
+	                                            url: "<?php echo add_query_arg('wc-api', 'WC_culqi', site_url('/')); ?>",
 	                                            type: "POST",
 	                                            data: {emptyCart: 1},
 	                                            success: function (data) {
@@ -765,7 +765,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 
                                 // Procesar Venta en WooCommerce
 	                           $.ajax({
-	                              url: "index.php?wc-api=process_order",
+	                              url: "<?php echo add_query_arg('wc-api', 'process_order', site_url('/')); ?>",
 	                              type: "POST",
 	                              data: {order_id: "<?php echo $order->id ?>", cip: Culqi.order.payment_code},
 	                              success: function (data) {
