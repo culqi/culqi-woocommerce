@@ -48,7 +48,7 @@ donde encontrarás tus llaves `<link>` : <https://integ-panel.culqi.com/#/desarr
 
 #### 1. Cumplir con los requisitos técnicos
 
-`<link>` : < https://culqi.com/docs/#/desarrollo/produccion/> 
+`<link>` : <https://culqi.com/docs/#/desarrollo/produccion/> 
 
 #### 2. Activar comercio desde tu panel de integración de Culqi
 
