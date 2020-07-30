@@ -69,12 +69,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
      */
     function some_custom_checkout_field_process() {
         error_log("[CULQI]...Validando...");
-        if(preg_match('/^[^0-9±!@£$%^&*_+§¡€#¢§¶•ªº«\\<>?:;|=.,]{2,50}$/', $_POST['billing_first_name'])) {
+        if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚäöüÄÖÜß\s\-]{2,50}$/', $_POST['billing_first_name'])) {
             //error_log("Nombre correcto");
         } else {
             wc_add_notice('Por favor, ingresa un <strong>nombre </strong>válido', 'error' );
         }
-        if(preg_match('/^[^0-9±!@£$%^&*_+§¡€#¢§¶•ªº«\\<>?:;|=.,]{2,50}$/', $_POST['billing_last_name'])) {
+        if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚäöüÄÖÜß\s\-]{2,50}$/', $_POST['billing_last_name'])) {
             //error_log("Apellido correcto");
         } else {
             wc_add_notice('Por favor, ingresa un <strong>apellido </strong>válido.', 'error' );
