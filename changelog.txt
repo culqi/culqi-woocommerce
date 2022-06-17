@@ -1,0 +1,116 @@
+2021-06-07 - version 2.0.5
+Fix: validate if method exists
+
+2021-06-03 - version 2.0.4
+Fix: check if the product class exists
+
+2021-05-25 - version 2.0.3
+Fix: sync to Culqi entities
+
+2021-03-03 - version 2.0.2
+* Fix: fix: upgrade process
+
+2021-03-03 - version 2.0.0
+* Feature: new structure
+* Feature: new webhook section
+* Feature: the customer will be registered in Culqi
+* Feature: new section called "orders"
+* Feature: new section called "customers"
+
+2020-06-13 - version 1.5.2
+* Fix: we convert amount field in string because json_decode modify the precision of decimals
+
+2020-06-07 - version 1.5.1
+* Feature: status on multipayment
+* Feature: add new addon
+
+2020-06-04 - version 1.5.0
+* Feature: refund and status
+
+2020-03-05 - version 1.4.8
+* Fix: if the product has get_name method
+
+2020-03-04 - version 1.4.7
+* Fix: if method exist
+
+2020-03-04 - version 1.4.6
+* Fix: when the product doesnt exist on the order
+
+2020-02-08 - version 1.4.5
+* Fix: double function
+
+2020-02-07 - version 1.4.4
+* Fix: description on checkout page
+* Compatilibity Woocommerce 3.9.x
+
+2020-01-16 - version 1.4.3
+* Fix: scripts JS
+
+2019-11-07 - version 1.4.2
+* Fix: we increase parameters in the payment process
+
+2019-10-21 - version 1.4.1
+* Fix: add filters to one click
+
+2019-10-20 - version 1.4.0
+* Fix: Update the culqi-php by composer
+
+2019-10-05 - version 1.3.7
+* Feature: set language to the culqi modal
+
+2019-10-05 - version 1.3.6
+* Fix: records in payment class
+
+2019-10-04 - version 1.3.5
+* Fix: include wc class
+
+2019-10-04 - version 1.3.4
+* Fix: add params to hooks that disabled multipayments
+
+2019-10-03 - version 1.3.3
+* Fix: hook to disabled multipayments and installments
+
+2019-10-03 - version 1.3.2
+* Fix: when the cip expired so the order is cancelled
+
+2019-10-03 - version 1.3.1
+* Fix: change the load of css file
+
+2019-10-03 - version 1.3.0
+* Feature : multtipayment enabled
+
+2019-09-30 - version 1.2.0
+* Feature : add addons section
+
+2019-09-29 - version 1.1.1
+* Feature : we add new hooks to admin settings
+
+2019-09-09 - version 1.1.0
+* Feature : Enable Logo in the modal
+
+2019-08-27 - version 1.0.8
+* Feature : Enable installments
+
+2019-05-09 - version 1.0.7
+*Fix: Log always is active
+
+2019-05-09 - version 1.0.6
+* Fix : Time to modal
+
+2019-05-09 - version 1.0.5
+* Tweet : remove automatic sync
+
+2019-05-07 - version 1.0.4
+* Fix: AntiFraud only Email
+
+2019-05-07 - version 1.0.3
+* Fix : capture payment is true
+
+2019-05-07 - version 1.0.2
+* fix: form receipt filters in do payment section
+
+2019-05-06 - version 1.0.1
+* Filters created
+
+2019-04-22 - version 1.0.0
+* Ready
