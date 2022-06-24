@@ -39,6 +39,7 @@ window.addEventListener("message", async function (event) {
 	}
 }, false );
 // GENERAR DEVICE ID (INVOCAR APENAS SE DE AL BOTON PAGAR Y ABRA EL CULQI CHECKOUT)
+Culqi3DS.publicKey = fullculqi_vars.public_key;
 var device = await Culqi3DS.generateDevice();
 
 (function ($) {
