@@ -15,7 +15,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->method_title			= esc_html__( 'Culqi Checkout', 'fullculqi' );
 		$this->method_description 	= esc_html__( 'Conéctate a nuestra pasarela de pagos para aumentar tus ventas.', 'fullculqi' );
 		$this->icon 				= FULLCULQI_WC_URL . 'assets/images/cards.png';
-		
+
 		// Define user set variables
 		$this->has_fields		= apply_filters( 'fullculqi/method/has_fields', false );
 		$this->title			= $this->get_option( 'title' );
@@ -31,7 +31,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->supports = apply_filters('fullculqi/method/supports',
 			[ 'products', 'refunds', 'pre-orders' ]
 		);
-		
+
 		// Load the settings.
 		$this->init_form_fields();
 		$this->init_settings();
@@ -55,7 +55,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     }
 
 	public function enqueue_scripts() {
-		
+
 		// Check if it is /checkout/pay page
 		if( is_checkout_pay_page() ) {
 
@@ -76,37 +76,37 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     			//$this->multipayment = apply_filters( 'fullculqi/method/disabled_multipayments', false, $order, 'order') ? 'no' : $this->multipayment;
                 $this->multipayment='yes';
     			$this->installments = apply_filters( 'fullculqi/method/disabled_installments', false, $order, 'order') ? 'no' : $this->installments;
-    
-    
+
+
     			// Description
     			$pnames = [];
-    
+
     			foreach( $order->get_items() as $item ) {
     					$pnames[] = $item['name'];
     			}
-    
+
     			$desc = count( $pnames ) == 0 ? 'Product' : implode(', ', $pnames);
-    			
-    
+
+
     			// Check if there is multipayment
     			if( $this->multipayment == 'yes' ) {
-    
+
     				$culqi_order_id = get_post_meta( $order_id, '_culqi_order_id', true );
     				//echo var_dump($culqi_order_id);
     				if( empty( $culqi_order_id ) ) {
     					// Antifraud Customer Data
     					$client_details = [ 'email' => $order->billing_email ];
-    
+
     					$billing_first_name 	= $order->billing_first_name;
     					$billing_last_name 		= $order->billing_last_name;
     					$billing_phone 			= $order->billing_phone;
-    
+
     					if( ! empty( $billing_first_name ) )
     						$client_details['first_name'] = $billing_first_name;
-    
+
     					if( ! empty( $billing_last_name ) )
     						$client_details['last_name'] = $billing_last_name;
-    
+
     					if( ! empty( $billing_phone ) )
     						$client_details['phone_number'] = $billing_phone;
                         $enviroment = explode('|',$settings['enviroment']);
@@ -135,10 +135,10 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     					//echo var_dump($culqi_order);
     					if( $culqi_order['status'] == 'ok' ) {
     						$culqi_order_id = $culqi_order['data']['culqi_order_id'];
-    
+
     						// Save meta order
     						update_post_meta( $order_id, '_culqi_order_id', $culqi_order_id );
-    
+
     					} else {
     						$error = sprintf(
     							esc_html__( 'Culqi Multipayment Error: %s', 'fullculqi' ),
@@ -157,40 +157,40 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     			//$this->multipayment = apply_filters( 'fullculqi/method/disabled_multipayments', false, $order, 'order') ? 'no' : $this->multipayment;
                 $this->multipayment='yes';
     			$this->installments = apply_filters( 'fullculqi/method/disabled_installments', false, $order, 'order') ? 'no' : $this->installments;
-    
-    
+
+
     			// Description
     			$pnames = [];
-    
+
     			foreach( $order->get_items() as $item ) {
     				$product = $item->get_product();
-    
+
     				if( $product && method_exists( $product, 'get_name' ) )
     					$pnames[] = $product->get_name();
     			}
-    
+
     			$desc = count( $pnames ) == 0 ? 'Product' : implode(', ', $pnames);
-    			
-    
+
+
     			// Check if there is multipayment
     			if( $this->multipayment == 'yes' ) {
-    
+
     				$culqi_order_id = get_post_meta( $order_id, '_culqi_order_id', true );
     				//echo var_dump($culqi_order_id);
     				if( empty( $culqi_order_id ) ) {
     					// Antifraud Customer Data
     					$client_details = [ 'email' => $order->get_billing_email() ];
-    
+
     					$billing_first_name 	= $order->get_billing_first_name();
     					$billing_last_name 		= $order->get_billing_last_name();
     					$billing_phone 			= $order->get_billing_phone();
-    
+
     					if( ! empty( $billing_first_name ) )
     						$client_details['first_name'] = $billing_first_name;
-    
+
     					if( ! empty( $billing_last_name ) )
     						$client_details['last_name'] = $billing_last_name;
-    
+
     					if( ! empty( $billing_phone ) )
     						$client_details['phone_number'] = $billing_phone;
                         $enviroment = explode('|',$settings['enviroment']);
@@ -219,10 +219,10 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     					//echo var_dump($culqi_order);
     					if( $culqi_order['status'] == 'ok' ) {
     						$culqi_order_id = $culqi_order['data']['culqi_order_id'];
-    
+
     						// Save meta order
     						update_post_meta( $order->get_id(), '_culqi_order_id', $culqi_order_id );
-    
+
     					} else {
     						$error = sprintf(
     							esc_html__( 'Culqi Multipayment Error: %s', 'fullculqi' ),
@@ -237,7 +237,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 				return;
 
 			// Log
-			
+
 
 			//var_dump(FULLCULQI_WC_URL); exit(1);
 			//OLANDA SCRIPT JS
@@ -246,9 +246,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 			$libraries = explode('|', $settings['enviroment']);
 			$js_library		= $libraries[1];
-            $js_3ds	= FULLCULQI_WC_URL . 'assets/js/culqi-3ds.min.js';
+            $js_3ds	= $libraries[2];
 			$js_checkout	= FULLCULQI_WC_URL . 'assets/js/wc-checkout.js';
-
 			$js_waitme		= FULLCULQI_WC_URL . 'assets/js/waitMe.min.js';
 			$css_waitme		= FULLCULQI_WC_URL . 'assets/css/waitMe.min.css';
             add_filter('script_loader_tag', 'add_type_attribute' , 10, 3);
@@ -309,7 +308,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 		do_action( 'fullculqi/method/enqueue_scripts/after', $this );
 	}
-	
+
 	//OLANDA - FORM WOOCOMMERCE SETTINGS JS
 	/**
 	 * Fields Form
@@ -467,7 +466,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	 */
 	public function receipt_page( $order_id = 0 ) {
 		//var_dump('receipt page'); exit(1);
-		$order = new WC_Order( $order_id );	
+		$order = new WC_Order( $order_id );
 
 		$args = apply_filters( 'fullculqi/receipt_page/args', [
 			'src_image'		=> $this->icon,
@@ -488,7 +487,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 	/**
 	 * Process Payment
-	 * 
+	 *
 	 * @param  integer $order_id
 	 * @return mixed
 	 */
@@ -506,7 +505,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 	/**
 	 * Can the order be refunded via Culqi?
-	 * 
+	 *
 	 * @param  WC_Order $order Order object.
 	 * @return bool
 	 */
@@ -550,7 +549,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 				'order_id'	=> $order->get_id(),
 			],
 		];
-		
+
 		$refund = FullCulqi_Refunds::create( $args, $post_charge_id );
 
 		if( $refund['status'] == 'error' ) {
@@ -615,7 +614,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			<td class="forminp">
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
-					
+
 					<?php foreach ( (array) $data['options'] as $option_key => $option_value ) : ?>
 						<label for="<?php echo esc_attr( $option_key ); ?>">
 							<input type="radio" value="<?php echo esc_attr( $option_key ); ?>" name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $option_key ); ?>" <?php checked( $this->get_option( $key ), $option_key ); ?> /><?php echo esc_attr( $option_value ); ?>
