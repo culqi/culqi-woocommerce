@@ -263,12 +263,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			wp_enqueue_script( 'waitme-js', $js_waitme, [ 'jquery' ], false, true );
 			wp_enqueue_style( 'waitme-css', $css_waitme );
             $returnUrl3DS = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-            if($returnUrl3DS=="http://prestashop-development.culqi.xyz/es/pedido"){
-                $returnUrl3DS = "https://prestashop-development.culqi.xyz/es/pedido";
-            }
-            if($returnUrl3DS=="http://prestashop-qa.culqi.xyz/es/pedido"){
-                $returnUrl3DS = "https://prestashop-qa.culqi.xyz/es/pedido";
-            }
+            
 			wp_localize_script( 'fullculqi-js', 'fullculqi_vars',
 				apply_filters('fullculqi/method/localize', [
 					'url_actions'	=> site_url( 'fullculqi-api/wc-actions/' ),
