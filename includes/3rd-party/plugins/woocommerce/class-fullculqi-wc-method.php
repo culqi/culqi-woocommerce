@@ -263,8 +263,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			wp_enqueue_script( 'waitme-js', $js_waitme, [ 'jquery' ], false, true );
 			wp_enqueue_style( 'waitme-css', $css_waitme );
             $returnUrl3DS = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-            
-			wp_localize_script( 'fullculqi-js', 'fullculqi_vars',
+
+            wp_localize_script( 'fullculqi-js', 'fullculqi_vars',
 				apply_filters('fullculqi/method/localize', [
 					'url_actions'	=> site_url( 'fullculqi-api/wc-actions/' ),
 					'url_success'	=> $order->get_checkout_order_received_url(),
@@ -275,7 +275,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 					'lang'			=> fullculqi_language(),
 					'time_modal'	=> absint( $this->time_modal*1000 ),
 					'order_id'		=> absint( $order_id ),
-					'commerce'		=> sanitize_text_field( $settings['commerce'] ),
+					//'commerce'		=> sanitize_text_field( $settings['commerce'] ),
+                    'commerce'		=> sanitize_text_field( get_bloginfo( 'name' ) ),
 					'url_logo'		=> esc_url( $settings['logo_url'] ),
                     'color_palette'	=> $settings['color_palette'],
 					'currency'		=> get_woocommerce_currency(),
