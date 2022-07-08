@@ -4,7 +4,7 @@ Nuestro plugin integra por ti nuestro Checkout v4 y nuestra libreria JS 3DS, con
 
 >Recuerda que para usar cualquier plugins necesitas tener tu llave pública y llave privada (test o live), los cuales los puedes generar a través de tu Culqipanel.
 
-> **Note**
+> 
 >Recuerda que para usar cualquier plugins necesitas tener tu llave pública y llave privada (test o live), los cuales los puedes generar a través de tu Culqipanel.
 
 
