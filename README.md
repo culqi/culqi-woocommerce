@@ -1,4 +1,4 @@
-# Culqi Integration - Wordpress Plugin
+# Culqi WooCommerce - Wordpress Plugin
 
 Bienvenido al respositorio de Culqi Integración para WordPress. Este plugin te permite sincronizar tus pagos, tus ordenes y tus clientes desde Culqi; y además, mediante WooCommerce puedes realizar pagos simples de una manera segura.
 
