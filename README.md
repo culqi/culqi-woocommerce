@@ -3,7 +3,7 @@
 Nuestro plugin integra por ti nuestro Checkout v4 y nuestra libreria JS 3DS, con el cual tendras la posibilidad de realizar cobros con tarjetas de crédito y débito, pagoEfectivo(banca móvil o internet, agentes y bodegas), billeteras móviles y cuotéalo tan solo con unos simples pasos de configuración.
 
 > **Note**
->Recuerda que para usar cualquier plugins necesitas tener tu llave pública y llave privada (test o live), los cuales los puedes generar a través de tu Culqipanel.
+> Recuerda que para usar cualquier plugins necesitas tener tu llave pública y llave privada (test o live), los cuales los puedes generar a través de tu Culqipanel.
 
 
 ## Requisitos ##
