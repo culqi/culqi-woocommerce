@@ -18,8 +18,8 @@ class Client {
 				'Accept'			=> 'application/json',
 				'Accept-Encoding'	=> '*',
 			];
-			
-			$options = [ 'timeout' => 120 ]; 
+
+			$options = [ 'timeout' => 120 ];
 
 			if( is_array( $data ) && isset( $data['amount'] ) )
 				$data['amount'] = strval( $data['amount'] );
@@ -35,6 +35,7 @@ class Client {
 				update_option('kono_9', print_r($response,true));
 
 			} else if($method == "POST") {
+			    //echo $data['enviroment'] . $url;
 				$response = \Requests::post($data['enviroment'] . $url, $headers, json_encode($data), $options);
 			} else if($method == "PATCH") {
 				$response = \Requests::patch($data['enviroment'] . $url, $headers, json_encode($data), $options);

@@ -23,7 +23,7 @@
                                              alt="logo">
                                     </div>
                                     <div class="banner-title">
-                                        Nombre de la empresa
+                                        <?php echo get_bloginfo( 'name' ); ?>
                                     </div>
                                 </div>
                                 <div class="preview-checkout__amount">
@@ -524,3 +524,12 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('#<?php echo str_replace('#', '', $color_palette) ?>').click();
+        if(document.querySelector('#logo-url').value!=''){
+            document.querySelector('#logo').src=document.querySelector('#logo-url').value;
+        }
+
+    });
+</script>
