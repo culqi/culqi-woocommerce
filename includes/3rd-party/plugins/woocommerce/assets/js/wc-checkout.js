@@ -123,7 +123,6 @@ var device = await Culqi3DS.generateDevice();
 		setSettings: function() {
 			//console.log('fullculqi_vars:::', fullculqi_vars);
 			Culqi.publicKey = fullculqi_vars.public_key;
-			alert(fullculqi_vars.commerce);
 			let args_settings = {
 				title: fullculqi_vars.commerce,
 				currency: fullculqi_vars.currency,
@@ -132,6 +131,7 @@ var device = await Culqi3DS.generateDevice();
 				culqiclient: 'Woocomerce',
 				culqiclientversion: fullculqi_vars.version_wc
 			};
+			console.log(fullculqi_vars.multi_order+':: el orderid');
 			if( fullculqi_vars.multipayment == 'yes' && fullculqi_vars.multi_order != '' ) {
 				args_settings.order = fullculqi_vars.multi_order;
 			}

@@ -8,8 +8,8 @@ namespace Culqi;
  * @package Culqi
  */
 class Orders extends Resource {
-    
-    const URL_ORDERS = "/orders/";
+
+    const URL_ORDERS = "/orders";
 
     /**
      * @param array|null $options
@@ -23,17 +23,15 @@ class Orders extends Resource {
     /**
      * @param array|null $options
      *
-     * @return create Order 
      */
     public function create($options = NULL) {
         return $this->request("POST", self::URL_ORDERS, $api_key = $this->culqi->api_key, $options);
-    } 
-
+    }
 
     /**
      * @param array|null $options
      *
-     * @return confirm Order 
+     * @return confirm Order
      */
     public function confirm($id = NULL) {
         return $this->request("POST", self::URL_ORDERS . $id . "/confirm/", $api_key = $this->culqi->api_key);

@@ -18,8 +18,8 @@ class Client {
 				'Accept'			=> 'application/json',
 				'Accept-Encoding'	=> '*',
 			];
-			
-			$options = [ 'timeout' => 120 ]; 
+
+			$options = [ 'timeout' => 120 ];
 
 			if( is_array( $data ) && isset( $data['amount'] ) )
 				$data['amount'] = strval( $data['amount'] );

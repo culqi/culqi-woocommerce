@@ -8,11 +8,11 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="email">Correo electrónico</label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="ejemplo@culqi.com" value="legy95@gmail.com">
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="ejemplo@culqi.com" value="">
           </div>
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Tu contraseña de CulqiPanel" value="123456789Aa.">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Tu contraseña de CulqiPanel" value="">
           </div>
           <!-- <div class="form-group">
             <label for="type_integration">Tipo de Integración</label>
