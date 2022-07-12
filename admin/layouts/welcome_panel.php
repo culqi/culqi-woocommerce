@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) )
 
 <div class="wrap about-wrap full-width-layout">
 	<div style="float: right;">
-		<img src="<?php echo FULLCULQI_PLUGIN_URL . 'admin/assets/images/culqi_logo.png'; ?>" alt="FullCulqi Logo" />
+		<img src="<?php echo FULLCULQI_URL . 'admin/assets/images/culqi_logo.png'; ?>" alt="FullCulqi Logo" />
 	</div>
 	<h1><?php _e('FullCulqi Integration','letsgo'); ?></h1>
 
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) )
 		</div>
 
 		<div class="feature-section one-col is-wide wp-clearfix one-col">
-			
+
 
 			<div class="col">
 				<div class="alignleft" style="margin-right: 20px;">
@@ -78,7 +78,7 @@ if ( ! defined( 'ABSPATH' ) )
 				</form>
 				<?php endif; ?>
 
-				
+
 
 				<a href="<?php echo admin_url('admin.php?page=fullculqi_settings'); ?>"><?php _e('Not now','letsgo'); ?></a>
 			</div>

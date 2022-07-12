@@ -211,7 +211,7 @@
                                             </div>
                                         </div>
                                         <div class="iso-logo__item">
-                                            <div class="error">
+                                            <div class="errorlogo">
                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 1L6 6" stroke="white" stroke-width="1.4"
@@ -219,8 +219,6 @@
                                                     <path d="M6 1L1 6" stroke="white" stroke-width="1.4"
                                                           stroke-linecap="round"/>
                                                 </svg>
-
-
                                             </div>
                                             <div class="image">
                                                 <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/bran-culqi-bg.svg"

@@ -582,7 +582,7 @@ screen and (max-height: 900px) {
 }
 
 .customcheckout .custom-checkout__body .personalize-logotipo__content .iso-logo__item .check,
-.customcheckout .custom-checkout__body .personalize-logotipo__content .iso-logo__item .error {
+.customcheckout .custom-checkout__body .personalize-logotipo__content .iso-logo__item .errorlogo {
   position: absolute;
   left: 50%;
   -webkit-transform: translate(-50%, -8px);
@@ -605,7 +605,7 @@ screen and (max-height: 900px) {
   background-color: #499636;
 }
 
-.customcheckout .custom-checkout__body .personalize-logotipo__content .iso-logo__item .error {
+.customcheckout .custom-checkout__body .personalize-logotipo__content .iso-logo__item .errorlogo {
   background-color: #d20808;
 }
 
