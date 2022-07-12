@@ -359,7 +359,6 @@ var device = await Culqi3DS.generateDevice();
 
 					} else {
 						console.log(response);
-						console.log(Culqi.token.email);
 						Culqi.close();
 						if(response.data.message!='' && response.data.message!=null){
 							console.log(response.data.message);

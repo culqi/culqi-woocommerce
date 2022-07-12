@@ -61,7 +61,7 @@
                       method="post" enctype="multipart/form-data">
                     <div>
                         <div>
-                            <img src="/wp-content/plugins/culqi-full-integration/resources/assets/images/icon-check.png" />
+                            <img src="<?php echo FULLCULQI_URL . 'resources/assets/images/icon-check.png'; ?>" />
                         </div>
                         <div>
                             <h1>¡Configuración registrada<br/> con éxito!</h1>

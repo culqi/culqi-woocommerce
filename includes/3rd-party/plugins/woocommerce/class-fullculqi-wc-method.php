@@ -169,7 +169,6 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
     			$desc = count( $pnames ) == 0 ? 'Product' : implode(', ', $pnames);
 
-
     			// Check if there is multipayment
     			if( $this->multipayment == 'yes' ) {
 
