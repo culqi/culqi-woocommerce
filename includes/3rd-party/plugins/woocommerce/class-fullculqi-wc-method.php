@@ -115,7 +115,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     						'order_number'		=> $order->get_order_number(),
     						'client_details'	=> $client_details,
     						'confirm'			=> false,
-    						'expiration_date'	=> time() + ( $this->multi_duration * HOUR_IN_SECONDS ),
+    						'expiration_date'	=> time() + ( $settings['time_expiration'] * HOUR_IN_SECONDS ),
+                            //'expiration_date'	=> $settings['time_expiration'],
     						'metadata'			=> [
     							'order_id'			=> $order_id,
     							'order_number'		=> $order->get_order_number(),
@@ -198,7 +199,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     						'order_number'		=> $order->get_order_number(),
     						'client_details'	=> $client_details,
     						'confirm'			=> false,
-    						'expiration_date'	=> time() + ( $this->multi_duration * HOUR_IN_SECONDS ),
+    						'expiration_date'	=> time() + ( $settings['time_expiration'] * HOUR_IN_SECONDS ),
     						'metadata'			=> [
     							'order_id'			=> $order->get_id(),
     							'order_number'		=> $order->get_order_number(),

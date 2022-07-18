@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
       labelText.innerText = labelDefault;
       inputLogo.classList.remove('invalid');
       labelText.removeAttribute('style');
+      logo.src = 'https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/brand.svg';
     } else {
       inputLogo.classList.add('invalid')
       labelText.style.color = '#D20808';

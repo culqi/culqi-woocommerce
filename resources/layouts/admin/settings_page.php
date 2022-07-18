@@ -43,8 +43,6 @@
             </tbody>
         </table>
 
-
-
         <?php
         // OLANDA FORM SETTINGS PAGE
         // This prints out all hidden setting fields

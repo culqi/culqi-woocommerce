@@ -331,17 +331,21 @@ var device = await Culqi3DS.generateDevice();
 		 */
 		loadAjax: function( post_data ) {
 			console.log(post_data);
+			alert(fullculqi_vars.url_actions);
 			$.ajax({
 				url 		: fullculqi_vars.url_actions,
 				type 		: 'POST',
 				dataType	: 'json',
 				data 		: post_data,
-				
-				success: function( response ) {
 
+				success: function( response ) {
+					//alert(1);
 					$( document.body ).trigger('fullculqi.checkout.success', [ post_data, response ]);
-					
+					console.log('juancito');
+					console.log(response);
+					alert(fullculqi_vars.url_success);
 					if( response.success ) {
+						//alert(2);
 						var enviroment = fullculqi_vars.enviroment.split('|');
 						$('#fullculqi_notify').empty();
 						if(Culqi.token==null){
@@ -352,12 +356,14 @@ var device = await Culqi3DS.generateDevice();
 								}
 							}, 1000);
 						}else{
+							//alert(3);
 							console.log(response);
 							//alert('stop');
 							location.href = fullculqi_vars.url_success;
 						}
 
 					} else {
+						//alert(4);
 						console.log(response);
 						Culqi.close();
 						if(response.data.message!='' && response.data.message!=null){

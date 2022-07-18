@@ -528,6 +528,5 @@
         if(document.querySelector('#logo-url').value!=''){
             document.querySelector('#logo').src=document.querySelector('#logo-url').value;
         }
-
     });
 </script>

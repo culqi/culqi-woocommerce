@@ -19,7 +19,7 @@ class FullCulqi_WC_Process {
 			! isset( $post_data['order_id'] ) ) {
 			return false;
 		}
-			
+
 		// Settings Gateway
 		$method = get_option( 'woocommerce_fullculqi_settings', [] );
 
@@ -39,7 +39,6 @@ class FullCulqi_WC_Process {
 		// Culqi Customer ID
 		$post_customer_id = 0;
 		if( self::customer( $order ) ) {
-		
 			$culqi_customer_id = get_post_meta( $order->get_id(), '_culqi_customer_id', true );
 			$post_customer_id = get_post_meta( $order->get_id(), '_post_customer_id', true );
 		}
@@ -62,7 +61,6 @@ class FullCulqi_WC_Process {
 
 		// Update CIP CODE in WC Order
 		update_post_meta( $order->get_id(), '_culqi_cip', $post_data['cip_code'] );
-
 		// From Culqi
 		$culqi_order = FullCulqi_Orders::after_confirm( $post_data, $post_customer_id );
 
@@ -130,8 +128,8 @@ class FullCulqi_WC_Process {
 		    self::$log = new FullCulqi_Logs( $post_data['order_id'] );
 		}else{
 		    self::$log = new FullCulqi_Logs( $order->get_id() );
-		} 
-		
+		}
+
 
 		// If the user is logged
 		/*if( self::customer( $order ) ) {
@@ -149,7 +147,7 @@ class FullCulqi_WC_Process {
 					$culqi_card = FullCulqi_Cards::get( $token );
 
 					do_action( 'fullculqi/wc/charge/card', $culqi_card, $order );
-				
+
 				} else {
 
 					$args_card = [
@@ -181,9 +179,9 @@ class FullCulqi_WC_Process {
 			return false;
 
 		if( apply_filters( 'fullculqi/wc/charge/is_new', false, $order ) ) {
-			
+
 			return apply_filters( 'fullculqi/wc/charge/create', false, $order );
-		
+
 		} else {
 
 			// Charges
@@ -197,11 +195,11 @@ class FullCulqi_WC_Process {
 				    if( $product && method_exists( $product, 'get_name' ) )
 					    $pnames[] = $product->get_name();
         		}
-				
+
 			}
 
 			$desc = count( $pnames ) == 0 ? 'Product' : implode(', ', $pnames);
-			
+
 			// Antifraud Customer Data
 			$antifraud_charges = [ 'device_finger_print_id' => $post_data['device'] ];
 /*
@@ -304,7 +302,7 @@ class FullCulqi_WC_Process {
                     ], $order );
                 }
 			}
-			
+
 
 
 			//echo var_dump($args_charges);
@@ -449,7 +447,7 @@ class FullCulqi_WC_Process {
 
 		// Error
 		if( $culqi_customer['status'] == 'error' ) {
-			
+
 			$error = sprintf(
 				esc_html__( 'Culqi Customer Error: %s', 'fullculqi' ),
 				$culqi_customer['data']
