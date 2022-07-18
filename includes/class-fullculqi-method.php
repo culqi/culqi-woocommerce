@@ -9,7 +9,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->method_title			= esc_html__('Culqi Full Integration','letsgo');
 		$this->method_description 	= esc_html__( 'Allows payments by Card Credit. This payment method will decide if it is a simple payment or subscription or other', 'letsgo' );
 		$this->icon 				= FULLCULQI_PLUGIN_URL . 'public/assets/images/cards.png';
-		
+
 		// Define user set variables
 		$this->has_fields		= apply_filters('fullculqi/method/has_fields', false);
 		$this->title			= $this->get_option( 'title' );
@@ -25,7 +25,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->supports = apply_filters('fullculqi/method/supports',
 								[ 'products', 'refunds', 'pre-orders' ]
 							);
-							
+
 		// Load the settings.
 		$this->init_form_fields();
 		$this->init_settings();
@@ -69,7 +69,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			$this->multipayment = apply_filters('fullculqi/method/disabled_multipayments', false, $order, 'order') ? 'no' : $this->multipayment;
 
 			$this->installments = apply_filters('fullculqi/method/disabled_installments', false, $order, 'order') ? 'no' : $this->installments;
-			
+
 
 			if( $this->multipayment == 'yes' ) {
 
@@ -86,7 +86,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 					update_post_meta($order_id, 'culqi_order', $multi_order);
 				}
 			}
-			
+
 
 			$js_checkout	= 'https://checkout.culqi.com/js/v3';
 			$js_fullculqi	= FULLCULQI_PLUGIN_URL . 'public/assets/js/fullculqi.js';
@@ -126,7 +126,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 		do_action('fullculqi/method/enqueue_scripts' );
 	}
-	
+
 
 	function init_form_fields() {
 
@@ -269,7 +269,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 	function receipt_page( $order_id ) {
 
-		$order = new WC_Order( $order_id );	
+		$order = new WC_Order( $order_id );
 
 		$args = [
 			'src_image'		=> $this->icon,
@@ -327,7 +327,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		if ( ! $this->can_refund_order( $order ) ) {
 			return new WP_Error( 'error', esc_html__( 'Refund failed.', 'letsgo' ) );
 		}
-		
+
 		// Init Log
 		$log = new FullCulqi_Logs();
 		$log->set_settings_payment( $order->get_id() );
@@ -350,9 +350,9 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		// Save Refund
 		$basic = get_post_meta( $culqi_post_id, 'culqi_basic', true );
 		$refunds = (array)get_post_meta( $culqi_post_id, 'culqi_ids_refunded', true );
-		
+
 		$refunds[ $data->id ] = number_format( $data->amount / 100, 2, '.', '' );
-		
+
 		$basic['culqi_amount_refunded'] = array_sum( $refunds );
 
 		update_post_meta( $culqi_post_id, 'culqi_basic', $basic );
@@ -393,7 +393,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			<td class="forminp">
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
-					
+
 					<?php foreach ( (array) $data['options'] as $option_key => $option_value ) : ?>
 						<label for="<?php echo esc_attr( $option_key ); ?>">
 							<input type="radio" value="<?php echo esc_attr( $option_key ); ?>" name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $option_key ); ?>" <?php checked( $this->get_option( $key ), $option_key ); ?> /><?php echo esc_attr( $option_value ); ?>
