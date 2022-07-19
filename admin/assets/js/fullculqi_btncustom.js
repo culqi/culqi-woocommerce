@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       labelText.removeAttribute('style');
     } else if (el.target.value == '') {
       labelText.innerText = labelDefault;
+      isUrlDefault = true;
       inputLogo.classList.remove('invalid');
       labelText.removeAttribute('style');
       logo.src = 'https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/brand.svg';

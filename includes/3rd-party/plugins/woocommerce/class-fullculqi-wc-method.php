@@ -108,6 +108,11 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     					if( ! empty( $billing_phone ) )
     						$client_details['phone_number'] = $billing_phone;
                         $enviroment = explode('|',$settings['enviroment']);
+
+                        $time_expiration = 24;
+                        if($settings['time_expiration']>0){
+                            $time_expiration = time() + ( $settings['time_expiration'] * HOUR_IN_SECONDS );
+                        }
     					$args_order = apply_filters( 'fullculqi/orders/create/args', [
     						'amount'			=> fullculqi_format_total( $order->get_total() ),
     						'currency_code'		=> $order->order_currency,
@@ -115,7 +120,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     						'order_number'		=> $order->get_order_number(),
     						'client_details'	=> $client_details,
     						'confirm'			=> false,
-    						'expiration_date'	=> time() + ( $settings['time_expiration'] * HOUR_IN_SECONDS ),
+    						'expiration_date'	=> $time_expiration,
                             //'expiration_date'	=> $settings['time_expiration'],
     						'metadata'			=> [
     							'order_id'			=> $order_id,
@@ -192,6 +197,11 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     					if( ! empty( $billing_phone ) )
     						$client_details['phone_number'] = $billing_phone;
                         $enviroment = explode('|',$settings['enviroment']);
+                        $time_expiration = 24;
+                        if($settings['time_expiration']>0){
+                            $time_expiration = time() + ( $settings['time_expiration'] * HOUR_IN_SECONDS );
+                        }
+
     					$args_order = apply_filters( 'fullculqi/orders/create/args', [
     						'amount'			=> fullculqi_format_total( $order->get_total() ),
     						'currency_code'		=> $order->get_currency(),
@@ -199,7 +209,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     						'order_number'		=> $order->get_order_number(),
     						'client_details'	=> $client_details,
     						'confirm'			=> false,
-    						'expiration_date'	=> time() + ( $settings['time_expiration'] * HOUR_IN_SECONDS ),
+    						'expiration_date'	=> $time_expiration,
     						'metadata'			=> [
     							'order_id'			=> $order->get_id(),
     							'order_number'		=> $order->get_order_number(),
