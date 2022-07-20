@@ -443,13 +443,22 @@ class FullCulqi_WC_Process {
 			'email'		=> $order->get_billing_email(),
 			'metadata'	=> [ 'user_id' => get_current_user_id() ],
 		];
+        if (version_compare(WC_VERSION, "2.7", "<")) {
+            $billing_first_name 	= $order->billing_first_name;
+            $billing_last_name 		= $order->billing_last_name;
+            $billing_phone 			= $order->billing_phone;
+            $billing_address_1 		= $order->billing_city;
+            $billing_city 			= $order->billing_city;
+            $billing_country 		= $order->billing_country;
+        }else{
+            $billing_first_name 	= $order->get_billing_first_name();
+            $billing_last_name 		= $order->get_billing_last_name();
+            $billing_phone 			= $order->get_billing_phone();
+            $billing_address_1 		= $order->get_billing_address_1();
+            $billing_city 			= $order->get_billing_city();
+            $billing_country 		= $order->get_billing_country();
+        }
 
-		$billing_first_name 	= $order->get_billing_first_name();
-		$billing_last_name 		= $order->get_billing_last_name();
-		$billing_phone 			= $order->get_billing_phone();
-		$billing_address_1 		= $order->get_billing_address_1();
-		$billing_city 			= $order->get_billing_city();
-		$billing_country 		= $order->get_billing_country();
 
 		if( ! empty( $billing_first_name ) )
 			$args_customer['first_name'] = $billing_first_name;
@@ -495,18 +504,25 @@ class FullCulqi_WC_Process {
 			esc_html__( 'Culqi Customer Created: %s', 'fullculqi' ), $culqi_customer_id
 		);
 		self::$log->set_notice( $notice );
+        if (version_compare(WC_VERSION, "2.7", "<")) {
+            update_post_meta( $order->id, '_culqi_customer_id', $culqi_customer_id );
+            $notice = sprintf(
+                esc_html__( 'Post Customer Created: %s', 'fullculqi' ), $post_customer_id
+            );
+            self::$log->set_notice( $notice );
+            update_post_meta( $order->id, '_post_customer_id', $post_customer_id );
+        }else{
+            update_post_meta( $order->get_id(), '_culqi_customer_id', $culqi_customer_id );
+            $notice = sprintf(
+                esc_html__( 'Post Customer Created: %s', 'fullculqi' ), $post_customer_id
+            );
+            self::$log->set_notice( $notice );
 
+            // Update meta post in wc order
+            update_post_meta( $order->get_id(), '_post_customer_id', $post_customer_id );
+        }
 		// Update meta culqi id in wc order
-		update_post_meta( $order->get_id(), '_culqi_customer_id', $culqi_customer_id );
 
-		// Log
-		$notice = sprintf(
-			esc_html__( 'Post Customer Created: %s', 'fullculqi' ), $post_customer_id
-		);
-		self::$log->set_notice( $notice );
-
-		// Update meta post in wc order
-		update_post_meta( $order->get_id(), '_post_customer_id', $post_customer_id );
 
 		return true;
 	}
