@@ -77,7 +77,6 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
                 $this->multipayment='yes';
     			$this->installments = apply_filters( 'fullculqi/method/disabled_installments', false, $order, 'order') ? 'no' : $this->installments;
 
-
     			// Description
     			$pnames = [];
 
@@ -90,7 +89,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     			if( $this->multipayment == 'yes' ) {
 
     				$culqi_order_id = get_post_meta( $order_id, '_culqi_order_id', true );
-    				echo var_dump($culqi_order_id);
+    				//echo var_dump($culqi_order_id);
     				if( empty( $culqi_order_id ) ) {
     					// Antifraud Customer Data
     					$client_details = [ 'email' => $order->billing_email ];
@@ -109,15 +108,18 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     						$client_details['phone_number'] = $billing_phone;
                         $enviroment = explode('|',$settings['enviroment']);
 
-                        $time_expiration = 24;
+                        $time_expiration = time() + ( TIME_EXPIRATION_DEFAULT * 60*60 );
                         if($settings['time_expiration']>0){
-                            $time_expiration = time() + ( $settings['time_expiration'] * HOUR_IN_SECONDS );
+                            $time_expiration = time() + ( $settings['time_expiration'] * 60*60  );
                         }
+                        //echo var_dump($time_expiration);
+
     					$args_order = apply_filters( 'fullculqi/orders/create/args', [
     						'amount'			=> fullculqi_format_total( $order->get_total() ),
     						'currency_code'		=> $order->order_currency,
-    						'description'		=> substr( str_pad( $desc, 5, '_' ), 0, 80 ),
-    						'order_number'		=> $order->get_order_number(),
+                            //'description'		=> substr( str_pad( $desc, 5, '_' ), 0, 80 ),
+                            'description'		=> 'Venta desde Plugin WooCommerce',
+    						'order_number'		=> 'woo-'.time(),
     						'client_details'	=> $client_details,
     						'confirm'			=> false,
     						'expiration_date'	=> $time_expiration,
@@ -197,16 +199,17 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     					if( ! empty( $billing_phone ) )
     						$client_details['phone_number'] = $billing_phone;
                         $enviroment = explode('|',$settings['enviroment']);
-                        $time_expiration = 24;
+                        $time_expiration = time() + ( TIME_EXPIRATION_DEFAULT * 60*60 );
                         if($settings['time_expiration']>0){
-                            $time_expiration = time() + ( $settings['time_expiration'] * HOUR_IN_SECONDS );
+                            $time_expiration = time() + ( $settings['time_expiration'] * 60*60  );
                         }
 
     					$args_order = apply_filters( 'fullculqi/orders/create/args', [
     						'amount'			=> fullculqi_format_total( $order->get_total() ),
     						'currency_code'		=> $order->get_currency(),
-    						'description'		=> substr( str_pad( $desc, 5, '_' ), 0, 80 ),
-    						'order_number'		=> $order->get_order_number(),
+                            //'description'		=> substr( str_pad( $desc, 5, '_' ), 0, 80 ),
+                            'description'		=> 'Venta desde Plugin WooCommerce',
+                            'order_number'		=> 'woo-'.time(),
     						'client_details'	=> $client_details,
     						'confirm'			=> false,
     						'expiration_date'	=> $time_expiration,

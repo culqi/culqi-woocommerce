@@ -54,6 +54,8 @@ define( 'FULLCULQI_BASE' , plugin_basename( __FILE__ ) );
     define('URLAPI_MERCHANTSINGLE_PROD', URLAPI_PROD.'/secure/keys/?merchant=');
     define('URLAPI_WEBHOOK_PROD', URLAPI_PROD.'/secure/events');
 
+    define('TIME_EXPIRATION_DEFAULT', 24);
+
 /**
  * The core plugin class that is used to define internationalization,
  * dashboard-specific hooks, and public-facing site hooks.
