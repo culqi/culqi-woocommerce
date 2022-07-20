@@ -108,7 +108,7 @@ class FullCulqi_WC_Process {
             // Update culqi id in wc order
 
             update_post_meta(  $post_data['order_id'], '_culqi_order_id', $post_data['id'] );
-            update_post_meta( $post_data['order_id'], 'culqi_wc_order_id', $order->get_id() );
+            update_post_meta( $post_data['order_id'], 'culqi_wc_order_id', $post_data['order_id'] );
         }else{
             update_post_meta( $order->get_id(), '_post_order_id', $post_order_id );
 
@@ -439,11 +439,12 @@ class FullCulqi_WC_Process {
 		if( ! is_user_logged_in() )
 			return false;
 
-		$args_customer = [
-			'email'		=> $order->get_billing_email(),
-			'metadata'	=> [ 'user_id' => get_current_user_id() ],
-		];
+
         if (version_compare(WC_VERSION, "2.7", "<")) {
+            $args_customer = [
+                'email'		=> $order->billing_email,
+                'metadata'	=> [ 'user_id' => get_current_user_id() ],
+            ];
             $billing_first_name 	= $order->billing_first_name;
             $billing_last_name 		= $order->billing_last_name;
             $billing_phone 			= $order->billing_phone;
@@ -451,6 +452,10 @@ class FullCulqi_WC_Process {
             $billing_city 			= $order->billing_city;
             $billing_country 		= $order->billing_country;
         }else{
+            $args_customer = [
+                'email'		=> $order->get_billing_email(),
+                'metadata'	=> [ 'user_id' => get_current_user_id() ],
+            ];
             $billing_first_name 	= $order->get_billing_first_name();
             $billing_last_name 		= $order->get_billing_last_name();
             $billing_phone 			= $order->get_billing_phone();
@@ -517,13 +522,8 @@ class FullCulqi_WC_Process {
                 esc_html__( 'Post Customer Created: %s', 'fullculqi' ), $post_customer_id
             );
             self::$log->set_notice( $notice );
-
-            // Update meta post in wc order
             update_post_meta( $order->get_id(), '_post_customer_id', $post_customer_id );
         }
-		// Update meta culqi id in wc order
-
-
 		return true;
 	}
 
