@@ -23,6 +23,9 @@
  */
 jQuery(document).ready(function () {
     jQuery('#form-culqi-settings').submit(function (e) {
+        jQuery('#errorpubkey').html('');
+        jQuery('#errorseckey').html('');
+        jQuery('#errortimeexp').html('');
         var llavepublica = jQuery('#fullculqi_pubkey').val().split('_');
         var llaveprivada = jQuery('#fullculqi_seckey').val().split('_');
         if(jQuery('#integracion').is(':checked')){
@@ -45,6 +48,12 @@ jQuery(document).ready(function () {
                 e.preventDefault();
             }
         }
+
+        if(!(jQuery('#fullculqi_timexp').val()=='' || (jQuery('#fullculqi_timexp').val()>0 && jQuery('#fullculqi_timexp').val().length <= 10 && jQuery('#fullculqi_timexp').val().length > 0))){
+            jQuery('#errortimeexp').html('El tiempo de expiración debe ser un valor numérico, mayor a 0 y no mayor a 10 dígitos.');
+            e.preventDefault();
+        }
+
         if (jQuery('#fullculqi_tokenlogin').val().length>0) {
             var url_webhook = '';
             if (jQuery('#integracion').is(':checked')) {

@@ -104,16 +104,10 @@ class FullCulqi_WC_Process {
 		// Update meta post in wc order
         if (version_compare(WC_VERSION, "2.7", "<")) {
             update_post_meta(  $post_data['order_id'], '_post_order_id', $post_order_id );
-
-            // Update culqi id in wc order
-
             update_post_meta(  $post_data['order_id'], '_culqi_order_id', $post_data['id'] );
-            update_post_meta( $post_data['order_id'], 'culqi_wc_order_id', $post_data['order_id'] );
+            update_post_meta( $post_order_id, 'culqi_wc_order_id', $post_data['order_id'] );
         }else{
             update_post_meta( $order->get_id(), '_post_order_id', $post_order_id );
-
-            // Update culqi id in wc order
-
             update_post_meta( $order->get_id(), '_culqi_order_id', $post_data['id'] );
             update_post_meta( $post_order_id, 'culqi_wc_order_id', $order->get_id() );
         }
