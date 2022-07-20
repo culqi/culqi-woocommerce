@@ -34,15 +34,27 @@ class FullCulqi_WC_Process {
 			return false;
 
 		// Log
-		self::$log = new FullCulqi_Logs( $order->get_id() );
+
+        if (version_compare(WC_VERSION, "2.7", "<")) {
+            self::$log = new FullCulqi_Logs( $post_data['order_id'] );
+            $post_customer_id = 0;
+            if( self::customer( $order ) ) {
+                $culqi_customer_id = get_post_meta( $post_data['order_id'], '_culqi_customer_id', true );
+                $post_customer_id = get_post_meta( $post_data['order_id'], '_post_customer_id', true );
+            }
+        }else{
+            self::$log = new FullCulqi_Logs( $order->get_id() );
+            $post_customer_id = 0;
+            if( self::customer( $order ) ) {
+                $culqi_customer_id = get_post_meta( $order->get_id(), '_culqi_customer_id', true );
+                $post_customer_id = get_post_meta( $order->get_id(), '_post_customer_id', true );
+            }
+        }
+
 
 
 		// Culqi Customer ID
-		$post_customer_id = 0;
-		if( self::customer( $order ) ) {
-			$culqi_customer_id = get_post_meta( $order->get_id(), '_culqi_customer_id', true );
-			$post_customer_id = get_post_meta( $order->get_id(), '_post_customer_id', true );
-		}
+
 
 
 		$notice = sprintf(
@@ -61,7 +73,12 @@ class FullCulqi_WC_Process {
 		);
 
 		// Update CIP CODE in WC Order
-		update_post_meta( $order->get_id(), '_culqi_cip', $post_data['cip_code'] );
+        if (version_compare(WC_VERSION, "2.7", "<")) {
+            update_post_meta(  $post_data['order_id'], '_culqi_cip', $post_data['cip_code'] );
+        }else{
+            update_post_meta( $order->get_id(), '_culqi_cip', $post_data['cip_code'] );
+        }
+
 		// From Culqi
 		$culqi_order = FullCulqi_Orders::after_confirm( $post_data, $post_customer_id );
         //echo var_dump($culqi_order);
@@ -85,14 +102,25 @@ class FullCulqi_WC_Process {
 		self::$log->set_notice( $notice );
 
 		// Update meta post in wc order
-		update_post_meta( $order->get_id(), '_post_order_id', $post_order_id );
+        if (version_compare(WC_VERSION, "2.7", "<")) {
+            update_post_meta(  $post_data['order_id'], '_post_order_id', $post_order_id );
 
-		// Update culqi id in wc order
+            // Update culqi id in wc order
 
-		update_post_meta( $order->get_id(), '_culqi_order_id', $post_data['id'] );
+            update_post_meta(  $post_data['order_id'], '_culqi_order_id', $post_data['id'] );
+            update_post_meta( $post_data['order_id'], 'culqi_wc_order_id', $order->get_id() );
+        }else{
+            update_post_meta( $order->get_id(), '_post_order_id', $post_order_id );
+
+            // Update culqi id in wc order
+
+            update_post_meta( $order->get_id(), '_culqi_order_id', $post_data['id'] );
+            update_post_meta( $post_order_id, 'culqi_wc_order_id', $order->get_id() );
+        }
+
 
 		// Update WC Order IN in Culqi Orders
-		update_post_meta( $post_order_id, 'culqi_wc_order_id', $order->get_id() );
+
 
 		return true;
 	}
