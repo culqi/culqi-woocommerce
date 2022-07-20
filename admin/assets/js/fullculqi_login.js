@@ -26,14 +26,22 @@ jQuery(document).ready(function () {
         var llavepublica = jQuery('#fullculqi_pubkey').val().split('_');
         var llaveprivada = jQuery('#fullculqi_seckey').val().split('_');
         if(jQuery('#integracion').is(':checked')){
-            if(!(llavepublica.length==3 && llavepublica[1]=='test' && llaveprivada.length==3 && llaveprivada[1]=='test')){
-                alert('Las llaves ingresadas no pertenecen al ambiente de integración');
+            if(!(llavepublica.length==3 && llavepublica[1]=='test')){
+                jQuery('#errorpubkey').html('La llave pública no pertenece al ambiente de integración');
+                e.preventDefault();
+            }
+            if(!(llaveprivada.length==3 && llaveprivada[1]=='test')){
+                jQuery('#errorseckey').html('La llave privada no pertenece al ambiente de integración');
                 e.preventDefault();
             }
         }
         if(jQuery('#produccion').is(':checked')){
-            if(!(llavepublica.length==3 && llavepublica[1]=='live' && llaveprivada.length==3 && llaveprivada[1]=='live')){
-                alert('Las llaves ingresadas no pertenecen al ambiente de producción');
+            if(!(llavepublica.length==3 && llavepublica[1]=='live')){
+                jQuery('#errorpubkey').html('La llave pública no pertenece al ambiente de producción');
+                e.preventDefault();
+            }
+            if(!(llaveprivada.length==3 && llaveprivada[1]=='live')){
+                jQuery('#errorseckey').html('La llave privada no pertenece al ambiente de producción');
                 e.preventDefault();
             }
         }
