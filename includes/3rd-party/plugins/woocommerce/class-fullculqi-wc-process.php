@@ -28,6 +28,7 @@ class FullCulqi_WC_Process {
 
 		// Variables
 		$order = wc_get_order( absint( $post_data['order_id'] ) );
+		//echo var_dump($order);
 
 		if( ! $order  )
 			return false;
@@ -63,9 +64,9 @@ class FullCulqi_WC_Process {
 		update_post_meta( $order->get_id(), '_culqi_cip', $post_data['cip_code'] );
 		// From Culqi
 		$culqi_order = FullCulqi_Orders::after_confirm( $post_data, $post_customer_id );
-
+        //echo var_dump($culqi_order);
 		if( $culqi_order['status'] != 'ok' ) {
-
+            //echo 'hola';
 			$error = sprintf(
 				esc_html__( 'Culqi Multipayment Error: %s', 'fullculqi' ), $culqi_order['data']
 			);

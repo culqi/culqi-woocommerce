@@ -264,7 +264,7 @@ var device = await Culqi3DS.generateDevice();
 						action 		: 'order',
 						id 			: Culqi.order.id,
 						cip_code	: Culqi.order.payment_code,
-						order_id	: Culqi.order.order_number,
+						order_id	: Culqi.order.metadata.order_id,
 						wpnonce		: fullculqi_vars.wpnonce,
 						enviroment		: enviroment[0],
 						device			: device
@@ -330,8 +330,8 @@ var device = await Culqi3DS.generateDevice();
 		 * @return mixed
 		 */
 		loadAjax: function( post_data ) {
-			console.log(post_data);
-			alert(fullculqi_vars.url_actions);
+			//console.log(post_data);
+			//alert(fullculqi_vars.url_actions);
 			$.ajax({
 				url 		: fullculqi_vars.url_actions,
 				type 		: 'POST',
@@ -343,7 +343,7 @@ var device = await Culqi3DS.generateDevice();
 					$( document.body ).trigger('fullculqi.checkout.success', [ post_data, response ]);
 					console.log('juancito');
 					console.log(response);
-					alert(fullculqi_vars.url_success);
+					//alert(fullculqi_vars.url_success);
 					if( response.success ) {
 						//alert(2);
 						var enviroment = fullculqi_vars.enviroment.split('|');

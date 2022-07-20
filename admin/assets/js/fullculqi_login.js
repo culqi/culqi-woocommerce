@@ -23,7 +23,20 @@
  */
 jQuery(document).ready(function () {
     jQuery('#form-culqi-settings').submit(function (e) {
-
+        var llavepublica = jQuery('#fullculqi_pubkey').val().split('_');
+        var llaveprivada = jQuery('#fullculqi_seckey').val().split('_');
+        if(jQuery('#integracion').is(':checked')){
+            if(!(llavepublica.length==3 && llavepublica[1]=='test' && llaveprivada.length==3 && llaveprivada[1]=='test')){
+                alert('Las llaves ingresadas no pertenecen al ambiente de integración');
+                e.preventDefault();
+            }
+        }
+        if(jQuery('#produccion').is(':checked')){
+            if(!(llavepublica.length==3 && llavepublica[1]=='live' && llaveprivada.length==3 && llaveprivada[1]=='live')){
+                alert('Las llaves ingresadas no pertenecen al ambiente de producción');
+                e.preventDefault();
+            }
+        }
         if (jQuery('#fullculqi_tokenlogin').val().length>0) {
             var url_webhook = '';
             if (jQuery('#integracion').is(':checked')) {
