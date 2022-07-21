@@ -256,7 +256,7 @@ class FullCulqi_WC_Process {
 			// Metadata Order
 			if (version_compare(WC_VERSION, "2.7", "<")) {
 			    $metadata_charges = [
-    				'order_id'			=> $order->$post_data['order_id'],
+    				'order_id'			=> $post_data['order_id'],
     				'order_number'		=> $order->get_order_number(),
     				'order_key'			=> $order->order_key,
     				'post_customer'		=> isset( $post_customer_id ) ? $post_customer_id : false,
