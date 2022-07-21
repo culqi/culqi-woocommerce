@@ -57,7 +57,7 @@
 			?>
 			<?php do_action( 'fullculqi/layout_basic/status' ); ?>
 		</div>
-		<div class="culqi_data_column">
+		<div class="culqi_data_column" style="display: none">
 			<h3 class="metabox_h3">
 				<?php esc_html_e( 'Customer', 'fullculqi' ); ?>
 			</h3>
