@@ -35,7 +35,11 @@ class Client {
 				update_option('kono_9', print_r($response,true));
 
 			} else if($method == "POST") {
+			    //echo $data['enviroment'] . $url;
+                //echo var_dump($headers);
+                //echo var_dump($data);
 				$response = \Requests::post($data['enviroment'] . $url, $headers, json_encode($data), $options);
+
 			} else if($method == "PATCH") {
 				$response = \Requests::patch($data['enviroment'] . $url, $headers, json_encode($data), $options);
 			} else if($method == "DELETE") {

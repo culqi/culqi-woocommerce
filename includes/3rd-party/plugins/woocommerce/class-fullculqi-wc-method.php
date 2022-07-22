@@ -534,6 +534,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	 * @return bool|WP_Error
 	 */
 	public function process_refund( $order_id = 0, $amount = null, $reason = '' ) {
+        $settings = fullculqi_get_settings();
+
 		$order = wc_get_order( $order_id );
 
 		if ( ! $this->can_refund_order( $order ) ) {
@@ -546,19 +548,20 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 		$culqi_charges_id = get_post_meta( $order->get_id(), '_culqi_charge_id', true );
 		$post_charge_id = get_post_meta( $order->get_id(), '_post_charge_id', true );
-
+        $enviroment = explode('|',$settings['enviroment']);
 		$args = [
 			'amount'	=> round( $amount*100, 0 ),
 			'charge_id'	=> $culqi_charges_id,
 			'reason'	=> 'solicitud_comprador',
 			'metadata'	=> [
-				'post_id'	=> $post_charge_id,
+				//'post_id'	=> $post_charge_id,
 				'order_id'	=> $order->get_id(),
 			],
+            'enviroment'=>$enviroment[0]
 		];
 
 		$refund = FullCulqi_Refunds::create( $args, $post_charge_id );
-
+        //echo var_dump($refund);
 		if( $refund['status'] == 'error' ) {
 			$error = sprintf(
 				esc_html__( 'Culqi Refund Error : %s','fullculqi' ), $refund['data']
