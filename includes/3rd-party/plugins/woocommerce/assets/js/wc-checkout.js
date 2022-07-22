@@ -215,7 +215,7 @@ var device = await Culqi3DS.generateDevice();
 			$( document ).ajaxStart( function() {
 				$('#fullculqi_notify').removeClass('woocommerce-error').empty();
 				
-				$('#fullculqi_receipt_page').waitMe({
+				$('#page').waitMe({
 					effect		: 'pulse',
 					text 		: fullculqi_vars.loading_text,
 					bg			: 'rgba(255,255,255,0.7)',
@@ -231,7 +231,7 @@ var device = await Culqi3DS.generateDevice();
 
 			// Ajax Complete
 			$( document ).ajaxComplete( function() {
-				$('#fullculqi_receipt_page').waitMe('hide');
+				$('#page').waitMe('hide');
 			});
 		},
 		/*
