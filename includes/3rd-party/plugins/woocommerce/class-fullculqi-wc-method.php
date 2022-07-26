@@ -89,9 +89,9 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     			if( $this->multipayment == 'yes' ) {
 
     				$culqi_order_id = get_post_meta( $order_id, '_culqi_order_id', true );
-    				//echo var_dump($culqi_order_id);
+
     				if( empty( $culqi_order_id ) ) {
-    					// Antifraud Customer Data
+
     					$client_details = [ 'email' => $order->billing_email ];
 
     					$billing_first_name 	= $order->billing_first_name;
