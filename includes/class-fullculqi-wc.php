@@ -122,24 +122,17 @@ class FullCulqi_WC {
 
 				switch($data->state) {
 					case 'paid' :
-
 						$note = sprintf(
 							esc_html__( 'The order was paid. The CIP %s was paid', 'letsgo'),
 							$cip_code
 						);
-
 						$order->add_order_note($note);
-
 						$log->set_msg_payment('notice', sprintf(
 							esc_html__( 'The CIP %s was paid', 'letsgo' ),
 							$cip_code
 						));
-
-
-							$order->update_status( 'Processing' );
-
+						$order->update_status( 'Processing' );
 						break;
-
 					case 'expired' :
 
 						$log->set_msg_payment( 'notice', sprintf(

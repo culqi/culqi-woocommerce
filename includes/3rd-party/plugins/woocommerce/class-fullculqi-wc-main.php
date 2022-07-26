@@ -112,7 +112,11 @@ class FullCulqi_WC {
 			return;
 
 		// Log
-		$log = new FullCulqi_Logs( $order->get_id() );
+        if (version_compare(WC_VERSION, "2.7", "<")) {
+            $log = new FullCulqi_Logs($order_id);
+        }else{
+            $log = new FullCulqi_Logs($order->get_id());
+        }
 
 		// Payment Settings
 		$method = get_option( 'woocommerce_fullculqi_settings', [] );

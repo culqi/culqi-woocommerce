@@ -12,7 +12,7 @@ class FullCulqi_Checkout {
 
 		foreach ($order->get_items() as $item ) {
 			$_product = $item->get_product();
-			
+
 			if( $_product && method_exists($_product, 'get_name' ) )
 				$pnames[] = $_product->get_name();
 		}
@@ -20,7 +20,7 @@ class FullCulqi_Checkout {
 		// If empty
 		if( count($pnames) == 0 )
 			$pnames[0] = 'Product';
-		
+
 
 		// Antifraud Customer Data
 		$antifraud = [ 'email' => $order->get_billing_email() ];
@@ -51,7 +51,7 @@ class FullCulqi_Checkout {
 
 		if( !empty( $billing_phone ) )
 			$antifraud['phone_number'] = $billing_phone;
-		
+
 
 		// Metadata Order
 		$metadata = [
@@ -75,7 +75,7 @@ class FullCulqi_Checkout {
 		$provider_payment = FullCulqi_Provider::create_payment($args_payment);
 
 		if( $provider_payment['status'] == 'ok' ) {
-		
+
 			$note = sprintf(
 				esc_html__('Culqi Payment created: %s','letsgo'),
 				$provider_payment['data']->id
@@ -101,7 +101,7 @@ class FullCulqi_Checkout {
 
 
 			if( apply_filters( 'fullculqi/checkout/change_status', true, $log, $order ) ) {
-				
+
 				if( $method_array['status_success'] == 'wc-completed')
 					$order->payment_complete();
 				else
@@ -109,7 +109,7 @@ class FullCulqi_Checkout {
 			}
 
 			do_action('fullculqi/checkout/simple_success', $order, $log, $provider_payment );
-		
+
 		} else {
 
 			$log->set_msg_payment('error', sprintf(
@@ -119,7 +119,7 @@ class FullCulqi_Checkout {
 
 			do_action('fullculqi/checkout/simple_error', $order, $log, $provider_payment );
 		}
-		
+
 		return $provider_payment;
 	}
 
@@ -161,24 +161,24 @@ class FullCulqi_Checkout {
 		$provider_order = FullCulqi_Provider::create_order($args_order);
 
 		if( $provider_order['status'] == 'ok' ) {
-		
+
 			$log->set_msg_payment('notice', sprintf(esc_html__('Culqi Multipayment created: %s','letsgo'), $provider_order['data']->id) );
 
 			$provider_order = apply_filters('fullculqi/checkout/order_success', $provider_order, $log, $order);
-		
+
 		} else {
 
 			$log->set_msg_payment('error', sprintf(esc_html__('Culqi Multipayment error : %s','letsgo'), $provider_order['msg']) );
 
 			$provider_order = apply_filters('fullculqi/checkout/order_error', $provider_order, $log, $order);
 		}
-		
+
 		return $provider_order;
 	}
 
 
 	static function process_order($order, $cip_code, $log ) {
-		
+
 		$log->set_msg_payment('notice', esc_html__('This order is a Multipayment', 'letsgo') );
 		$log->set_msg_payment('notice', sprintf(esc_html__('Culqi Multipayment CIP: %s','letsgo'), $cip_code) );
 
@@ -186,7 +186,7 @@ class FullCulqi_Checkout {
 		$order->add_order_note($note);
 
 		if( apply_filters( 'fullculqi/checkout/order_change_status', true, $log, $order ) ) {
-			
+
 			$method_array = fullculqi_get_woo_settings();
 
 			if( $method_array['multi_status'] == 'wc-completed')
@@ -224,7 +224,7 @@ class FullCulqi_Checkout {
 		$provider_refund = FullCulqi_Provider::refund_payment( $args );
 
 		if( $provider_refund['status'] == 'ok' ) {
-		
+
 			$log->set_msg_payment( 'notice', sprintf(
 				esc_html__( 'Culqi Refund created: %s', 'letsgo' ),
 				$provider_refund['data']->id)
@@ -233,7 +233,7 @@ class FullCulqi_Checkout {
 			$provider_refund = apply_filters( 'fullculqi/checkout/refund_success',
 				$provider_refund, $log, $order
 			);
-		
+
 		} else {
 
 			$log->set_msg_payment( 'error', sprintf(
@@ -244,7 +244,7 @@ class FullCulqi_Checkout {
 				$provider_refund, $log, $order
 			);
 		}
-		
+
 		return $provider_refund;
 	}
 }
