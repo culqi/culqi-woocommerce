@@ -27,7 +27,7 @@ class FullCulqi_WC {
 
 
 				if( apply_filters( 'fullculqi/do_payment/conditional', false, $order, $log ) ) {
-					
+
 					$provider_payment = apply_filters('fullculqi/do_payment/create', $provider_payment, compact('token_id', 'installments', 'country_code'), $log, $order);
 
 				} else {
@@ -49,7 +49,7 @@ class FullCulqi_WC {
 				wp_send_json($provider_payment);
 			}
 		}
-		
+
 		die();
 	}
 
@@ -71,7 +71,7 @@ class FullCulqi_WC {
 
 
 				if( apply_filters('fullculqi/do_order/conditional', false, $order, $log) ) {
-					
+
 					$provider_order = apply_filters('fullculqi/do_order/create', $provider_order, $cip_code, $log, $order);
 
 				} else {
@@ -93,7 +93,7 @@ class FullCulqi_WC {
 				wp_send_json( $provider_order );
 			}
 		}
-		
+
 		die();
 	}
 
@@ -135,10 +135,8 @@ class FullCulqi_WC {
 							$cip_code
 						));
 
-						if( $method_array['status_success'] == 'wc-completed')
-							$order->payment_complete();
-						else
-							$order->update_status( $method_array['status_success'] );
+
+							$order->update_status( 'Processing' );
 
 						break;
 
@@ -161,7 +159,7 @@ class FullCulqi_WC {
 						$log->set_msg_payment('notice', sprintf(
 							esc_html__( 'The CIP %s was deleted', 'letsgo' ), $cip_code
 						));
-						
+
 						$order->update_status( 'cancelled', sprintf(
 							esc_html__( 'The order was not paid on time. The CIP %s was deleted','letsgo'), $cip_code
 						));

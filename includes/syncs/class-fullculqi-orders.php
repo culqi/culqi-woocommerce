@@ -168,7 +168,7 @@ class FullCulqi_Orders {
 			return;
 
 		//$cip_code = trim( $culqi_order->payment_code );
-		$post_id = fullculqi_post_from_meta( 'culqi_id', $culqi_order->metadata->order_id );
+		$post_id = fullculqi_post_from_meta( 'culqi_id', $culqi_order->id );
 
 		if( ! empty( $post_id ) )
 			$post_id = self::create_wppost( $culqi_order, $post_id );

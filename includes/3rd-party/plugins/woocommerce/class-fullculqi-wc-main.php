@@ -58,7 +58,7 @@ class FullCulqi_WC {
 			return $methods;
 
 		$methods[] = 'WC_Gateway_FullCulqi';
-		
+
 		return $methods;
 	}
 
@@ -67,7 +67,7 @@ class FullCulqi_WC {
 	 * @return mixed
 	 */
 	public function actions() {
-		
+
 		if( ! isset( $_POST['action'] ) )
 			return;
 
@@ -129,17 +129,23 @@ class FullCulqi_WC {
 				$order->add_order_note( $notice );
 				$log->set_notice( $notice );
 
+                /*$notice = sprintf(
+                    'xxx',
+                    $cip_code
+                );
+
+                $order->add_order_note( $notice );
+                $log->set_notice( $notice );*/
+
 				// Status
-				if( $method['status_success'] == 'wc-completed')
-					$order->payment_complete();
-				else {
-					$order->update_status( $method_array['status_success'],
+
+					$order->update_status( 'processing',
 						sprintf(
 							esc_html__( 'Status changed by FullCulqi (to %s)', 'fullculqi' ),
 							$method['status_success']
 						)
 					);
-				}
+
 
 				break;
 
@@ -161,7 +167,7 @@ class FullCulqi_WC {
 					esc_html__( 'The CIP %s was deleted', 'fullculqi' ),
 					$cip_code
 				);
-				
+
 				$log->set_error( $error );
 				$order->update_status( 'cancelled', $error );
 
@@ -176,7 +182,7 @@ class FullCulqi_WC {
 	 * @return [type] [description]
 	 */
 	public function old_update_order() {
-		
+
 		$inputJSON	= file_get_contents('php://input');
 
 		if( empty( $inputJSON ) )
