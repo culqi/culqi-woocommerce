@@ -58,7 +58,7 @@ class FullCulqi_Orders {
 		$results = $wpdb->get_results( $query );
 		$keys = [];
 
-		// Keys Post Type 
+		// Keys Post Type
 		foreach( $results as $result )
 			$keys[ $result->culqi_id ] = $result->post_id;
 
@@ -163,12 +163,12 @@ class FullCulqi_Orders {
 	 * @return mixed
 	 */
 	public static function update( $culqi_order ) {
-		
+
 		if( ! isset( $culqi_order->id ) )
 			return;
 
 		//$cip_code = trim( $culqi_order->payment_code );
-		$post_id = fullculqi_post_from_meta( 'culqi_id', $culqi_order->id );
+		$post_id = fullculqi_post_from_meta( 'culqi_id', $culqi_order->metadata->order_id );
 
 		if( ! empty( $post_id ) )
 			$post_id = self::create_wppost( $culqi_order, $post_id );
