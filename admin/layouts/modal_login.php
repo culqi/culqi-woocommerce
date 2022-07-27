@@ -14,6 +14,9 @@
             <label for="password">Contraseña</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Tu contraseña de CulqiPanel" value="">
           </div>
+            <div class="form-group">
+                <label id="errorlogincpanelculqi" style="color: red"></label>
+            </div>
           <!-- <div class="form-group">
             <label for="type_integration">Tipo de Integración</label>
             <select name="type_integration" class="form-control" id="type_integration">

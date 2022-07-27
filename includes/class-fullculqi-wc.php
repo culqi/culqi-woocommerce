@@ -53,7 +53,6 @@ class FullCulqi_WC {
 		die();
 	}
 
-
 	public function do_order() {
 		if( isset($_POST) ) {
 			$order_id 		= sanitize_key($_POST['order_id']);

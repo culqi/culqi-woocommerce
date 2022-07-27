@@ -38,6 +38,8 @@ class FullCulqi_Webhooks {
 
 		switch( $input->type ) {
 			case 'order.status.changed' : FullCulqi_Orders::update( $data ); break;
+
+            case 'refund.creation.succeeded' : FullCulqi_Orders::update( $data ); break;
 		}
 
 		do_action( 'fullculqi/webhooks/to_receive', $input, $data );
@@ -61,7 +63,7 @@ class FullCulqi_Webhooks {
 
 		$webhooks_in = [
 			'event_id'			=> $input->id,
-			'event_name'		=> $input->type,
+			'event_name'		=> $input->data,
 			'data_id'			=> isset( $data->id ) ? $data->id : '',
 			'data_description'	=> isset( $data->description ) ? $data->description : '',
 			'creation_date'		=> fullculqi_convertToDate( $input->creation_date ),
