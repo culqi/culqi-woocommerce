@@ -116,6 +116,7 @@ jQuery(document).ready(function () {
         }
     });
     jQuery("#modal_login_form_culqi").submit(function (e) {
+        jQuery('div#wpwrap').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(255,255,255,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 20% 0;">Cargando</div>');
         e.preventDefault(); 
         const data = jQuery(this).serializeArray();
         //console.log('data:::', data);
@@ -162,8 +163,16 @@ jQuery(document).ready(function () {
         };
         //console.log('settings:::', settings);
         jQuery.ajax(settings).done(function (response) {
-            window.culqi_token = response.data;
-            culqiWoGetMerchants(url_merchant);
+            console.log('la respuesta');
+            console.log(response);
+            if(typeof(response.message) != "undefined" && response.message !== null){
+                jQuery('#loadingloginculqi').remove();
+                jQuery('#errorlogincpanelculqi').html(response.message);
+            }else{
+                window.culqi_token = response.data;
+                culqiWoGetMerchants(url_merchant);
+            }
+
         });
     }
 
@@ -185,7 +194,7 @@ jQuery(document).ready(function () {
         jQuery.ajax(settings).done(function (response) {
             renderMerchants(response.data);
             jQuery("#modalLogin").modal("hide");
-
+            jQuery('#loadingloginculqi').remove();
             jQuery("#modalList").modal("show");
         });
     };
