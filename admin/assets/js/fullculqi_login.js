@@ -116,7 +116,8 @@ jQuery(document).ready(function () {
         }
     });
     jQuery("#modal_login_form_culqi").submit(function (e) {
-        jQuery('div#wpwrap').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(255,255,255,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 20% 0;">Cargando</div>');
+        //jQuery('div#wpwrap').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(255,255,255,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 20% 0;">Cargando</div>');
+        jQuery(this).find('button').html('Cargando...');
         e.preventDefault(); 
         const data = jQuery(this).serializeArray();
         //console.log('data:::', data);
@@ -166,6 +167,7 @@ jQuery(document).ready(function () {
             console.log('la respuesta');
             console.log(response);
             if(typeof(response.message) != "undefined" && response.message !== null){
+                jQuery('#loginbutton').html('Iniciar sesión');
                 jQuery('#loadingloginculqi').remove();
                 jQuery('#errorlogincpanelculqi').html(response.message);
             }else{
