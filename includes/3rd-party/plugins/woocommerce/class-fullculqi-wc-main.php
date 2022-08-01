@@ -153,6 +153,36 @@ class FullCulqi_WC {
 
 				break;
 
+            case 'refund' :
+
+                $notice = sprintf(
+                    esc_html__( 'The CIP %s was paid', 'fullculqi' ),
+                    $cip_code
+                );
+
+                $order->add_order_note( $notice );
+                $log->set_notice( $notice );
+
+                /*$notice = sprintf(
+                    'xxx',
+                    $cip_code
+                );
+
+                $order->add_order_note( $notice );
+                $log->set_notice( $notice );*/
+
+                // Status
+
+                $order->update_status( 'refund',
+                    sprintf(
+                        esc_html__( 'Status changed by FullCulqi (to %s)', 'fullculqi' ),
+                        $method['status_success']
+                    )
+                );
+
+
+                break;
+
 			case 'expired' :
 
 				$error = sprintf(
