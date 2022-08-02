@@ -63,7 +63,7 @@ class FullCulqi_Webhooks {
 
 		$webhooks_in = [
 			'event_id'			=> $input->id,
-			'event_name'		=> json_encode($input),
+			'event_name'		=> $input->type,
 			'data_id'			=> isset( $data->id ) ? $data->id : '',
 			'data_description'	=> isset( $data->description ) ? $data->description : '',
 			'creation_date'		=> fullculqi_convertToDate( $input->creation_date ),
