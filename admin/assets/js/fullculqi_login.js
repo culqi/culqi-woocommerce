@@ -198,8 +198,7 @@ jQuery(document).ready(function () {
         jQuery.ajax(settings).done(function (response) {
             renderMerchants(response.data);
             jQuery("#modalLogin").modal("hide");
-            jQuery('#loginbutton').html('Iniciar sesión');
-            jQuery('#loginbutton').removeAttr('disabled');
+
             jQuery("#modalList").modal("show");
         });
     };
@@ -328,7 +327,8 @@ jQuery(document).ready(function () {
         </li>`;
         });
         jQuery("#list-merchants").html(html);
-
+        jQuery('#loginbutton').html('Iniciar sesión');
+        jQuery('#loginbutton').removeAttr('disabled');
         jQuery(".merchant_item").click(function () {
             const key = jQuery(this).attr("data-key");
             const name = jQuery(this).attr("data-name");
