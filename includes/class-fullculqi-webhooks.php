@@ -37,10 +37,32 @@ class FullCulqi_Webhooks {
 		$this->register( $input );
 
 		switch( $input->type ) {
-			case 'order.status.changed' : FullCulqi_Orders::update( $data ); break;
+            case 'order.status.changed' :
+                FullCulqi_Orders::update($data);
+                break;
+            case 'refund.creation.succeeded' :
+                $order_id = fullculqi_post_from_meta('_culqi_charge_id', $data->chargeId);
+                $order = new WC_Order($order_id);
+                if (version_compare(WC_VERSION, "2.7", "<")) {
+                    $log = new FullCulqi_Logs($order_id);
+                } else {
+                    $log = new FullCulqi_Logs($order->get_id());
+                }
+                $notice = sprintf(
+                    esc_html__('The CHARGE %s was refund', 'fullculqi'),
+                    $input->data->chargeId
+                );
 
-            case 'refund.creation.succeeded' : FullCulqi_Orders::update( $data ); break;
-		}
+                $order->add_order_note($notice);
+                $log->set_notice($notice);
+
+                $order->update_status('refunded',
+                    sprintf(
+                        esc_html__('Status changed by FullCulqi (to %s)', 'fullculqi'),'refund'
+                    )
+                );
+                break;
+        }
 
 		do_action( 'fullculqi/webhooks/to_receive', $input, $data );
 	}

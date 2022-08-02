@@ -179,26 +179,6 @@ class FullCulqi_WC {
 				break;
 		}
 
-        switch( $culqi_order->object ) {
-            case 'refund' :
-
-                $notice = sprintf(
-                    esc_html__( 'The CIP %s was refund', 'fullculqi' ),
-                    $cip_code
-                );
-
-                $order->add_order_note( $notice );
-                $log->set_notice( $notice );
-
-                $order->update_status( 'refund',
-                    sprintf(
-                        esc_html__( 'Status changed by FullCulqi (to %s)', 'fullculqi' ),
-                        $method['status_success']
-                    )
-                );
-                break;
-        }
-
 		return true;
 	}
 
