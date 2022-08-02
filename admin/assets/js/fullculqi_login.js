@@ -118,6 +118,7 @@ jQuery(document).ready(function () {
     jQuery("#modal_login_form_culqi").submit(function (e) {
         //jQuery('div#wpwrap').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(255,255,255,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 20% 0;">Cargando</div>');
         jQuery(this).find('button').html('Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" />');
+        jQuery(this).find('button').attr('disabled', 'true');
         e.preventDefault(); 
         const data = jQuery(this).serializeArray();
         //console.log('data:::', data);
@@ -168,6 +169,7 @@ jQuery(document).ready(function () {
             console.log(response);
             if(typeof(response.message) != "undefined" && response.message !== null){
                 jQuery('#loginbutton').html('Iniciar sesión');
+                jQuery('#loginbutton').removeAttr('disabled');
                 jQuery('#loadingloginculqi').remove();
                 jQuery('#errorlogincpanelculqi').html(response.message);
             }else{
@@ -197,6 +199,7 @@ jQuery(document).ready(function () {
             renderMerchants(response.data);
             jQuery("#modalLogin").modal("hide");
             jQuery('#loginbutton').html('Iniciar sesión');
+            jQuery('#loginbutton').removeAttr('disabled');
             jQuery("#modalList").modal("show");
         });
     };
