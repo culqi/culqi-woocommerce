@@ -42,6 +42,8 @@ class FullCulqi_Webhooks {
                 break;
             case 'refund.creation.succeeded' :
                 $order_id = fullculqi_post_from_meta('_culqi_charge_id', $data->chargeId);
+                $charge_id = fullculqi_post_from_meta('culqi_id', $data->chargeId);
+
                 $order = new WC_Order($order_id);
                 if (version_compare(WC_VERSION, "2.7", "<")) {
                     $log = new FullCulqi_Logs($order_id);
@@ -61,6 +63,7 @@ class FullCulqi_Webhooks {
                         esc_html__('Status changed by FullCulqi (to %s)', 'fullculqi'),'refund'
                     )
                 );
+                fullculqi_update_post_meta('culqi_status', $charge_id, 'refunded');
                 break;
         }
 
