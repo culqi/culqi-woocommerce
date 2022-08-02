@@ -116,7 +116,7 @@ jQuery(document).ready(function () {
         }
     });
     jQuery("#modal_login_form_culqi").submit(function (e) {
-        jQuery('div#wpwrap').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 20% 0; color: white; font-size: 14px">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div>');
+        jQuery('div#wpwrap').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 25% 0; color: white; font-size: 14px">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div>');
         //jQuery(this).find('button').html('Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" />');
         //jQuery(this).find('button').attr('disabled', 'true');
         e.preventDefault(); 
@@ -198,8 +198,8 @@ jQuery(document).ready(function () {
         jQuery.ajax(settings).done(function (response) {
             renderMerchants(response.data);
             jQuery("#modalLogin").modal("hide");
-
             jQuery("#modalList").modal("show");
+
         });
     };
 
@@ -327,7 +327,11 @@ jQuery(document).ready(function () {
         </li>`;
         });
         jQuery("#list-merchants").html(html);
-        jQuery('#loadingloginculqi').remove();
+        jQuery("#modalLogin").modal("hide");
+        setTimeout(function (){
+            jQuery('#loadingloginculqi').remove();
+        }, 3000)
+
         jQuery(".merchant_item").click(function () {
             const key = jQuery(this).attr("data-key");
             const name = jQuery(this).attr("data-name");
