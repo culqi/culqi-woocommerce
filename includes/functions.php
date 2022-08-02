@@ -58,7 +58,7 @@ function fullculqi_currencies( $type = 'name' ) {
 			];
 		break;
 	}
-	
+
 	return apply_filters('fullculqi/currencies', $output, $type);
 }
 
@@ -100,7 +100,7 @@ function fullculqi_get_cpts() {
  * @return mixed
  */
 function fullculqi_language() {
-	
+
 	$lang_locale = $language = get_locale();
 	$allows = [ 'es', 'en' ];
 
@@ -113,8 +113,8 @@ function fullculqi_language() {
 
 	// Default
 	if( ! in_array( $language, $allows ) )
-		$language = $allows[0]; 
-	
+		$language = $allows[0];
+
 	return apply_filters( 'fullculqi/language', $language );
 }
 
@@ -127,7 +127,7 @@ function fullculqi_language() {
 function fullculqi_format_total( $total = 0 ) {
 	$total_points = number_format( $total, 2, '.', '' );
 	$total_raw = strval( $total_points * 100 );
-	
+
 	return apply_filters( 'fullculqi/format_total', $total_raw, $total );
 }
 
@@ -152,7 +152,7 @@ function fullculqi_have_posts() {
 /**
  * Print Layout
  * @param  string $template_name
- * @param  array  $args         
+ * @param  array  $args
  * @param  string $template_path]
  * @return mixed
  */
@@ -165,7 +165,7 @@ function fullculqi_get_template( $template_name = '', $args = [], $template_path
 		$located = trailingslashit( $template_path ) . $template_name;
 	else
 		$located = FULLCULQI_DIR . $template_name;
-	
+
 	// Allow 3rd party plugin filter template file from their plugin.
 	$located = apply_filters( 'fullculqi/global/located', $located, $args );
 	//var_dump($located); exit(1);
@@ -274,10 +274,23 @@ function fullculqi_post_from_meta( $meta_key = '', $meta_value = '' ) {
 
 	$query = 'SELECT post_id FROM '.$wpdb->postmeta.' WHERE meta_key=%s && meta_value=%s LIMIT 1';
 	$query = $wpdb->prepare( $query, $meta_key, $meta_value );
-	
+
 	$post_id = $wpdb->get_var( $query );
 
 	return apply_filters( 'fullculqi/post_from_meta', $post_id, $meta_key, $meta_value );
+}
+
+function fullculqi_update_post_meta( $meta_key = '', $post_id = '', $meta_value = '') {
+
+    if( empty( $meta_key ) )
+        return false;
+
+    global $wpdb;
+
+    $query = 'UPDATE '.$wpdb->postmeta.' SET meta_value = %s WHERE meta_key=%s && post_id=%s LIMIT 1';
+    $query = $wpdb->prepare( $query, $meta_value, $meta_key, $post_id );
+    $wpdb->get_var( $query );
+    return true;
 }
 
 /**
@@ -295,7 +308,7 @@ function fullculqi_user_from_meta( $meta_key = '', $meta_value = '' ) {
 
 	$query = 'SELECT user_id FROM '.$wpdb->usermeta.' WHERE meta_key=%s && meta_value=%s LIMIT 1';
 	$query = $wpdb->prepare( $query, $meta_key, $meta_value );
-	
+
 	$post_id = $wpdb->get_var( $query );
 
 	return apply_filters( 'fullculqi/user_from_meta', $post_id, $meta_key, $meta_value );
