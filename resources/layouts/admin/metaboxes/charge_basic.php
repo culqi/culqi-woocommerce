@@ -28,10 +28,10 @@
 					<b><?php esc_html_e( 'Amount', 'fullculqi' ); ?> : </b>
 					<?php echo $amount; ?>
 				</li>
-				<li>
+				<!-- <li>
 					<b><?php esc_html_e( 'Refund', 'fullculqi' ); ?> : </b>
 					<?php echo $refunded; ?>
-				</li>
+				</li> -->
 				<?php do_action( 'fullculqi/charges/basic/print_data', $post_id ); ?>
 			</ul>
 			<?php
