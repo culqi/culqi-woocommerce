@@ -7,7 +7,7 @@
 
 <div class="logincontainer">
 
-    <span style="color: #1d2327"><b>¡Ahorra tiempo configurando tu Culqi checkout! Inicia sesión con tu cuenta de CulqiPanel</b></span>
+    <span id="spanbuttonlogin" style="color: #1d2327"><b>¡Ahorra tiempo configurando tu Culqi checkout! Inicia sesión con tu cuenta de CulqiPanel</b></span>
     <button id="woocommerce_culqi_login_button" type="button" class="btnlogin" data-toggle="modal"
             data-target="#modalLogin" onclick="jQuery('#errorlogincpanelculqi').html('');">
         <div class=''>
