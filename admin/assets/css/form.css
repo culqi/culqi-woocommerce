@@ -3,12 +3,17 @@
 }
 
 @media (max-width: 576px) {
+  #woocommerce_culqi_login_button {
+    margin-left: 0!important;
+    margin-top: 10px;
+  }
+  .form-table td span{
+    display: block;!important
+  }
   label {
     align-items: center;
-    justify-content: center;
     margin-bottom: 0;
   }
-
   .form-group {
     display: flex;
     flex: 0 0 auto;
