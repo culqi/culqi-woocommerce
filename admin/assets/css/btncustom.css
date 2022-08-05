@@ -908,8 +908,12 @@ background-image: url(https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout
 
 @media screen and (max-width: 782px){
 .customcheckout{
-display: none;
+
 }
+  .form-table td div {
+    padding: 5px 0!important;
+  }
+
 }
 
 .can-toggle label .can-toggle__switch:before{
