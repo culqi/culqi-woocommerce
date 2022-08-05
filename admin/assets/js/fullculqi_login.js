@@ -142,6 +142,7 @@ jQuery(document).ready(function () {
     });
 
     function fullculqi_login(data) {
+        console.log(data);
         var url_login = '';
         var url_merchant = '';
         if (jQuery('#integracion').is(':checked')) {

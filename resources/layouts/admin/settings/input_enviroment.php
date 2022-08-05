@@ -9,7 +9,7 @@
 
     <span style="color: #1d2327"><b>¡Ahorra tiempo configurando tu Culqi checkout! Inicia sesión con tu cuenta de CulqiPanel</b></span>
     <button id="woocommerce_culqi_login_button" type="button" class="btnlogin" data-toggle="modal"
-            data-target="#modalLogin">
+            data-target="#modalLogin" onclick="jQuery('#errorlogincpanelculqi').html('');">
         <div class=''>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.99463 8.66086C6.58697 8.66086 5.44795 7.52184 5.44795 6.11418C5.44795 4.70653 6.59772 3.55676 8.00537 3.55676C9.41303 3.55676 10.5628 4.70653 10.5628 6.11418C10.5628 7.52184 9.40228 8.66086 7.99463 8.66086ZM7.99463 4.95367C7.36065 4.95367 6.83412 5.46946 6.83412 6.11418C6.83412 6.75891 7.3499 7.27469 7.99463 7.27469C8.63936 7.27469 9.15514 6.75891 9.15514 6.11418C9.15514 5.46946 8.63936 4.95367 7.99463 4.95367Z"
