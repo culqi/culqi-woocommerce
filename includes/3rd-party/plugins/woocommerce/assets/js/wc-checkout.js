@@ -220,8 +220,8 @@ var device = await Culqi3DS.generateDevice();
 				$('#page').waitMe({
 					effect		: 'pulse',
 					text 		: fullculqi_vars.loading_text,
-					bg			: 'rgba(255,255,255,0.7)',
-					color		: '#000000',
+					bg			: 'rgba(0,0,0,0.7)',
+					color		: '#FFFFFF',
 					maxSize		: '',
 					waitTime	: -1,
 					textPos		: 'vertical',
