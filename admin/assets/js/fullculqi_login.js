@@ -174,10 +174,10 @@ jQuery(document).ready(function () {
                 jQuery('#loadingloginculqi').remove();
                 jQuery('#errorlogincpanelculqi').html(response.message);
             }else{
+                jQuery("#modalLogin").modal("hide");
                 window.culqi_token = response.data;
                 culqiWoGetMerchants(url_merchant);
             }
-
         });
     }
 
@@ -195,7 +195,6 @@ jQuery(document).ready(function () {
                 // wpnonce: fullculqi_charges_vars.nonce,
             },
         };
-
         jQuery.ajax(settings).done(function (response) {
             renderMerchants(response.data);
             jQuery("#modalLogin").modal("hide");
