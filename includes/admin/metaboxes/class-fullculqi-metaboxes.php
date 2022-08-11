@@ -40,14 +40,14 @@ abstract class FullCulqi_Metaboxes {
 	 */
 	public function enqueue_scripts() {
 		global $pagenow, $post;
-		
+
 		$is_list = $pagenow == 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] == $this->post_type;
 
 		$is_edit = in_array( $pagenow, [ 'post-new.php', 'post.php' ] ) && get_post_type() == $this->post_type;
 
 		// CSS
 		if( $is_list || $is_edit ) {
-			
+
 			wp_enqueue_style(
 				'fullculqi-metaboxes-css',
 				FULLCULQI_URL . 'resources/assets/css/admin-metaboxes.css'
@@ -149,7 +149,7 @@ abstract class FullCulqi_Metaboxes {
 
 	public function save_post( $post_id = 0, $post, $update = false ) {}
 
-	public function delete_post( $post_id = 0, $post ) {}
+	public function delete_post( $post_id = 0, $post = array()) {}
 
 	public function add_scripts() {}
 }
