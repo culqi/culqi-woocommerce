@@ -1821,6 +1821,6 @@ background-image: url(https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout
 
 @media screen and (max-width: 782px){
     .form-table td {
-        padding: 15px 0 10px!important;
+        padding: 15px 0px 10px!important;
     }
 }

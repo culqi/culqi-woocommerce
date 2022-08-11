@@ -21,6 +21,10 @@
     align-items: center;
     margin-bottom: 0;
   }
+  .form-table td{
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+  }
 }
 
 .form-label {

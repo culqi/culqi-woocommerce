@@ -9,12 +9,12 @@ Author URI: https://www.purpura.pe/
 Developer: Juan Ysen
 Developer URI: https://www.purpura.pe/
 Text Domain: culqi, woocommerce, method payment
-Requires at least: 5.6
-Tested up to: 5.7.2
+Requires at least: 5.0
+Tested up to: 6.0
 Stable tag: 5.6
 Requires PHP: 5.6
-WC requires at least: 4.9.0
-WC tested up to: 5.3.0
+WC requires at least: 2.6.11
+WC tested up to: 
 */
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
