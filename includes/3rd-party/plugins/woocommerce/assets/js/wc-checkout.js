@@ -405,6 +405,8 @@ var device = await Culqi3DS.generateDevice();
 			});
 		},
 		loadAjax3DS: function( post_data ) {
+			console.log('enviando al cargo con 3DS');
+			jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 25% 0; color: white; font-size: 14px">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div>');
 			console.log(post_data);
 			$.ajax({
 				url 		: fullculqi_vars.url_actions,
