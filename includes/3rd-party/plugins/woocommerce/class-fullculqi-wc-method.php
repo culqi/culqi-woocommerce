@@ -592,7 +592,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
             $log->set_notice( $notice );
         }else{
             $error = sprintf(
-                'Este pedido no ha sido generado con un cargo.', 'Error'
+                'Solo se puede hacer devoluciones a pedidos pagados con tarjeta de crédito o débito.', 'Error'
             );
             $log->set_error( $error );
             return new WP_Error( 'error', $error );
