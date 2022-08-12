@@ -277,7 +277,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
             wp_localize_script( 'fullculqi-js', 'fullculqi_vars',
 				apply_filters('fullculqi/method/localize', [
-					'url_actions'	=> site_url( 'fullculqi-api/wc-actions/' ),
+                    'url_actions'	=> site_url( 'fullculqi-api/wc-actions/' ),
 					'url_success'	=> $order->get_checkout_order_received_url(),
 					'public_key'	=> sanitize_text_field( $settings['public_key'] ),
 					'installments'	=> sanitize_title( $this->installments ),
@@ -296,11 +296,11 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 					'loading_text'	=> esc_html__( 'Loading. Please wait.', 'fullculqi' ),
 					'total'			=> fullculqi_format_total( $order->get_total() ),
 					'methods'		=> [
-										'tarjeta'		=>	isset($settings['methods']['tarjeta']) ? true : false,
-										'bancaMovil'	=>	isset($settings['methods']['bancaMovil']) ? true : false,
-										'agente'		=>	isset($settings['methods']['agente']) ? true : false,
-										'billetera'		=>	isset($settings['methods']['billetera']) ? true : false,
-										'cuetealo'		=>	isset($settings['methods']['cuetealo']) ? true : false,
+                            'tarjeta'		=>	(isset($settings['methods']['tarjeta']) and $settings['methods']['tarjeta']!='0') ? true : false,
+                            'bancaMovil'	=>	(isset($settings['methods']['bancaMovil']) and $settings['methods']['tarjeta']!='0') ? true : false,
+                            'agente'		=>	(isset($settings['methods']['agente']) and $settings['methods']['tarjeta']!='0') ? true : false,
+                            'billetera'		=>	(isset($settings['methods']['billetera']) and $settings['methods']['tarjeta']!='0') ? true : false,
+                            'cuetealo'		=>	(isset($settings['methods']['cuetealo']) and $settings['methods']['tarjeta']!='0') ? true : false,
 					],
 					'msg_fail'		=> sanitize_text_field( $this->msg_fail ),
 					'msg_error'		=> esc_html__( 'There was some problem in the purchase process. Try again please', 'fullculqi' ),
@@ -309,7 +309,6 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
                     'url' 	=> $returnUrl3DS,
 				], $order )
 			);
-
 			do_action( 'fullculqi/method/enqueue_scripts/pay_page', $order );
 		}
 

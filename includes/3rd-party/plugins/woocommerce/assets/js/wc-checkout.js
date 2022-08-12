@@ -294,7 +294,7 @@ var device = await Culqi3DS.generateDevice();
 				$('#fullculqi_notify').addClass('woocommerce-error').html( Culqi.error.merchant_message );
 			} else {
 				console.log('device:::::::'+device);
-				FullCulqi.waitMe();
+				//FullCulqi.waitMe();
 				let data;
 				var enviroment = fullculqi_vars.enviroment.split('|');
 				if( Culqi.order ) {
