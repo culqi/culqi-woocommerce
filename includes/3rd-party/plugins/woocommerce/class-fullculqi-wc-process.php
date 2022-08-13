@@ -402,8 +402,14 @@ class FullCulqi_WC_Process {
 
 		if( is_user_logged_in() )
 			$culqi_customer = FullCulqi_Customers::get( get_current_user_id() );
-		else
-			$culqi_customer = FullCulqi_Customers::getByEmail( $order->get_billing_email() );
+		else{
+            if (version_compare(WC_VERSION, "2.7", "<")) {
+                $culqi_customer = FullCulqi_Customers::getByEmail( $order->billing_email );
+            }else{
+                $culqi_customer = FullCulqi_Customers::getByEmail( $order->get_billing_email() );
+            }
+        }
+
 
 
 		if( ! empty( $culqi_customer ) ) {
