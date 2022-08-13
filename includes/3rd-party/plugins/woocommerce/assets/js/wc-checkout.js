@@ -230,7 +230,7 @@ var device = await Culqi3DS.generateDevice();
 					onClose : function() {},
 				});
 			});
- 
+
 			// Ajax Complete
 			$( document ).ajaxComplete( function() {
 				$('#page').waitMe('hide');
@@ -258,7 +258,7 @@ var device = await Culqi3DS.generateDevice();
 				$('#fullculqi_notify').addClass('woocommerce-error').html( Culqi.error.merchant_message );
 			} else {
 				console.log('device:::::::'+device);
-				//FullCulqi.waitMe();
+
 				let data;
 				var enviroment = fullculqi_vars.enviroment.split('|');
 				if( Culqi.order ) {
@@ -273,6 +273,8 @@ var device = await Culqi3DS.generateDevice();
 					};
 
 				} else if( Culqi.token ) {
+					Culqi.close();
+					jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div></div>');
 					data = {
 						action 			: 'charge',
 						token_id		: Culqi.token.id,
@@ -294,7 +296,7 @@ var device = await Culqi3DS.generateDevice();
 				$('#fullculqi_notify').addClass('woocommerce-error').html( Culqi.error.merchant_message );
 			} else {
 				console.log('device:::::::'+device);
-				//FullCulqi.waitMe();
+				jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div></div>');
 				let data;
 				var enviroment = fullculqi_vars.enviroment.split('|');
 				if( Culqi.order ) {
@@ -343,7 +345,6 @@ var device = await Culqi3DS.generateDevice();
 				success: function( response ) {
 					//alert(1);
 					$( document.body ).trigger('fullculqi.checkout.success', [ post_data, response ]);
-					console.log('juancito');
 					console.log(response);
 					//alert(fullculqi_vars.url_success);
 					if( response.success ) {
@@ -369,6 +370,7 @@ var device = await Culqi3DS.generateDevice();
 						console.log(response);
 						Culqi.close();
 						if(response.data.message!='' && response.data.message!=null){
+							jQuery('#loadingloginculqi').remove();
 							console.log(response.data.message);
 							if(response.data.message=='REVIEW'){
 								console.log('abriendo 3DS');
@@ -406,7 +408,7 @@ var device = await Culqi3DS.generateDevice();
 		},
 		loadAjax3DS: function( post_data ) {
 			console.log('enviando al cargo con 3DS');
-			jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 25% 0; color: white; font-size: 14px">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div>');
+			//jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 25% 0; color: white; font-size: 14px">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div>');
 			console.log(post_data);
 			$.ajax({
 				url 		: fullculqi_vars.url_actions,
