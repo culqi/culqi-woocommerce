@@ -60,7 +60,7 @@ class FullCulqi_Customers {
 		$results = $wpdb->get_results( $query );
 		$keys = [];
 
-		// Keys Post Type 
+		// Keys Post Type
 		foreach( $results as $result )
 			$keys[ $result->culqi_id ] = $result->post_id;
 
@@ -167,7 +167,7 @@ class FullCulqi_Customers {
 		return false;
 	}
 
-	
+
 	/**
 	 * Create Customer
 	 * @param  integer $wpuser_id
@@ -181,6 +181,7 @@ class FullCulqi_Customers {
 
 		try {
 			$customer = $culqi->Customers->create( $args_customer );
+			//echo var_dump($customer);
 		} catch( Exception $e ) {
 			return [ 'status' => 'error', 'data' => $e->getMessage() ];
 		}
@@ -255,7 +256,7 @@ class FullCulqi_Customers {
 
 			if( $user ) {
 				update_post_meta( $post_id, 'culqi_wp_user_id', $user->ID );
-				
+
 				update_user_meta( $user->ID, '_culqi_customer_id', $customer->id );
 				update_user_meta( $user->ID, '_post_customer_id', $post_id );
 			}
