@@ -333,18 +333,17 @@ class FullCulqi_WC_Process {
 			//echo var_dump($installments);
             //echo var_dump($culqi_charge);
 			if( $culqi_charge['status'] != 'ok' ) {
-				$error = sprintf(
-					esc_html__( 'Culqi Charge Error: %s', 'fullculqi' ),
-					$culqi_charge['data']
-				);
-				self::$log->set_notice( $error );
                 if(isset($culqi_charge['action_code']) and $culqi_charge['action_code']=='REVIEW'){
                     return $culqi_charge['action_code'];
                 }else{
+                    $error = sprintf(
+                        esc_html__( 'Culqi Charge Error: %s', 'fullculqi' ),
+                        $culqi_charge['data']
+                    );
+                    self::$log->set_notice( $error );
                     $json = json_decode($culqi_charge['data'], true);
                     return $json['user_message'];
                 }
-
 			}
 			$culqi_charge_id = $culqi_charge['data']['culqi_charge_id'];
 			$post_charge_id = $culqi_charge['data']['post_charge_id'];
