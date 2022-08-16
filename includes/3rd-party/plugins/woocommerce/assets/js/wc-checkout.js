@@ -128,7 +128,7 @@ var device = await Culqi3DS.generateDevice();
 				currency: fullculqi_vars.currency,
 				//description: fullculqi_vars.description,
 				amount: fullculqi_vars.total,
-				culqiclient: 'Woocomerce',
+				culqiclient: 'woocommerce',
 				culqiclientversion: fullculqi_vars.version_wc
 			};
 			console.log(fullculqi_vars.multi_order+':: el orderid');
@@ -167,9 +167,9 @@ var device = await Culqi3DS.generateDevice();
 			}
 			
 			// Check the installments option
-			if( fullculqi_vars.installments == 'yes' ) {
-				args_options.installments = true;
-			}
+			//if( fullculqi_vars.installments == 'yes' ) {
+			args_options.installments = true;
+			//}
 			// Check the logo option
 			if( fullculqi_vars.url_logo.length > 0 ) {
 				args_options.style.logo = fullculqi_vars.url_logo;

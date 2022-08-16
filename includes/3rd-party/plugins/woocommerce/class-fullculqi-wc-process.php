@@ -260,6 +260,7 @@ class FullCulqi_WC_Process {
     				'order_number'		=> $order->get_order_number(),
     				'order_key'			=> $order->order_key,
     				'post_customer'		=> isset( $post_customer_id ) ? $post_customer_id : false,
+                    'sponsor'           => 'woocommerce'
     			];
     			if(isset($post_data['parameters3DS']) and $post_data['parameters3DS']!==FALSE and !is_null($post_data['parameters3DS']) and is_array($post_data['parameters3DS'])){
                     $args_charges = apply_filters( 'fullculqi/process/charge_args', [
@@ -295,6 +296,7 @@ class FullCulqi_WC_Process {
     				'order_number'		=> $order->get_order_number(),
     				'order_key'			=> $order->get_order_key(),
     				'post_customer'		=> isset( $post_customer_id ) ? $post_customer_id : false,
+                    'sponsor'           => 'woocommerce'
     			];
     			if(isset($post_data['parameters3DS']) and $post_data['parameters3DS']!==FALSE and !is_null($post_data['parameters3DS']) and is_array($post_data['parameters3DS'])){
                     $args_charges = apply_filters( 'fullculqi/process/charge_args', [
