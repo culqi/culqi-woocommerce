@@ -133,7 +133,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     							'customer_last'		=> $order->billing_last_name,
     							'customer_city'		=> $order->billing_city,
     							'customer_country'	=> $order->billing_country,
-    							'customer_phone'	=> $order->billing_phone
+    							'customer_phone'	=> $order->billing_phone,
+                                'sponsor'           => 'woocommerce'
     						],
                             'enviroment' 	=> $enviroment[0]
     					], $order);
@@ -222,7 +223,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     							'customer_last'		=> $order->get_billing_last_name(),
     							'customer_city'		=> $order->get_billing_city(),
     							'customer_country'	=> $order->get_billing_country(),
-    							'customer_phone'	=> $order->get_billing_phone()
+    							'customer_phone'	=> $order->get_billing_phone(),
+                                'sponsor'           => 'woocommerce'
     						],
                             'enviroment' 	=> $enviroment[0]
     					], $order);
