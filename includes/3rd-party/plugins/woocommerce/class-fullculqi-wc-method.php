@@ -86,7 +86,11 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
     			$desc = count( $pnames ) == 0 ? 'Product' : implode(', ', $pnames);
     			// Check if there is multipayment
-    			if( $this->multipayment == 'yes' ) {
+    			//if( $this->multipayment == 'yes' ) {
+    			if((isset($settings['methods']['cuetealo']) and $settings['methods']['cuetealo']!='0')
+            or (isset($settings['methods']['billetera']) and $settings['methods']['billetera']!='0')
+            or (isset($settings['methods']['agente']) and $settings['methods']['agente']!='0')
+            or (isset($settings['methods']['bancaMovil']) and $settings['methods']['bancaMovil']!='0')){
 
     				$culqi_order_id = get_post_meta( $order_id, '_culqi_order_id', true );
 
@@ -179,7 +183,10 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     			$desc = count( $pnames ) == 0 ? 'Product' : implode(', ', $pnames);
 
     			// Check if there is multipayment
-    			if( $this->multipayment == 'yes' ) {
+                if((isset($settings['methods']['cuetealo']) and $settings['methods']['cuetealo']!='0')
+                    or (isset($settings['methods']['billetera']) and $settings['methods']['billetera']!='0')
+                    or (isset($settings['methods']['agente']) and $settings['methods']['agente']!='0')
+                    or (isset($settings['methods']['bancaMovil']) and $settings['methods']['bancaMovil']!='0')){
 
     				$culqi_order_id = get_post_meta( $order_id, '_culqi_order_id', true );
     				//echo var_dump($culqi_order_id);
@@ -284,7 +291,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 					'public_key'	=> sanitize_text_field( $settings['public_key'] ),
 					'installments'	=> sanitize_title( $this->installments ),
 					'multipayment'	=> sanitize_title( $this->multipayment ),
-					'multi_order'	=> $this->multipayment == 'yes' ? $culqi_order_id : '',
+					'multi_order'	=> ((isset($settings['methods']['cuetealo']) and $settings['methods']['cuetealo']!='0') or (isset($settings['methods']['billetera']) and $settings['methods']['billetera']!='0') or (isset($settings['methods']['agente']) and $settings['methods']['agente']!='0') or (isset($settings['methods']['bancaMovil']) and $settings['methods']['bancaMovil']!='0')) ? $culqi_order_id : '',
 					'lang'			=> fullculqi_language(),
 					'time_modal'	=> absint( $this->time_modal*1000 ),
 					'order_id'		=> absint( $order_id ),
@@ -299,10 +306,10 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 					'total'			=> fullculqi_format_total( $order->get_total() ),
 					'methods'		=> [
                             'tarjeta'		=>	(isset($settings['methods']['tarjeta']) and $settings['methods']['tarjeta']!='0') ? true : false,
-                            'bancaMovil'	=>	(isset($settings['methods']['bancaMovil']) and $settings['methods']['tarjeta']!='0') ? true : false,
-                            'agente'		=>	(isset($settings['methods']['agente']) and $settings['methods']['tarjeta']!='0') ? true : false,
-                            'billetera'		=>	(isset($settings['methods']['billetera']) and $settings['methods']['tarjeta']!='0') ? true : false,
-                            'cuetealo'		=>	(isset($settings['methods']['cuetealo']) and $settings['methods']['tarjeta']!='0') ? true : false,
+                            'bancaMovil'	=>	(isset($settings['methods']['bancaMovil']) and $settings['methods']['bancaMovil']!='0') ? true : false,
+                            'agente'		=>	(isset($settings['methods']['agente']) and $settings['methods']['agente']!='0') ? true : false,
+                            'billetera'		=>	(isset($settings['methods']['billetera']) and $settings['methods']['billetera']!='0') ? true : false,
+                            'cuetealo'		=>	(isset($settings['methods']['cuetealo']) and $settings['methods']['cuetealo']!='0') ? true : false,
 					],
 					'msg_fail'		=> sanitize_text_field( $this->msg_fail ),
 					'msg_error'		=> esc_html__( 'There was some problem in the purchase process. Try again please', 'fullculqi' ),
