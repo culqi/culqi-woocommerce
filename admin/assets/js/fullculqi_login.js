@@ -71,7 +71,7 @@ jQuery(document).ready(function () {
                 timeout: 0,
                 headers: {
                     'Authorization': 'Bearer ' + jQuery('#fullculqi_tokenlogin').val(),
-                    'Access-Control-Allow-Origin': '*',
+                    //'Access-Control-Allow-Origin': '*',
                     "Content-Type": "application/json",
                     "Accept": "*/*"
                 },
@@ -97,7 +97,6 @@ jQuery(document).ready(function () {
                         timeout: 0,
                         headers: {
                             'Authorization': 'Bearer ' + jQuery('#fullculqi_tokenlogin').val(),
-                            'Access-Control-Allow-Origin': '*',
                             "Content-Type": "application/json",
                             "Accept": "*/*"
                         },
@@ -255,7 +254,6 @@ jQuery(document).ready(function () {
             timeout: 0,
             headers: {
                 'Authorization': 'Bearer ' + window.culqi_token,
-                'Access-Control-Allow-Origin': '*',
                 "Content-Type": "application/json",
                 "Accept": "*/*"
             },

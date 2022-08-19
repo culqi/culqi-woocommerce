@@ -132,7 +132,7 @@ var device = await Culqi3DS.generateDevice();
 				culqiclientversion: fullculqi_vars.version_wc
 			};
 			console.log(fullculqi_vars.multi_order+':: el orderid');
-			if( fullculqi_vars.multipayment == 'yes' && fullculqi_vars.multi_order != '' ) {
+			if( fullculqi_vars.multi_order != '' ) {
 				args_settings.order = fullculqi_vars.multi_order;
 			}
 			console.log(args_settings);
