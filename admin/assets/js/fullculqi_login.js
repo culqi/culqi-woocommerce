@@ -54,6 +54,13 @@ jQuery(document).ready(function () {
             e.preventDefault();
         }
 
+        if(!(jQuery('#fullculqi_methods_tarjeta').is(':checked') || jQuery('#fullculqi_methods_bancaMovil').is(':checked') || jQuery('#fullculqi_methods_agents').is(':checked') || jQuery('#fullculqi_methods_wallets').is(':checked') || jQuery('#fullculqi_methods_quotedbcp').is(':checked'))){
+            jQuery('#errorpaymentmethods').html('Debe seleccionar por lo menos 1 método de pago.');
+            e.preventDefault();
+        }
+
+
+
         if (jQuery('#fullculqi_tokenlogin').val().length>0) {
             var url_webhook = '';
             if (jQuery('#integracion').is(':checked')) {
