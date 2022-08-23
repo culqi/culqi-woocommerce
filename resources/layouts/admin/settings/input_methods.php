@@ -23,3 +23,4 @@
 		</span>
   </div>
 </label>
+<span id="errorpaymentmethods" class="form-text text-muted" style="display: block; color: red"></span>

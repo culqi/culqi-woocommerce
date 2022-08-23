@@ -139,7 +139,7 @@ var device = await Culqi3DS.generateDevice();
 			Culqi.settings( args_settings );
 		},
 		/**
-		 * Set Culqi Options
+		 * Set Culqi Options 
 		 * @return mixed
 		 */
 		setOptions: function() {
