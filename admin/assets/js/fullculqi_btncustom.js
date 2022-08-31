@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const actionTextVisible = document.querySelector('.action-visible-text');
   const inputLogo = document.querySelector('#logo-url');
   const logo = document.querySelector('#logo');
+  const logodefault = document.querySelector('#logodefault');
   const labelText = document.querySelector('#label-text');
 
   const btnClose = document.querySelectorAll('#btn-close')
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isUrlDefault = true;
       inputLogo.classList.remove('invalid');
       labelText.removeAttribute('style');
-      logo.src = 'https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/brand.svg';
+      logo.src = logodefault.value;
     } else {
       inputLogo.classList.add('invalid')
       labelText.style.color = '#D20808';
@@ -159,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.remove('active');
     jQuery('#fullculqi_logo').val(styleConfig.urlLogo);
     jQuery('#fullculqi_colorpalette').val(styleConfig.primaryColor+'-'+styleConfig.secondaryColor);
-    console.log('styleConfig: ', styleConfig)
   });
   Array.from(btnClose).forEach(el => {
     el.addEventListener('click', event => {

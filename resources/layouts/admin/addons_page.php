@@ -6,10 +6,10 @@
 		<div class="fullculqi_addons_container">
 			<div class="fullculqi_addons_item">
 				<div class="fullculqi_addons_header">
-					<img src="<?php echo $banner_1; ?>" alt="Fullculqi One Click" />
+					<img src="<?php echo esc_html($banner_1); ?>" alt="Fullculqi One Click" />
 				</div>
 				<div class="fullculqi_addons_body">
-					<img src="<?php echo $icon_wc; ?>" alt="wordpress" />
+					<img src="<?php echo esc_html($icon_wc); ?>" alt="wordpress" />
 					<h2><?php esc_html_e( 'Culqi One Click Payments', 'fullculqi' ); ?></h2>
 					<p><?php esc_html_e( 'Your buyers will can do their purchase with a single click in the checkout page', 'fullculqi' ); ?></p>
 				</div>
@@ -29,10 +29,10 @@
 		<div class="fullculqi_addons_container">
 			<div class="fullculqi_addons_item">
 				<div class="fullculqi_addons_header">
-					<img src="<?php echo $banner_2; ?>" alt="Fullculqi Subscriptions" />
+					<img src="<?php echo esc_html($banner_2); ?>" alt="Fullculqi Subscriptions" />
 				</div>
 				<div class="fullculqi_addons_body">
-					<img src="<?php echo $icon_wc; ?>" alt="woocommerce" />
+					<img src="<?php echo esc_html($icon_wc); ?>" alt="woocommerce" />
 					<h2><?php esc_html_e( 'Culqi Subscriptions', 'fullculqi' ); ?></h2>
 					<p><?php esc_html_e( 'Your ecommerce will can sell products or services using Culqi recurring payment.', 'fullculqi' ); ?></p>
 				</div>
@@ -52,10 +52,10 @@
 		<div class="fullculqi_addons_container">
 			<div class="fullculqi_addons_item">
 				<div class="fullculqi_addons_header">
-					<img src="<?php echo $banner_3; ?>" alt="Fullculqi Buttons" />
+					<img src="<?php echo esc_html($banner_3); ?>" alt="Fullculqi Buttons" />
 				</div>
 				<div class="fullculqi_addons_body">
-					<img src="<?php echo $icon_wp; ?>" alt="wordpress" />
+					<img src="<?php echo esc_html($icon_wp); ?>" alt="wordpress" />
 					<h2><?php esc_html_e( 'Culqi Payment Buttons', 'fullculqi' ); ?></h2>
 					<p><?php esc_html_e( 'You can use Culqi payments buttons in everywhere of you website without have a ecommerce installed.', 'fullculqi' ); ?></p>
 				</div>
@@ -77,10 +77,10 @@
 		<div class="fullculqi_addons_container">
 			<div class="fullculqi_addons_item">
 				<div class="fullculqi_addons_header">
-					<img src="<?php echo $banner_4; ?>" alt="Fullculqi Deferred Payment" />
+					<img src="<?php echo esc_html($banner_4); ?>" alt="Fullculqi Deferred Payment" />
 				</div>
 				<div class="fullculqi_addons_body">
-					<img src="<?php echo $icon_wc; ?>" alt="woocommerce" />
+					<img src="<?php echo esc_html($icon_wc); ?>" alt="woocommerce" />
 					<h2><?php esc_html_e( 'Culqi Deferred Payment', 'fullculqi' ); ?></h2>
 					<p><?php esc_html_e( 'You can authorize a payment, check its stocks, and then capture the payment.', 'fullculqi' ); ?></p>
 				</div>

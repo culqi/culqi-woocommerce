@@ -13,7 +13,7 @@
 						<td><?php esc_html_e( 'Brand', 'fullculqi' ); ?></td>
 						<td><?php esc_html_e( 'Type', 'fullculqi' ); ?></td>
 						<td><?php esc_html_e( 'Creation', 'fullculqi' ); ?></td>
-						
+
 						<?php if( ! empty( $actions ) ) : ?>
 							<td><?php esc_html_e( 'Actions', 'fullculqi' ); ?></td>
 						<?php endif; ?>
@@ -22,16 +22,16 @@
 				<tbody>
 				<?php foreach( $cards as $card ) : ?>
 					<tr>
-						<td><?php echo $card['culqi_number']; ?></td>
-						<td><?php echo $card['culqi_brand']; ?></td>
-						<td><?php echo $card['culqi_type']; ?></td>
-						<td><?php echo $card['culqi_creation']; ?></td>						
+						<td><?php echo esc_html($card['culqi_number']); ?></td>
+						<td><?php echo esc_html($card['culqi_brand']); ?></td>
+						<td><?php echo esc_html($card['culqi_type']); ?></td>
+						<td><?php echo esc_html($card['culqi_creation']); ?></td>
 
 						<?php if( ! empty( $actions ) ) : ?>
 						<td>
 							<?php foreach( $actions as $action ) : ?>
-								<a href="<?php echo $action['url']; ?>" class="button button-secondary customer_card_action" id="<?php echo $action['id']; ?>" data-id="<?php echo $card['culqi_card_id']; ?>">
-								<?php echo $action['name']; ?>		
+								<a href="<?php echo esc_html($action['url']); ?>" class="button button-secondary customer_card_action" id="<?php echo esc_html($action['id']); ?>" data-id="<?php echo esc_html($card['culqi_card_id']); ?>">
+								<?php echo esc_html($action['name']); ?>
 								</a>
 							<?php endforeach; ?>
 						</td>
@@ -40,9 +40,9 @@
 				<?php endforeach; ?>
 				</tbody>
 			</table>
-		
+
 		<?php else: ?>
-			
+
 			<p><?php esc_html_e( 'There is no cards', 'fullculqi' ); ?></p>
 
 		<?php endif; ?>

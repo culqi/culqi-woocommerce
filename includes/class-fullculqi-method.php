@@ -97,7 +97,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			wp_enqueue_script('fullculqi-js', $js_fullculqi, [ 'jquery', 'fullcheckout-js' ], false, true);
 			wp_enqueue_script('waitme-js', $js_waitme, [ 'jquery' ], false, true);
 			wp_enqueue_style('waitme-css', $css_waitme );
-
+            $logo_url = (isset($settings['logo_url']) and $settings['logo_url']!='' and !is_null($settings['logo_url'])) ? $settings['logo_url'] :  FULLCULQI_URL.'resources/assets/images/brand.svg';
 			wp_localize_script( 'fullculqi-js', 'fullculqi',
 				apply_filters('fullculqi/method/localize',
 				[
@@ -112,7 +112,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 					'time_modal'	=> absint($this->time_modal*1000),
 					'order_id'		=> absint($order_id),
 					'commerce'		=> sanitize_text_field($settings['commerce']),
-					'url_logo'		=> esc_url($settings['logo_url']),
+					'url_logo'		=> esc_url($logo_url),
 					'currency'		=> get_woocommerce_currency(),
 					'description'	=> substr(str_pad(implode(', ', $pnames), 5, '_'), 0, 80),
 					'loading_text'	=> esc_html__('Loading. Please wait.','letsgo'),

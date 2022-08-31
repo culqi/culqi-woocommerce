@@ -14,27 +14,27 @@
 			<ul>
 				<li>
 					<b><?php esc_html_e( 'Creation Date', 'fullculqi' ); ?> : </b>
-					<?php echo $creation; ?>
+					<?php echo esc_html($creation); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Expiration Date', 'fullculqi' ); ?> : </b>
-					<?php echo $expiration; ?>
+					<?php echo esc_html($expiration); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Last Status Date', 'fullculqi' ); ?> : </b>
-					<?php echo $status_date; ?>
+					<?php echo esc_html($status_date); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Currency', 'fullculqi' ); ?> : </b>
-					<?php echo $currency; ?>
+					<?php echo esc_html($currency); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Amount', 'fullculqi' ); ?> : </b>
-					<?php echo $amount; ?>
+					<?php echo esc_html($amount); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'CIP Code', 'fullculqi' ); ?> : </b>
-					<?php echo $cip; ?>
+					<?php echo esc_html($cip); ?>
 				</li>
 				<?php do_action( 'fullculqi/orders/basic/print_data', $post_id ); ?>
 			</ul>
@@ -52,23 +52,23 @@
 			<ul>
 				<li>
 					<b><?php esc_html_e( 'First Name', 'fullculqi' ); ?> : </b>
-					<?php echo $first_name; ?>
+					<?php echo esc_html($first_name); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Last Name', 'fullculqi' ); ?> : </b>
-					<?php echo $last_name; ?>
+					<?php echo esc_html($last_name); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'City', 'fullculqi' ); ?> : </b>
-					<?php echo $city; ?>
+					<?php echo esc_html($city); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Country', 'fullculqi' ); ?> : </b>
-					<?php echo $country; ?>
+					<?php echo esc_html($country); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Phone', 'fullculqi' ); ?> : </b>
-					<?php echo $phone; ?>
+					<?php echo esc_html($phone); ?>
 				</li>
 			</ul>
 		</div>

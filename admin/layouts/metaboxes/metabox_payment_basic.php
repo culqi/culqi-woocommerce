@@ -4,20 +4,20 @@ if ( ! defined( 'ABSPATH' ) )
 ?>
 
 <div class="culqi_payments_box">
-	<h2 class="culqi_payments_h2">Culqi ID : <?php echo $id; ?></h2>
+	<h2 class="culqi_payments_h2">Culqi ID : <?php echo esc_html($id); ?></h2>
 	<p class="culqi_payments_subh2"><?php printf(__('Payment via FullCulqi. Paid on %s. Customer IP: %s','letsgo'), $creation, $ip); ?></p>
 
 	<div class="culqi_data_column_container">
 		<div class="culqi_data_column">
 			<h3 class="culqi_payments_h3"><?php esc_html_e('Payment Data','letsgo'); ?></h3>
 			<ul>
-				<li><b><?php esc_html_e('Capture Date', 'letsgo'); ?> :</b> <?php echo $capture_date; ?></li>
-				<li><b><?php esc_html_e('Currency', 'letsgo'); ?> :</b> <?php echo $currency; ?></li>
-				<li><b><?php esc_html_e('Amount', 'letsgo'); ?> :</b> <?php echo $amount; ?></li>
-				<li><b><?php esc_html_e('Refund', 'letsgo'); ?> :</b> <?php echo $refunded; ?></li>
-				<li><b><?php esc_html_e('Card Brand', 'letsgo'); ?> :</b> <?php echo $card_brand; ?></li>
-				<li><b><?php esc_html_e('Card Type', 'letsgo'); ?> :</b> <?php echo $card_type; ?></li>
-				<li><b><?php esc_html_e('Card Number', 'letsgo'); ?> :</b> <?php echo $card_number; ?></li>
+				<li><b><?php esc_html_e('Capture Date', 'letsgo'); ?> :</b> <?php echo esc_html($capture_date); ?></li>
+				<li><b><?php esc_html_e('Currency', 'letsgo'); ?> :</b> <?php echo esc_html($currency); ?></li>
+				<li><b><?php esc_html_e('Amount', 'letsgo'); ?> :</b> <?php echo esc_html($amount); ?></li>
+				<li><b><?php esc_html_e('Refund', 'letsgo'); ?> :</b> <?php echo esc_html($refunded); ?></li>
+				<li><b><?php esc_html_e('Card Brand', 'letsgo'); ?> :</b> <?php echo esc_html($card_brand); ?></li>
+				<li><b><?php esc_html_e('Card Type', 'letsgo'); ?> :</b> <?php echo esc_html($card_type); ?></li>
+				<li><b><?php esc_html_e('Card Number', 'letsgo'); ?> :</b> <?php echo esc_html($card_number); ?></li>
 			</ul>
 			<?php
 				printf(
@@ -40,11 +40,11 @@ if ( ! defined( 'ABSPATH' ) )
 		<div class="culqi_data_column">
 			<h3 class="culqi_payments_h3"><?php esc_html_e('Customer','letsgo'); ?></h3>
 			<ul>
-				<li><b><?php esc_html_e('First Name', 'letsgo'); ?> :</b> <?php echo $first_name; ?></li>
-				<li><b><?php esc_html_e('Last Name', 'letsgo'); ?> :</b> <?php echo $last_name; ?></li>
-				<li><b><?php esc_html_e('City', 'letsgo'); ?> :</b> <?php echo $city; ?></li>
-				<li><b><?php esc_html_e('Country', 'letsgo'); ?> :</b> <?php echo $country; ?></li>
-				<li><b><?php esc_html_e('Phone', 'letsgo'); ?> :</b> <?php echo $phone; ?></li>
+				<li><b><?php esc_html_e('First Name', 'letsgo'); ?> :</b> <?php echo esc_html($first_name); ?></li>
+				<li><b><?php esc_html_e('Last Name', 'letsgo'); ?> :</b> <?php echo esc_html($last_name); ?></li>
+				<li><b><?php esc_html_e('City', 'letsgo'); ?> :</b> <?php echo esc_html($city); ?></li>
+				<li><b><?php esc_html_e('Country', 'letsgo'); ?> :</b> <?php echo esc_html($country); ?></li>
+				<li><b><?php esc_html_e('Phone', 'letsgo'); ?> :</b> <?php echo esc_html($phone); ?></li>
 			</ul>
 		</div>
 	</div>

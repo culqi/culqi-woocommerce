@@ -171,11 +171,7 @@ var device = await Culqi3DS.generateDevice();
 			args_options.installments = true;
 			//}
 			// Check the logo option
-			if( fullculqi_vars.url_logo.length > 0 ) {
 				args_options.style.logo = fullculqi_vars.url_logo;
-			}else{
-				args_options.style.logo = 'https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/brand.svg';
-			}
 			if(fullculqi_vars.color_palette.length > 0 ){
 				var colors = fullculqi_vars.color_palette.split('-');
 				args_options.style.bannerColor=colors[0];

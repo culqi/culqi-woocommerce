@@ -48,7 +48,7 @@ class FullCulqi_Welcome {
 		}
 
         if (isset($_POST['fullculqi_options'])) {
-            $options = $_POST['fullculqi_options'];
+            $options = is_array($_POST['fullculqi_options']) ? $_POST['fullculqi_options'] : [];
             $settings = new WC_Gateway_FullCulqi();
             if(isset($options['enabled'])){
                 $settings->settings['enabled'] = $options['enabled'];
@@ -105,14 +105,14 @@ class FullCulqi_Welcome {
 		wp_enqueue_style( 'fullculqi-btn-css', plugin_dir_url( __FILE__ ) . '../../admin/assets/css/btn.css');
 		wp_enqueue_script( 'fullculqi-bootstrap-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/bootstrap.min.js', [ 'jquery' ], false, true );
 		wp_enqueue_script( 'fullculqi-login-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/fullculqi_login.js', [ 'jquery', 'fullculqi-bootstrap-js' ], false, true );
-		
+
 		wp_localize_script( 'fullculqi-login-js', 'fullculqi_merchants',
 				[
 					'url_merchants'	=> admin_url( 'admin-ajax.php' ),
 					// 'nonce'				=> wp_create_nonce( 'fullculqi-wpnonce' ),
 				]
 			);
-		
+
 		fullculqi_get_template( 'resources/layouts/admin/welcome-panel.php' );
 	}
 

@@ -1,3 +1,16 @@
+<style>
+    .customcheckout .form__group__select::before {
+        content: url("<?php echo  FULLCULQI_URL; ?>resources/assets/images/arrow_down.svg");
+    }
+    .customcheckout .form__group-input .brand {
+        background-image: url("<?php echo FULLCULQI_URL; ?>resources/assets/images/visa.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+</style>
 <div class="customcheckout">
     <div>
         <input value="Personalizar" type="button" class="btn btn-save" id="open-modal" />
@@ -8,7 +21,7 @@
                 <div class="custom-checkout__header">
                     <div class="custom-checkout__header-title">Personalización</div>
                     <div class="custom-checkout__header-close" id="btn-close">
-                        <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/icons/close-black.svg"
+                        <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/close-black.svg"
                              alt="close">
                     </div>
                 </div>
@@ -19,7 +32,7 @@
                                 <div class="preview-checkout__banner" id="palette-left">
                                     <div class="banner-logo">
                                         <img id="logo"
-                                             src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/brand.svg"
+                                             src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/brand.svg"
                                              alt="logo">
                                     </div>
                                     <div class="banner-title">
@@ -62,35 +75,35 @@
                                                 Tarjeta débito / crédito
                                             </li>
                                             <li>
-                                                <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/icons/online-banking.svg"
+                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/online-banking.svg"
                                                      alt="icon">
                                                 Banca móvil o internet
                                             </li>
                                             <li>
-                                                <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/icons/agents.svg"
+                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/agents.svg"
                                                      alt="icon">
                                                 Agentes y bodegas
                                             </li>
                                             <li>
-                                                <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/icons/banca-movil.svg"
+                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/banca-movil.svg"
                                                      alt="icon">
 
                                                 Billeteras móviles
                                             </li>
                                             <li>
-                                                <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/icons/calendar.svg"
+                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/calendar.svg"
                                                      alt="icon">
                                                 Cuotéalo BCP
                                             </li>
                                         </ul>
                                         <div class="preview-checkout__container-menu-image">
-                                            <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/logos/culqi-black.svg"
+                                            <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/culqi-black.svg"
                                                  alt="Culqi logo"/>
                                         </div>
                                     </div>
                                     <div class="preview-checkout__container-content">
                     <span class="form-info">
-                      <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/icons/info.svg"
+                      <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/info.svg"
                            alt="culqi icon"/>
                       <p>Recuerda activar tu tarjeta para <b>compras por internet.</b></p>
                     </span>
@@ -192,7 +205,7 @@
 
                                             </div>
                                             <div class="image">
-                                                <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/brand.svg"
+                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/brand.svg"
                                                      alt="logo">
                                             </div>
                                         </div>
@@ -206,7 +219,7 @@
 
                                             </div>
                                             <div class="image">
-                                                <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/brand-culqi.svg"
+                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/brand-culqi.svg"
                                                      alt="logo">
                                             </div>
                                         </div>
@@ -221,7 +234,7 @@
                                                 </svg>
                                             </div>
                                             <div class="image">
-                                                <img src="https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/bran-culqi-bg.svg"
+                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/bran-culqi-bg.svg"
                                                      alt="logo">
                                             </div>
                                         </div>
@@ -269,7 +282,8 @@
                                             <div class="form__group" style="margin-bottom: 0;">
                                                 <div class="form__group-input">
                                                     <input name="url" id="logo-url"
-                                                           placeholder="https://culqi.image.jpg.com" value="<?php echo $logo_url ?>" type="url">
+                                                           placeholder="https://culqi.image.jpg.com" value="<?php echo esc_html($logo_url) ?>" type="url">
+                                                    <input name="logodefault" id="logodefault" value="<?php echo  FULLCULQI_URL.'resources/assets/images/brand.svg' ?>" type="hidden">
                                                 </div>
                                                 <label id="label-text" for="url">
                                                     Copia la URL de tu logotipo
