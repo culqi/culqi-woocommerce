@@ -16,13 +16,12 @@
         <input value="Personalizar" type="button" class="btn btn-save" id="open-modal" />
     </div>
     <div class="overlay" id="overlay">
-        <div class="container containerpopup" >
+        <div class="container containerpopup">
             <div class="custom-checkout">
                 <div class="custom-checkout__header">
                     <div class="custom-checkout__header-title">Personalización</div>
                     <div class="custom-checkout__header-close" id="btn-close">
-                        <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/close-black.svg"
-                             alt="close">
+                        <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/icons/close-black.svg" alt="close">
                     </div>
                 </div>
                 <div class="custom-checkout__body">
@@ -31,22 +30,20 @@
                             <div class="preview-checkout">
                                 <div class="preview-checkout__banner" id="palette-left">
                                     <div class="banner-logo">
-                                        <img id="logo"
-                                             src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/brand.svg"
-                                             alt="logo">
+                                        <img id="logo" src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/brand.svg" alt="logo">
                                     </div>
                                     <div class="banner-title">
-                                        <?php echo get_bloginfo( 'name' ); ?>
+                                        <?php echo get_bloginfo('name'); ?>
                                     </div>
                                 </div>
                                 <div class="preview-checkout__amount">
                                     <div class="preview-checkout__amount-contain">
                                         <span id="palette-right" name="color">S/ 350.00</span>
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path id="palette-right" name="svg"
-                                                  d="M18.3335 1.66663H1.66683C1.44582 1.66663 1.23385 1.75442 1.07757 1.9107C0.921293 2.06698 0.833496 2.27895 0.833496 2.49996V9.16663C0.833496 9.38764 0.921293 9.5996 1.07757 9.75588C1.23385 9.91216 1.44582 9.99996 1.66683 9.99996H4.16683V17.5C4.16683 17.721 4.25463 17.9329 4.41091 18.0892C4.56719 18.2455 4.77915 18.3333 5.00016 18.3333H15.0002C15.2212 18.3333 15.4331 18.2455 15.5894 18.0892C15.7457 17.9329 15.8335 17.721 15.8335 17.5V9.99996H18.3335C18.5545 9.99996 18.7665 9.91216 18.9228 9.75588C19.079 9.5996 19.1668 9.38764 19.1668 9.16663V2.49996C19.1668 2.27895 19.079 2.06698 18.9228 1.9107C18.7665 1.75442 18.5545 1.66663 18.3335 1.66663ZM5.8335 16.6666V15C6.27552 15 6.69945 15.1756 7.01201 15.4881C7.32457 15.8007 7.50016 16.2246 7.50016 16.6666H5.8335ZM14.1668 16.6666H12.5002C12.5002 16.2246 12.6758 15.8007 12.9883 15.4881C13.3009 15.1756 13.7248 15 14.1668 15V16.6666ZM14.1668 13.3333C13.2828 13.3333 12.4349 13.6845 11.8098 14.3096C11.1847 14.9347 10.8335 15.7826 10.8335 16.6666H9.16683C9.16683 15.7826 8.81564 14.9347 8.19052 14.3096C7.5654 13.6845 6.71755 13.3333 5.8335 13.3333V6.66663H14.1668V13.3333ZM17.5002 8.33329H15.8335V5.83329C15.8335 5.61228 15.7457 5.40032 15.5894 5.24404C15.4331 5.08776 15.2212 4.99996 15.0002 4.99996H5.00016C4.77915 4.99996 4.56719 5.08776 4.41091 5.24404C4.25463 5.40032 4.16683 5.61228 4.16683 5.83329V8.33329H2.50016V3.33329H17.5002V8.33329ZM10.0002 12.5C10.4946 12.5 10.978 12.3533 11.3891 12.0786C11.8002 11.8039 12.1206 11.4135 12.3099 10.9567C12.4991 10.4999 12.5486 9.99719 12.4521 9.51223C12.3557 9.02728 12.1176 8.58182 11.7679 8.23219C11.4183 7.88256 10.9728 7.64446 10.4879 7.548C10.0029 7.45153 9.50027 7.50104 9.04345 7.69026C8.58664 7.87948 8.19619 8.19991 7.92149 8.61103C7.64678 9.02216 7.50016 9.50551 7.50016 9.99996C7.50016 10.663 7.76355 11.2989 8.23239 11.7677C8.70124 12.2366 9.33712 12.5 10.0002 12.5ZM10.0002 9.16663C10.165 9.16663 10.3261 9.2155 10.4631 9.30707C10.6002 9.39864 10.707 9.52878 10.7701 9.68106C10.8331 9.83333 10.8496 10.0009 10.8175 10.1625C10.7853 10.3242 10.706 10.4727 10.5894 10.5892C10.4729 10.7058 10.3244 10.7851 10.1627 10.8173C10.0011 10.8494 9.83353 10.8329 9.68126 10.7699C9.52899 10.7068 9.39884 10.6 9.30727 10.4629C9.2157 10.3259 9.16683 10.1648 9.16683 9.99996C9.16683 9.77895 9.25463 9.56698 9.41091 9.4107C9.56719 9.25442 9.77915 9.16663 10.0002 9.16663Z"
-                                                  fill="#00A19B"/>
+                                        <svg style="width: 20px!important; height: 20px!important" width="22" height="22" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" id="palette-right" name="svg" clip-rule="evenodd" d="M2.39404 14.3924C2.39404 9.80605 6.11198 6.0881 10.6983 6.0881H31.6775C36.2638 6.0881 39.9817 9.80605 39.9817 14.3924V23.1337C39.9817 23.8578 39.3947 24.4449 38.6705 24.4449C37.9464 24.4449 37.3593 23.8578 37.3593 23.1337V14.3924C37.3593 11.2544 34.8155 8.7105 31.6775 8.7105H10.6983C7.56029 8.7105 5.01644 11.2544 5.01644 14.3924V28.3785C5.01644 31.5165 7.56029 34.0603 10.6983 34.0603H22.9361C23.6603 34.0603 24.2473 34.6474 24.2473 35.3715C24.2473 36.0957 23.6603 36.6827 22.9361 36.6827H10.6983C6.11198 36.6827 2.39404 32.9648 2.39404 28.3785V14.3924Z" fill="#00A19B" />
+                                            <path id="palette-right" name="svg" d="M12.4462 14.3924C12.4462 13.4268 11.6635 12.6441 10.698 12.6441C9.73243 12.6441 8.94971 13.4268 8.94971 14.3924C8.94971 15.3579 9.73243 16.1406 10.698 16.1406C11.6635 16.1406 12.4462 15.3579 12.4462 14.3924Z" fill="#00A19B" />
+                                            <path fill-rule="evenodd" id="palette-right" name="svg" clip-rule="evenodd" d="M21.1876 23.5707C19.9807 23.5707 19.0023 22.5923 19.0023 21.3854C19.0023 20.1785 19.9807 19.2001 21.1876 19.2001C22.3945 19.2001 23.3729 20.1785 23.3729 21.3854C23.3729 22.5923 22.3945 23.5707 21.1876 23.5707ZM16.3799 21.3854C16.3799 24.0407 18.5324 26.1931 21.1876 26.1931C23.8428 26.1931 25.9953 24.0407 25.9953 21.3854C25.9953 18.7302 23.8428 16.5777 21.1876 16.5777C18.5324 16.5777 16.3799 18.7302 16.3799 21.3854Z" fill="#00A19B" />
+                                            <path fill-rule="evenodd" id="palette-right" name="svg" clip-rule="evenodd" d="M39.5339 27.3917C40.0789 27.8686 40.1341 28.6969 39.6572 29.2419L34.6399 34.976C33.5617 36.2082 31.7047 36.3732 30.4262 35.3504L27.3618 32.8989C26.7963 32.4465 26.7046 31.6214 27.157 31.0559C27.6094 30.4904 28.4345 30.3988 29 30.8511L32.0644 33.3026C32.247 33.4488 32.5123 33.4252 32.6663 33.2492L37.6837 27.515C38.1605 26.9701 38.9889 26.9148 39.5339 27.3917Z" fill="#00A19B" />
                                         </svg>
 
                                     </div>
@@ -54,75 +51,69 @@
                                 <div class="preview-checkout__container">
                                     <div class="preview-checkout__container-menu">
                                         <ul>
-                                            <li id="palette-right" name="color" style="color: rgb(0, 161, 155);">
-                                            <span class="barra" id="palette-right" name="bg"
-                                                  style="background: rgb(0, 161, 155);"></span>
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
+                                            <li id="palette-right" name="color">
+                                                <span class="barra" id="palette-right" name="bg"></span>
+                                                <svg style="width: 20px!important; height: 20px!important" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <g clip-path="url(#clip0_478_2813)">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" id="palette-right"
-                                                              name="svg"
-                                                              d="M3.94475 4.5H16.0552C17.0276 4.5 17.9116 5.38 18 6.436V13.564C18 14.62 17.116 15.5 16.0552 15.5H3.94475C2.88398 15.5 2 14.62 2 13.564V6.436C2 5.38 2.88398 4.5 3.94475 4.5ZM16.0552 5.644H3.94475C3.50276 5.644 3.14917 5.996 3.14917 6.436V6.964H16.8508V6.436C16.8508 5.996 16.4972 5.644 16.0552 5.644ZM3.94475 14.268H16.0552C16.4088 14.268 16.7624 13.916 16.7624 13.564V8.108H3.14917V13.476C3.14917 13.916 3.50276 14.268 3.94475 14.268ZM4.20989 11.892H6.68503V13.036H4.20989V11.892Z"
-                                                              fill="#00A19B"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" id="palette-right" name="svg" d="M3.94475 4.5H16.0552C17.0276 4.5 17.9116 5.38 18 6.436V13.564C18 14.62 17.116 15.5 16.0552 15.5H3.94475C2.88398 15.5 2 14.62 2 13.564V6.436C2 5.38 2.88398 4.5 3.94475 4.5ZM16.0552 5.644H3.94475C3.50276 5.644 3.14917 5.996 3.14917 6.436V6.964H16.8508V6.436C16.8508 5.996 16.4972 5.644 16.0552 5.644ZM3.94475 14.268H16.0552C16.4088 14.268 16.7624 13.916 16.7624 13.564V8.108H3.14917V13.476C3.14917 13.916 3.50276 14.268 3.94475 14.268ZM4.20989 11.892H6.68503V13.036H4.20989V11.892Z" fill="#00A19B"></path>
                                                     </g>
                                                     <defs>
                                                         <clipPath id="clip0_478_2813">
-                                                            <rect width="16" height="11" fill="white"
-                                                                  transform="translate(2 4.5)"/>
+                                                            <rect width="16" height="11" fill="white" transform="translate(2 4.5)"></rect>
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Tarjeta débito / crédito
+                                                Tarjeta débito/crédito
                                             </li>
                                             <li>
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/online-banking.svg"
-                                                     alt="icon">
-                                                Banca móvil o internet
+                                                <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/icons/yape.svg" alt="icon">
+                                                Yape
                                             </li>
                                             <li>
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/agents.svg"
-                                                     alt="icon">
-                                                Agentes y bodegas
-                                            </li>
-                                            <li>
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/banca-movil.svg"
-                                                     alt="icon">
+                                                <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/icons/banca-movil.svg" alt="icon">
 
                                                 Billeteras móviles
                                             </li>
                                             <li>
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/calendar.svg"
-                                                     alt="icon">
+                                                <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/icons/online-banking.svg" alt="icon">
+                                                Banca móvil o internet
+                                            </li>
+                                            <li>
+                                                <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/icons/agents.svg" alt="icon">
+                                                Agentes y bodegas
+                                            </li>
+                                            <li>
+                                                <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/icons/bcp.svg" alt="icon">
                                                 Cuotéalo BCP
                                             </li>
                                         </ul>
                                         <div class="preview-checkout__container-menu-image">
-                                            <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/culqi-black.svg"
-                                                 alt="Culqi logo"/>
+                                            <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/logos/culqi-black.svg" alt="Culqi logo" />
                                         </div>
                                     </div>
                                     <div class="preview-checkout__container-content">
-                    <span class="form-info">
-                      <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/info.svg"
-                           alt="culqi icon"/>
-                      <p>Recuerda activar tu tarjeta para <b>compras por internet.</b></p>
-                    </span>
+                                        <span class="form-info">
+                                            <svg width="15" height="13" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="14.0867" cy="8.22975" r="1.16551" fill="#00A19B" />
+                                                <path fill-rule="evenodd" id="palette-right" name="svg" clip-rule="evenodd" d="M14.0868 3.27637C8.13268 3.27637 3.30588 8.10317 3.30588 14.0573C3.30588 20.0115 8.13268 24.8383 14.0868 24.8383C20.041 24.8383 24.8678 20.0115 24.8678 14.0573C24.8678 8.10317 20.041 3.27637 14.0868 3.27637ZM1.55762 14.0573C1.55762 7.13763 7.16714 1.52811 14.0868 1.52811C21.0065 1.52811 26.6161 7.13763 26.6161 14.0573C26.6161 20.977 21.0065 26.5866 14.0868 26.5866C7.16714 26.5866 1.55762 20.977 1.55762 14.0573ZM12.0472 11.7263C12.0472 11.2435 12.4386 10.8522 12.9213 10.8522H14.0868C14.5696 10.8522 14.961 11.2435 14.961 11.7263V19.8849C14.961 20.3676 14.5696 20.759 14.0868 20.759C13.6041 20.759 13.2127 20.3676 13.2127 19.8849V12.6004H12.9213C12.4386 12.6004 12.0472 12.2091 12.0472 11.7263Z" fill="#00A19B" />
+                                            </svg>
+                                            <p>Recuerda activar tu tarjeta para <b>compras por internet.</b></p>
+                                        </span>
                                         <form class="form">
-                                            <div class="form__row empty dobble">
+                                            <div class="form__row empty dobble" style="margin-top: 15px">
                                                 <div class="form__row__col">
                                                     <div class="form__group">
                                                         <label class="" for="cardNumber">
                                                             Número de Tarjeta
                                                         </label>
                                                         <div class="form__group-input">
-                                                            <input name="cardNumber" value="1234 1234 1234 1234" type="tel"
-                                                                   class="empty">
+                                                            <input name="cardNumber" value="1234 1234 1234 1234" type="tel" class="valid">
                                                             <div class="brand"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form__row middle">
+                                            <div class="form__row middle" style="float: left; width: 50%;">
                                                 <div class="form__row__col left">
                                                     <div class="form__group">
                                                         <label class="" for="cardExp">
@@ -134,7 +125,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form__row middle">
+                                            <div class="form__row middle" style="float: left; width: 50%;">
                                                 <div class="form__row__col right">
                                                     <div class="form__group">
                                                         <label class="" for="cardCVV">
@@ -155,9 +146,10 @@
                                                         <div class="form__group__select">
                                                             <select name="select" id="select" disabled="disabled">
                                                                 <option value="">
-                                                                    0
+                                                                    Sin cuotas
                                                                 </option>
-                                                            </select></div>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,8 +160,7 @@
                                                             Correo Electrónico
                                                         </label>
                                                         <div class="form__group-input">
-                                                            <input name="cardEmail" value="correo@electronico.com"
-                                                                   type="email" class="">
+                                                            <input name="cardEmail" placeholder="correo@electronico.com" type="email" class="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -177,8 +168,7 @@
                                             <div class="form__row dobble">
                                                 <div class="form__row__col">
                                                     <div class="form__group" style="margin-bottom: 0;">
-                                                        <button class="btn btn-green" id="palette-right" name="bg"
-                                                                style="background-color:#00A19B; color: #FFFFFF;">
+                                                        <button class="btn btn-green opacity" id="palette-right" name="bg">
                                                             Pagar S/ 350.00
                                                         </button>
                                                     </div>
@@ -197,75 +187,58 @@
                                     <div class="iso-logo">
                                         <div class="iso-logo__item">
                                             <div class="check">
-                                                <svg width="9" height="8" viewBox="0 0 9 8" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.55361L3.53289 6L8 1" stroke="white" stroke-width="1.4"
-                                                          stroke-linecap="round"/>
+                                                <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.55361L3.53289 6L8 1" stroke="white" stroke-width="1.4" stroke-linecap="round" />
                                                 </svg>
 
                                             </div>
                                             <div class="image">
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/brand.svg"
-                                                     alt="logo">
+                                                <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/brand.svg" alt="logo">
                                             </div>
                                         </div>
                                         <div class="iso-logo__item">
                                             <div class="check">
-                                                <svg width="9" height="8" viewBox="0 0 9 8" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 3.55361L3.53289 6L8 1" stroke="white" stroke-width="1.4"
-                                                          stroke-linecap="round"/>
+                                                <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 3.55361L3.53289 6L8 1" stroke="white" stroke-width="1.4" stroke-linecap="round" />
                                                 </svg>
 
                                             </div>
                                             <div class="image">
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/brand-culqi.svg"
-                                                     alt="logo">
+                                                <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/brand-culqi.svg" alt="logo">
                                             </div>
                                         </div>
                                         <div class="iso-logo__item">
                                             <div class="errorlogo">
-                                                <svg width="7" height="7" viewBox="0 0 7 7" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 1L6 6" stroke="white" stroke-width="1.4"
-                                                          stroke-linecap="round"/>
-                                                    <path d="M6 1L1 6" stroke="white" stroke-width="1.4"
-                                                          stroke-linecap="round"/>
+                                                <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 1L6 6" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                    <path d="M6 1L1 6" stroke="white" stroke-width="1.4" stroke-linecap="round" />
                                                 </svg>
                                             </div>
                                             <div class="image">
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/bran-culqi-bg.svg"
-                                                     alt="logo">
+                                                <img src="https://culqi-static-files.s3.amazonaws.com/v4/v4-checkout/bran-culqi-bg.svg" alt="logo">
                                             </div>
                                         </div>
 
                                     </div>
                                     <div class="detail-logo">
                                         <li class="detail-logo__list">
-                                            <svg width="9" height="8" viewBox="0 0 9 8" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 3.55361L3.53289 6L8 1" stroke="#5BBC43" stroke-width="1.4"
-                                                      stroke-linecap="round"/>
+                                            <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 3.55361L3.53289 6L8 1" stroke="#5BBC43" stroke-width="1.4" stroke-linecap="round" />
                                             </svg>
 
                                             Isotipo
                                         </li>
                                         <li class="detail-logo__list">
-                                            <svg width="9" height="8" viewBox="0 0 9 8" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 3.55361L3.53289 6L8 1" stroke="#5BBC43" stroke-width="1.4"
-                                                      stroke-linecap="round"/>
+                                            <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 3.55361L3.53289 6L8 1" stroke="#5BBC43" stroke-width="1.4" stroke-linecap="round" />
                                             </svg>
 
                                             En fondo blanco
                                         </li>
                                         <li class="detail-logo__list">
-                                            <svg width="7" height="7" viewBox="0 0 7 7" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L6 6" stroke="#D20808" stroke-width="1.4"
-                                                      stroke-linecap="round"/>
-                                                <path d="M6 1L1 6" stroke="#D20808" stroke-width="1.4"
-                                                      stroke-linecap="round"/>
+                                            <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L6 6" stroke="#D20808" stroke-width="1.4" stroke-linecap="round" />
+                                                <path d="M6 1L1 6" stroke="#D20808" stroke-width="1.4" stroke-linecap="round" />
                                             </svg>
 
                                             Evita fondos de color
@@ -281,9 +254,7 @@
                                         <div class="form__row__col">
                                             <div class="form__group" style="margin-bottom: 0;">
                                                 <div class="form__group-input">
-                                                    <input name="url" id="logo-url"
-                                                           placeholder="https://culqi.image.jpg.com" value="<?php echo esc_html($logo_url) ?>" type="url">
-                                                    <input name="logodefault" id="logodefault" value="<?php echo  FULLCULQI_URL.'resources/assets/images/brand.svg' ?>" type="hidden">
+                                                    <input name="url" id="logo-url" placeholder="https://culqi.image.jpg.com" value="<?php echo $logo_url ?>" type="url">
                                                 </div>
                                                 <label id="label-text" for="url">
                                                     Copia la URL de tu logotipo
@@ -303,7 +274,7 @@
                                         <div class="subtitle">Predeterminado</div>
                                         <div class="color-palette">
                                             <div class="color-palette__item">
-                                                <input type="radio" checked name="color-palette" id="141414-00a19b">
+                                                <input type="radio" checked name="color-palette" class="colorPreviewDefault" id="141414-00a19b">
                                                 <label for="141414-00a19b">
                                                     <div class="color-container">
                                                         <div class="color-container__left"></div>
@@ -429,21 +400,18 @@
                                     </div>
 
                                     <div class="personalize-color__content-item">
-                    <span class="action-visible">
-                      <svg width="9" height="5" viewBox="0 0 9 5" fill="none" class="action-svg"
-                           xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_478_2514)">
-                          <path d="M1.61794 4.64227L0.913939 3.94377L4.49994 0.357773L8.08594 3.93827L7.38744 4.64227L4.49994 1.75477L1.61794 4.64227Z"
-                                fill="#3CB4E5"/>
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_478_2514">
-                            <rect width="7.172" height="4.2845" fill="white"
-                                  transform="translate(8.08594 4.64227) rotate(-180)"/>
-                          </clipPath>
-                        </defs>
-                      </svg>
-                      <span class="action-visible-text">Ver más combinaciones</span></span>
+                                        <span class="action-visible">
+                                            <svg width="9" height="5" viewBox="0 0 9 5" fill="none" class="action-svg" xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_478_2514)">
+                                                    <path d="M1.61794 4.64227L0.913939 3.94377L4.49994 0.357773L8.08594 3.93827L7.38744 4.64227L4.49994 1.75477L1.61794 4.64227Z" fill="#3CB4E5" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_478_2514">
+                                                        <rect width="7.172" height="4.2845" fill="white" transform="translate(8.08594 4.64227) rotate(-180)" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            <span class="action-visible-text">Ver más combinaciones</span></span>
                                         <div class="action-container">
                                             <div class="subtitle">Colores complementarios</div>
                                             <div class="color-palette">
@@ -537,10 +505,15 @@
     </div>
 </div>
 <script type="text/javascript">
-    jQuery(document).ready(function(){
+    jQuery(document).ready(function() {
         jQuery('#<?php echo str_replace('#', '', $color_palette) ?>').click();
-        if(document.querySelector('#logo-url').value!=''){
-            document.querySelector('#logo').src=document.querySelector('#logo-url').value;
+        if (document.querySelector('#logo-url').value != '') {
+            document.querySelector('#logo').src = document.querySelector('#logo-url').value;
         }
+    });
+</script>
+<script type="text/javascript" defer>
+    jQuery(document).ready(function() {
+        previewCustomFunction('<?php echo str_replace('#', '', $color_palette) ?>', '<?php echo str_replace('#', '', $logo_url) ?>')
     });
 </script>
