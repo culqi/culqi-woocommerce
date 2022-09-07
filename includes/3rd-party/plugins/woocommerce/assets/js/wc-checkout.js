@@ -38,7 +38,6 @@ window.addEventListener("message", async function (event) {
 		}
 	}
 }, false );
-// GENERAR DEVICE ID (INVOCAR APENAS SE DE AL BOTON PAGAR Y ABRA EL CULQI CHECKOUT)
 Culqi3DS.publicKey = fullculqi_vars.public_key;
 var device = await Culqi3DS.generateDevice();
 
@@ -57,10 +56,8 @@ var device = await Culqi3DS.generateDevice();
 
 		init: function () {
 
-			// Document ready
 			$(document).ready(FullCulqi.ready);
 
-			// Page load
 			$(window).on('load', FullCulqi.load);
 
 		},
@@ -79,7 +76,6 @@ var device = await Culqi3DS.generateDevice();
 		 * @since 2.0.0
 		 */
 		load: function () {
-			// Bind all actions.
 			FullCulqi.bindUIActions();
 		},
 
@@ -103,10 +99,7 @@ var device = await Culqi3DS.generateDevice();
 			
 			$('#fullculqi_button').on('click', function (e) {
 				e.preventDefault();
-				//console.log('antes moodal');
-				//console.log(bindUIActions);
 				FullCulqi.openModal();
-				//console.log('abrio moodal');
 			});
 		},
 		/**
@@ -121,7 +114,6 @@ var device = await Culqi3DS.generateDevice();
 		 * @return mixed
 		 */
 		setSettings: function() {
-			//console.log('fullculqi_vars:::', fullculqi_vars);
 			Culqi.publicKey = fullculqi_vars.public_key;
 			let args_settings = {
 				title: fullculqi_vars.commerce,
@@ -165,17 +157,9 @@ var device = await Culqi3DS.generateDevice();
 				priceColor: '', // hexadecimal
 				logo: 'http://www.childrensociety.ms/wp-content/uploads/2019/11/MCS-Logo-2019-no-text.jpg'
 			}
-			
-			// Check the installments option
-			//if( fullculqi_vars.installments == 'yes' ) {
+
 			args_options.installments = true;
-			//}
-			// Check the logo option
-			if( fullculqi_vars.url_logo.length > 0 ) {
 				args_options.style.logo = fullculqi_vars.url_logo;
-			}else{
-				args_options.style.logo = 'https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/brand.svg';
-			}
 			if(fullculqi_vars.color_palette.length > 0 ){
 				var colors = fullculqi_vars.color_palette.split('-');
 				args_options.style.bannerColor=colors[0];
@@ -231,7 +215,6 @@ var device = await Culqi3DS.generateDevice();
 				});
 			});
 
-			// Ajax Complete
 			$( document ).ajaxComplete( function() {
 				$('#page').waitMe('hide');
 			});
@@ -258,7 +241,6 @@ var device = await Culqi3DS.generateDevice();
 				$('#fullculqi_notify').addClass('woocommerce-error').html( Culqi.error.merchant_message );
 			} else {
 				console.log('device:::::::'+device);
-
 				let data;
 				var enviroment = fullculqi_vars.enviroment.split('|');
 				if( Culqi.order ) {
@@ -274,7 +256,7 @@ var device = await Culqi3DS.generateDevice();
 
 				} else if( Culqi.token ) {
 					Culqi.close();
-					jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div></div>');
+					jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando <img style="display: inline-block" width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div></div>');
 					data = {
 						action 			: 'charge',
 						token_id		: Culqi.token.id,
@@ -286,7 +268,6 @@ var device = await Culqi3DS.generateDevice();
 						device			: device
 					};
 				}
-				//console.log('Proceso de pago');
 				FullCulqi.loadAjax( data );
 			}
 		},
@@ -296,7 +277,7 @@ var device = await Culqi3DS.generateDevice();
 				$('#fullculqi_notify').addClass('woocommerce-error').html( Culqi.error.merchant_message );
 			} else {
 				console.log('device:::::::'+device);
-				jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div></div>');
+				jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando <img style="display: inline-block" width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div></div>');
 				let data;
 				var enviroment = fullculqi_vars.enviroment.split('|');
 				if( Culqi.order ) {
@@ -334,8 +315,6 @@ var device = await Culqi3DS.generateDevice();
 		 * @return mixed
 		 */
 		loadAjax: function( post_data ) {
-			//console.log(post_data);
-			//alert(fullculqi_vars.url_actions);
 			$.ajax({
 				url 		: fullculqi_vars.url_actions,
 				type 		: 'POST',
@@ -343,12 +322,9 @@ var device = await Culqi3DS.generateDevice();
 				data 		: post_data,
 
 				success: function( response ) {
-					//alert(1);
 					$( document.body ).trigger('fullculqi.checkout.success', [ post_data, response ]);
 					console.log(response);
-					//alert(fullculqi_vars.url_success);
 					if( response.success ) {
-						//alert(2);
 						var enviroment = fullculqi_vars.enviroment.split('|');
 						$('#fullculqi_notify').empty();
 						if(Culqi.token==null){
@@ -359,14 +335,11 @@ var device = await Culqi3DS.generateDevice();
 								}
 							}, 1000);
 						}else{
-							//alert(3);
 							console.log(response);
-							//alert('stop');
 							location.href = fullculqi_vars.url_success;
 						}
 
 					} else {
-						//alert(4);
 						console.log(response);
 						Culqi.close();
 						if(response.data.message!='' && response.data.message!=null){
@@ -408,7 +381,6 @@ var device = await Culqi3DS.generateDevice();
 		},
 		loadAjax3DS: function( post_data ) {
 			console.log('enviando al cargo con 3DS');
-			//jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; padding: 25% 0; color: white; font-size: 14px">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div>');
 			console.log(post_data);
 			$.ajax({
 				url 		: fullculqi_vars.url_actions,
@@ -451,7 +423,6 @@ var device = await Culqi3DS.generateDevice();
 	};
 
 	FullCulqi.init();
-	// Add to global scope.
 	console.log('device:::'+device);
 	window.fullculqi = FullCulqi;
 	window.load = FullCulqi.load();
@@ -460,6 +431,5 @@ var device = await Culqi3DS.generateDevice();
 
 
 function culqi() {
-	//window.fullculqi.generateToken();
 	window.fullculqi.payProcess();
 }

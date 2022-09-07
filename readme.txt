@@ -1,10 +1,10 @@
 === Culqi Integracion ===
-Contributors: gonzalesc
+Contributors: jysenp
 Tags: culqi, full integration, payment method, peru, woocommerce
 Donate link: https://www.paypal.me/letsgodev
 Requires at least: 5.6
 Tested up to: 5.7.2
-Stable tag: 5.6
+Stable tag: 3.0.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -150,6 +150,10 @@ Necesitamos validar si el servicio de Culqi está disponible, para ello te sugie
 
 
 == Changelog ==
+
+= 3.0.0 =
+* Feature: Checkout Culqi V4
+* Feature: 3DS
 
 = 2.0.4 =
 * Fix: check if the product class exists

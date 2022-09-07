@@ -16,10 +16,10 @@ if ( ! defined( 'ABSPATH' ) )
 		<?php foreach($payment_log as $log) : ?>
 			<?php if( empty($log) ) continue; ?>
 			<tr>
-				<td><?php echo $i++; ?></td>
-				<td><?php echo $log['dateh']; ?></td>
-				<td><?php echo $log['type']; ?></td>
-				<td><?php echo $log['message']; ?></td>
+				<td><?php echo esc_html($i++); ?></td>
+				<td><?php echo esc_html($log['dateh']); ?></td>
+				<td><?php echo esc_html($log['type']); ?></td>
+				<td><?php echo esc_html($log['message']); ?></td>
 			</tr>
 		<?php endforeach; ?>
 		</tbody>

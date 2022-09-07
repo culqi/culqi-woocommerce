@@ -38,17 +38,17 @@
 				</td></tr>
 
 			<?php else : ?>
-					
+
 				<?php foreach( $webhook_list as $webhook ) : ?>
 					<tr>
-						<td><?php echo $webhook['creation_date']; ?></td>
-						<td><?php echo $webhook['event_id']; ?></td>
-						<td><?php echo $webhook['event_name']; ?></td>
-						<td><?php echo $webhook['data_id']; ?></td>
-						<td><?php echo $webhook['data_description']; ?></td>
+						<td><?php echo esc_html($webhook['creation_date']); ?></td>
+						<td><?php echo esc_html($webhook['event_id']); ?></td>
+						<td><?php echo esc_html($webhook['event_name']); ?></td>
+						<td><?php echo esc_html($webhook['data_id']); ?></td>
+						<td><?php echo esc_html($webhook['data_description']); ?></td>
 					</tr>
 				<?php endforeach; ?>
-					
+
 			<?php endif; ?>
 		</tbody>
 	</table>

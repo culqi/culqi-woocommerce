@@ -11,19 +11,19 @@
 			<ul>
 				<li>
 					<b><?php esc_html_e( 'Email', 'fullculqi' ); ?> : </b>
-					<?php echo $email; ?>
+					<?php echo esc_html($email); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'First Name', 'fullculqi' ); ?> : </b>
-					<?php echo $first_name; ?>
+					<?php echo esc_html($first_name); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Last Name', 'fullculqi' ); ?> : </b>
-					<?php echo $last_name; ?>
+					<?php echo esc_html($last_name); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Creation', 'fullculqi' ); ?> : </b>
-					<?php echo $creation; ?>
+					<?php echo esc_html($creation); ?>
 				</li>
 			</ul>
 		</div>
@@ -31,19 +31,19 @@
 			<ul>
 				<li>
 					<b><?php esc_html_e( 'Address', 'fullculqi' ); ?> : </b>
-					<?php echo $address; ?>
+					<?php echo esc_html($address); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'City', 'fullculqi' ); ?> : </b>
-					<?php echo $city; ?>
+					<?php echo esc_html($city); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Country', 'fullculqi' ); ?> : </b>
-					<?php echo $country; ?>
+					<?php echo esc_html($country); ?>
 				</li>
 				<li>
 					<b><?php esc_html_e( 'Phone', 'fullculqi' ); ?> : </b>
-					<?php echo $phone; ?>
+					<?php echo esc_html($phone); ?>
 				</li>
 			</ul>
 		</div>

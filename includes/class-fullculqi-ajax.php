@@ -43,9 +43,9 @@ class FullCulqi_Ajax {
 	 */
 
 	 public function get_merchants() {
-		 $token = $_GET['token'];
+		 $token = esc_html($_GET['token']);
 		 // Run a security check.
-		 $url_get_merchants = $_GET['url_merchant'];
+		 $url_get_merchants = esc_html($_GET['url_merchant']);
 
 			$args = array(
 					'method'        => 'GET',
@@ -66,10 +66,10 @@ class FullCulqi_Ajax {
 	 }
 
 	 public function get_merchant() {
-		 $token = $_GET['token'];
-         $url_get_merchant = $_GET['url_merchant'];
+		 $token = esc_html($_GET['token']);
+         $url_get_merchant = esc_html($_GET['url_merchant']);
 
-		 $public_key = $_GET['public_key'];
+		 $public_key = esc_html($_GET['public_key']);
 
 		 $url_get_merchant_info = $url_get_merchant . $public_key;
 
@@ -183,7 +183,7 @@ class FullCulqi_Ajax {
 			wp_send_json_error( esc_html( 'You do not have permission.', 'fullculqi_subs' ) );
 
 		$result = FullCulqi_Charges::delete_wpposts();
-		
+
 		if( $result )
 			wp_send_json_success();
 		else
@@ -205,7 +205,7 @@ class FullCulqi_Ajax {
 			wp_send_json_error( esc_html( 'You do not have permission.', 'fullculqi_subs' ) );
 
 		$result = FullCulqi_Orders::delete_wpposts();
-		
+
 		if( $result )
 			wp_send_json_success();
 		else
@@ -227,7 +227,7 @@ class FullCulqi_Ajax {
 			wp_send_json_error( esc_html( 'You do not have permission.', 'fullculqi_subs' ) );
 
 		$result = FullCulqi_Customers::delete_wpposts();
-		
+
 		if( $result )
 			wp_send_json_success();
 		else
