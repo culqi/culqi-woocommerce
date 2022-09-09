@@ -25,13 +25,6 @@ define( 'FULLCULQI_DIR' , plugin_dir_path(__FILE__) );
 define( 'FULLCULQI_URL' , plugin_dir_url(__FILE__) );
 define( 'FULLCULQI_BASE' , plugin_basename( __FILE__ ) );
 
-//define('URLAPI_ORDERCHARGES_INTEG', 'https://dev-api.culqi.xyz/v2');
-//define('URLAPI_CHECKOUT_INTEG', 'https://dev-checkout.culqi.xyz/js/v4');
-//define('URLAPI_LOGIN_INTEG', 'https://integ-panel.culqi.com/user/login');
-//define('URLAPI_MERCHANT_INTEG', 'https://integ-panel.culqi.com/secure/merchant/');
-//define('URLAPI_MERCHANTSINGLE_INTEG', 'https://integ-panel.culqi.com/secure/keys/?merchant=');
-//define('URLAPI_WEBHOOK_INTEG', 'https://dev-panel.culqi.xyz/secure/events');
-
     define('URLAPI_INTEG', 'https://qa-test-panel.culqi.xyz');
     define('URLAPI_PROD', 'https://qa-panel.culqi.xyz');
 

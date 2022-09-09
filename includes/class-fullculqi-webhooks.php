@@ -33,6 +33,14 @@ class FullCulqi_Webhooks {
 
 		$data = json_decode( $input->data );
 
+        if (empty($data->metadata)) {
+            exit("Error: Metadata vacia");
+        }
+
+        if (empty($data->amount) || empty($data->currency_code) || empty($data->state)) {
+            exit("Error: valores de la orden incorrectos");
+        }
+
 		// Webhook History
 		$this->register( $input );
 
