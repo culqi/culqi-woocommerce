@@ -3,7 +3,7 @@ Contributors: Culqi Team
 Tags: culqi, checkout, payment method, peru, woocommerce
 Donate link: https://culqi.com/
 Requires at least: 5.6
-Tested up to: 5.7.2
+Tested up to: 6.0.2
 Stable tag: 3.0.0
 Requires PHP: 5.6
 License: GPLv2 or later
