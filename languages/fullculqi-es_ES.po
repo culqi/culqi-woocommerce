@@ -40,8 +40,8 @@ msgstr "El CIP %s fue pagado"
 #: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:59
 #: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:289
 #, php-format
-msgid "Status changed by FullCulqi (to %s)"
-msgstr "Estado cambiado por FullCulqi (a %s)"
+msgid "Status changed by Culqi Checkout (to %s)"
+msgstr "Estado cambiado por Culqi Checkout (a %s)"
 
 #: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-main.php:149
 #, php-format
