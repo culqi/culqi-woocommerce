@@ -37,8 +37,8 @@ class FullCulqi_Webhooks {
             exit("Error: Metadata vacia");
         }
 
-        if (empty($data->amount) || empty($data->currency_code) || empty($data->state)) {
-            exit("Error: valores de la orden incorrectos");
+        if (empty($data->amount)) {
+            exit("Error: No envió el amount");
         }
 
 		// Webhook History
@@ -46,6 +46,9 @@ class FullCulqi_Webhooks {
 
 		switch( $input->type ) {
             case 'order.status.changed' :
+				if (empty($data->currency_code) || empty($data->state)) {
+					exit("Error: currency_code o state incorrectos");
+				}
                 FullCulqi_Orders::update($data);
                 break;
             case 'refund.creation.succeeded' :
