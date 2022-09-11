@@ -4,10 +4,10 @@ Plugin Name: Culqi Checkout
 Plugin URI:https://wordpress.org/plugins/wp-culqi-integration
 Description: Culqi acepta pago con tarjetas, pagoefectivo, billeteras móviles y cuotéalo desde tu tienda virtual.
 Version: 3.0.0
-Author: Purpura Lab
-Author URI: https://www.purpura.pe/
+Author: Culqi
+Author URI: https://culqi.com/
 Developer: Juan Ysen
-Developer URI: https://www.purpura.pe/
+Developer URI: https://culqi.com/
 Text Domain: culqi, woocommerce, method payment
 Requires at least: 5.0
 Tested up to: 6.0
