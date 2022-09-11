@@ -254,7 +254,7 @@ msgstr "no hay logs registrados"
 
 #: admin/layouts/metaboxes/metabox_payment_basic.php:8
 #, php-format
-msgid "Payment via FullCulqi. Paid on %s. Customer IP: %s"
+msgid "Payment via Culqi. Paid on %s. Customer IP: %s"
 msgstr "Pago via Culqi. Pagado en %s. IP del cliente: %s"
 
 #: admin/layouts/metaboxes/metabox_payment_basic.php:12
@@ -764,7 +764,7 @@ msgstr "Cancelar"
 #~ msgid "Customer ID : %s"
 #~ msgstr "Cliente ID : %s"
 
-#~ msgid "Customer via FullCulqi: %s"
+#~ msgid "Customer via Culqi: %s"
 #~ msgstr "Cliente via Culqi: %s"
 
 #~ msgid "Cards"

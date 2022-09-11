@@ -40,8 +40,8 @@ msgstr "El CIP %s fue pagado"
 #: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:59
 #: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:289
 #, php-format
-msgid "Status changed by FullCulqi (to %s)"
-msgstr "Estado cambiado por FullCulqi (a %s)"
+msgid "Status changed by Culqi Checkout (to %s)"
+msgstr "Estado cambiado por Culqi Checkout (a %s)"
 
 #: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-main.php:149
 #, php-format
@@ -830,8 +830,8 @@ msgstr "Culqi ID : %s"
 
 #: resources/layouts/admin/metaboxes/charge_basic.php:6
 #, php-format
-msgid "Charge via FullCulqi. Paid on %s. Customer IP: %s"
-msgstr "Cargo via FullCulqi. Pagado en %s. IP del cliente: %s"
+msgid "Charge via Culqi Checkout. Paid on %s. Customer IP: %s"
+msgstr "Cargo via Culqi Checkout. Pagado en %s. IP del cliente: %s"
 
 #: resources/layouts/admin/metaboxes/charge_basic.php:12
 msgid "Charge Data"
@@ -884,8 +884,8 @@ msgstr "Cliente ID : %s"
 
 #: resources/layouts/admin/metaboxes/customer_basic.php:6
 #, php-format
-msgid "Customer via FullCulqi: %s"
-msgstr "Cliente via Culqi: %s"
+msgid "Customer via Culqi Checkout: %s"
+msgstr "Cliente via Culqi Checkout: %s"
 
 #: resources/layouts/admin/metaboxes/customer_basic.php:33
 msgid "Address"
@@ -909,8 +909,8 @@ msgstr "No hay tarjetas"
 
 #: resources/layouts/admin/metaboxes/order_basic.php:6
 #, php-format
-msgid "Created via FullCulqi on %s."
-msgstr "Creado via FullCulqi en %s."
+msgid "Created via Culqi Checkout on %s."
+msgstr "Creado via Culqi Checkout en %s."
 
 #: resources/layouts/admin/metaboxes/order_basic.php:12
 msgid "Order Data"

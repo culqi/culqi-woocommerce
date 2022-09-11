@@ -37,8 +37,8 @@ class FullCulqi_Webhooks {
             exit("Error: Metadata vacia");
         }
 
-        if (empty($data->amount) || empty($data->currency_code) || empty($data->state)) {
-            exit("Error: valores de la orden incorrectos");
+        if (empty($data->amount)) {
+            exit("Error: No envió el amount");
         }
 
 		// Webhook History
@@ -46,9 +46,15 @@ class FullCulqi_Webhooks {
 
 		switch( $input->type ) {
             case 'order.status.changed' :
+				if (empty($data->id) || empty($data->order_number) || empty($data->currency_code) || empty($data->state)) {
+					exit("Error: order_id, order_number, currency_code o state vacios");
+				}
                 FullCulqi_Orders::update($data);
                 break;
             case 'refund.creation.succeeded' :
+				if (empty($data->chargeId)) {
+					exit("Error: No envió el chargeId");
+				}
                 $order_id = fullculqi_post_from_meta('_culqi_charge_id', $data->chargeId);
                 $charge_id = fullculqi_post_from_meta('culqi_id', $data->chargeId);
 
@@ -68,7 +74,7 @@ class FullCulqi_Webhooks {
 
                 $order->update_status('refunded',
                     sprintf(
-                        esc_html__('Status changed by FullCulqi (to %s)', 'fullculqi'),'refund'
+                        esc_html__('Status changed by Culqi (to %s)', 'fullculqi'),'refund'
                     )
                 );
                 fullculqi_update_post_meta('culqi_status', $charge_id, 'refunded');
