@@ -113,7 +113,7 @@
 }
 
 .customcheckout select:disabled {
-  background-color: none !important;
+  background: none !important;
   border-color: transparent !important;
 }
 
