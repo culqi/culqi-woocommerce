@@ -53,7 +53,7 @@
 				$title_action = $('.edit-php .wrap .wp-heading-inline');
 
 			$title_action.after(
-				'<a href="" id ="' +
+				'<a style="display: none" href="" id ="' +
 				fullculqi_vars.sync_id +
 				'" class="page-title-action" data-record="50">' +
 				'<span class="dashicons dashicons-update-alt" style="vertical-align:middle"></span> ' +

@@ -162,7 +162,7 @@ class FullCulqi_Orders {
 	 * @param  object $culqi_order
 	 * @return mixed
 	 */
-	public static function update( $culqi_order ) {
+	public static function update( $culqi_order, $wh = 0) {
 
 		if( ! isset( $culqi_order->id ) )
 			return;
@@ -170,8 +170,14 @@ class FullCulqi_Orders {
 		//$cip_code = trim( $culqi_order->payment_code );
 		$post_id = fullculqi_post_from_meta( 'culqi_id', $culqi_order->id );
 
-		if( ! empty( $post_id ) )
-			$post_id = self::create_wppost( $culqi_order, $post_id );
+		if($wh>0){
+            if( ! empty( $post_id ) )
+                $post_id = self::create_wppost_wh( $culqi_order, $post_id );
+        }else{
+            if( ! empty( $post_id ) )
+                $post_id = self::create_wppost( $culqi_order, $post_id );
+        }
+
 
 		do_action( 'fullculqi/orders/update', $culqi_order );
 	}
@@ -268,6 +274,92 @@ class FullCulqi_Orders {
 
 		return $post_id;
 	}
+
+    public static function create_wppost_wh( $culqi_order, $post_id = 0 ) {
+
+        if( empty( $post_id ) ) {
+
+            // Create Post
+            $args = [
+                'post_title'	=> $culqi_order->id,
+                'post_type'		=> 'culqi_orders',
+                'post_status'	=> 'publish',
+            ];
+
+            $post_id = wp_insert_post( $args );
+        }
+
+        $amount = round( $culqi_order->amount/100, 2 );
+
+        update_post_meta( $post_id, 'culqi_id', $culqi_order->id );
+        //update_post_meta( $post_id, 'culqi_data', $culqi_order );
+        update_post_meta( $post_id, 'culqi_status', $culqi_order->state );
+        update_post_meta( $post_id, 'culqi_status_date', date('Y-m-d H:i:s') );
+
+        // CIP CODE
+        $culqi_cip = '';
+        if( ! empty( $culqi_order->payment_code ) )
+            $culqi_cip = $culqi_order->payment_code;
+        elseif( isset( $culqi_order->metadata->cip_code ) )
+            $culqi_cip = $culqi_order->metadata->cip_code;
+
+        //update_post_meta( $post_id, 'culqi_cip', $culqi_cip );
+
+        //update_post_meta( $post_id, 'culqi_creation_date', fullculqi_convertToDate( $culqi_order->creation_date ) );
+
+        $basic = [
+            'culqi_expiration'		=> fullculqi_convertToDate( $culqi_order->expiration_date ),
+            'culqi_amount'			=> $amount,
+            'culqi_currency'		=> $culqi_order->currency_code,
+        ];
+
+        //update_post_meta( $post_id, 'culqi_basic', $basic );
+
+        // Metavalues
+        if( isset( $culqi_order->metadata ) && ! empty( $culqi_order->metadata ) )
+            //update_post_meta( $post_id, 'culqi_metadata', $culqi_order->metadata );
+
+        // Customers
+        $customer = [
+            'post_id'	=> 0,
+            'culqi_email'		=> '',
+            'culqi_first_name'	=> '',
+            'culqi_last_name'	=> '',
+            'culqi_city'		=> '',
+            'culqi_country'		=> '',
+            'culqi_phone'		=> '',
+        ];
+
+        // Save customer
+        if( isset( $culqi_order->metadata->post_customer_id ) )
+            $customer[ 'post_id' ] = $culqi_order->metadata->post_customer_id;
+
+        if( isset( $culqi_order->metadata->customer_email ) )
+            $customer[ 'culqi_email' ] = $culqi_order->metadata->customer_email;
+
+        if( isset( $culqi_order->metadata->customer_first ) )
+            $customer[ 'culqi_first_name' ] = $culqi_order->metadata->customer_first;
+
+        if( isset( $culqi_order->metadata->customer_last ) )
+            $customer[ 'culqi_last_name' ] = $culqi_order->metadata->customer_last;
+
+        if( isset( $culqi_order->metadata->customer_city ) )
+            $customer[ 'culqi_city' ] = $culqi_order->metadata->customer_city;
+
+        if( isset( $culqi_order->metadata->customer_country ) )
+            $customer[ 'culqi_country' ] = $culqi_order->metadata->customer_country;
+
+        if( isset( $culqi_order->metadata->customer_phone ) )
+            $customer[ 'culqi_phone' ] = $culqi_order->metadata->customer_phone;
+
+        // Customer
+        //update_post_meta( $post_id, 'culqi_customer', $customer );
+
+
+        do_action( 'fullculqi/orders/wppost', $culqi_order, $post_id );
+
+        return $post_id;
+    }
 
 	/**
 	 * Delete Posts

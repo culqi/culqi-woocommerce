@@ -47,7 +47,7 @@ class FullCulqi_WC_Admin {
 
 		add_meta_box(
 			'fullculqi_payment_log',
-			esc_html__( 'FullCulqi Logs', 'fullculqi' ),
+			esc_html__( 'Culqi Logs', 'fullculqi' ),
 			[ $this, 'metabox_log' ],
 			'shop_order',
 			'normal',
@@ -126,7 +126,7 @@ class FullCulqi_WC_Admin {
 		$args = [
 			'order_id' => get_post_meta( $post_id, 'culqi_wc_order_id', true ),
 		];
-		
+
 		fullculqi_get_template( 'layouts/charge_basic.php', $args, FULLCULQI_WC_DIR );
 	}
 
@@ -214,7 +214,7 @@ class FullCulqi_WC_Admin {
 
 		if( ! $order )
 			return $args;
-		
+
 		$args['metadata']['order_id'] = $order->get_id();
 		$args['metadata']['order_key'] = $order->get_order_key();
 
@@ -324,7 +324,7 @@ class FullCulqi_WC_Admin {
 				update_post_meta( $order->get_id(), '_culqi_cip', $culqi_cip );
 				delete_post_meta( $order->get_id(), 'culqi_cip', $culqi_cip );
 			}
-				
+
 		}
 
 	}

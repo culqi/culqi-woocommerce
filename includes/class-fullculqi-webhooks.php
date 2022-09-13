@@ -49,7 +49,7 @@ class FullCulqi_Webhooks {
 				if (empty($data->id) || empty($data->order_number) || empty($data->currency_code) || empty($data->state)) {
 					exit("Error: order_id, order_number, currency_code o state vacios");
 				}
-                FullCulqi_Orders::update($data);
+                FullCulqi_Orders::update($data, 1);
                 break;
             case 'refund.creation.succeeded' :
 				if (empty($data->chargeId)) {
