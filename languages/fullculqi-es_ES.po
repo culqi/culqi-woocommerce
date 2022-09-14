@@ -16,8 +16,8 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-admin.php:49
-msgid "FullCulqi Logs"
-msgstr "Logs de FullCulqi"
+msgid "Culqi Logs"
+msgstr "Logs de Culqi"
 
 #: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-admin.php:84
 msgid "WC Order"

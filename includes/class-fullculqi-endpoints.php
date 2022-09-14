@@ -73,7 +73,9 @@ class FullCulqi_Endpoints {
 
 			// Done, clear buffer and exit.
 			ob_end_clean();
-			die( '-1' );
+			$array = array('sucess'=>true);
+			echo json_encode($array);
+			die();
 		}
 	}
 }

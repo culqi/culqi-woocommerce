@@ -7,7 +7,7 @@
         <a href="admin.php?page=fullculqi_settings" class="nav-tab nav-tab-active">Settings</a>
         <a href="edit.php?post_type=culqi_charges" class="nav-tab">Charges</a>
         <a href="edit.php?post_type=culqi_orders" class="nav-tab">Orders</a>
-        <a href="edit.php?post_type=culqi_customers" class="nav-tab">Customers</a>
+        <a style="display: none" href="edit.php?post_type=culqi_customers" class="nav-tab">Customers</a>
         <a href="admin.php?page=fullculqi_webhooks" class="nav-tab">Webhooks</a>
     </nav>
     <?php
