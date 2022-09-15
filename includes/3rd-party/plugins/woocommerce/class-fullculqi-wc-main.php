@@ -145,7 +145,7 @@ class FullCulqi_WC {
 
 					$order->update_status( 'processing',
 						sprintf(
-							esc_html__( 'Status changed by FullCulqi (to %s)', 'fullculqi' ),
+							esc_html__( 'Status changed (to %s)', 'fullculqi' ),
 							$method['status_success']
 						)
 					);
