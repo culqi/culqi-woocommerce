@@ -6,6 +6,9 @@
     <input  id="fullculqi_methods_bancaMovil" name="fullculqi_options[methods][bancaMovil]" <?php echo ($methods['bancaMovil'] == 'yes') ? 'checked' : '' ; ?> type="checkbox" value="yes"> Banca móvil o internet
   </div>
   <div>
+    <input  id="fullculqi_methods_yape" name="fullculqi_options[methods][yape]" <?php echo ($methods['yape'] == 'yes') ? 'checked' : '' ; ?> type="checkbox" value="yes"> Yape
+  </div>
+  <div>
     <input  id="fullculqi_methods_agents" name="fullculqi_options[methods][agente]" <?php echo ($methods['agente'] == 'yes') ? 'checked' : '' ; ?> type="checkbox" value="yes"> Agentes y bodegas
   </div>
   <div>
