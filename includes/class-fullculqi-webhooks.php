@@ -74,7 +74,7 @@ class FullCulqi_Webhooks {
 
                 $order->update_status('refunded',
                     sprintf(
-                        esc_html__('Status changed by Culqi (to %s)', 'fullculqi'),'refund'
+                        esc_html__('Estado cambiado (a %s)', 'fullculqi'),'refund'
                     )
                 );
                 fullculqi_update_post_meta('culqi_status', $charge_id, 'refunded');
