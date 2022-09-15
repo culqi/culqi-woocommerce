@@ -67,7 +67,7 @@ class FullCulqi_WC_Process {
 		// Status Orders
 		$order->update_status( $method['multi_status'],
 			sprintf(
-				esc_html__( 'Estado cambiado (to %s)', 'fullculqi' ),
+				esc_html__( 'Estado cambiado (a %s)', 'fullculqi' ),
 				$method['multi_status']
 			)
 		);
@@ -379,7 +379,7 @@ class FullCulqi_WC_Process {
 			$status = apply_filters( 'fullculqi/process/change_status', [
 				'name'	=> $method['status_success'],
 				'note'	=> sprintf(
-					esc_html__( 'Estado cambiado (to %s)', 'fullculqi' ),
+					esc_html__( 'Estado cambiado (a %s)', 'fullculqi' ),
 					$method['status_success']
 				),
 			], $order );
