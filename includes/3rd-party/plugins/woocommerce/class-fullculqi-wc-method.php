@@ -306,9 +306,10 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 					'total'			=> fullculqi_format_total( $order->get_total() ),
 					'methods'		=> [
                             'tarjeta'		=>	(isset($settings['methods']['tarjeta']) and $settings['methods']['tarjeta']!='0') ? true : false,
+							'yape'			=>	(isset($settings['methods']['yape']) and $settings['methods']['yape']!='0') ? true : false,
+							'billetera'		=>	(isset($settings['methods']['billetera']) and $settings['methods']['billetera']!='0') ? true : false,
                             'bancaMovil'	=>	(isset($settings['methods']['bancaMovil']) and $settings['methods']['bancaMovil']!='0') ? true : false,
                             'agente'		=>	(isset($settings['methods']['agente']) and $settings['methods']['agente']!='0') ? true : false,
-                            'billetera'		=>	(isset($settings['methods']['billetera']) and $settings['methods']['billetera']!='0') ? true : false,
                             'cuetealo'		=>	(isset($settings['methods']['cuetealo']) and $settings['methods']['cuetealo']!='0') ? true : false,
 					],
 					'msg_fail'		=> sanitize_text_field( $this->msg_fail ),
