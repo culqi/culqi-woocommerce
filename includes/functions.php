@@ -28,9 +28,10 @@ function fullculqi_get_default() {
 		'logo_url'			=> '',
 		'methods'			=> [
 			'tarjeta'  		=>  '0',
+			'yape'			=>  '0',
+			'billetera'  	=>  '0',
 			'bancaMovil'	=>  '0',
 			'agente'  		=>  '0',
-			'billetera'  	=>  '0',
 			'cuetealo'  	=>  '0'
 		],
 		'time_expiration'  	=> '',

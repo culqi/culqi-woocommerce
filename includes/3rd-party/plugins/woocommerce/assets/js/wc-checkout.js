@@ -141,9 +141,10 @@ var device = await Culqi3DS.generateDevice();
 
 			args_options.paymentMethods = {
 				tarjeta: fullculqi_vars.methods.tarjeta,
+				yape: fullculqi_vars.methods.yape,
+				billetera: fullculqi_vars.methods.billetera,
 				bancaMovil: fullculqi_vars.methods.bancaMovil,
 				agente: fullculqi_vars.methods.agente,
-				billetera: fullculqi_vars.methods.billetera,
 				cuotealo: fullculqi_vars.methods.cuetealo
 			};
 
