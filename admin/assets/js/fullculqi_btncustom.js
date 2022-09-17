@@ -51,7 +51,7 @@ const previewCustomFunction = (insertPalette = '', insertLogo = '') => {
   const btnClose = document.querySelectorAll('#btn-close')
   const btnSave = document.querySelector('#btn-save')
 
-
+/*
   const checkoutPreviewText = {
     labelDefault: 'Copia la URL de tu logotipo',
     logoDefault: 'https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/brand.svg',
@@ -60,6 +60,9 @@ const previewCustomFunction = (insertPalette = '', insertLogo = '') => {
       logoInvalid: 'Imagen no válida'
     }
   }
+*/
+  const logoDefault = logo.src;
+  const labelDefault = 'Copia la URL de tu logotipo';
 
   let styleConfig = {};
   let isEnabledRadio = false,
