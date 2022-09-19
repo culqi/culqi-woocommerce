@@ -223,8 +223,7 @@ class FullCulqi_WC_Process {
 
 			$desc = count( $pnames ) == 0 ? 'Product' : implode(', ', $pnames);
 
-			// Antifraud Customer Data
-			$antifraud_charges = [ 'device_finger_print_id' => $post_data['device'] ];
+
 /*
 			$billing_first_name 	= $order->get_billing_first_name();
 			$billing_last_name 		= $order->get_billing_last_name();
@@ -255,6 +254,16 @@ class FullCulqi_WC_Process {
 */
 			// Metadata Order
 			if (version_compare(WC_VERSION, "2.7", "<")) {
+                // Antifraud Customer Data
+                $antifraud_charges = [
+                    'firt_name'=>$order->billing_first_name,
+                    'last_name'=>$order->billing_last_name,
+                    'address'=>$order->billing_address_1,
+                    'address_city'=>$order->billing_city,
+                    'country_code'=>$order->billing_country,
+                    'phone_number'=>$order->billing_phone,
+                    'device_finger_print_id' => $post_data['device']
+                ];
 			    $metadata_charges = [
     				//'order_id'			=> $post_data['order_id'],
     				'order_number'		=> $order->get_order_number(),
@@ -262,6 +271,7 @@ class FullCulqi_WC_Process {
     				'post_customer'		=> isset( $post_customer_id ) ? $post_customer_id : false,
                     'sponsor'           => 'woocommerce'
     			];
+
     			if(isset($post_data['parameters3DS']) and $post_data['parameters3DS']!==FALSE and !is_null($post_data['parameters3DS']) and is_array($post_data['parameters3DS'])){
                     $args_charges = apply_filters( 'fullculqi/process/charge_args', [
                         'amount'			=> fullculqi_format_total( $order->get_total() ),
@@ -291,6 +301,22 @@ class FullCulqi_WC_Process {
                     ], $order );
                 }
 			}else{
+                $billing_first_name 	= $order->get_billing_first_name();
+                $billing_last_name 		= $order->get_billing_last_name();
+                $billing_address_1 		= $order->get_billing_address_1();
+                $billing_phone 			= $order->get_billing_phone();
+                $billing_city 			= $order->get_billing_city();
+                $billing_country 		= $order->get_billing_country();
+                $antifraud_charges = [
+                    'firt_name'=>$billing_first_name,
+                    'last_name'=>$billing_last_name,
+                    'address'=>$billing_address_1,
+                    'address_city'=>$billing_city,
+                    'country_code'=>$billing_country,
+                    'phone_number'=>$billing_phone,
+                    'device_finger_print_id' => $post_data['device']
+                ];
+                //var_dump($antifraud_charges); exit();
 			    $metadata_charges = [
     				//'order_id'			=> $order->get_id(),
     				'order_number'		=> $order->get_order_number(),
