@@ -927,11 +927,6 @@
   right: 20px;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  /*background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-image: url(https://culqi-static-files.s3.amazonaws.com/v3/v3-checkout/logos/red-service/visa.png);*/
 }
 
 @media screen and (max-width: 782px) {

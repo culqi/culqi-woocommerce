@@ -25,29 +25,29 @@ define( 'FULLCULQI_DIR' , plugin_dir_path(__FILE__) );
 define( 'FULLCULQI_URL' , plugin_dir_url(__FILE__) );
 define( 'FULLCULQI_BASE' , plugin_basename( __FILE__ ) );
 
-    define('URLAPI_INTEG', 'https://qa-test-panel.culqi.xyz');
-    define('URLAPI_PROD', 'https://qa-panel.culqi.xyz');
+define('MPCULQI_URLAPI_INTEG', 'https://qa-test-panel.culqi.xyz');
+define('MPCULQI_URLAPI_PROD', 'https://qa-panel.culqi.xyz');
 
-    define('URLAPI_INTEG_3DS', 'https://3ds-qa.culqi.xyz/');
-    define('URLAPI_PROD_3DS', 'https://3ds-qa.culqi.xyz');
+define('MPCULQI_URLAPI_INTEG_3DS', 'https://3ds-qa.culqi.xyz/');
+define('MPCULQI_URLAPI_PROD_3DS', 'https://3ds-qa.culqi.xyz');
 
-    define('URLAPI_ORDERCHARGES_INTEG', 'https://qa-api.culqi.xyz/v2');
-    define('URLAPI_CHECKOUT_INTEG', 'https://qa-checkout.culqi.xyz/js/v4');
+define('MPCULQI_URLAPI_ORDERCHARGES_INTEG', 'https://qa-api.culqi.xyz/v2');
+define('MPCULQI_URLAPI_CHECKOUT_INTEG', 'https://qa-checkout.culqi.xyz/js/v4');
 
-    define('URLAPI_LOGIN_INTEG', URLAPI_INTEG.'/user/login');
-    define('URLAPI_MERCHANT_INTEG', URLAPI_INTEG.'/secure/merchant/');
-    define('URLAPI_MERCHANTSINGLE_INTEG', URLAPI_INTEG.'/secure/keys/?merchant=');
-    define('URLAPI_WEBHOOK_INTEG', URLAPI_INTEG.'/secure/events');
+define('MPCULQI_URLAPI_LOGIN_INTEG', FULLCULQI_URLAPI_INTEG.'/user/login');
+define('MPCULQI_URLAPI_MERCHANT_INTEG', FULLCULQI_URLAPI_INTEG.'/secure/merchant/');
+define('MPCULQI_URLAPI_MERCHANTSINGLE_INTEG', FULLCULQI_URLAPI_INTEG.'/secure/keys/?merchant=');
+define('MPCULQI_URLAPI_WEBHOOK_INTEG', FULLCULQI_URLAPI_INTEG.'/secure/events');
 
-    define('URLAPI_ORDERCHARGES_PROD', 'https://qa-api.culqi.xyz/v2');
-    define('URLAPI_CHECKOUT_PROD', 'https://qa-checkout.culqi.xyz/js/v4');
+define('MPCULQI_URLAPI_ORDERCHARGES_PROD', 'https://qa-api.culqi.xyz/v2');
+define('MPCULQI_URLAPI_CHECKOUT_PROD', 'https://qa-checkout.culqi.xyz/js/v4');
 
-    define('URLAPI_LOGIN_PROD', URLAPI_PROD.'/user/login');
-    define('URLAPI_MERCHANT_PROD', URLAPI_PROD.'/secure/merchant/');
-    define('URLAPI_MERCHANTSINGLE_PROD', URLAPI_PROD.'/secure/keys/?merchant=');
-    define('URLAPI_WEBHOOK_PROD', URLAPI_PROD.'/secure/events');
+define('MPCULQI_URLAPI_LOGIN_PROD', FULLCULQI_URLAPI_PROD.'/user/login');
+define('MPCULQI_URLAPI_MERCHANT_PROD', FULLCULQI_URLAPI_PROD.'/secure/merchant/');
+define('MPCULQI_URLAPI_MERCHANTSINGLE_PROD', FULLCULQI_URLAPI_PROD.'/secure/keys/?merchant=');
+define('MPCULQI_URLAPI_WEBHOOK_PROD', FULLCULQI_URLAPI_PROD.'/secure/events');
 
-    define('TIME_EXPIRATION_DEFAULT', 24);
+define('TIME_EXPIRATION_DEFAULT', 24);
 
 /**
  * The core plugin class that is used to define internationalization,

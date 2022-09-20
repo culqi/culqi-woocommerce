@@ -43,9 +43,9 @@ class FullCulqi_Ajax {
 	 */
 
 	 public function get_merchants() {
-		 $token = esc_html($_GET['token']);
+		 $token = sanitize_text_field($_GET['token']);
 		 // Run a security check.
-		 $url_get_merchants = esc_html($_GET['url_merchant']);
+		 $url_get_merchants = sanitize_url($_GET['url_merchant']);
 
 			$args = array(
 					'method'        => 'GET',
@@ -66,10 +66,10 @@ class FullCulqi_Ajax {
 	 }
 
 	 public function get_merchant() {
-		 $token = esc_html($_GET['token']);
-         $url_get_merchant = esc_html($_GET['url_merchant']);
+		 $token = sanitize_text_field($_GET['token']);
+         $url_get_merchant = sanitize_url($_GET['url_merchant']);
 
-		 $public_key = esc_html($_GET['public_key']);
+		 $public_key = sanitize_text_field($_GET['public_key']);
 
 		 $url_get_merchant_info = $url_get_merchant . $public_key;
 

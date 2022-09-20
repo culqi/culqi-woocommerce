@@ -156,7 +156,6 @@ var device = await Culqi3DS.generateDevice();
 				linksColor: '#00A19B', // hexadecimal
 				buttontext: '#ffffff', // hexadecimal
 				priceColor: '', // hexadecimal
-				logo: 'http://www.childrensociety.ms/wp-content/uploads/2019/11/MCS-Logo-2019-no-text.jpg'
 			}
 
 			args_options.installments = true;
