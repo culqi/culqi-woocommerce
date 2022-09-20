@@ -34,18 +34,18 @@ define('MPCULQI_URLAPI_PROD_3DS', 'https://3ds-qa.culqi.xyz');
 define('MPCULQI_URLAPI_ORDERCHARGES_INTEG', 'https://qa-api.culqi.xyz/v2');
 define('MPCULQI_URLAPI_CHECKOUT_INTEG', 'https://qa-checkout.culqi.xyz/js/v4');
 
-define('MPCULQI_URLAPI_LOGIN_INTEG', FULLCULQI_URLAPI_INTEG.'/user/login');
-define('MPCULQI_URLAPI_MERCHANT_INTEG', FULLCULQI_URLAPI_INTEG.'/secure/merchant/');
-define('MPCULQI_URLAPI_MERCHANTSINGLE_INTEG', FULLCULQI_URLAPI_INTEG.'/secure/keys/?merchant=');
-define('MPCULQI_URLAPI_WEBHOOK_INTEG', FULLCULQI_URLAPI_INTEG.'/secure/events');
+define('MPCULQI_URLAPI_LOGIN_INTEG', MPCULQI_URLAPI_INTEG.'/user/login');
+define('MPCULQI_URLAPI_MERCHANT_INTEG', MPCULQI_URLAPI_INTEG.'/secure/merchant/');
+define('MPCULQI_URLAPI_MERCHANTSINGLE_INTEG', MPCULQI_URLAPI_INTEG.'/secure/keys/?merchant=');
+define('MPCULQI_URLAPI_WEBHOOK_INTEG', MPCULQI_URLAPI_INTEG.'/secure/events');
 
 define('MPCULQI_URLAPI_ORDERCHARGES_PROD', 'https://qa-api.culqi.xyz/v2');
 define('MPCULQI_URLAPI_CHECKOUT_PROD', 'https://qa-checkout.culqi.xyz/js/v4');
 
-define('MPCULQI_URLAPI_LOGIN_PROD', FULLCULQI_URLAPI_PROD.'/user/login');
-define('MPCULQI_URLAPI_MERCHANT_PROD', FULLCULQI_URLAPI_PROD.'/secure/merchant/');
-define('MPCULQI_URLAPI_MERCHANTSINGLE_PROD', FULLCULQI_URLAPI_PROD.'/secure/keys/?merchant=');
-define('MPCULQI_URLAPI_WEBHOOK_PROD', FULLCULQI_URLAPI_PROD.'/secure/events');
+define('MPCULQI_URLAPI_LOGIN_PROD', MPCULQI_URLAPI_PROD.'/user/login');
+define('MPCULQI_URLAPI_MERCHANT_PROD', MPCULQI_URLAPI_PROD.'/secure/merchant/');
+define('MPCULQI_URLAPI_MERCHANTSINGLE_PROD', MPCULQI_URLAPI_PROD.'/secure/keys/?merchant=');
+define('MPCULQI_URLAPI_WEBHOOK_PROD', MPCULQI_URLAPI_PROD.'/secure/events');
 
 define('TIME_EXPIRATION_DEFAULT', 24);
 
