@@ -370,7 +370,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 				'title'			=> esc_html__( 'Description', 'fullculqi' ),
 				'description'	=> esc_html__( 'Brief description of the payment gateway. This message will be seen by the buyer', 'fullculqi' ),
 				'class'			=> '',
-				'default'		=> 'Culqi acepta pago con tarjetas, pagoefectivo, billeteras móviles y cuotéalo',
+				'default'		=> 'Culqi acepta pagos con tarjeta de crédito/débito y más',
 				'type'			=> 'textarea',
 				'desc_tip'		=> true,
 			],
