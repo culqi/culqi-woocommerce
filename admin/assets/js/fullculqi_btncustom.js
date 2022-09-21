@@ -51,8 +51,14 @@ const previewCustomFunction = (insertPalette = '', insertLogo = '') => {
   const btnClose = document.querySelectorAll('#btn-close')
   const btnSave = document.querySelector('#btn-save')
 
-  const logoDefault = logo.src;
-  const labelDefault = 'Copia la URL de tu logotipo';
+  const checkoutPreviewText = {
+    labelDefault: 'Copia la URL de tu logotipo',
+    logoDefault: logo.src,
+    errors: {
+      logoUrl: 'URL incompleta, falta agregar protocolo https o http',
+      logoInvalid: 'Imagen no válida'
+    }
+  }
 
   let styleConfig = {};
   let isEnabledRadio = false,
