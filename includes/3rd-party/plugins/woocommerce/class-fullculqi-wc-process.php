@@ -227,7 +227,7 @@ class FullCulqi_WC_Process {
 
 			if (version_compare(WC_VERSION, "2.7", "<")) {
                 // Antifraud Customer Data
-                $antifraud_charges = [];
+                $antifraud_charges = array();
 
                 if(isset($order->billing_first_name) and !empty($order->billing_first_name) and !is_null($order->billing_first_name) and $order->billing_first_name!=''){
                     $antifraud_charges['first_name']=$order->billing_first_name;
@@ -294,7 +294,7 @@ class FullCulqi_WC_Process {
                 $billing_phone 			= $order->get_billing_phone();
                 $billing_city 			= $order->get_billing_city();
                 $billing_country 		= $order->get_billing_country();
-                $antifraud_charges = [];
+                $antifraud_charges = array();
 
                 if(isset($billing_first_name) and !empty($billing_first_name) and !is_null($billing_first_name) and $billing_first_name!=''){
                     $antifraud_charges['first_name']=$billing_first_name;
