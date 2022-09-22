@@ -224,46 +224,31 @@ class FullCulqi_WC_Process {
 			$desc = count( $pnames ) == 0 ? 'Product' : implode(', ', $pnames);
 
 
-/*
-			$billing_first_name 	= $order->get_billing_first_name();
-			$billing_last_name 		= $order->get_billing_last_name();
-			$billing_address_1 		= $order->get_billing_address_1();
-			$billing_phone 			= $order->get_billing_phone();
-			$billing_city 			= $order->get_billing_city();
-			$billing_country 		= $order->get_billing_country();
 
-			if( ! empty( $billing_first_name ) )
-				$antifraud_charges['first_name'] = $billing_first_name;
-
-			if( ! empty( $billing_last_name ) )
-				$antifraud_charges['last_name'] = $billing_last_name;
-
-			if( ! empty( $billing_address_1 ) )
-				$antifraud_charges['address'] = $billing_address_1;
-
-			if( ! empty( $billing_city ) )
-				$antifraud_charges['address_city'] = $billing_city;
-
-			if( ! empty( $billing_country ) )
-				$antifraud_charges['country_code'] = $billing_country;
-			elseif( ! empty($country_code) )
-				$antifraud_charges['country_code'] = $country_code;
-
-			if( ! empty( $billing_phone ) )
-				$antifraud_charges['phone_number'] = $billing_phone;
-*/
-			// Metadata Order
 			if (version_compare(WC_VERSION, "2.7", "<")) {
                 // Antifraud Customer Data
-                $antifraud_charges = [
-                    'first_name'=>$order->billing_first_name,
-                    'last_name'=>$order->billing_last_name,
-                    'address'=>$order->billing_address_1,
-                    'address_city'=>$order->billing_city,
-                    'country_code'=>$order->billing_country,
-                    'phone_number'=>$order->billing_phone,
-                    'device_finger_print_id' => $post_data['device']
-                ];
+                $antifraud_charges = [];
+
+                if(isset($order->billing_first_name) and !empty($order->billing_first_name) and !is_null($order->billing_first_name) and $order->billing_first_name!=''){
+                    $antifraud_charges['first_name']=$order->billing_first_name;
+                }
+                if(isset($order->billing_last_name) and !empty($order->billing_last_name) and !is_null($order->billing_last_name) and $order->billing_last_name!=''){
+                    $antifraud_charges['last_name']=$order->billing_last_name;
+                }
+                if(isset($order->billing_address_1) and !empty($order->billing_address_1) and !is_null($order->billing_address_1) and $order->billing_address_1!=''){
+                    $antifraud_charges['address']=$order->billing_address_1;
+                }
+                if(isset($order->billing_city) and !empty($order->billing_city) and !is_null($order->billing_city) and $order->billing_city!=''){
+                    $antifraud_charges['address_city']=$order->billing_city;
+                }
+                if(isset($order->billing_country) and !empty($order->billing_country) and !is_null($order->billing_country) and $order->billing_country!=''){
+                    $antifraud_charges['country_code']=$order->billing_country;
+                }
+                if(isset($order->billing_phone) and !empty($order->billing_phone) and !is_null($order->billing_phone) and $order->billing_phone!=''){
+                    $antifraud_charges['phone_number']=$order->billing_phone;
+                }
+                $antifraud_charges['device_finger_print_id']=$post_data['device'];
+
 			    $metadata_charges = [
     				//'order_id'			=> $post_data['order_id'],
 					'order_id'			=> $order->get_order_number(),
@@ -302,22 +287,35 @@ class FullCulqi_WC_Process {
                     ], $order );
                 }
 			}else{
+
                 $billing_first_name 	= $order->get_billing_first_name();
                 $billing_last_name 		= $order->get_billing_last_name();
                 $billing_address_1 		= $order->get_billing_address_1();
                 $billing_phone 			= $order->get_billing_phone();
                 $billing_city 			= $order->get_billing_city();
                 $billing_country 		= $order->get_billing_country();
-                $antifraud_charges = [
-                    'first_name'=>$billing_first_name,
-                    'last_name'=>$billing_last_name,
-                    'address'=>$billing_address_1,
-                    'address_city'=>$billing_city,
-                    'country_code'=>$billing_country,
-                    'phone_number'=>$billing_phone,
-                    'device_finger_print_id' => $post_data['device']
-                ];
-                //var_dump($antifraud_charges); exit();
+                $antifraud_charges = [];
+
+                if(isset($billing_first_name) and !empty($billing_first_name) and !is_null($billing_first_name) and $billing_first_name!=''){
+                    $antifraud_charges['first_name']=$billing_first_name;
+                }
+                if(isset($billing_last_name) and !empty($billing_last_name) and !is_null($billing_last_name) and $billing_last_name!=''){
+                    $antifraud_charges['last_name']=$billing_last_name;
+                }
+                if(isset($billing_address_1) and !empty($billing_address_1) and !is_null($billing_address_1) and $billing_address_1!=''){
+                    $antifraud_charges['address']=$billing_address_1;
+                }
+                if(isset($billing_city) and !empty($billing_city) and !is_null($billing_city) and $billing_city!=''){
+                    $antifraud_charges['address_city']=$billing_city;
+                }
+                if(isset($billing_country) and !empty($billing_country) and !is_null($billing_country) and $billing_country!=''){
+                    $antifraud_charges['country_code']=$billing_country;
+                }
+                if(isset($billing_phone) and !empty($billing_phone) and !is_null($billing_phone) and $billing_phone!=''){
+                    $antifraud_charges['phone_number']=$billing_phone;
+                }
+                $antifraud_charges['device_finger_print_id']=$post_data['device'];
+
 			    $metadata_charges = [
     				//'order_id'			=> $order->get_id(),
 					'order_id'		=> $order->get_order_number(),
