@@ -23,7 +23,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->multipayment 	= $this->get_option( 'multipayment', 'no' );
 		$this->multi_duration	= $this->get_option( 'multi_duration', 24 );
 		$this->multi_status		= $this->get_option( 'multi_status', 'wc-pending' );
-		$this->description		= $this->get_option( 'description' );
+		$this->description		= esc_html__( 'Culqi acepta pagos con tarjeta de crédito/débito y más.', 'fullculqi' );
 		$this->instructions		= $this->get_option( 'instructions', $this->description );
 		$this->msg_fail			= $this->get_option( 'msg_fail' );
 		$this->time_modal		= $this->get_option( 'time_modal', 0 );

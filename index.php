@@ -2,7 +2,7 @@
 /*
 Plugin Name: Culqi Checkout
 Plugin URI:https://wordpress.org/plugins/wp-culqi-integration
-Description: Culqi acepta pagos con tarjeta de crédito/débito y más.
+Description: Culqi acepta pago con tarjetas, pagoefectivo, billeteras móviles y cuotéalo desde tu tienda virtual.
 Version: 3.0.0
 Author: Culqi
 Author URI: https://culqi.com/
