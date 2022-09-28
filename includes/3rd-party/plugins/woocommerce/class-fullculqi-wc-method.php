@@ -12,7 +12,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	public function __construct() {
 
 		$this->id 					= 'fullculqi';
-		$this->method_title			= esc_html__( 'Culqi Checkout', 'fullculqi' );
+		$this->method_title			= esc_html__( 'Culqi', 'fullculqi' );
 		$this->method_description 	= esc_html__( 'Conéctate a nuestra pasarela de pagos para aumentar tus ventas.', 'fullculqi' );
 		$this->icon 				= FULLCULQI_WC_URL . 'assets/images/cards.png';
 
@@ -364,7 +364,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 				'type'			=> 'text',
 				'description'	=> esc_html__( 'This controls the title which the user sees during checkout.', 'fullculqi' ),
 				'desc_tip'		=> true,
-				'default'		=> 'Culqi Checkout',
+				'default'		=> 'Culqi',
 			],
 			'description' => [
 				'title'			=> esc_html__( 'Description', 'fullculqi' ),
