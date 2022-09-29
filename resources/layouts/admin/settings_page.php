@@ -19,7 +19,7 @@
         <table class="form-table" role="presentation">
             <tbody>
             <tr>
-                <th scope="row"><?php esc_html_e('Culqi Checkout', 'fullculqi'); ?></th>
+                <th scope="row"><?php esc_html_e('Culqi', 'fullculqi'); ?></th>
                 <td>
                     <!-- <div class="can-toggle can-toggle--size-large">
                         <input id="c" type="checkbox">
