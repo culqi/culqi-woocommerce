@@ -19,7 +19,7 @@
         <table class="form-table" role="presentation">
             <tbody>
             <tr>
-                <th scope="row"><?php esc_html_e('Culqi checkout', 'fullculqi'); ?></th>
+                <th scope="row"><?php esc_html_e('Culqi', 'fullculqi'); ?></th>
                 <td>
                     <?php $settings = fullculqi_get_settings(); ?>
                     <div class="can-toggle demo-rebrand-1">

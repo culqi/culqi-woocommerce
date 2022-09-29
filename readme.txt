@@ -1,4 +1,4 @@
-=== Culqi Checkout ===
+=== Culqi ===
 Contributors: Culqi Team
 Tags: culqi, checkout, payment method, peru, woocommerce
 Donate link: https://culqi.com/
