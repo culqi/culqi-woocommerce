@@ -18,7 +18,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 		// Define user set variables
 		$this->has_fields		= apply_filters( 'fullculqi/method/has_fields', false );
-		$this->title			= $this->get_option( 'title' );
+		$this->title			= esc_html__( 'Culqi', 'fullculqi' );
 		$this->installments 	= $this->get_option( 'installments', 'no' );
 		$this->multipayment 	= $this->get_option( 'multipayment', 'no' );
 		$this->multi_duration	= $this->get_option( 'multi_duration', 24 );
