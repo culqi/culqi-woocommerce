@@ -40,7 +40,7 @@ class FullCulqi_WC {
 				if( count( $provider_payment ) == 0 ) {
 
 					$log->set_msg_payment('error',
-						esc_html__( 'Culqi Provider Payment error : There was not set any payment','letsgo'
+						esc_html__( 'Culqi Provider Payment error : There was not set any payment','culqi'
 					));
 
 					$provider_payment = [ 'status' => 'error' ];
@@ -83,7 +83,7 @@ class FullCulqi_WC {
 				if( count($provider_order) == 0 ) {
 
 					$log->set_msg_payment('error',
-						esc_html__('Culqi Provider Order error : There was not set any payment','letsgo'
+						esc_html__('Culqi Provider Order error : There was not set any payment','culqi'
 					));
 
 					$provider_order = [ 'status' => 'error' ];
@@ -122,12 +122,12 @@ class FullCulqi_WC {
 				switch($data->state) {
 					case 'paid' :
 						$note = sprintf(
-							esc_html__( 'The order was paid. The CIP %s was paid', 'letsgo'),
+							esc_html__( 'The order was paid. The CIP %s was paid', 'culqi'),
 							$cip_code
 						);
 						$order->add_order_note($note);
 						$log->set_msg_payment('notice', sprintf(
-							esc_html__( 'The CIP %s was paid', 'letsgo' ),
+							esc_html__( 'The CIP %s was paid', 'culqi' ),
 							$cip_code
 						));
 						$order->update_status( 'Processing' );
@@ -135,12 +135,12 @@ class FullCulqi_WC {
 					case 'expired' :
 
 						$log->set_msg_payment( 'notice', sprintf(
-							esc_html__( 'The CIP %s expired', 'letsgo' ),
+							esc_html__( 'The CIP %s expired', 'culqi' ),
 							$cip_code
 						));
 
 						$order->update_status( 'cancelled', sprintf(
-							esc_html__('The order was not paid on time. The CIP %s expired','letsgo'),
+							esc_html__('The order was not paid on time. The CIP %s expired','culqi'),
 							$cip_code
 						));
 
@@ -149,11 +149,11 @@ class FullCulqi_WC {
 					case 'deleted' :
 
 						$log->set_msg_payment('notice', sprintf(
-							esc_html__( 'The CIP %s was deleted', 'letsgo' ), $cip_code
+							esc_html__( 'The CIP %s was deleted', 'culqi' ), $cip_code
 						));
 
 						$order->update_status( 'cancelled', sprintf(
-							esc_html__( 'The order was not paid on time. The CIP %s was deleted','letsgo'), $cip_code
+							esc_html__( 'The order was not paid on time. The CIP %s was deleted','culqi'), $cip_code
 						));
 
 						break;

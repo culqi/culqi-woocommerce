@@ -36,12 +36,12 @@ class FullCulqi_Settings {
 					'url_loading'		=> admin_url('images/spinner.gif'),
 					'url_success'		=> admin_url('images/yes.png'),
 					'url_failure'		=> admin_url('images/no.png'),
-					'sync_loading'		=> esc_html__('Synchronizing. It may take several minutes.','letsgo'),
-					'sync_success'		=> esc_html__('Complete synchronization.','letsgo'),
-					'delete_loading'	=> esc_html__('Deleting post from %s.','letsgo'),
-					'delete_success'	=> esc_html__('%s : Posts deleted.','letsgo'),
+					'sync_loading'		=> esc_html__('Synchronizing. It may take several minutes.','culqi'),
+					'sync_success'		=> esc_html__('Complete synchronization.','culqi'),
+					'delete_loading'	=> esc_html__('Deleting post from %s.','culqi'),
+					'delete_success'	=> esc_html__('%s : Posts deleted.','culqi'),
 					'delete_cpts'		=> fullculqi_get_cpts(),
-					'text_confirm'		=> esc_html__('if you continue, you will delete all fullculqi posts','letsgo'),
+					'text_confirm'		=> esc_html__('if you continue, you will delete all fullculqi posts','culqi'),
 					'is_welcome'		=> $screen->base == 'dashboard_page_fullculqi-welcome' ? true : false,
 					'nonce'				=> wp_create_nonce( 'fullculqi-wpnonce' ),
 				]
@@ -49,12 +49,12 @@ class FullCulqi_Settings {
 		}
 	}
 
-	
+
 	public function add_admin_menu() {
 /*
 		add_menu_page(
-			esc_html__('Culqi Full Integration','letsgo'),
-			esc_html__('Culqi Full Integration','letsgo'),
+			esc_html__('Culqi Full Integration','culqi'),
+			esc_html__('Culqi Full Integration','culqi'),
 			'manage_options',
 			'fullculqi_menu',
 			'', //function
@@ -67,8 +67,8 @@ class FullCulqi_Settings {
 
 		add_submenu_page(
 			'fullculqi_menu',
-			esc_html__('Settings','letsgo'),
-			esc_html__('Settings','letsgo'),
+			esc_html__('Settings','culqi'),
+			esc_html__('Settings','culqi'),
 			'manage_options',
 			'fullculqi_settings',
 			[ $this, 'menu_settings' ]
@@ -79,8 +79,8 @@ class FullCulqi_Settings {
 
 		add_submenu_page(
 			'fullculqi_menu',
-			esc_html__('Add-ons','letsgo'),
-			esc_html__('Add-ons','letsgo'),
+			esc_html__('Add-ons','culqi'),
+			esc_html__('Add-ons','culqi'),
 			'manage_options',
 			'fullculqi_addons',
 			[ $this, 'menu_addons' ]
@@ -94,7 +94,7 @@ class FullCulqi_Settings {
 	public function menu_settings() {
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-            wp_die( esc_html__('You do not have sufficient permissions to access this page.','letsgo') );
+            wp_die( esc_html__('You do not have sufficient permissions to access this page.','culqi') );
         }
 
 		include_once FULLCULQI_PLUGIN_DIR . 'admin/layouts/settings_options.php';
@@ -104,9 +104,9 @@ class FullCulqi_Settings {
 	public function register_settings() {
 
 		$settings = fullculqi_get_settings();
-		
+
 		do_action('fullculqi/settings/before_fields', $settings, $this);
-		
+
 		register_setting(
 			'fullculqi_group', // Option group
 			'fullculqi_options', // Option name
@@ -115,14 +115,14 @@ class FullCulqi_Settings {
 
 		add_settings_section(
 			'fullculqi_section', // ID
-			esc_html__('Culqi Full Integration Settings','letsgo'), // Title
+			esc_html__('Culqi Full Integration Settings','culqi'), // Title
 			false, // Callback [ $this, 'print_section_info' ]
 			'fullculqi_page' // Page
 		);
 
 		add_settings_field(
 			'fullculqi_commerce', // ID
-			esc_html__('Commerce name','letsgo'), // Commerce Name
+			esc_html__('Commerce name','culqi'), // Commerce Name
 			[ $this, 'input_commerce' ], // Callback
 			'fullculqi_page', // Page
 			'fullculqi_section' // Section
@@ -130,7 +130,7 @@ class FullCulqi_Settings {
 
 		add_settings_field(
 			'fullculqi_pubkey', // ID
-			esc_html__('Public Key','letsgo'), // Public Key
+			esc_html__('Public Key','culqi'), // Public Key
 			[ $this, 'input_pubkey' ], // Callback
 			'fullculqi_page', // Page
 			'fullculqi_section' // Section
@@ -138,7 +138,7 @@ class FullCulqi_Settings {
 
 		add_settings_field(
 			'fullculqi_seckey', // ID
-			esc_html__('Secret Key','letsgo'), // Secret Key
+			esc_html__('Secret Key','culqi'), // Secret Key
 			[ $this, 'input_seckey' ], // Callback
 			'fullculqi_page', // Page
 			'fullculqi_section' // Section
@@ -146,7 +146,7 @@ class FullCulqi_Settings {
 
 		add_settings_field(
 			'fullculqi_logo', // ID
-			esc_html__('Logo URL','letsgo'), // Logo
+			esc_html__('Logo URL','culqi'), // Logo
 			[ $this, 'input_logo' ], // Callback
 			'fullculqi_page', // Page
 			'fullculqi_section' // Section
@@ -154,7 +154,7 @@ class FullCulqi_Settings {
 
 		add_settings_field(
 			'fullculqi_methods', // ID
-			esc_html__('Metodos de pago','letsgo'), // Logo
+			esc_html__('Metodos de pago','culqi'), // Logo
 			[ $this, 'input_methods' ], // Callback
 			'fullculqi_page', // Page
 			'fullculqi_section' // Section
@@ -162,7 +162,7 @@ class FullCulqi_Settings {
 
 		add_settings_field(
 			'fullculqi_sync_payments', // ID
-			__('Synchronize Payments','letsgo'), // Button
+			__('Synchronize Payments','culqi'), // Button
 			[ $this, 'button_sync_payments' ], // Callback
 			'fullculqi_page', // Page
 			'fullculqi_section' // Section
@@ -172,7 +172,7 @@ class FullCulqi_Settings {
 
 		add_settings_field(
 			'fullculqi_woo_payment', // ID
-			esc_html__('Activate Payment Method in Woocommerce','letsgo'), // Simple Payment
+			esc_html__('Activate Payment Method in Woocommerce','culqi'), // Simple Payment
 			[ $this, 'input_woo_payment' ], // Callback
 			'fullculqi_page', // Page
 			'fullculqi_section' // Section
@@ -180,7 +180,7 @@ class FullCulqi_Settings {
 
 		add_settings_field(
 			'fullculqi_button_clear', // ID
-			esc_html__('Delete all','letsgo'), // Simple Payment
+			esc_html__('Delete all','culqi'), // Simple Payment
 			[ $this, 'input_delete_all' ], // Callback
 			'fullculqi_page', // Page
 			'fullculqi_section' // Section
@@ -197,14 +197,14 @@ class FullCulqi_Settings {
 
 		foreach( $default as $key => $value) {
 			if( !isset($settings[$key]) || empty($settings[$key]) )
-				$settings[$key] = $default[$key];	
+				$settings[$key] = $default[$key];
 		}
 
 		return $settings;
 	}
 
 	public function print_section_info() {
-		echo '<div class="fullculqi_section">'.esc_html__('Options','letsgo').'</div>';
+		echo '<div class="fullculqi_section">'.esc_html__('Options','culqi').'</div>';
 	}
 
 	public function input_commerce() {
@@ -236,7 +236,7 @@ class FullCulqi_Settings {
 
 		echo '<label for="fullculqi_logo">
 				<input type="text" id="fullculqi_logo" class="regular-text" name="fullculqi_options[logo_url]" value="'.$settings['creditcard'].'"/>
-				<p class="help">'.esc_html__('This logo will appear in the Culqi Modal/Popup','letsgo').'</p>
+				<p class="help">'.esc_html__('This logo will appear in the Culqi Modal/Popup','culqi').'</p>
 			</label>';
 	}
 
@@ -245,14 +245,14 @@ class FullCulqi_Settings {
 
 		echo '<label for="fullculqi_logo">
 				<input type="text" id="fullculqi_logo" class="regular-text" name="fullculqi_options[logo_url]" value="'.$settings['logo_url'].'"/>
-				<p class="help">'.esc_html__('This logo will appear in the Culqi Modal/Popup','letsgo').'</p>
+				<p class="help">'.esc_html__('This logo will appear in the Culqi Modal/Popup','culqi').'</p>
 			</label>';
 	}
 
 	public function button_sync_payments() {
 		echo '<label for="fullculqi_sync_payments">
-				'.esc_html__('Last','letsgo').' <input type="number" id="fullculqi_sync_payments_records" step="1" id="" value="100" style="width:55px;" /> '.esc_html__('records','letsgo').'
-				<button id="fullculqi_sync_payments" class="fullculqi_sync_button" data-action="payments">'.esc_html__('Synchronize Now','letsgo').'</button>
+				'.esc_html__('Last','culqi').' <input type="number" id="fullculqi_sync_payments_records" step="1" id="" value="100" style="width:55px;" /> '.esc_html__('records','culqi').'
+				<button id="fullculqi_sync_payments" class="fullculqi_sync_button" data-action="payments">'.esc_html__('Synchronize Now','culqi').'</button>
 				<span id="fullculqi_sync_payments_loading"></span>
 			</label>';
 	}
@@ -264,23 +264,23 @@ class FullCulqi_Settings {
 		if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
 			$disabled = true;
 			echo '<div style="color: red;">';
-			esc_html_e( 'You do not have Woocommerce activated', 'letsgo' );
+			esc_html_e( 'You do not have Woocommerce activated', 'culqi' );
 			echo '</div>';
 		}
 
 		echo '<label for="fullculqi_woo_payment">
 				<input type="checkbox" id="fullculqi_woo_payment" name="fullculqi_options[woo_payment]" value="yes" '.checked($settings['woo_payment'], 'yes', false).' '.disabled($disabled, true, false).' />
-				<p class="help">'.esc_html__('If checked, the Culqi payment method will appear in Woocommerce.', 'letsgo').'</p>
+				<p class="help">'.esc_html__('If checked, the Culqi payment method will appear in Woocommerce.', 'culqi').'</p>
 			</label>';
 
 		if( $settings['woo_payment'] == 'yes' ) {
-			echo '<a href="'.admin_url('admin.php?page=wc-settings&tab=checkout&section=fullculqi').'">'.esc_html__('Customize Culqi Payment Gateway','letsgo').'</a>';
+			echo '<a href="'.admin_url('admin.php?page=wc-settings&tab=checkout&section=fullculqi').'">'.esc_html__('Customize Culqi Payment Gateway','culqi').'</a>';
 		}
 	}
 
 	public function input_delete_all() {
 		echo '<label for="fullculqi_delete_all">
-				<button id="fullculqi_delete_all" class="fullculqi_delete_all button button-secondary button-hero">'.esc_html__('Clear all','letsgo').'</button>
+				<button id="fullculqi_delete_all" class="fullculqi_delete_all button button-secondary button-hero">'.esc_html__('Clear all','culqi').'</button>
 				<div id="fullculqi_delete_all_loading"></div>
 			</label>';
 	}

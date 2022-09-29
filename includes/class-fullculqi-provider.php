@@ -11,7 +11,7 @@ class FullCulqi_Provider {
 
 		// Validate $culqi global
 		if( ! $culqi )
-			return [ 'status' => 'error', 'msg' => esc_html__('There is not Culqi credentials', 'letsgo') ];
+			return [ 'status' => 'error', 'msg' => esc_html__('There is not Culqi credentials', 'culqi') ];
 
 		// Connect to the API Culqi
 		try {
@@ -68,7 +68,7 @@ class FullCulqi_Provider {
 				$output = [ 'status' => 'ok', 'data' => $order ];
 			else
 				$output = [ 'status' => 'error', 'msg' => $order->merchant_message ];
-			
+
 		} catch(Exception $e) {
 			$output = [ 'status' => 'error', 'msg' => $e->getMessage() ];
 		}
@@ -91,7 +91,7 @@ class FullCulqi_Provider {
 				$output = [ 'status' => 'ok', 'data' => $token ];
 			else
 				$output = [ 'status' => 'error', 'msg' => $token->merchant_message ];
-			
+
 		} catch(Exception $e) {
 			$output = [ 'status' => 'error', 'msg' => $e->getMessage() ];
 		}
@@ -114,7 +114,7 @@ class FullCulqi_Provider {
 				$output = [ 'status' => 'ok', 'data' => $capture ];
 			else
 				$output = [ 'status' => 'error', 'msg' => $capture->merchant_message ];
-			
+
 		} catch(Exception $e) {
 			$output = [ 'status' => 'error', 'msg' => $e->getMessage() ];
 		}
@@ -137,7 +137,7 @@ class FullCulqi_Provider {
 				$output = [ 'status' => 'ok', 'data' => $refund ];
 			else
 				$output = [ 'status' => 'error', 'msg' => $refund->merchant_message ];
-			
+
 		} catch(Exception $e) {
 			$output = [ 'status' => 'error', 'msg' => $e->getMessage() ];
 		}

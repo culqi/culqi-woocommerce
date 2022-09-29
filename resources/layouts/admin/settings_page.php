@@ -21,18 +21,10 @@
             <tr>
                 <th scope="row"><?php esc_html_e('Culqi Checkout', 'fullculqi'); ?></th>
                 <td>
-                    <!-- <div class="can-toggle can-toggle--size-large">
-                        <input id="c" type="checkbox">
-                        <label for="c">
-                            <div class="can-toggle__switch" data-checked="ACTIVO" data-unchecked="INACTIVO"></div>
-                        </label>
-                    </div>
-
-                    <br> -->
                     <?php $settings = fullculqi_get_settings(); ?>
                     <div class="can-toggle demo-rebrand-1">
                         <input id="d" type="checkbox" name="fullculqi_options[enabled]"
-                               value="yes" <?php echo ($settings['enabled'] == 'yes') ? 'checked' : ''; ?>>
+                               value="yes" <?php checked( $settings['enabled'], 'yes', true ); ?>>
                         <label for="d">
                             <div class="can-toggle__switch" data-checked="Activo" data-unchecked="Inactivo"></div>
                         </label>

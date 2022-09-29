@@ -517,13 +517,6 @@ class FullCulqi_WC_Process {
 
 		// Error
 		if( $culqi_customer['status'] == 'error' ) {
-
-			$error = sprintf(
-				esc_html__( 'Culqi Customer Error: %s', 'fullculqi' ),
-				$culqi_customer['data']
-			);
-			self::$log->set_error( $error );
-
 			return false;
 		}
 

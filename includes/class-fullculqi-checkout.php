@@ -8,7 +8,7 @@ class FullCulqi_Checkout {
 
 		extract($culqi_token);
 
-		$log->set_msg_payment( 'notice', esc_html__( 'This order is a simple payment', 'letsgo' ) );
+		$log->set_msg_payment( 'notice', esc_html__( 'This order is a simple payment', 'culqi' ) );
 
 		foreach ($order->get_items() as $item ) {
 			$_product = $item->get_product();
@@ -77,7 +77,7 @@ class FullCulqi_Checkout {
 		if( $provider_payment['status'] == 'ok' ) {
 
 			$note = sprintf(
-				esc_html__('Culqi Payment created: %s','letsgo'),
+				esc_html__('Culqi Payment created: %s','culqi'),
 				$provider_payment['data']->id
 			);
 
@@ -86,7 +86,7 @@ class FullCulqi_Checkout {
 			update_post_meta( $order->get_id(), 'culqi_charge_id', wc_clean( $provider_payment['data']->id ) );
 
 			$log->set_msg_payment('notice', sprintf(
-				esc_html__('Culqi Payment created: %s','letsgo'),
+				esc_html__('Culqi Payment created: %s','culqi'),
 				$provider_payment['data']->id
 			));
 
@@ -95,7 +95,7 @@ class FullCulqi_Checkout {
 			update_post_meta( $order->get_id(), 'culqi_post_id', wc_clean( $post_id ) );
 
 			$log->set_msg_payment('notice', sprintf(
-				esc_html__( 'Post Payment created : %s', 'letsgo' ),
+				esc_html__( 'Post Payment created : %s', 'culqi' ),
 				$post_id
 			));
 
@@ -113,7 +113,7 @@ class FullCulqi_Checkout {
 		} else {
 
 			$log->set_msg_payment('error', sprintf(
-				esc_html__('Culqi Payment error : %s','letsgo'),
+				esc_html__('Culqi Payment error : %s','culqi'),
 				$provider_payment['msg']
 			));
 
@@ -162,13 +162,13 @@ class FullCulqi_Checkout {
 
 		if( $provider_order['status'] == 'ok' ) {
 
-			$log->set_msg_payment('notice', sprintf(esc_html__('Culqi Multipayment created: %s','letsgo'), $provider_order['data']->id) );
+			$log->set_msg_payment('notice', sprintf(esc_html__('Culqi Multipayment created: %s','culqi'), $provider_order['data']->id) );
 
 			$provider_order = apply_filters('fullculqi/checkout/order_success', $provider_order, $log, $order);
 
 		} else {
 
-			$log->set_msg_payment('error', sprintf(esc_html__('Culqi Multipayment error : %s','letsgo'), $provider_order['msg']) );
+			$log->set_msg_payment('error', sprintf(esc_html__('Culqi Multipayment error : %s','culqi'), $provider_order['msg']) );
 
 			$provider_order = apply_filters('fullculqi/checkout/order_error', $provider_order, $log, $order);
 		}
@@ -179,10 +179,10 @@ class FullCulqi_Checkout {
 
 	static function process_order($order, $cip_code, $log ) {
 
-		$log->set_msg_payment('notice', esc_html__('This order is a Multipayment', 'letsgo') );
-		$log->set_msg_payment('notice', sprintf(esc_html__('Culqi Multipayment CIP: %s','letsgo'), $cip_code) );
+		$log->set_msg_payment('notice', esc_html__('This order is a Multipayment', 'culqi') );
+		$log->set_msg_payment('notice', sprintf(esc_html__('Culqi Multipayment CIP: %s','culqi'), $cip_code) );
 
-		$note = esc_html__('Culqi Method: Multipayment','letsgo');
+		$note = esc_html__('Culqi Method: Multipayment','culqi');
 		$order->add_order_note($note);
 
 		if( apply_filters( 'fullculqi/checkout/order_change_status', true, $log, $order ) ) {
@@ -196,7 +196,7 @@ class FullCulqi_Checkout {
 		}
 
 
-		$note = sprintf(esc_html__('Culqi Multipayment CIP: %s','letsgo'), $cip_code);
+		$note = sprintf(esc_html__('Culqi Multipayment CIP: %s','culqi'), $cip_code);
 		$order->add_order_note($note);
 
 		update_post_meta($order->get_id(), 'culqi_cip', $cip_code);
@@ -226,7 +226,7 @@ class FullCulqi_Checkout {
 		if( $provider_refund['status'] == 'ok' ) {
 
 			$log->set_msg_payment( 'notice', sprintf(
-				esc_html__( 'Culqi Refund created: %s', 'letsgo' ),
+				esc_html__( 'Culqi Refund created: %s', 'culqi' ),
 				$provider_refund['data']->id)
 			);
 
@@ -237,7 +237,7 @@ class FullCulqi_Checkout {
 		} else {
 
 			$log->set_msg_payment( 'error', sprintf(
-				esc_html__( 'Culqi Refund error : %s', 'letsgo' ), $provider_refund['msg']
+				esc_html__( 'Culqi Refund error : %s', 'culqi' ), $provider_refund['msg']
 			));
 
 			$provider_refund = apply_filters('fullculqi/checkout/refund_error',

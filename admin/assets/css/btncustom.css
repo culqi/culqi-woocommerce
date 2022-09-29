@@ -945,4 +945,7 @@
   .form-table td {
     padding: 15px 0px 10px !important;
   }
+  #form-culqi-settings > table > tbody > tr > td > label > br{
+    display: none!important;
+  }
 }

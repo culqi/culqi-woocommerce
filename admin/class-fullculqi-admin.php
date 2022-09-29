@@ -20,7 +20,7 @@ class FullCulqi_Admin {
 		if( isset($method_array['enabled']) && $method_array['enabled'] == 'yes' ) {
 			add_meta_box(
 				'fullculqi_payment_log',
-				__( 'FullCulqi payment transactions log', 'letsgo' ),
+				__( 'FullCulqi payment transactions log', 'culqi' ),
 				[ $this, 'payment_log' ],
 				'shop_order',
 				'normal',
@@ -28,7 +28,7 @@ class FullCulqi_Admin {
 			);
 		}
 	}
-	
+
 
 	public function payment_log($post, $metabox) {
 
@@ -85,8 +85,8 @@ class FullCulqi_Admin {
 
 	public function welcome_menu() {
 		add_dashboard_page(
-			__('Welcome to FullCulqi Integration','letsgo'),
-			__('FullCulqi Integration','letsgo'),
+			__('Welcome to FullCulqi Integration','culqi'),
+			__('FullCulqi Integration','culqi'),
 			'manage_options',
 			'fullculqi-welcome',
 			[$this, 'welcome_content']
@@ -100,6 +100,6 @@ class FullCulqi_Admin {
 	public function welcome_remove() {
 		remove_submenu_page( 'index.php', 'fullculqi-welcome' );
 	}
-	
+
 }
 ?>
