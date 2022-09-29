@@ -33,7 +33,7 @@ class FullCulqi_Admin {
 	public function payment_log($post, $metabox) {
 
 		$args = array( 'payment_log' => get_post_meta($post->ID, 'culqi_log', true) );
-		wc_get_template('admin/layouts/metaboxes/metabox_order_log.php', $args, false, FULLCULQI_PLUGIN_DIR );
+		wc_get_template('admin/layouts/metaboxes/metabox_order_log.php', $args, false, MPCULQI_PLUGIN_DIR );
 	}
 
 

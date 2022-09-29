@@ -165,7 +165,7 @@ function fullculqi_get_template( $template_name = '', $args = [], $template_path
 	if( ! empty( $template_path ) )
 		$located = trailingslashit( $template_path ) . $template_name;
 	else
-		$located = FULLCULQI_DIR . $template_name;
+		$located = MPCULQI_DIR . $template_name;
 
 	// Allow 3rd party plugin filter template file from their plugin.
 	$located = apply_filters( 'fullculqi/global/located', $located, $args );

@@ -67,7 +67,7 @@ class FullCulqi_WC_Admin {
 			'logs' => get_post_meta( $post->ID, 'culqi_log', true )
 		];
 
-		fullculqi_get_template( 'layouts/order_log.php', $args, FULLCULQI_WC_DIR );
+		fullculqi_get_template( 'layouts/order_log.php', $args, MPCULQI_WC_DIR );
 	}
 
 
@@ -127,7 +127,7 @@ class FullCulqi_WC_Admin {
 			'order_id' => get_post_meta( $post_id, 'culqi_wc_order_id', true ),
 		];
 
-		fullculqi_get_template( 'layouts/charge_basic.php', $args, FULLCULQI_WC_DIR );
+		fullculqi_get_template( 'layouts/charge_basic.php', $args, MPCULQI_WC_DIR );
 	}
 
 

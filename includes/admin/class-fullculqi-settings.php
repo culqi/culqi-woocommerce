@@ -35,7 +35,7 @@ class FullCulqi_Settings {
 		) ) {
 			wp_enqueue_style(
 				'fullculqi-css-addons',
-				FULLCULQI_URL . 'resources/assets/css/admin-addons.css'
+				MPCULQI_URL . 'resources/assets/css/admin-addons.css'
 			);
 		}
 
@@ -46,7 +46,7 @@ class FullCulqi_Settings {
 		) {
 			wp_enqueue_script(
 				'fullculqi-js-settings',
-				FULLCULQI_URL . 'resources/assets/js/admin-settings.js',
+				MPCULQI_URL . 'resources/assets/js/admin-settings.js',
 				[ 'jquery' ], false, true
 			);
 
@@ -89,7 +89,7 @@ class FullCulqi_Settings {
 		}
 	}
 
-	
+
 	/**
 	 * Add to menu
 	 * @return mixed
@@ -146,12 +146,12 @@ class FullCulqi_Settings {
 	public function addons_page() {
 
 		$args = [
-			'banner_1'	=> FULLCULQI_URL . 'resources/assets/images/letsgo_1.png',
-			'banner_2'	=> FULLCULQI_URL . 'resources/assets/images/letsgo_2.png',
-			'banner_3'	=> FULLCULQI_URL . 'resources/assets/images/letsgo_3.png',
-			'banner_4'	=> FULLCULQI_URL . 'resources/assets/images/letsgo_4.png',
-			'icon_wc'	=> FULLCULQI_URL . 'resources/assets/images/icon_woo.png',
-			'icon_wp'	=> FULLCULQI_URL . 'resources/assets/images/icon_wp.png',
+			'banner_1'	=> MPCULQI_URL . 'resources/assets/images/letsgo_1.png',
+			'banner_2'	=> MPCULQI_URL . 'resources/assets/images/letsgo_2.png',
+			'banner_3'	=> MPCULQI_URL . 'resources/assets/images/letsgo_3.png',
+			'banner_4'	=> MPCULQI_URL . 'resources/assets/images/letsgo_4.png',
+			'icon_wc'	=> MPCULQI_URL . 'resources/assets/images/icon_woo.png',
+			'icon_wp'	=> MPCULQI_URL . 'resources/assets/images/icon_wp.png',
 			'has_subscribers'	=> class_exists('FullCulqi_Subscription'),
 			'has_oneclick'		=> class_exists('FullCulqi_CardCredit'),
 			'has_button'		=> class_exists('FullCulqi_Button'),
@@ -182,7 +182,7 @@ class FullCulqi_Settings {
 				wp_enqueue_script( 'fullculqi-bootstrap-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/bootstrap.min.js', [ 'jquery' ], false, true );
 				wp_enqueue_script( 'fullculqi-login-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/fullculqi_login.js', [ 'jquery', 'fullculqi-bootstrap-js' ], false, true );
                 wp_enqueue_script( 'fullculqi-btncustom-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/fullculqi_btncustom.js', [ 'jquery' ], false, true );
-				
+
 				wp_localize_script( 'fullculqi-login-js', 'fullculqi_merchants',
 						[
 							'url_merchants'	=> admin_url( 'admin-ajax.php' ),
@@ -214,7 +214,7 @@ class FullCulqi_Settings {
 	public function register_settings() {
 		//OLANDA INGRESO INPUTS FORM SETTINGS
 		do_action( 'fullculqi/settings/before_fields' );
-		
+
 		register_setting(
 			'fullculqi_group', // Option group
 			'fullculqi_options', // Option name
@@ -249,7 +249,7 @@ class FullCulqi_Settings {
 			'fullculqi_pubkey', // ID
 			esc_html__( 'Llave Pública', 'fullculqi' )  . '<span class="tool" data-tip="Encuentra tu llave pública ingresando a la sección Desarrollo en tu Culqipanel, en la pestaña de API Keys" tabindex="2"> ' .
 			'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
-			<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/> </svg>' . 
+			<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/> </svg>' .
 		  '</span> ', // Public Key
 			[ $this, 'input_pubkey' ], // Callback
 			'fullculqi_page', // Page
@@ -260,7 +260,7 @@ class FullCulqi_Settings {
 			'fullculqi_seckey', // ID
 			esc_html__( 'Llave Privada', 'fullculqi' )  . '<span class="tool" data-tip="Encuentra tu llave privada ingresando a la sección Desarrollo en tu Culqipanel, en la pestaña de API Keys" tabindex="2"> ' .
 			'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
-			<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/> </svg>' . 
+			<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/> </svg>' .
 		  '</span> ', // Secret Key
 			[ $this, 'input_seckey' ], // Callback
 			'fullculqi_page', // Page
@@ -289,7 +289,7 @@ class FullCulqi_Settings {
 			'fullculqi_notpay', // ID
 			esc_html__( 'Notificaciones de pagos', 'fullculqi' )  . '<span class="tool" data-tip="Ingresa a tu Culqipanel en la sección de eventos, hacer clic a +Añadir. Se abrirá un popup, en donde deberás escoger order.status.changed y pegar la siguiente URL" tabindex="2"> ' .
 			'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
-			<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/> </svg>' . 
+			<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/> </svg>' .
 		  '</span> ', // Notify Pay
 			[ $this, 'input_notpay' ], // Callback
 			'fullculqi_page', // Page
@@ -353,7 +353,7 @@ class FullCulqi_Settings {
 		return $settings;
 	}
 
-	
+
 	/**
 	 * Input Commerce
 	 * @return html
@@ -390,13 +390,13 @@ class FullCulqi_Settings {
 	 */
 	public function input_methods() {
 		$settings = fullculqi_get_settings();
-		
+
 		fullculqi_get_template( 'resources/layouts/admin/settings/input_methods.php', $settings );
 	}
 
 	public function input_enviroment() {
 		$settings = fullculqi_get_settings();
-		
+
 		fullculqi_get_template( 'resources/layouts/admin/settings/input_enviroment.php', $settings );
 	}
 

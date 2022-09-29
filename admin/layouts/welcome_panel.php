@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) )
 
 <div class="wrap about-wrap full-width-layout">
 	<div style="float: right;">
-		<img src="<?php echo FULLCULQI_URL . 'admin/assets/images/culqi_logo.png'; ?>" alt="FullCulqi Logo" />
+		<img src="<?php echo MPCULQI_URL . 'admin/assets/images/culqi_logo.png'; ?>" alt="FullCulqi Logo" />
 	</div>
 	<h1><?php _e('FullCulqi Integration','culqi'); ?></h1>
 
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) )
 
 			<div class="col">
 				<div class="alignleft" style="margin-right: 20px;">
-					<img src="<?php echo FULLCULQI_PLUGIN_URL . 'admin/assets/images/welcome.png'; ?>" alt="FullCulqi Logo" style="width:100%;" />
+					<img src="<?php echo MPCULQI_PLUGIN_URL . 'admin/assets/images/welcome.png'; ?>" alt="FullCulqi Logo" style="width:100%;" />
 				</div>
 
 				<br /><br /><br />
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) )
 					<table>
 						<tr><th>
 							<div class="alignright" style="margin-left: 20px;">
-								<img src="<?php echo FULLCULQI_PLUGIN_URL . 'admin/assets/images/alert.png'; ?>" alt="alert" style="margin-bottom: 0;" />
+								<img src="<?php echo MPCULQI_PLUGIN_URL . 'admin/assets/images/alert.png'; ?>" alt="alert" style="margin-bottom: 0;" />
 							</div>
 							<p><?php _e('We have realized that you have posts related to fullculqi plugin. It is advisable to delete that information before proceeding.', 'culqi'); ?></p>
 						</th></tr>

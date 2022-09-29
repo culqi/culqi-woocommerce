@@ -27,7 +27,7 @@ class FullCulqi_i18n {
 		load_plugin_textdomain(
 			$this->domain,
 			false,
-			dirname( FULLCULQI_BASE ) . '/languages/'
+			dirname( MPCULQI_BASE ) . '/languages/'
 		);
 
 	}

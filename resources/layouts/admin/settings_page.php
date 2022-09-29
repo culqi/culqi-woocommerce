@@ -11,15 +11,15 @@
         <a href="admin.php?page=fullculqi_webhooks" class="nav-tab">Webhooks</a>
     </nav>
     <?php
-    require_once FULLCULQI_DIR . 'admin/layouts/modal_merchants.php';
-    require_once FULLCULQI_DIR . 'admin/layouts/modal_login.php';
+    require_once MPCULQI_DIR . 'admin/layouts/modal_merchants.php';
+    require_once MPCULQI_DIR . 'admin/layouts/modal_login.php';
     ?>
 
     <form id="form-culqi-settings" method="post" action="options.php">
         <table class="form-table" role="presentation">
             <tbody>
             <tr>
-                <th scope="row"><?php esc_html_e('Culqi Checkout', 'fullculqi'); ?></th>
+                <th scope="row"><?php esc_html_e('Culqi checkout', 'fullculqi'); ?></th>
                 <td>
                     <?php $settings = fullculqi_get_settings(); ?>
                     <div class="can-toggle demo-rebrand-1">
@@ -51,7 +51,7 @@
                       method="post" enctype="multipart/form-data">
                     <div>
                         <div>
-                            <img src="<?php echo FULLCULQI_URL . 'resources/assets/images/icon-check.png'; ?>" />
+                            <img src="<?php echo MPCULQI_URL . 'resources/assets/images/icon-check.png'; ?>" />
                         </div>
                         <div>
                             <h1>¡Configuración registrada<br/> con éxito!</h1>

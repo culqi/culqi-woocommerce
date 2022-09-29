@@ -1,6 +1,6 @@
 <div class="wrap about-wrap full-width-layout">
 	<div style="float: right;">
-		<img src="<?php echo FULLCULQI_URL; ?>resources/assets/images/culqi_logo.png" alt="FullCulqi Logo" />
+		<img src="<?php echo MPCULQI_URL; ?>resources/assets/images/culqi_logo.png" alt="FullCulqi Logo" />
 	</div>
 	<h1><?php esc_html_e( 'FullCulqi Integration', 'fullculqi' ); ?></h1>
 
@@ -16,7 +16,7 @@
 			<div class="col">
 				<h2><?php esc_html_e( 'This will just take a minute!', 'fullculqi' ); ?></h2>
 				<p class="about-description"><?php esc_html_e( 'To continue with this integration, you need provide the public and secret key.', 'fullculqi' ); ?></p>
-		
+
 			</div>
 
 		</div>
@@ -36,7 +36,7 @@
 		<div class="feature-section one-col is-wide wp-clearfix one-col">
 			<div class="col">
 				<div class="alignleft" style="margin-right: 20px;">
-					<img src="<?php echo FULLCULQI_URL; ?>resources/assets/images/welcome.png" alt="FullCulqi Logo" style="width:100%;" />
+					<img src="<?php echo MPCULQI_URL; ?>resources/assets/images/welcome.png" alt="FullCulqi Logo" style="width:100%;" />
 				</div>
 
 				<br /><br /><br />
@@ -45,7 +45,7 @@
 					<table>
 						<tr><th>
 							<div class="alignright" style="margin-left: 20px;">
-								<img src="<?php echo FULLCULQI_URL; ?>resources/assets/images/alert.png" alt="alert" style="margin-bottom: 0;" />
+								<img src="<?php echo MPCULQI_URL; ?>resources/assets/images/alert.png" alt="alert" style="margin-bottom: 0;" />
 							</div>
 							<p><?php esc_html_e( 'We have realized that you have posts related to fullculqi plugin. It is advisable to delete that information before proceeding.', 'fullculqi' ); ?></p>
 						</th></tr>
@@ -57,9 +57,9 @@
 					<br /><br />
 				<?php else : ?>
 
-					<?php 
-						require_once FULLCULQI_DIR . 'admin/layouts/modal_merchants.php';
-						require_once FULLCULQI_DIR . 'admin/layouts/modal_login.php';
+					<?php
+						require_once MPCULQI_DIR . 'admin/layouts/modal_merchants.php';
+						require_once MPCULQI_DIR . 'admin/layouts/modal_login.php';
 					?>
 
 					<form action="" method="POST">
