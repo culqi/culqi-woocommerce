@@ -31,6 +31,7 @@
                                 <div class="preview-checkout__banner" id="palette-left">
                                     <div class="banner-logo">
                                     <img id="logo" src="<?php echo  MPCULQI_URL; ?>resources/assets/images/brand.svg" alt="logo">
+                                    <img id="logo-default" style="display:none;" src="<?php echo  MPCULQI_URL; ?>resources/assets/images/brand.svg" alt="logo">
                                     </div>
                                     <div class="banner-title">
                                         <?php echo get_bloginfo('name'); ?>
