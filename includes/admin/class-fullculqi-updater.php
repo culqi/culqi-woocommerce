@@ -24,7 +24,7 @@ class FullCulqi_Updater {
 
 		// Check if the Culqi CC plugin is activated
 		$is_cc_activated = is_plugin_active( 'wp-culqi-integration-creditcard/index.php' );
-		$is_cc_version = defined( 'FULLCULQI_CC_VERSION' ) && version_compare( FULLCULQI_CC_VERSION, '2.0.0', '<' );
+		$is_cc_version = defined( 'MPCULQI_CC_VERSION' ) && version_compare( MPCULQI_CC_VERSION, '2.0.0', '<' );
 
 		if( $is_cc_activated && $is_cc_version ) {
 			$args_cc = [
@@ -40,7 +40,7 @@ class FullCulqi_Updater {
 
 		// Check if the Culqi Subscription plugin is activated
 		$is_subs_activated = is_plugin_active( 'wp-culqi-integration-subscription/index.php' );
-		$is_subs_version = defined( 'FULLCULQI_VERSION' ) && version_compare( FULLCULQI_VERSION, '2.0.0', '<' );
+		$is_subs_version = defined( 'MPCULQI_VERSION' ) && version_compare( MPCULQI_VERSION, '2.0.0', '<' );
 
 		if( $is_subs_activated && $is_subs_version ) {
 			$args_subs = [
@@ -49,14 +49,14 @@ class FullCulqi_Updater {
 				'class_title'	=> 'notice-title',
 				'class_box'		=> 'notice notice-error',
 			];
-			
+
 			fullculqi_get_template( 'resources/layouts/admin/notice-box.php', $args_subs );
 		}
 
 
 		// Check if the Culqi Button Subs plugin is activated
 		$is_bt_activated = is_plugin_active( 'wp-culqi-integration-button/index.php' );
-		$is_bt_version = defined( 'FULLCULQI_BT_VERSION' ) && version_compare( FULLCULQI_BT_VERSION, '2.0.0', '<' );
+		$is_bt_version = defined( 'MPCULQI_BT_VERSION' ) && version_compare( MPCULQI_BT_VERSION, '2.0.0', '<' );
 
 		if( $is_bt_activated && $is_bt_version ) {
 			$args_bt = [
@@ -65,14 +65,14 @@ class FullCulqi_Updater {
 				'class_title'	=> 'notice-title',
 				'class_box'		=> 'notice notice-error',
 			];
-			
+
 			fullculqi_get_template( 'resources/layouts/admin/notice-box.php', $args_bt );
 		}
 
 
 		// Check if the Culqi Deferred Payment plugin is activated
 		$is_df_activated = is_plugin_active( 'wp-culqi-integration-capture/index.php' );
-		$is_df_version = defined( 'FULLCULQI_DF_VERSION' ) && version_compare( FULLCULQI_DF_VERSION, '2.0.0', '<' );
+		$is_df_version = defined( 'MPCULQI_DF_VERSION' ) && version_compare( MPCULQI_DF_VERSION, '2.0.0', '<' );
 
 		if( $is_df_activated && $is_df_version ) {
 			$args_bt = [
@@ -81,7 +81,7 @@ class FullCulqi_Updater {
 				'class_title'	=> 'notice-title',
 				'class_box'		=> 'notice notice-error',
 			];
-			
+
 			fullculqi_get_template( 'resources/layouts/admin/notice-box.php', $args_bt );
 		}
 	}

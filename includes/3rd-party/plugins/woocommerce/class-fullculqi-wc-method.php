@@ -14,7 +14,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->id 					= 'fullculqi';
 		$this->method_title			= esc_html__( 'Culqi', 'fullculqi' );
 		$this->method_description 	= esc_html__( 'Conéctate a nuestra pasarela de pagos para aumentar tus ventas.', 'fullculqi' );
-		$this->icon 				= FULLCULQI_WC_URL . 'assets/images/cards.png';
+		$this->icon 				= MPCULQI_WC_URL . 'assets/images/cards.png';
 
 		// Define user set variables
 		$this->has_fields		= apply_filters( 'fullculqi/method/has_fields', false );
@@ -259,7 +259,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			// Log
 
 
-			//var_dump(FULLCULQI_WC_URL); exit(1);
+			//var_dump(MPCULQI_WC_URL); exit(1);
 			//OLANDA SCRIPT JS
 			//$js_library		= 'https://checkout.culqi.com/js/v3';
 			//var_dump(explode('|', $settings['enviroment'])); exit(1);
@@ -267,9 +267,9 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			$libraries = explode('|', $settings['enviroment']);
 			$js_library		= $libraries[1];
             $js_3ds	= $libraries[2];
-			$js_checkout	= FULLCULQI_WC_URL . 'assets/js/wc-checkout.js';
-			$js_waitme		= FULLCULQI_WC_URL . 'assets/js/waitMe.min.js';
-			$css_waitme		= FULLCULQI_WC_URL . 'assets/css/waitMe.min.css';
+			$js_checkout	= MPCULQI_WC_URL . 'assets/js/wc-checkout.js';
+			$js_waitme		= MPCULQI_WC_URL . 'assets/js/waitMe.min.js';
+			$css_waitme		= MPCULQI_WC_URL . 'assets/css/waitMe.min.css';
             add_filter('script_loader_tag', 'add_type_attribute' , 10, 3);
 			wp_enqueue_script( 'culqi-library-js', $js_library, [ 'jquery' ], false, true );
             wp_enqueue_script(
@@ -283,7 +283,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			wp_enqueue_script( 'waitme-js', $js_waitme, [ 'jquery' ], false, true );
 			wp_enqueue_style( 'waitme-css', $css_waitme );
             $returnUrl3DS = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-            $logo_url = (isset($settings['logo_url']) and $settings['logo_url']!='' and !is_null($settings['logo_url'])) ? $settings['logo_url'] :  FULLCULQI_URL.'resources/assets/images/brand.svg';
+            $logo_url = (isset($settings['logo_url']) and $settings['logo_url']!='' and !is_null($settings['logo_url'])) ? $settings['logo_url'] :  MPCULQI_URL.'resources/assets/images/brand.svg';
             wp_localize_script( 'fullculqi-js', 'fullculqi_vars',
 				apply_filters('fullculqi/method/localize', [
                     'url_actions'	=> site_url( 'fullculqi-api/wc-actions/' ),
@@ -494,7 +494,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		do_action('fullculqi/form-receipt/before', $order);
 
 		wc_get_template(
-			'layouts/checkout-receipt.php', $args, false, FULLCULQI_WC_DIR
+			'layouts/checkout-receipt.php', $args, false, MPCULQI_WC_DIR
 		);
 
 		do_action('fullculqi/form-receipt/after', $order);

@@ -17,7 +17,7 @@ class FullCulqi {
 	 * Settings Instance
 	 */
 	protected $settings;
-	
+
 	/**
 	 * Admin Instance
 	 */
@@ -86,43 +86,43 @@ class FullCulqi {
 	 */
 	private function load_dependencies() {
 
-		require_once FULLCULQI_DIR . 'vendor/autoload.php';
-		require_once FULLCULQI_DIR . 'includes/functions.php';
-		require_once FULLCULQI_DIR . 'includes/class-fullculqi-i18n.php';
-		require_once FULLCULQI_DIR . 'includes/class-fullculqi-cpt.php';
-		require_once FULLCULQI_DIR . 'includes/class-fullculqi-logs.php';
-		require_once FULLCULQI_DIR . 'includes/class-fullculqi-ajax.php';
+		require_once MPCULQI_DIR . 'vendor/autoload.php';
+		require_once MPCULQI_DIR . 'includes/functions.php';
+		require_once MPCULQI_DIR . 'includes/class-fullculqi-i18n.php';
+		require_once MPCULQI_DIR . 'includes/class-fullculqi-cpt.php';
+		require_once MPCULQI_DIR . 'includes/class-fullculqi-logs.php';
+		require_once MPCULQI_DIR . 'includes/class-fullculqi-ajax.php';
 
 		// Endpoint
-		require_once FULLCULQI_DIR . 'includes/class-fullculqi-endpoints.php';
-		require_once FULLCULQI_DIR . 'includes/class-fullculqi-webhooks.php';
+		require_once MPCULQI_DIR . 'includes/class-fullculqi-endpoints.php';
+		require_once MPCULQI_DIR . 'includes/class-fullculqi-webhooks.php';
 
 		// Syncs
-		require_once FULLCULQI_DIR . 'includes/syncs/class-fullculqi-cards.php';
-		require_once FULLCULQI_DIR . 'includes/syncs/class-fullculqi-charges.php';
-		require_once FULLCULQI_DIR . 'includes/syncs/class-fullculqi-login.php';
-		require_once FULLCULQI_DIR . 'includes/syncs/class-fullculqi-refunds.php';
-		require_once FULLCULQI_DIR . 'includes/syncs/class-fullculqi-orders.php';
-		require_once FULLCULQI_DIR . 'includes/syncs/class-fullculqi-customers.php';
+		require_once MPCULQI_DIR . 'includes/syncs/class-fullculqi-cards.php';
+		require_once MPCULQI_DIR . 'includes/syncs/class-fullculqi-charges.php';
+		require_once MPCULQI_DIR . 'includes/syncs/class-fullculqi-login.php';
+		require_once MPCULQI_DIR . 'includes/syncs/class-fullculqi-refunds.php';
+		require_once MPCULQI_DIR . 'includes/syncs/class-fullculqi-orders.php';
+		require_once MPCULQI_DIR . 'includes/syncs/class-fullculqi-customers.php';
 
 		// 3rd-party
-		require_once FULLCULQI_DIR . 'includes/3rd-party/plugins/woocommerce/class-fullculqi-wc.php';
-		
+		require_once MPCULQI_DIR . 'includes/3rd-party/plugins/woocommerce/class-fullculqi-wc.php';
+
 		if( is_admin() ) {
-			require_once FULLCULQI_DIR . 'includes/admin/class-fullculqi-updater.php';
-			require_once FULLCULQI_DIR . 'includes/admin/class-fullculqi-upgrader.php';
-			require_once FULLCULQI_DIR . 'includes/admin/class-fullculqi-settings.php';
-			require_once FULLCULQI_DIR . 'includes/admin/class-fullculqi-welcome.php';
-			
+			require_once MPCULQI_DIR . 'includes/admin/class-fullculqi-updater.php';
+			require_once MPCULQI_DIR . 'includes/admin/class-fullculqi-upgrader.php';
+			require_once MPCULQI_DIR . 'includes/admin/class-fullculqi-settings.php';
+			require_once MPCULQI_DIR . 'includes/admin/class-fullculqi-welcome.php';
+
 			// Metaboxes
-			require_once FULLCULQI_DIR . 'includes/admin/metaboxes/class-fullculqi-metaboxes.php';
-			require_once FULLCULQI_DIR . 'includes/admin/metaboxes/class-fullculqi-orders.php';
-			require_once FULLCULQI_DIR . 'includes/admin/metaboxes/class-fullculqi-charges.php';
-			require_once FULLCULQI_DIR . 'includes/admin/metaboxes/class-fullculqi-customers.php';
+			require_once MPCULQI_DIR . 'includes/admin/metaboxes/class-fullculqi-metaboxes.php';
+			require_once MPCULQI_DIR . 'includes/admin/metaboxes/class-fullculqi-orders.php';
+			require_once MPCULQI_DIR . 'includes/admin/metaboxes/class-fullculqi-charges.php';
+			require_once MPCULQI_DIR . 'includes/admin/metaboxes/class-fullculqi-customers.php';
 		}
 	}
 
-	
+
 	/**
 	 * Plugins Loaded
 	 * @return mixed

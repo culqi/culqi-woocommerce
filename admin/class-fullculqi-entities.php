@@ -21,7 +21,7 @@ abstract class FullCulqi_Entities {
 			return;
 		}
 
-		wp_enqueue_style( 'fullculqi-css', FULLCULQI_PLUGIN_URL . 'admin/assets/css/fullculqi_admin.css');
+		wp_enqueue_style( 'fullculqi-css', MPCULQI_PLUGIN_URL . 'admin/assets/css/fullculqi_admin.css');
 	}
 }
 ?>

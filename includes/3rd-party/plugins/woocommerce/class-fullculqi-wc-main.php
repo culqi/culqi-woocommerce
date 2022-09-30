@@ -43,7 +43,7 @@ class FullCulqi_WC {
 			return;
 		}
 
-		require_once FULLCULQI_WC_DIR . 'class-fullculqi-wc-method.php';
+		require_once MPCULQI_WC_DIR . 'class-fullculqi-wc-method.php';
 	}
 
 	/**
@@ -216,7 +216,7 @@ class FullCulqi_WC {
 	 * @return html
 	 */
 	public function notice_currency() {
-		fullculqi_get_template( 'layouts/notice_currency.php', [], FULLCULQI_WC_DIR );
+		fullculqi_get_template( 'layouts/notice_currency.php', [], MPCULQI_WC_DIR );
 	}
 
 }

@@ -23,7 +23,7 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 
 		wp_enqueue_script(
 			'fullculqi-charges-js',
-			FULLCULQI_URL . 'resources/assets/js/admin-charges.js',
+			MPCULQI_URL . 'resources/assets/js/admin-charges.js',
 			[ 'jquery' ], false, true
 		);
 
@@ -72,10 +72,10 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 		$cols[ 'title' ] = esc_html__( 'ID', 'fullculqi' );
 		unset( $cols[ 'date' ] );
 
-		foreach($cols as $key_column => $value_column) {	
+		foreach($cols as $key_column => $value_column) {
 			$newCols[ $key_column ] = $value_column;
 
-			if( $key_column == 'title' ) {			
+			if( $key_column == 'title' ) {
 				$newCols['culqi_email']		= esc_html__( 'Email', 'fullculqi' );
 				$newCols['culqi_amount']	= esc_html__( 'Amount', 'fullculqi' );
 				//$newCols['culqi_refunded']	= esc_html__( 'Refunded', 'fullculqi' );
@@ -83,7 +83,7 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 				$newCols['culqi_creation']	= esc_html__( 'Creation', 'fullculqi' );
 			}
 		}
-		
+
 		return apply_filters('fullculqi/charges/column_name', $newCols, $cols );
 	}
 
@@ -108,7 +108,7 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 
 				$culqi_customer_id 	= get_post_meta( $post_id, 'culqi_customer_id', true );
 				$post_customer_id = fullculqi_post_from_meta( 'culqi_id', $culqi_customer_id );
-				
+
 				if( ! empty( $post_customer_id ) ) {
 					$customer_email = get_post_meta( $post_customer_id, 'culqi_email', true );
 
@@ -127,7 +127,7 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 			case 'culqi_amount'		:
 				$value = fullculqi_format_price(
 					$basic['culqi_amount'], $basic['culqi_currency']
-				); 
+				);
 				break;
 
 			// case 'culqi_refunded'	:
@@ -140,7 +140,7 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 
 				$statuses = fullculqi_charges_statuses();
 				$status = get_post_meta( $post_id, 'culqi_status', true );
-	
+
 				$class = fullculqi_class_from_status( $status, 'charges' );
 
 				if( ! empty( $status ) && isset( $statuses[$status] ) ) {
@@ -247,12 +247,12 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 	 */
 	public function metabox_source() {
 		global $post;
-		
+
 		$args = apply_filters( 'fullculqi/charges/metabox_source/args', [
 			'data' => get_post_meta( $post->ID, 'culqi_data', true ),
 		], $post );
 
-		fullculqi_get_template( 'resources/layouts/admin/metaboxes/charge_source.php', $args );	
+		fullculqi_get_template( 'resources/layouts/admin/metaboxes/charge_source.php', $args );
 	}
 }
 

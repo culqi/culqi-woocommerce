@@ -3,12 +3,12 @@
     "description": "WordPress Culqi Integration",
     "keywords": ["culqi", "client", "api", "php", "wordpress"],
     "type": "wordpress-plugin",
-    "homepage": "https://www.letsgodev.com/",
+    "homepage": "https://www.culqi.com/",
     "license": "GPL-2.0+",
     "authors": [
         {
             "name": "Lets Go Dev",
-            "email": "support@letsgodev.com"
+            "email": "soporte@culqi.com"
         }
     ],
     "minimum-stability": "dev",

@@ -10,7 +10,7 @@ class FullCulqi_Upgrader {
 	 * Construct
 	 */
 	public function __construct() {
-		
+
 		// Check available updates
 		add_action( 'admin_notices', [ $this, 'check_available_upgrades' ] );
 
@@ -23,7 +23,7 @@ class FullCulqi_Upgrader {
 	 * @return mixed
 	 */
 	public function check_available_upgrades() {
-		$plugin = get_file_data( FULLCULQI_FILE, [ 'Version' => 'Version' ] );
+		$plugin = get_file_data( MPCULQI_FILE, [ 'Version' => 'Version' ] );
 
 		// Compare version 2.0.0
 		if( version_compare( $plugin['Version'], '2.0.0', '>=' ) &&
@@ -31,13 +31,13 @@ class FullCulqi_Upgrader {
 
 			// Check if it has payments
 			$count_posts = wp_count_posts( 'culqi_payments' );
-			
+
 			if( isset( $count_posts->publish ) && $count_posts->publish > 0 )
 				$this->screen_upgrade_2_0_0();
 			else
 				update_option( 'fullculqi_2_0_0_upgraded', true );
 		}
-			
+
 	}
 
 	/**
@@ -80,7 +80,7 @@ class FullCulqi_Upgrader {
 		// Check the permissions
 		if( ! current_user_can( 'manage_options' ) )
 			return;
-	
+
 		// Chek if this version was updated
 		if( get_option( 'fullculqi_2_0_0_upgraded', false ) )
 			return;
@@ -102,8 +102,8 @@ class FullCulqi_Upgrader {
 		if( $posts ) {
 
 			foreach( $posts as $post ) {
-				
-				// Get			
+
+				// Get
 				$basic = get_post_meta( $post->ID, 'culqi_basic', true );
 
 				// Update
@@ -145,8 +145,8 @@ class FullCulqi_Upgrader {
 	 */
 	private function set_capabilities() {
 		$administrator = get_role( 'administrator' );
-	
-		$admin_caps = apply_filters( 'fullculqi/set_capabilities', [		
+
+		$admin_caps = apply_filters( 'fullculqi/set_capabilities', [
 			'edit_others_charges',
 			'edit_charges',
 			'edit_published_charges',
@@ -162,7 +162,7 @@ class FullCulqi_Upgrader {
 			'edit_published_customers',
 			'publish_customers',
 		] );
-	
+
 		foreach( $admin_caps as $cap )
 			$administrator->add_cap( $cap );
 

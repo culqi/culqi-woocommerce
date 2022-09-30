@@ -11,8 +11,8 @@
         <a href="admin.php?page=fullculqi_webhooks" class="nav-tab">Webhooks</a>
     </nav>
     <?php
-    require_once FULLCULQI_DIR . 'admin/layouts/modal_merchants.php';
-    require_once FULLCULQI_DIR . 'admin/layouts/modal_login.php';
+    require_once MPCULQI_DIR . 'admin/layouts/modal_merchants.php';
+    require_once MPCULQI_DIR . 'admin/layouts/modal_login.php';
     ?>
 
     <form id="form-culqi-settings" method="post" action="options.php">
@@ -21,18 +21,10 @@
             <tr>
                 <th scope="row"><?php esc_html_e('Culqi', 'fullculqi'); ?></th>
                 <td>
-                    <!-- <div class="can-toggle can-toggle--size-large">
-                        <input id="c" type="checkbox">
-                        <label for="c">
-                            <div class="can-toggle__switch" data-checked="ACTIVO" data-unchecked="INACTIVO"></div>
-                        </label>
-                    </div>
-
-                    <br> -->
                     <?php $settings = fullculqi_get_settings(); ?>
                     <div class="can-toggle demo-rebrand-1">
                         <input id="d" type="checkbox" name="fullculqi_options[enabled]"
-                               value="yes" <?php echo ($settings['enabled'] == 'yes') ? 'checked' : ''; ?>>
+                               value="yes" <?php checked( $settings['enabled'], 'yes', true ); ?>>
                         <label for="d">
                             <div class="can-toggle__switch" data-checked="Activo" data-unchecked="Inactivo"></div>
                         </label>
@@ -59,7 +51,7 @@
                       method="post" enctype="multipart/form-data">
                     <div>
                         <div>
-                            <img src="<?php echo FULLCULQI_URL . 'resources/assets/images/icon-check.png'; ?>" />
+                            <img src="<?php echo MPCULQI_URL . 'resources/assets/images/icon-check.png'; ?>" />
                         </div>
                         <div>
                             <h1>¡Configuración registrada<br/> con éxito!</h1>

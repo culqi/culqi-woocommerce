@@ -6,8 +6,8 @@ class FullCulqi_Payments extends FullCulqi_Entities {
 	protected $post_type = 'culqi_payments';
 
 	public function addmetabox() {
-		add_meta_box('culqi_payments_basic', __('Basic', 'letsgo'), [ $this, 'metabox_basic' ], $this->post_type, 'normal', 'high');
-		add_meta_box('culqi_payments_source', __('Source', 'letsgo'), [ $this, 'metabox_source' ], $this->post_type, 'normal', 'high');
+		add_meta_box('culqi_payments_basic', __('Basic', 'culqi'), [ $this, 'metabox_basic' ], $this->post_type, 'normal', 'high');
+		add_meta_box('culqi_payments_source', __('Source', 'culqi'), [ $this, 'metabox_source' ], $this->post_type, 'normal', 'high');
 	}
 
 
@@ -15,25 +15,25 @@ class FullCulqi_Payments extends FullCulqi_Entities {
 
 		$settings = fullculqi_get_settings();
 
-		$columns[ 'title' ] = esc_html__('ID', 'letsgo');
+		$columns[ 'title' ] = esc_html__('ID', 'culqi');
 		unset($columns[ 'date' ]);
 
-		foreach($columns as $key_column => $value_column) {	
+		foreach($columns as $key_column => $value_column) {
 			$ok_columns[$key_column] = $value_column;
 
-			if( $key_column == 'title' ) {			
-				$ok_columns['culqi_creation']	= esc_html__( 'Creation', 'letsgo' );
-				$ok_columns['culqi_email']		= esc_html__( 'Email', 'letsgo' );
-				$ok_columns['culqi_currency']	= esc_html__( 'Currency', 'letsgo' );
-				$ok_columns['culqi_amount']		= esc_html__( 'Amount', 'letsgo' );
-				$ok_columns['culqi_refunded']	= esc_html__( 'Refunded', 'letsgo' );
-				$ok_columns['culqi_status']		= esc_html__( 'Status', 'letsgo' );
+			if( $key_column == 'title' ) {
+				$ok_columns['culqi_creation']	= esc_html__( 'Creation', 'culqi' );
+				$ok_columns['culqi_email']		= esc_html__( 'Email', 'culqi' );
+				$ok_columns['culqi_currency']	= esc_html__( 'Currency', 'culqi' );
+				$ok_columns['culqi_amount']		= esc_html__( 'Amount', 'culqi' );
+				$ok_columns['culqi_refunded']	= esc_html__( 'Refunded', 'culqi' );
+				$ok_columns['culqi_status']		= esc_html__( 'Status', 'culqi' );
 
 				if( $settings['woo_payment'] == 'yes' )
-					$ok_columns['culqi_order_id']	= esc_html__( 'Order', 'letsgo' );
+					$ok_columns['culqi_order_id']	= esc_html__( 'Order', 'culqi' );
 			}
 		}
-		
+
 		return apply_filters('fullculqi/payments/manage_columns/name', $ok_columns, $columns);
 	}
 
@@ -138,7 +138,7 @@ class FullCulqi_Payments extends FullCulqi_Entities {
 				);
 
 		$args = apply_filters('fullculqi/payments/metabox_source/args', $args, $post);
-		fullculqi_get_template('admin/layouts/metaboxes/metabox_payment_source.php', $args);	
+		fullculqi_get_template('admin/layouts/metaboxes/metabox_payment_source.php', $args);
 	}
 
 
@@ -168,7 +168,7 @@ class FullCulqi_Payments extends FullCulqi_Entities {
 			$results = $wpdb->get_results($query);
 			$keys = array();
 
-			// Keys Post Type 
+			// Keys Post Type
 			foreach($results as $result)
 				$keys[$result->culqi_id] = $result->post_id;
 

@@ -1,9 +1,9 @@
 <style>
     .customcheckout .form__group__select::before {
-        content: url("<?php echo  FULLCULQI_URL; ?>resources/assets/images/arrow_down.svg");
+        content: url("<?php echo  MPCULQI_URL; ?>resources/assets/images/arrow_down.svg");
     }
     .customcheckout .form__group-input .brand {
-        background-image: url("<?php echo FULLCULQI_URL; ?>resources/assets/images/visa.png");
+        background-image: url("<?php echo MPCULQI_URL; ?>resources/assets/images/visa.png");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -21,7 +21,7 @@
                 <div class="custom-checkout__header">
                     <div class="custom-checkout__header-title">Personalización</div>
                     <div class="custom-checkout__header-close" id="btn-close">
-                    <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/close-black.svg" alt="close">
+                    <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/close-black.svg" alt="close">
                     </div>
                 </div>
                 <div class="custom-checkout__body">
@@ -30,7 +30,7 @@
                             <div class="preview-checkout">
                                 <div class="preview-checkout__banner" id="palette-left">
                                     <div class="banner-logo">
-                                    <img id="logo" src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/brand.svg" alt="logo">
+                                    <img id="logo" src="<?php echo  MPCULQI_URL; ?>resources/assets/images/brand.svg" alt="logo">
                                     </div>
                                     <div class="banner-title">
                                         <?php echo get_bloginfo('name'); ?>
@@ -66,29 +66,29 @@
                                                 Tarjeta débito/crédito
                                             </li>
                                             <li>
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/yape.svg" alt="icon">
+                                                <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/yape.svg" alt="icon">
                                                 Yape
                                             </li>
                                             <li>
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/banca-movil.svg" alt="icon">
+                                                <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/banca-movil.svg" alt="icon">
 
                                                 Billeteras móviles
                                             </li>
                                             <li>
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/online-banking.svg" alt="icon">
+                                                <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/online-banking.svg" alt="icon">
                                                 Banca móvil o internet
                                             </li>
                                             <li>
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/agents.svg" alt="icon">
+                                                <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/agents.svg" alt="icon">
                                                 Agentes y bodegas
                                             </li>
                                             <li>
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/bcp.svg" alt="icon">
+                                                <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/bcp.svg" alt="icon">
                                                 Cuotéalo BCP
                                             </li>
                                         </ul>
                                         <div class="preview-checkout__container-menu-image">
-                                            <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/culqi-black.svg" alt="Culqi logo"/>
+                                            <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/culqi-black.svg" alt="Culqi logo"/>
                                         </div>
                                     </div>
                                     <div class="preview-checkout__container-content">
@@ -193,7 +193,7 @@
 
                                             </div>
                                             <div class="image">
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/brand.svg" alt="logo">
+                                                <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/brand.svg" alt="logo">
                                             </div>
                                         </div>
                                         <div class="iso-logo__item">
@@ -204,7 +204,7 @@
 
                                             </div>
                                             <div class="image">
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/brand-culqi.svg" alt="logo">
+                                                <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/brand-culqi.svg" alt="logo">
                                             </div>
                                         </div>
                                         <div class="iso-logo__item">
@@ -215,7 +215,7 @@
                                                 </svg>
                                             </div>
                                             <div class="image">
-                                                <img src="<?php echo  FULLCULQI_URL; ?>resources/assets/images/bran-culqi-bg.svg" alt="logo">
+                                                <img src="<?php echo  MPCULQI_URL; ?>resources/assets/images/bran-culqi-bg.svg" alt="logo">
                                             </div>
                                         </div>
 

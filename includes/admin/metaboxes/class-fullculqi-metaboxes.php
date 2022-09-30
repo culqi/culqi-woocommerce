@@ -50,12 +50,12 @@ abstract class FullCulqi_Metaboxes {
 
 			wp_enqueue_style(
 				'fullculqi-metaboxes-css',
-				FULLCULQI_URL . 'resources/assets/css/admin-metaboxes.css'
+				MPCULQI_URL . 'resources/assets/css/admin-metaboxes.css'
 			);
 
 			wp_enqueue_style(
 				'fullculqi-tags-css',
-				FULLCULQI_URL . 'resources/assets/css/tags.css'
+				MPCULQI_URL . 'resources/assets/css/tags.css'
 			);
 
 			// Loading Gif
@@ -82,13 +82,13 @@ abstract class FullCulqi_Metaboxes {
 
 				wp_enqueue_script(
 					'fullculqi-js',
-					FULLCULQI_URL . 'resources/assets/js/admin-metaboxes.js',
+					MPCULQI_URL . 'resources/assets/js/admin-metaboxes.js',
 					[ 'jquery' ], false, true
 				);
 
                 wp_enqueue_script(
                     'fullculqi-tabs-js',
-                    FULLCULQI_URL . 'resources/assets/js/admin-tabs.js',
+                    MPCULQI_URL . 'resources/assets/js/admin-tabs.js',
                     [ 'jquery' ], false, true
                 );
 

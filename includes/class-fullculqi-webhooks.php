@@ -109,7 +109,6 @@ class FullCulqi_Webhooks {
 		];
 
 		array_unshift( $webhooks_saved, $webhooks_in );
-		//var_dump(array_unshift( $webhooks_saved, $webhooks_in )); exit(1);
 		update_option( 'fullculqi_webhooks', $webhooks_saved );
 
 		return true;
