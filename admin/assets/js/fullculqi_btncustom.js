@@ -45,7 +45,7 @@ const previewCustomFunction = (insertPalette = '', insertLogo = '') => {
   const actionTextVisible = document.querySelector('.action-visible-text');
   const inputLogo = document.querySelector('#logo-url');
   const logo = document.querySelector('#logo');
-  const logodefault = document.querySelector('#logodefault');
+  const logo_default = document.querySelector('#logo-default');
   const labelText = document.querySelector('#label-text');
 
   const btnClose = document.querySelectorAll('#btn-close')
@@ -53,7 +53,7 @@ const previewCustomFunction = (insertPalette = '', insertLogo = '') => {
 
   const checkoutPreviewText = {
     labelDefault: 'Copia la URL de tu logotipo',
-    logoDefault: logo.src,
+    logoDefault: logo_default.src,
     errors: {
       logoUrl: 'URL incompleta, falta agregar protocolo https o http',
       logoInvalid: 'Imagen no válida'
