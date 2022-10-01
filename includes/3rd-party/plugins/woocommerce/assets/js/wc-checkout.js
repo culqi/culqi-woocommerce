@@ -265,7 +265,8 @@ var device = await Culqi3DS.generateDevice();
 						installments	: Culqi.token.metadata.installments,
 						wpnonce			: fullculqi_vars.wpnonce,
 						enviroment		: enviroment[0],
-						device			: device
+						device			: device,
+						email			: Culqi.token.email
 					};
 				}
 				FullCulqi.loadAjax( data );
@@ -302,7 +303,8 @@ var device = await Culqi3DS.generateDevice();
 						wpnonce			: fullculqi_vars.wpnonce,
 						enviroment		: enviroment[0],
 						device			: device,
-						parameters3DS	: parameters3DS
+						parameters3DS	: parameters3DS,
+						email			: Culqi.token.email
 					};
 				}
 				FullCulqi.loadAjax3DS( data );
