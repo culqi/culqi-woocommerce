@@ -49,7 +49,7 @@ class FullCulqi_Admin {
 			wp_verify_nonce( $_POST['fullculqi_install'], 'fullculqi_wpnonce' )
 		) {
 			//var_dump($_POST['fullculqi_options']); exit(1);
-			$fullculqi_options = array_map( 'esc_html', $_POST['fullculqi_options'] );
+			$fullculqi_options = array_map( 'sanitize_text_field', $_POST['fullculqi_options'] );
 
 			update_option('fullculqi_options', $fullculqi_options);
 
