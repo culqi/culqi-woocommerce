@@ -2,15 +2,13 @@
 
 Nuestro plugin integra por tí nuestro Checkout v4 y nuestra librería JS 3DS, con los cuales tendrás la posibilidad de realizar cobros con tarjetas de débito y crédito, Yape, PagoEfectivo, billeteras móviles y Cuotéalo con solo unos simples pasos de configuración.
 
-> **Note**
 > Recuerda que para usar cualquier plugins necesitas tener tu llave pública y llave privada (test o live), los cuales los puedes generar a través de tu Culqipanel.
-
->[!WARNING]
->This is a warning
 
 ## Requisitos ##
 
-- Version PHP mínimo requerido es 5.6
+- Version PHP 7.0+
+- WooCommerce 3.0+
+- Wordpress 5.5+
 - [Credenciales de Culqi](https://www.culqi.com)
 
 
@@ -18,13 +16,13 @@ Nuestro plugin integra por tí nuestro Checkout v4 y nuestra librería JS 3DS, c
 
 Contamos con 2 formas de instalar nuestro complemento en tu tienda virtual:
 
-#### Instalar automáticamente el complemento desde el MarketPlace de WordPress.
+1. Instalar automáticamente el complemento desde el MarketPlace de WordPress.
 
- Debes buscar nuestro complemento **Culqi**. Luego, procede a activarlo.
+    Debes buscar nuestro complemento **Culqi**. Luego, procede a activarlo.
 
-#### Instalar manualmente el .zip de nuestro complemento.
+2. Instalar manualmente el .zip de nuestro complemento.
 
-Debes descargar el zip (.zip) de nuestro complemento desde [aquí](https://github.com/culqi/culqi-woocommerce/releases/download/v3.0.0/culqi-woocommerce.zip "download") y subirlo como plugin.
+    Debes descargar el zip (.zip) de nuestro complemento desde [aquí](https://github.com/culqi/culqi-woocommerce/releases/download/v3.0.0/culqi-woocommerce.zip "download") y subirlo como plugin.
 
 ![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-instalar-zip.png)
 
@@ -47,29 +45,22 @@ Independiente del mecanismo de instalación, los pasos para configurar el plugin
 
 3. Iniciar sesión: Con este boton podrás iniciar sesión en tu CulqiPanel y podrás obtener las llaves de tu comercio automáticamente.
 
-<Toolbar>
-  Recuerda que las credenciales son enviadas al correo que registraste en el proceso de afiliación.
-</Toolbar>
+> Recuerda que las credenciales son enviadas al correo que registraste en el proceso de afiliación.
 
 4. Ingresa las llaves pública y privada (test o live): Lo puedes hacer de manera manual o automática. Para el segundo, haz click en "Iniciar Sesión" para entrar al CulqiPanel, luego selecciona tu comercio e inserta automáticamente tus llaves.
 
-<Toolbar>
-  Recuerda que las llaves de integración se identifican como "test" y las de producción como "live".
-</Toolbar>
+> Recuerda que las llaves de integración se identifican como "test" y las de producción como "live".
 
 5. Selecciona los métodos de pago: Por defecto nuestro plugin habilita los pagos con tarjeta. Sin embargo, si deseas habilitar otros medios de pago (Banca móvil e internet, Agentes y bodegas, Billeteras móviles, Cuotéalo BCP) solo debes activar los "checks".
 
 6. Define el tiempo de expiración de pago: Debes definirlo si habilitarás pagos con PagoEfectivo, billeteras móviles o Cuotéalo.
 
-<Toolbar>
-  Recuerda que si no configuras el tiempo de expiración, este tomará el tiempo por defecto: 24 horas.
-</Toolbar>
+> Recuerda que si no configuras el tiempo de expiración, este tomará el tiempo por defecto: 24 horas.
 
 7. Registra notificaciones de pago (Webhook): Valida en tu CulqiPanel que la URL de notificaciones de pago sea correcta.
 
-<Toolbar>
-  Recuerda que si no iniciaste sesión en el Culqipanel desde el plugin, debes configurar manualmente la URL de Webhook con el <b>evento (order.status.changed)</b>. Sigue los pasos <Link to="/es/documentacion/pagos-online/webhooks" text="aquí" />.
-</Toolbar>
+
+> Recuerda que si no iniciaste sesión en el Culqipanel desde el plugin, debes configurar manualmente la URL de Webhook con el <b>evento (order.status.changed)</b>. Sigue los pasos [aquí](https://docs.culqi.com/es/documentacion/pagos-online/webhooks/).
 
 8. Personaliza tu checkout: Con esta opción puedes cambiar los colores preestablecidos por los colores de tu marca, así como el logo.
 
@@ -85,9 +76,7 @@ Antes de activar tu tienda en producción, te recomendamos realizar pruebas de i
 
 Si vas a empezar a vender desde tu tienda virtual, deberás seleccionar el ambiente de producción e ingresar tus llaves.
 
- <Toolbar type='info'>
-    Recuerda que si quieres probar tu integración, puedes utilizar nuestras <Link to="/es/documentacion/pagos-online/tarjetas-de-prueba" text="tarjetas de prueba." />
-  </Toolbar>
+> Recuerda que si quieres probar tu integración, puedes utilizar nuestras [tarjetas de prueba.](https://docs.culqi.com/es/documentacion/pagos-online/tarjetas-de-prueba/)
 
 ## Versiones disponibles
 
