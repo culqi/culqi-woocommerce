@@ -1,6 +1,6 @@
 # Culqi WooCommerce - Wordpress Plugin
 
-Nuestro plugin integra por ti nuestro Checkout v4 y nuestra libreria JS 3DS, con el cual tendras la posibilidad de realizar cobros con tarjetas de crédito y débito, pagoEfectivo(banca móvil o internet, agentes y bodegas), billeteras móviles y cuotéalo tan solo con unos simples pasos de configuración.
+Nuestro plugin integra por tí nuestro Checkout v4 y nuestra librería JS 3DS, con los cuales tendrás la posibilidad de realizar cobros con tarjetas de débito y crédito, Yape, PagoEfectivo, billeteras móviles y Cuotéalo con solo unos simples pasos de configuración.
 
 > **Note**
 > Recuerda que para usar cualquier plugins necesitas tener tu llave pública y llave privada (test o live), los cuales los puedes generar a través de tu Culqipanel.
@@ -14,126 +14,133 @@ Nuestro plugin integra por ti nuestro Checkout v4 y nuestra libreria JS 3DS, con
 - [Credenciales de Culqi](https://www.culqi.com)
 
 
-## Instalación desde el repositorio de WP ##
+## Instalación y activación
 
-Puedes descargar el plugin desde el repositorio de WordPress :
-[https://wordpress.org/plugins/culqi-full-integration/](https://wordpress.org/plugins/culqi-full-integration/)
+Contamos con 2 formas de instalar nuestro complemento en tu tienda virtual:
 
+#### Instalar automáticamente el complemento desde el MarketPlace de WordPress.
 
-O puedes instalarlo desde el mismo WordPress. Ir a Plugins > Agregar nuevo
+ Debes buscar nuestro complemento **Culqi**. Luego, procede a activarlo.
 
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2015/08/install_plugin1.png "Add New Plugin")
+#### Instalar manualmente el .zip de nuestro complemento.
 
-Buscar "Culqi", instalar y activar
+Debes descargar el zip (.zip) de nuestro complemento desde [aquí](https://github.com/culqi/culqi-woocommerce/releases/download/v3.0.0/culqi-woocommerce.zip "download") y subirlo como plugin.
 
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2015/07/plugin.jpg "Add New Plugin")
+![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-instalar-zip.png)
 
+Luego busca el plugin instalado con el nombre de **Culqi** y procedes a activarlo.
 
-## Instalación desde Github ##
+![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-activar.png)
 
-**1. Clonar Repositorio**
-```git clone git@github.com:gonzalesc/wp-culqi-integration.git```
+## Configuración
 
-**2. Descargar Biblioteca Culqi**
-```composer update```
+A continuación se presenta una imagen de la pantalla de configuración:
 
+![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-conf.jpg)
 
-## Credenciales de Culqi ##
+Ingresa en la sección "Settings" para configurar el plugin.
+Independiente del mecanismo de instalación, los pasos para configurar el plugin son los mismos.
 
-Debes registrarte en [https://www.culqi.com](https://www.culqi.com) y luego acceder al panel de integración. Una vez ahi, irás a Desarrollo > ApiKey y así obtendrás tus credenciales:
+1. Activa tu Culqi checkout: Siempre debes mantenerlo activo para que tu checkout se muestre en tu tienda virtual.
 
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2019/04/apikey.png "Credenciales Culqi")
+2. Selecciona el ambiente (integración o producción): Este paso es esencial para que determines cuándo realizar pruebas y cuándo activar tu tienda en producción. Sirve también para indicar en que ambiente de CulqiPanel vas iniciar sesión.
 
-## Página de Bienvenida ##
+3. Iniciar sesión: Con este boton podrás iniciar sesión en tu CulqiPanel y podrás obtener las llaves de tu comercio automáticamente.
 
-Cuando actives el plugin, éste te redireccionará a una página de bienvenida donde deberás poner tus credenciales de Culqi y otras cosas más.
+<Toolbar>
+  Recuerda que las credenciales son enviadas al correo que registraste en el proceso de afiliación.
+</Toolbar>
 
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2015/07/welcome.jpg "Welcome Page")
+4. Ingresa las llaves pública y privada (test o live): Lo puedes hacer de manera manual o automática. Para el segundo, haz click en "Iniciar Sesión" para entrar al CulqiPanel, luego selecciona tu comercio e inserta automáticamente tus llaves.
 
+<Toolbar>
+  Recuerda que las llaves de integración se identifican como "test" y las de producción como "live".
+</Toolbar>
 
-## Página de Configuración ##
+5. Selecciona los métodos de pago: Por defecto nuestro plugin habilita los pagos con tarjeta. Sin embargo, si deseas habilitar otros medios de pago (Banca móvil e internet, Agentes y bodegas, Billeteras móviles, Cuotéalo BCP) solo debes activar los "checks".
 
-Una vez llenado todo correctamente, al presionar "Guardar", éste le enviará a la página de configuración del plugin.
+6. Define el tiempo de expiración de pago: Debes definirlo si habilitarás pagos con PagoEfectivo, billeteras móviles o Cuotéalo.
 
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2021/03/base_2_settings.jpg "Configure you Settings page")
+<Toolbar>
+  Recuerda que si no configuras el tiempo de expiración, este tomará el tiempo por defecto: 24 horas.
+</Toolbar>
 
-## Servicios y Sincronización ##
+7. Registra notificaciones de pago (Webhook): Valida en tu CulqiPanel que la URL de notificaciones de pago sea correcta.
 
-### Cargos ###
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2021/03/base_3_charges.jpg "Charges List")
+<Toolbar>
+  Recuerda que si no iniciaste sesión en el Culqipanel desde el plugin, debes configurar manualmente la URL de Webhook con el <b>evento (order.status.changed)</b>. Sigue los pasos <Link to="/es/documentacion/pagos-online/webhooks" text="aquí" />.
+</Toolbar>
 
-### Ordenes ( PagoEfectivo ) ###
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2021/03/base_4_orders.jpg "Order List")
+8. Personaliza tu checkout: Con esta opción puedes cambiar los colores preestablecidos por los colores de tu marca, así como el logo.
 
-### Clientes ###
+![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-preview-checkout.png)
 
-El plugin registrará a los clientes en Culqi sólo si el comprador esta logueado en la tienda.
+9. Finalmente guarda tu configuración: ¡Listo!, Tus clientes ya pueden realizar pagos a través de tu tienda virtual.
 
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2021/03/base_5_customers.jpg "Customer List")
+![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-save.png)
 
-## Popup de Culqi para WooCommerce ##
+## Pruebas
 
-Tienes activada la pasarela de pago para WooCommerce y sólo debes ir a personalizarlo.
+Antes de activar tu tienda en producción, te recomendamos realizar pruebas de integración. Así garantizarás un correcto despliegue.
 
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2021/03/base_6_wc.jpg "WooCommerce Payment")
+Si vas a empezar a vender desde tu tienda virtual, deberás seleccionar el ambiente de producción e ingresar tus llaves.
 
+ <Toolbar type='info'>
+    Recuerda que si quieres probar tu integración, puedes utilizar nuestras <Link to="/es/documentacion/pagos-online/tarjetas-de-prueba" text="tarjetas de prueba." />
+  </Toolbar>
 
-## Log de transacciones ##
+## Versiones disponibles
 
-El log siempre está habilitado, cada pedido tendrá un detalle de todos los pasos que sigue Culqi para hacer el pago. Aqui también se registrará los errores si los hay.
+Contamos con las siguientes versiones:
 
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2015/07/log.jpg "Log")
+<table
+  class="mx-auto max-w-4xl w-full whitespace-nowrap bg-transparent divide-y divide-culqi-gray-ultra-light dark:divide-culqi-plate-light border-2 border-culqi-gray-ultra-light dark:border-culqi-plate-light">
+  <thead>
+    <tr class="bg-culqi-gray-light dark:bg-culqi-gray-ultra-light text-culqi-plate-light text-left">
+      <th class="px-3 py-[14px] font-semibold text-sm"></th>
+      <th class="px-3 py-[14px] font-semibold text-sm">Versión</th>
+      <th class="px-3 py-[14px] font-semibold text-sm">Descarga</th>
+    </tr>
+  </thead>
+  <tbody class="bg-transparent divide-y divide-culqi-gray-ultra-light dark:divide-culqi-plate-light">
+    <tr class="whitespace-nowrap font-normal font-Archivo  text-culqi-plate-dark dark:text-white-gray">
+      <td class = "px-3 py-4 font-bold text-sm">
+        <img src="https://docs.culqi.com/images/plugins/woocommerce.svg" alt="woocommerce" /></br>
+      </td>
+      <td class = "px-3 py-4 font-bold text-sm">
+        2.6.11+
+      </td>
+      <td class = "px-3 py-4 text-sm">
+        <a href='https://github.com/culqi/culqi-woocommerce/releases/download/v3.0.0/culqi-woocommerce.zip'>
+          Descargar
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
+## Manual de instalación y configuración
 
-## Datos recomendados en el Checkout ##
+Puedes usar el manual para obtener más detalle:
 
-Culqi recomienda que estos campos sean obligatorios:
-
-- Email
-- Nombre
-- Apellido
-- Dirección
-- Ciudad
-- Código de pais ( ejem: para Perú es PE)
-- Teléfono
-
-De todos estos puntos el más importante es el `email`, los otros campos son muy necesarios para un tema de antifraude pero no son obligatorios. Yo recomiendo que tengas todos estos campos en tu checkout. El plugin no validará estos campos.
-
-
-## Rembolso vía Woocommerce ##
-
-Podrás hacer reembolsos usando la API de Culqi con un sólo click, además de reponer el stock si así lo especificas.
-
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2020/06/woo_refund.jpg "Refund")
-
-
-## Webhooks - Ordenes ( PagoEfectivo ) ##
-
-Puedes habilitar Multipagos en la sección de configuración de la pasarela de pago Culqi. Cada vez que se genera una orden de pago, le llegará al cliente un email con el CIP de pago.
-
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2021/03/base_7_webhook.jpg "Multipagos")
-
-
-Cuando el cliente page su código CIP, Culqi avisará al comercio mediante un `evento` el cual debemos configurar: para ello, debemos entrar al panel de Culqi e ir a la sección de `eventos` y al submenu de `webhooks`. Finalmente le damos click al botón `Añadir` que está arriba a la derecha.
-
-![Alt text](https://www.letsgodev.com/wp-content/uploads/2015/07/webhook_create.jpg "Event")
-
-
-Debes elegir el evento : `order.status.changed`
-y la URL que debes poner está en la sección Webhooks del plugin.
-
-```
-https://{tuweb}/fullculqi-api/webhooks
-```
-
-
-## Problemas Comunes desde el servicio de Culqi ##
-
-El servicio de Culqi suele ser óptimo cuando se trata de registrar pagos simples pero, raras veces, cuando empiezas a interactuar con otros servicios puede traernos estos tipos de problemas, si sueles tener alguno, comunicate con ellos.
-
-- `Ups! Algo salió mal en Culqi. Contáctate con soporte@culqi.com para obtener mas información` - *El servicio de Culqi, para el servicio solicitado, no está disponible en ese momento*
-
-- `Endpoint request timed out` - *El endpoint del API de Culqi a agotado su tiempo de solicitud*
-
-
-**Para hacer una verificación del servicio de Culqi, [te invito a seguir esta guía simple y sencilla](https://blog.letsgodev.com/tips-es/verificar-servicio-de-culqi-en-10-minutos/). Sólo te tomará 10 minutos.**
+<table
+  class="mx-auto max-w-4xl w-full whitespace-nowrap bg-transparent divide-y divide-culqi-gray-ultra-light dark:divide-culqi-plate-light border-2 border-culqi-gray-ultra-light dark:border-culqi-plate-light">
+  <thead>
+    <tr class="bg-culqi-gray-light dark:bg-culqi-gray-ultra-light text-culqi-plate-light text-left">
+      <th class="px-3 py-[14px] font-semibold text-sm"></th>
+      <th class="px-3 py-[14px] font-semibold text-sm">Descarga</th>
+    </tr>
+  </thead>
+  <tbody class="bg-transparent divide-y divide-culqi-gray-ultra-light dark:divide-culqi-plate-light">
+    <tr class="whitespace-nowrap font-normal font-Archivo  text-culqi-plate-dark dark:text-white-gray">
+      <td class = "px-3 py-4 font-bold text-sm">
+        <img src="https://docs.culqi.com/images/plugins/woocommerce.svg" alt="woocommerce" /></br>
+      </td>
+      <td class = "px-3 py-4 text-sm">
+        <a href='/pdf/manual_woocommerce.pdf' download>
+          Descargar
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
