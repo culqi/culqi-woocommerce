@@ -6,7 +6,7 @@ Nuestro plugin integra por tí nuestro Checkout v4 y nuestra librería JS 3DS, c
 
 ## Requisitos ##
 
-- Version PHP 7.0+
+- PHP 7.0+
 - WooCommerce 3.0+
 - Wordpress 5.5+
 - [Credenciales de Culqi](https://www.culqi.com)
