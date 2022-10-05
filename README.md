@@ -126,7 +126,7 @@ Puedes usar el manual para obtener más detalle:
         <img src="https://docs.culqi.com/images/plugins/woocommerce.svg" alt="woocommerce" /></br>
       </td>
       <td class = "px-3 py-4 text-sm">
-        <a href='/pdf/manual_woocommerce.pdf' download>
+        <a href='https://docs.culqi.com/pdf/manual_woocommerce.pdf' download>
           Descargar
         </a>
       </td>
