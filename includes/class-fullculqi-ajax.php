@@ -110,7 +110,7 @@ class FullCulqi_Ajax {
 			wp_send_json_error( esc_html( 'You do not have permission.', 'fullculqi_subs' ) );
 
 		$record = isset( $_POST['record'] ) ? intval( $_POST['record'] ) : 100;
-		$after_id = isset( $_POST['after_id'] ) ? esc_( $_POST['after_id'] ) : '';
+		$after_id = isset( $_POST['after_id'] ) ? sanitize_text_field( $_POST['after_id'] ) : '';
 
 		$result = FullCulqi_Charges::sync( $record, $after_id );
 
