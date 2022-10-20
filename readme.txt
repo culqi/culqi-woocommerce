@@ -96,12 +96,11 @@ Sí, para trabajar con estas opciones de pago se requiere de ordenes de compra, 
 
 == Screenshots ==
 
-1. Página de bienvenida.
-2. Configuración del plugin
-3. Personaliza tu checkout
-4. Cargos
-5. órdenes
-6. Configurar Webhook
+1. Configuración del plugin
+2. Personaliza tu checkout
+3. Cargos
+4. órdenes
+5. Configurar Webhook
 
 
 == Changelog ==
