@@ -16,21 +16,24 @@ Podrás hacer pagos desde Woocommerce usando el Culqi Checkout v4, además de re
 
 Conéctate a nuestra pasarela de pagos para aumentar tus ventas con múltiples opciones de pago. Nuestra app está diseñado para que tus clientes tengan una experiencia de compra rápida y segura, vende desde tu tienda virtual con nuestra pasarela de pago. Cobra pagos únicos. Con el respaldo de CREDICORP.
 
-Caracteristicas y Beneficios de integrar nuestra app
-Rápida configuración, solo ingresa tu llave pública y privada en tu configuración.
-Te proporcionamos un checkout multipago.
-Procesa pagos al instante que se ven reflejados en tu CulqiIPanel.
-Compra segura garantizada.
-Alta seguridad, con Certificación PCI- DSS, motor antifraude y almacenamiento seguro de las tarjetas de tus clientes.
-Integramos nuestra última versión de nuestros checkout, el cual crea una buena experiencia para tus clientes.
-Nuestro aplicativo soporta todos los navegadores desktop y mobile.
-Funcionalidades soportadas en nuestra app
+** Caracteristicas y Beneficios de integrar nuestra app**
+
+* Rápida configuración, solo ingresa tu llave pública y privada en tu configuración.
+* Te proporcionamos un checkout multipago.
+* Procesa pagos al instante que se ven reflejados en tu CulqiIPanel.
+* Compra segura garantizada.
+* Alta seguridad, con Certificación PCI- DSS, motor antifraude y almacenamiento seguro de las tarjetas de tus clientes.
+* Integramos nuestra última versión de nuestros checkout, el cual crea una buena experiencia para tus clientes.
+* Nuestro aplicativo soporta todos los navegadores desktop y mobile.
+
+** Funcionalidades soportadas en nuestra app**
+
 Configura nuestra app ingresando tu llave llave pública y privada , luego selecciona los métodos de pagos que deseas habilitar. A continuación te detallamos cada una de las opciones de pago:
 
-Tarjetas de crédito y débito. Tus clientes solo deben deben ingresar los datos de su tarjeta y proceder a pagar
-Banca móvil o internet. Generamos un código CIP con el cual tus clientes podrán pagar a través de este medio de pago.
-Agentes o bodegas. Generamos un código CIP con el cual tus clientes podrán pagar a través de este medio de pago.
-Billeteras móviles. Generamos un código QR con el cual tus clientes podrán pagar a través de este medio de pago.
+* Tarjetas de crédito y débito. Tus clientes solo deben deben ingresar los datos de su tarjeta y proceder a pagar
+* Banca móvil o internet. Generamos un código CIP con el cual tus clientes podrán pagar a través de este medio de pago.
+* Agentes o bodegas. Generamos un código CIP con el cual tus clientes podrán pagar a través de este medio de pago.
+* Billeteras móviles. Generamos un código QR con el cual tus clientes podrán pagar a través de este medio de pago.
 
 Con este plugin podrás:
 
@@ -108,3 +111,7 @@ Sí, para trabajar con estas opciones de pago se requiere de ordenes de compra, 
 = 1.0.0 =
 * Feature: Checkout Culqi V4
 * Feature: 3DS
+
+== Upgrade Notice ==
+
+El plugin cuenta con la integración de Culqi Checkout v4 y Culqi 3DS
