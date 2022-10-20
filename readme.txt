@@ -37,8 +37,8 @@ Configura nuestra app ingresando tu llave llave pública y privada , luego selec
 
 Con este plugin podrás:
 
-* Administrar los cargos
-* Administrar las ordenes ( Banca móvil o internet, Billeteras Móviles, PagoEfectivo, Cuotéalo )
+* Administrar los cargos.
+* Administrar las órdenes de pago ( Banca móvil o internet, Billeteras Móviles, PagoEfectivo, Cuotéalo ).
 * Podrás activar el checkout de Culqi como método de pago.
 * Hacer reembolsos con un click desde algún pedido de WooCommerce
 * Tener un log de actividades de Culqi para cada pedido de WooCommerce.
