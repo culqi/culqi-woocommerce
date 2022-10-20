@@ -1,5 +1,5 @@
 === Culqi ===
-Contributors: Culqi Team
+Contributors: culqionline
 Tags: culqi, checkout, payment method, Perú, woocommerce
 Donate link: https://culqi.com/
 Requires at least: 4.5
