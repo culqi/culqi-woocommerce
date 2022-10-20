@@ -1,8 +1,8 @@
 === Culqi ===
 Contributors: Culqi Team
-Tags: culqi, checkout, payment method, peru, woocommerce
+Tags: culqi, checkout, payment method, Perú, woocommerce
 Donate link: https://culqi.com/
-Requires at least: 5.6
+Requires at least: 4.5
 Tested up to: 6.0.2
 Stable tag: 3.0.0
 Requires PHP: 5.6
@@ -10,21 +10,36 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
-Podrás hacer pagos desde Woocommerce usando el Checkout de Culqi, además de reembolsos, estados, logs y personalizaciones del modal de pago.
+Podrás hacer pagos desde Woocommerce usando el Culqi Checkout v4, además de reembolsos, verificar estados de órdenes, logs y personalizaciones del checkout.
 
 == Description ==
 
-Culqi Checkout te permite sincronizar todos los pagos, ordenes con tu WordPress.
+Conéctate a nuestra pasarela de pagos para aumentar tus ventas con múltiples opciones de pago. Nuestra app está diseñado para que tus clientes tengan una experiencia de compra rápida y segura, vende desde tu tienda virtual con nuestra pasarela de pago. Cobra pagos únicos. Con el respaldo de CREDICORP.
+
+Caracteristicas y Beneficios de integrar nuestra app
+Rápida configuración, solo ingresa tu llave pública y privada en tu configuración.
+Te proporcionamos un checkout multipago.
+Procesa pagos al instante que se ven reflejados en tu CulqiIPanel.
+Compra segura garantizada.
+Alta seguridad, con Certificación PCI- DSS, motor antifraude y almacenamiento seguro de las tarjetas de tus clientes.
+Integramos nuestra última versión de nuestros checkout, el cual crea una buena experiencia para tus clientes.
+Nuestro aplicativo soporta todos los navegadores desktop y mobile.
+Funcionalidades soportadas en nuestra app
+Configura nuestra app ingresando tu llave llave pública y privada , luego selecciona los métodos de pagos que deseas habilitar. A continuación te detallamos cada una de las opciones de pago:
+
+Tarjetas de crédito y débito. Tus clientes solo deben deben ingresar los datos de su tarjeta y proceder a pagar
+Banca móvil o internet. Generamos un código CIP con el cual tus clientes podrán pagar a través de este medio de pago.
+Agentes o bodegas. Generamos un código CIP con el cual tus clientes podrán pagar a través de este medio de pago.
+Billeteras móviles. Generamos un código QR con el cual tus clientes podrán pagar a través de este medio de pago.
 
 Con este plugin podrás:
 
 * Administrar los cargos
-* Administrar las ordenes ( PagoEfectivo )
-* Si usas WooCommerce podrás activar el popup de Culqi como método de pago.
+* Administrar las ordenes ( Banca móvil o internet, Billeteras Móviles, PagoEfectivo, Cuotéalo )
+* Podrás activar el checkout de Culqi como método de pago.
 * Hacer reembolsos con un click desde algún pedido de WooCommerce
 * Tener un log de actividades de Culqi para cada pedido de WooCommerce.
-* Agregar el logo de tu comercio a tu modal/popup de Culqi
-* Colocar en el checkout los colores de tu marca
+* Personalizar tu Culqi checkout con los colores de tu marca y logo.
 
 
 = Available Languages =
@@ -43,9 +58,9 @@ Con este plugin podrás:
 
 3. Ingresa tu llave pública y llave secreta.
 
-4. Selecciona mos métodos de pagos que vas a activar.
+4. Selecciona los métodos de pagos que vas a activar.
 
-4. Para usar Multipagos, debes activarlo en la pasarela de pago Culqi y debes configurar el Webhook.
+4. Para usar Multipagos, debes configurar el Webhook.
 - Debemos entrar al panel de Culqi e ir a la sección de `eventos` y al submenu de `webhooks`
 - Debes elegir el evento : `order.status.changed`
 - La URL que debes poner es: `https://{tuweb}/fullculqi-api/webhooks`
@@ -54,21 +69,21 @@ Con este plugin podrás:
 
 6. Tienes la posibilidad de personalizar tu checkout con tu logo y los colores de tu marca.
 
-7. Finalmente guarda las configuración.
+7. Finalmente guarda la configuración.
 
 == FAQ ==
 
 = Cómo obtengo las llaves de Culqi ? =
 
-Es fácil!, sólo debes registrarte aqui : [https://www.culqi.com/](https://www.culqi.com/)
+para obtener tus llaves sólo debes registrarte aqui : [https://www.culqi.com/](https://www.culqi.com/)
 
 = Es compatible con WooCommerce ? =
 
-Sí, podrás hacer pagos, ordenes y reembolsos usando WooCommerce
+Sí, podrás hacer pagos, ordenes y reembolsos usando WooCommerce.
 
-= Puedo usar PagoEfectivo ? =
+= Puedo usar PagoEfectivo, Billeteras Móviles y Cuotéalo ? =
 
-Sí, ese modelo se llama ordenes de compra ( Multipago ) y es permitido por el plugin. Pero debes configurar un webhook para recibir las notificaciones de pago.
+Sí, para trabajar con estas opciones de pago se requiere de ordenes de compra, estos se generán en automático. Pero debes configurar un webhook para recibir las notificaciones de pago.
 
 = Cómo configurar el webhook de Culqi para Multipago ? =
 
@@ -80,11 +95,12 @@ Sí, ese modelo se llama ordenes de compra ( Multipago ) y es permitido por el p
 
 1. Página de bienvenida.
 2. Configuración del plugin
-3. Cargos
-4. Método de pago para WooCommerce
-5. Eventos de Culqi
-6. Configurar Webhook
-7. Reembolsar pago
+3. Personaliza tu checkout
+4. Cargos
+5. órdenes
+6. Eventos de Culqi
+7. Configurar Webhook
+8. Reembolsar pago
 
 
 == Changelog ==
