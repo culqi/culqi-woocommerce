@@ -10,7 +10,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
-Podrás hacer pagos desde Woocommerce usando el Culqi Checkout v4, además de reembolsos, verificar estados de órdenes, logs y personalizaciones del checkout.
+Podrás hacer pagos desde Woocommerce usando el Culqi Checkout v4, verificar estados de órdenes, logs y personalizaciones del checkout.
 
 == Description ==
 
@@ -101,9 +101,7 @@ Sí, para trabajar con estas opciones de pago se requiere de ordenes de compra, 
 3. Personaliza tu checkout
 4. Cargos
 5. órdenes
-6. Eventos de Culqi
-7. Configurar Webhook
-8. Reembolsar pago
+6. Configurar Webhook
 
 
 == Changelog ==
