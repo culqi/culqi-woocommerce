@@ -18,7 +18,9 @@ Contamos con 2 formas de instalar nuestro complemento en tu tienda virtual:
 
 1. Instalar automáticamente el complemento desde el MarketPlace de WordPress.
 
-    Debes buscar nuestro complemento **Culqi**. Luego, procede a activarlo.
+    Debes buscar nuestro complemento **Culqi**, pulsar instalar y luego procede a activarlo.
+
+    ![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-instalar.png)
 
 2. Instalar manualmente el .zip de nuestro complemento.
 
