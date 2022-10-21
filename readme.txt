@@ -10,7 +10,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
-¡Vende de forma segura y estable con nuestra pasarela de pago CulqiOnline desde tu tienda virtual! <strong>Aceptamos todas las tarjetas, PagoEfectivo, las principales billeteras móviles y Cuotéalo BCP para que tus clientes tengan todos los métodos de pago disponibles en un solo checkout.</strong>
+Conéctate a nuestra pasarela de pago CulqiOnline de forma segura y estable en tu tienda virtual.
 
 == Description ==
 
