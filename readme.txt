@@ -10,7 +10,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
-Podrás hacer pagos desde Woocommerce usando el Culqi Checkout v4, verificar estados de órdenes, logs y personalizaciones del checkout.
+Podrás hacer pagos con 3DS desde Woocommerce usando el Culqi Checkout v4, verificar estados de órdenes, logs y personalizaciones del checkout.
 
 == Description ==
 
@@ -20,11 +20,11 @@ Conéctate a nuestra pasarela de pagos para aumentar tus ventas con múltiples o
 
 * Rápida configuración, solo ingresa tu llave pública y privada en tu configuración.
 * Te proporcionamos un checkout multipago.
-* Procesa pagos al instante que se ven reflejados en tu CulqiIPanel.
+* Procesa pagos al instante que se ven reflejados en tu CulqiPanel.
 * Compra segura garantizada.
-* Alta seguridad, con Certificación PCI- DSS, motor antifraude y almacenamiento seguro de las tarjetas de tus clientes.
+* Alta seguridad con 3DS, con Certificación PCI- DSS, motor antifraude y almacenamiento seguro de las tarjetas de tus clientes.
 * Integramos nuestra última versión de nuestros checkout, el cual crea una buena experiencia para tus clientes.
-* Nuestro aplicativo soporta todos los navegadores desktop y mobile.
+* Nuestro plugin soporta todos los navegadores desktop y mobile.
 
 ** Funcionalidades soportadas en nuestra app**
 
