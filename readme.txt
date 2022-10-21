@@ -18,7 +18,7 @@ Conéctate a nuestra pasarela de pago CulqiOnline de forma segura y estable en t
 
 <strong> Beneficios de CulqiOnline </strong>
 
-* <strong>Intégrate en pocos pasos: ingresas tus credenciales del CulqiPanel</strong> y elige el entorno donde activarás el checkout. Antes de habilitarlo a tus clientes, podrás probar todas las veces que necesitas en el ambiente de integración con nuestras tarjetas de pruebas.
+* <strong>Intégrate en pocos pasos: ingresa tus credenciales del CulqiPanel</strong> y elige el entorno donde activarás el checkout. Antes de habilitarlo a tus clientes, podrás probar todas las veces que necesites en el ambiente de integración con nuestras tarjetas de pruebas.
 * <strong>Estabilidad y seguridad:</strong> Contamos con certificación PCI- DSS y doble capa de seguridad con nuestro motor antifraude y autenticación 3DS.
 * Personaliza tu checkout con el logo y colores de tu negocio.
 * <strong>Control de tus ventas a través del CulqiPanel.</strong>
@@ -26,10 +26,10 @@ Conéctate a nuestra pasarela de pago CulqiOnline de forma segura y estable en t
 
 <strong> Funcionalidades de nuestro plugin </strong>
 
-Inicia tu configuración del plugin de Culqi activando el Culqi Checkout. Selecciona el entorno donde habilitarás el checkout e ingresa tus credenciales del CulqiPanel. Se cargarán tus llaves automáticamente. Luego, marca los métodos de pagos que mostrarás en tu tienda virtual:
+Inicia tu configuración del plugin de Culqi activando el Culqi Checkout. Selecciona el entorno donde habilitarás el checkout e ingresa tus credenciales del CulqiPanel. Se cargarán tus llaves automáticamente. 
+Luego, marca los métodos de pagos que mostrarás en tu tienda virtual:
 
-Tarjetas de crédito y débito: Tus clientes solo deben deben ingresar los datos de su tarjeta y proceder a pagar
-
+* Tarjetas de crédito y débito: Tus clientes solo deben deben ingresar los datos de su tarjeta y proceder a pagar.
 * Botón de pago Yape: Tus clientes podrán pagar con su número de celular.
 * Billeteras móviles. Generamos un código QR para que tus clientes paguen con su billetera electrónica.
 * Banca móvil o internet / Agentes o bodegas: Generamos un código único CIP, el cual tus clientes podrán pagar en los centros autorizados.
@@ -53,6 +53,7 @@ Tarjetas de crédito y débito: Tus clientes solo deben deben ingresar los datos
 == Installation ==
 
 Para iniciar la integración con CulqiOnline, realiza lo siguiente:
+
 1. Selecciona la pestaña de "plugins", dirígete al buscador y digita "<strong>Culqi</strong>".
 2. Instala el plugin de <strong>Culqi</strong> y actívalo.
 3. Dirígete a la pestaña "Woocommerce", opción "Culqi", "Settings".
