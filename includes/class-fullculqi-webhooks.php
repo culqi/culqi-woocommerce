@@ -23,10 +23,23 @@ class FullCulqi_Webhooks {
 
 		$inputJSON	= file_get_contents('php://input');
 
+
+
 		if( empty( $inputJSON ) )
 			return;
 
 		$input = json_decode( $inputJSON );
+
+		$username = $input->userName;
+		$password = $input->password;
+		$settings = fullculqi_get_settings();
+
+		$username_bd = $settings['username'];
+		$password_bd = $settings['password'];
+
+		if( $username != $username_bd || $password != $password_bd ){
+			exit("Error: Error de autenticacion");
+		}
 
 		if( $input->object != 'event' )
 			return;
