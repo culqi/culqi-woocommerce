@@ -41,7 +41,8 @@ window.addEventListener("message", async function (event) {
 Culqi3DS.publicKey = fullculqi_vars.public_key;
 //var device = await Culqi3DS.generateDevice();
 async function generateDevice(){
-	return await Culqi3DS.generateDevice();
+	const device = await Culqi3DS.generateDevice();
+	return device;
 }
 var device = generateDevice();
 
