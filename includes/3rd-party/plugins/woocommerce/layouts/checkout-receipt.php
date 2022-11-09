@@ -1,4 +1,4 @@
-<div id="fullculqi_receipt_page">
+<div width="600" id="fullculqi_receipt_page">
 	<img src="<?php echo esc_html($src_image); ?>" alt="fullculqi" />
 	<br />
 	<p>
