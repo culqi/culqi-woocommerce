@@ -22,16 +22,19 @@ class FullCulqi_Webhooks {
 	public function to_receive() {
 
 		$inputJSON	= file_get_contents('php://input');
-
-
+		$headers = getallheaders();
+		$headers = $headers['Authorization'];
+		error_log("Authorizationb: " . $headers);
+        $authorization = substr($headers,6);
+        $credenciales = base64_decode($authorization);
+        $credenciales = explode( ':', $credenciales );
+        $username = $credenciales[0];
+        $password = $credenciales[1];
 
 		if( empty( $inputJSON ) )
 			return;
 
 		$input = json_decode( $inputJSON );
-
-		$username = $input->userName;
-		$password = $input->password;
 		$settings = fullculqi_get_settings();
 
 		$username_bd = $settings['username'];
