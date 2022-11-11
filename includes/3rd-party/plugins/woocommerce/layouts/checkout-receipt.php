@@ -1,5 +1,5 @@
-<div width="600" id="fullculqi_receipt_page">
-	<img src="<?php echo esc_html($src_image); ?>" alt="fullculqi" />
+<div id="fullculqi_receipt_page">
+	<img width="400px" src="<?php echo esc_html($src_image); ?>" alt="fullculqi" />
 	<br />
 	<p>
 		<?php esc_html_e( 'Make the purchase clicking the ', 'fullculqi'); ?><strong><?php esc_html_e( 'pay button', 'fullculqi'); ?></strong>
