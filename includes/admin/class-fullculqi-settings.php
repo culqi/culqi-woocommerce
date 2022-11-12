@@ -296,6 +296,23 @@ class FullCulqi_Settings {
 			'fullculqi_section' // Section
 		);
 
+		add_settings_field(
+			'fullculqi_username', // ID
+			esc_html__( '', 'fullculqi' )  , // Username
+			[ $this, 'input_username' ], // Callback
+			'fullculqi_page', // Page
+			'fullculqi_section' // Section
+		);
+
+		add_settings_field(
+			'fullculqi_password', // ID
+			esc_html__( '', 'fullculqi' )  , // Username
+			[ $this, 'input_password' ], // Callback
+			'fullculqi_page', // Page
+			'fullculqi_section', // Section
+			array( 'class' => 'fullculqi_password' )
+		);
+
         add_settings_field(
             'fullculqi_buttoncustom', // ID
             esc_html__( 'Personalizar formulario de checkout', 'fullculqi' ), // Logo
@@ -418,6 +435,26 @@ class FullCulqi_Settings {
 		$settings = fullculqi_get_settings();
 
 		fullculqi_get_template( 'resources/layouts/admin/settings/input_notpay.php', $settings );
+	}
+
+	/**
+	 * Input URL notify payment
+	 * @return html
+	 */
+	public function input_username() {
+		$settings = fullculqi_get_settings();
+
+		fullculqi_get_template( 'resources/layouts/admin/settings/input_username.php', $settings );
+	}
+
+	/**
+	 * Input URL notify payment
+	 * @return html
+	 */
+	public function input_password() {
+		$settings = fullculqi_get_settings();
+
+		fullculqi_get_template( 'resources/layouts/admin/settings/input_password.php', $settings );
 	}
 
 	/**
