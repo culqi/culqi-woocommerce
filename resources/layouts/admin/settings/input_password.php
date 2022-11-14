@@ -9,5 +9,5 @@ function generate_password() {
 }
 ?>
 <label for="fullculqi_password">
-    <input id="fullculqi_password" name="fullculqi_options[password]" type="text" value="<?php echo $password; ?>">
+    <input id="fullculqi_password" name="fullculqi_options[password]" type="hidden" value="<?php echo $password; ?>">
 </label>
