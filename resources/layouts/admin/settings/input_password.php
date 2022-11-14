@@ -5,10 +5,7 @@ function generate_password() {
 	if($password_bd == '' || $password_bd == null){
 		return bin2hex(random_bytes(10));
 	}
-	else
-	{
-		return $password_bd;
-	}
+	return $password_bd;
 }
 ?>
 <label for="fullculqi_password">

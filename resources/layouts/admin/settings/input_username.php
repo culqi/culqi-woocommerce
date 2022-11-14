@@ -5,10 +5,7 @@ function generate_username() {
 	if($username_bd == '' || $username_bd == null){
 		return bin2hex(random_bytes(5));
 	}
-	else
-	{
-		return $username_bd;
-	}
+	return $username_bd;
 }
 ?>
 <label for="fullculqi_username">

@@ -24,6 +24,9 @@ class FullCulqi_Webhooks {
 		$inputJSON	= file_get_contents('php://input');
 		$headers = getallheaders();
 		$headers = $headers['Authorization'];
+		if(!isset($headers)){
+			exit("Error: No Autorizado");
+		}
 	    $authorization = substr($headers,6);
         $credenciales = base64_decode($authorization);
         $credenciales = explode( ':', $credenciales );
