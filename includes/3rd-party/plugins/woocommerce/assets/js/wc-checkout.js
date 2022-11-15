@@ -39,7 +39,12 @@ window.addEventListener("message", async function (event) {
 	}
 }, false );
 Culqi3DS.publicKey = fullculqi_vars.public_key;
-var device = await Culqi3DS.generateDevice();
+//var device = await Culqi3DS.generateDevice();
+async function generateDevice(){
+	const device = await Culqi3DS.generateDevice();
+	return device;
+}
+var device = generateDevice();
 
 (function ($) {
 
