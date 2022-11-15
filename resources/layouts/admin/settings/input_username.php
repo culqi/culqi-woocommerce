@@ -1,15 +1,8 @@
-<?php
-function generate_username() {
-	$settings = fullculqi_get_settings();
-	$username_bd = $settings['username'];
-	if($username_bd == '' || $username_bd == null){
-		return bin2hex(random_bytes(5));
+<style>
+	.fullculqi_username{
+		display:none;
 	}
-	return $username_bd;
-}
-?>
+</style>
 <label for="fullculqi_username">
-	<b>Usuario:</b> <?php echo $username = generate_username(); ?>
-	<b>Password:</b> <?php echo $password; ?>
-    <input id="fullculqi_username" name="fullculqi_options[username]" type="hidden" value="<?php echo $username; ?>">
+    <input id="fullculqi_username" name="fullculqi_options[username]" type="hidden" value="<?php echo $GLOBALS['username']; ?>">
 </label>

@@ -1,13 +1,9 @@
-<?php
-function generate_password() {
-	$settings = fullculqi_get_settings();
-	$password_bd = $settings['password'];
-	if($password_bd == '' || $password_bd == null){
-		return bin2hex(random_bytes(10));
+<style>
+	.fullculqi_password{
+		display:none;
 	}
-	return $password_bd;
-}
-?>
+</style>
+
 <label for="fullculqi_password">
-    <input id="fullculqi_password" name="fullculqi_options[password]" type="hidden" value="<?php echo $password; ?>">
+    <input id="fullculqi_password" name="fullculqi_options[password]" type="hidden" value="<?php echo $GLOBALS['password']; ?>">
 </label>

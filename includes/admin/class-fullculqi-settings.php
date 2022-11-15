@@ -10,6 +10,25 @@ class FullCulqi_Settings {
 	 * Construct
 	 */
 	public function __construct() {
+		$settings = fullculqi_get_settings();
+		error_log(print_r($settings,true));
+		$username_bd = $settings['username'];
+		if($username_bd == '' || $username_bd == null){
+			$GLOBALS['username'] = bin2hex(random_bytes(5));
+		}
+		else{
+			$GLOBALS['username'] = $username_bd;
+		}
+
+		$settings = fullculqi_get_settings();
+		$password_bd = $settings['password'];
+		if($password_bd == '' || $password_bd == null){
+			$GLOBALS['password'] = bin2hex(random_bytes(10));
+		}
+		else
+		{
+			$GLOBALS['password'] = $password_bd;
+		}
 
 		// Script JS & CSS
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
@@ -19,14 +38,14 @@ class FullCulqi_Settings {
 
 		// Register Form
 		add_action( 'admin_init', [ $this, 'register_settings' ] );
+
 	}
-
-
 	/**
 	 * CSS & JS
 	 * @return mixed
 	 */
 	public function enqueue_scripts() {
+		
 		$screen = get_current_screen();
 
 		if( isset( $screen->base ) && (
@@ -205,8 +224,6 @@ class FullCulqi_Settings {
 			'resources/layouts/admin/webhooks-page.php', $args
 		);
 	}
-
-
 	/**
 	 * Register Settings
 	 * @return mixed
@@ -214,7 +231,6 @@ class FullCulqi_Settings {
 	public function register_settings() {
 		//OLANDA INGRESO INPUTS FORM SETTINGS
 		do_action( 'fullculqi/settings/before_fields' );
-
 		register_setting(
 			'fullculqi_group', // Option group
 			'fullculqi_options', // Option name
@@ -301,7 +317,8 @@ class FullCulqi_Settings {
 			esc_html__( '', 'fullculqi' )  , // Username
 			[ $this, 'input_username' ], // Callback
 			'fullculqi_page', // Page
-			'fullculqi_section' // Section
+			'fullculqi_section', // Section
+			array( 'class' => 'fullculqi_username' )
 		);
 
 		add_settings_field(
@@ -309,7 +326,7 @@ class FullCulqi_Settings {
 			esc_html__( '', 'fullculqi' )  , // Username
 			[ $this, 'input_password' ], // Callback
 			'fullculqi_page', // Page
-			'fullculqi_section', // Section
+			'fullculqi_section',
 			array( 'class' => 'fullculqi_password' )
 		);
 
