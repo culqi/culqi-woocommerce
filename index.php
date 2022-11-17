@@ -80,6 +80,11 @@ function fullculqi_activate() {
 register_activation_hook( __FILE__, 'fullculqi_activate' );
 //register_deactivation_hook( __FILE__, 'fullculqi_deactivate' );
 
+// plugin uninstallation
+register_uninstall_hook( __FILE__, 'my_fn_uninstall' );
+function my_fn_uninstall() {
+    delete_option( 'fullculqi_options' );
+}
 /**
  * Store the plugin global
  */
