@@ -111,7 +111,10 @@ jQuery(document).ready(function () {
                             "merchant": jQuery('#fullculqi_pubkey').val(),
                             "eventId": "order.status.changed",
                             "url": jQuery('#fullculqi_notpay').val(),
-                            "version": 2
+                            "version": 2,
+                            "loginActive": true,
+                            "username": jQuery('#fullculqi_username').val(),
+                            "password": jQuery('#fullculqi_password').val()
                         }),
                     };
                     jQuery.ajax(settings).done(function (response) {
