@@ -1,6 +1,7 @@
 <div class="wrap">
     <h1 class="wp-heading-inline">
         <?php esc_html_e('Culqi', 'fullculqi'); ?>
+        <?php echo MPCULQI_PLUGIN_VERSION; ?>
     </h1>
 
     <nav class="nav-tab-wrapper woo-nav-tab-wrapper">
