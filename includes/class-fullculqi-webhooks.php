@@ -22,11 +22,30 @@ class FullCulqi_Webhooks {
 	public function to_receive() {
 
 		$inputJSON	= file_get_contents('php://input');
-
+		$headers = getallheaders();
+		$headers = $headers['Authorization'];
+		if(!isset($headers)){
+			exit("Error: Cabecera Authorization no presente");
+		}
+	    $authorization = substr($headers,6);
+        $credenciales = base64_decode($authorization);
+        $credenciales = explode( ':', $credenciales );
+        $username = $credenciales[0];
+        $password = $credenciales[1];
+		if(!isset($username) or !isset($password)){
+			exit("Error: No Autorizado");
+		}
 		if( empty( $inputJSON ) )
 			return;
 
 		$input = json_decode( $inputJSON );
+		$settings = fullculqi_get_settings();
+		$username_bd = $settings['username'];
+		$password_bd = $settings['password'];
+
+		if( $username != $username_bd || $password != $password_bd ){
+			exit("Error: Crendenciales Incorrectas");
+		}
 
 		if( $input->object != 'event' )
 			return;

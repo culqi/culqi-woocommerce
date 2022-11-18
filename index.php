@@ -67,6 +67,11 @@ function fullculqi_activate() {
 	fullculqi_Activator::activate();
 }
 
+// plugin uninstallation
+register_uninstall_hook( __FILE__, 'my_fn_uninstall' );
+function my_fn_uninstall() {
+    delete_option( 'fullculqi_options' );
+}
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-fullculqi-deactivator.php
