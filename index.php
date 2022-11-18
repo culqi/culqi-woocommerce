@@ -22,6 +22,8 @@ WC tested up to:
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+define( 'MPCULQI_PLUGIN_VERSION' , 'v3.0.1');
+
 define( 'MPCULQI_FILE' , __FILE__ );
 define( 'MPCULQI_DIR' , plugin_dir_path(__FILE__) );
 define( 'MPCULQI_URL' , plugin_dir_url(__FILE__) );
