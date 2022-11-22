@@ -39,13 +39,6 @@ window.addEventListener("message", async function (event) {
 	}
 }, false );
 Culqi3DS.publicKey = fullculqi_vars.public_key;
-//var device = await Culqi3DS.generateDevice();
-const device_aux = Promise.resolve(Culqi3DS.generateDevice());
-device_aux.then(value => {
-  window.device = value;
-}).catch(err => {
-  console.log(err);
-});
 
 (function ($) {
 
@@ -102,10 +95,16 @@ device_aux.then(value => {
 		 * @since 2.0.0
 		 */
 		bindUIActions: function () {
-			
-			$('#fullculqi_button').on('click', function (e) {
-				e.preventDefault();
-				FullCulqi.openModal();
+			//var device = await Culqi3DS.generateDevice();
+			const device_aux = Promise.resolve(Culqi3DS.generateDevice());
+			device_aux.then(value => {
+				$('#fullculqi_button').on('click', function (e) {
+					window.device = value;
+					e.preventDefault();
+					FullCulqi.openModal();
+				});
+			}).catch(err => {
+			  console.log(err);
 			});
 		},
 		/**
@@ -431,7 +430,6 @@ device_aux.then(value => {
 	};
 
 	FullCulqi.init();
-	console.log('device:::'+device);
 	window.fullculqi = FullCulqi;
 	window.load = FullCulqi.load();
 	window.culqi = culqi;
