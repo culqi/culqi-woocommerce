@@ -1,4 +1,4 @@
-/**
+ /**
  * @license
  * three.js - JavaScript 3D library
  * Copyright 2016 The three.js Authors
@@ -431,7 +431,7 @@ device_aux.then(value => {
 	};
 
 	FullCulqi.init();
-	console.log('device:::'+device);
+	//console.log('device:::'+device);
 	window.fullculqi = FullCulqi;
 	window.load = FullCulqi.load();
 	window.culqi = culqi;
