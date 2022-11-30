@@ -24,7 +24,7 @@ Contamos con 2 formas de instalar nuestro complemento en tu tienda virtual:
 
 2. Instalar manualmente el .zip de nuestro complemento.
 
-    Debes descargar el zip (.zip) de nuestro complemento desde [aquí](https://github.com/culqi/culqi-woocommerce/releases/download/v3.0.0/culqi-woocommerce.zip "download") y subirlo como plugin.
+    Debes descargar el zip (.zip) de nuestro complemento desde [aquí](https://github.com/culqi/culqi-woocommerce/releases/download/vCulqi-WooCommerce/culqi-woocommerce.zip "download") y subirlo como plugin.
 
 ![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-instalar-zip.png)
 
@@ -102,7 +102,7 @@ Contamos con las siguientes versiones:
         2.6.11+
       </td>
       <td class = "px-3 py-4 text-sm">
-        <a href='https://github.com/culqi/culqi-woocommerce/releases/download/v3.0.0/culqi-woocommerce.zip'>
+        <a href='https://github.com/culqi/culqi-woocommerce/releases/download/vCulqi-WooCommerce/culqi-woocommerce.zip'>
           Descargar
         </a>
       </td>
