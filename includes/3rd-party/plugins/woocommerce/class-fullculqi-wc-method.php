@@ -301,6 +301,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
                     'color_palette'	=> $settings['color_palette'],
 					'currency'		=> get_woocommerce_currency(),
                     'version_wc'		=> WC_VERSION,
+					'version_plugin'	=> MPCULQI_PLUGIN_VERSION,
 					'description'	=> substr( str_pad( $desc, 5, '_' ), 0, 80 ),
 					'loading_text'	=> esc_html__( 'Loading. Please wait.', 'fullculqi' ),
 					'total'			=> fullculqi_format_total( $order->get_total() ),
