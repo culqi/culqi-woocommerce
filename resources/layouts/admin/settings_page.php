@@ -43,9 +43,10 @@
         do_settings_sections('fullculqi_page');
 
         do_action('fullculqi/settings/section');
-
-        submit_button();
         ?>
+
+        <input type="submit" name="submit-culqi" id="submit-culqi" class="button button-primary" value="Save Changes">
+        
         <?php if(isset($_GET['settings-updated']) and $_GET['settings-updated']){ ?>
             <div id="contact-popup">
                 <form class="contact-form" action="" id="contact-form"
