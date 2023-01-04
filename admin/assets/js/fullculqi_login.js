@@ -22,7 +22,11 @@
  * THE SOFTWARE.
  */
 jQuery(document).ready(function () {
+    /*jQuery('#form-culqi-settings').submit(function(e) {
+        console.log("efchgdvjhsbkjnk");
+    });*/
     jQuery('#form-culqi-settings').submit(function (e) {
+        //e.preventDefault();
         jQuery('#errorpubkey').html('');
         jQuery('#errorseckey').html('');
         jQuery('#errortimeexp').html('');
@@ -63,18 +67,21 @@ jQuery(document).ready(function () {
 
         if (jQuery('#fullculqi_tokenlogin').val().length>0) {
             var url_webhook = '';
+            var url_get_webhook = '';
             if (jQuery('#integracion').is(':checked')) {
                 url_webhook = jQuery('#integracion').data('urlwebhook');
+                url_get_webhook = jQuery('#integracion').data('urlgetwebhook');
             }
             if (jQuery('#produccion').is(':checked')) {
                 url_webhook = jQuery('#produccion').data('urlwebhook');
+                url_get_webhook = jQuery('#produccion').data('urlgetwebhook');
             }
             const settings = {
-                url: url_webhook,
+                url: url_get_webhook,
                 crossDomain: true,
                 dataType: 'json',
                 contentType: 'application/json',
-                type: "GET",
+                type: "POST",
                 timeout: 0,
                 headers: {
                     'Authorization': 'Bearer ' + jQuery('#fullculqi_tokenlogin').val(),
@@ -82,16 +89,17 @@ jQuery(document).ready(function () {
                     "Content-Type": "application/json",
                     "Accept": "*/*"
                 },
-                data: {
-                    "merchant": jQuery('#fullculqi_pubkey').val(),
-                    "version": 2
-                }
+                data: JSON.stringify({
+                    "merchantCode": jQuery('#fullculqi_pubkey').val(),
+                    "apiVersion": "2.0"
+                })
             };
             jQuery.ajax(settings).done(function (response) {
                 var valid = 1;
-                for(let i = 0; i < response.data.length; i++) {
-                    if(response.data[i].url==jQuery('#fullculqi_notpay').val()){
+                for(let i = 0; i < response.length; i++) {
+                    if(response[i].url==jQuery('#fullculqi_notpay').val()){
                         valid=0;
+                        //jQuery('#form-culqi-settings').submit();
                     }
                 }
                 if(valid==1){
@@ -108,21 +116,24 @@ jQuery(document).ready(function () {
                             "Accept": "*/*"
                         },
                         data: JSON.stringify({
-                            "merchant": jQuery('#fullculqi_pubkey').val(),
-                            "eventId": "order.status.changed",
+                            "merchantCode": jQuery('#fullculqi_pubkey').val(),
+                            "eventType": "order.status.changed",
                             "url": jQuery('#fullculqi_notpay').val(),
-                            "version": 2,
+                            "apiVersion": "2.0",
                             "loginActive": true,
-                            "username": jQuery('#fullculqi_username').val(),
+                            "userName": jQuery('#fullculqi_username').val(),
                             "password": jQuery('#fullculqi_password').val()
                         }),
                     };
                     jQuery.ajax(settings).done(function (response) {
                         console.log(response);
+                        //jQuery('#form-culqi-settings').submit();
                     });
                 }
             });
         }
+        jQuery('#form-culqi-settings').submit();
+
     });
     jQuery("#modal_login_form_culqi").submit(function (e) {
         jQuery('div#wpwrap').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando <img width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div></div>');
@@ -162,7 +173,7 @@ jQuery(document).ready(function () {
                 jQuery('#errorlogincpanelculqi').html(response.message);
             }else{
                 jQuery("#modalLogin").modal("hide");
-                window.culqi_token = response.data;
+                window.culqi_token = response.idToken;
                 culqiWoGetMerchants(url_merchant);
             }
         });
@@ -172,16 +183,18 @@ jQuery(document).ready(function () {
         const settings = {
             url: fullculqi_merchants.url_merchants,
             dataType: "json",
-            type: "get",
+            type: "post",
             timeout: 0,
             data: {
                 action: "culqi_merchants",
                 token: window.culqi_token,
+                email: jQuery("#email").val(),
                 url_merchant: url_merchant
                 // wpnonce: fullculqi_charges_vars.nonce,
             },
         };
         jQuery.ajax(settings).done(function (response) {
+            console.log(response.data);
             renderMerchants(response.data);
             jQuery("#modalLogin").modal("hide");
             jQuery("#modalList").modal("show");
@@ -201,7 +214,7 @@ jQuery(document).ready(function () {
         const settings = {
             url: fullculqi_merchants.url_merchants,
             dataType: "json",
-            type: "get",
+            type: "post",
             timeout: 0,
             data: {
                 action: "culqi_merchant",
@@ -272,7 +285,7 @@ jQuery(document).ready(function () {
             html += `
         <li>
           <div class="items">
-            <div class="merchant_item" data-name="${merchant.nombre_comercial}" data-key='${merchant.codigo_comercio}'>
+            <div class="merchant_item" data-name="${merchant.name}" data-key='${merchant.products[0].publicKey}'>
               <div class="merchant_logo">
                 <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_135_620)">
@@ -291,7 +304,7 @@ jQuery(document).ready(function () {
                 </svg>
               </div>
               <div class="merchant_name">
-              ${merchant.nombre_comercial}
+              ${merchant.name}
               </div>
               <div class="merchant_arrow">
                 <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">

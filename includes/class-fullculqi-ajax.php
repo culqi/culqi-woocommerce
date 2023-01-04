@@ -43,45 +43,48 @@ class FullCulqi_Ajax {
 	 */
 
 	 public function get_merchants() {
-		 $token = sanitize_text_field($_GET['token']);
+		 $token = sanitize_text_field($_POST['token']);
+		 $email = sanitize_text_field($_POST['email']);
 		 // Run a security check.
-		 $url_get_merchants = sanitize_url($_GET['url_merchant']);
+		 $url_get_merchants = sanitize_url($_POST['url_merchant']);
+		 $body = array("email" => $email); 
 
 			$args = array(
-					'method'        => 'GET',
+					'method'        => 'POST',
 					'headers'       => array(
 							'Content-Type'     => 'application/json',
 							'Accept'         => 'application/json',
 							'Authorization' => 'Bearer ' . $token
 					),
 					'timeout'       => 120,
-					'body'          => ''
+					'body'          => json_encode($body)
 			);
 
 			$response = wp_remote_request($url_get_merchants, $args);
 			$body = $response['body'];
 			$obj = json_decode($body, true);
-			$merchants = $obj['data'];
+			//var_dump($obj);
+			$merchants = $obj['accounts'][0]['merchants'];
 		 wp_send_json_success( $merchants );
 	 }
 
 	 public function get_merchant() {
-		 $token = sanitize_text_field($_GET['token']);
-         $url_get_merchant = sanitize_url($_GET['url_merchant']);
+		 $token = sanitize_text_field($_POST['token']);
+     $url_get_merchant = sanitize_url($_POST['url_merchant']);
+		 $public_key = sanitize_text_field($_POST['public_key']);
+		 $body = array("publicKey" => $public_key); 
 
-		 $public_key = sanitize_text_field($_GET['public_key']);
-
-		 $url_get_merchant_info = $url_get_merchant . $public_key;
+		 $url_get_merchant_info = $url_get_merchant;
 
         $args = array(
-            'method'        => 'GET',
+            'method'        => 'POST',
             'headers'       => array(
               'Content-Type'     => 'application/json',
               'Accept'         => 'application/json',
 							'Authorization' => 'Bearer ' . $token
             ),
             'timeout'       => 120,
-            'body'          => ''
+            'body'          => json_encode($body)
         );
 
         $response = wp_remote_request($url_get_merchant_info, $args);

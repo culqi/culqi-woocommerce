@@ -29,8 +29,8 @@ define( 'MPCULQI_DIR' , plugin_dir_path(__FILE__) );
 define( 'MPCULQI_URL' , plugin_dir_url(__FILE__) );
 define( 'MPCULQI_BASE' , plugin_basename( __FILE__ ) );
 
-define('MPCULQI_URLAPI_INTEG', 'https://integ-panel.culqi.com');
-define('MPCULQI_URLAPI_PROD', 'https://panel.culqi.com');
+define('MPCULQI_URLAPI_INTEG', 'https://internal-v3-dev.culqi.xyz');
+define('MPCULQI_URLAPI_PROD', 'https://internal-v3-dev.culqi.xyz');
 
 define('MPCULQI_URLAPI_INTEG_3DS', 'https://3ds.culqi.com');
 define('MPCULQI_URLAPI_PROD_3DS', 'https://3ds.culqi.com');
@@ -38,18 +38,20 @@ define('MPCULQI_URLAPI_PROD_3DS', 'https://3ds.culqi.com');
 define('MPCULQI_URLAPI_ORDERCHARGES_INTEG', 'https://api.culqi.com/v2');
 define('MPCULQI_URLAPI_CHECKOUT_INTEG', 'https://checkout.culqi.com/js/v4');
 
-define('MPCULQI_URLAPI_LOGIN_INTEG', MPCULQI_URLAPI_INTEG.'/user/login');
-define('MPCULQI_URLAPI_MERCHANT_INTEG', MPCULQI_URLAPI_INTEG.'/secure/merchant/');
-define('MPCULQI_URLAPI_MERCHANTSINGLE_INTEG', MPCULQI_URLAPI_INTEG.'/secure/keys/?merchant=');
-define('MPCULQI_URLAPI_WEBHOOK_INTEG', MPCULQI_URLAPI_INTEG.'/secure/events');
+define('MPCULQI_URLAPI_LOGIN_INTEG', MPCULQI_URLAPI_INTEG.'/or-dashboard/public/auth');
+define('MPCULQI_URLAPI_MERCHANT_INTEG', MPCULQI_URLAPI_INTEG.'/or-dashboard/secure/account-merchants');
+define('MPCULQI_URLAPI_MERCHANTSINGLE_INTEG', MPCULQI_URLAPI_INTEG.'/or-dashboard/secure/keys/get-keys');
+define('MPCULQI_URLAPI_WEBHOOK_INTEG', MPCULQI_URLAPI_INTEG.'/or-dashboard/secure/webhooks/create-merchant-event');
+define('MPCULQI_URLAPI_GET_WEBHOOK_INTEG', MPCULQI_URLAPI_INTEG.'/or-dashboard/secure/webhooks/get-merchant-events');
 
 define('MPCULQI_URLAPI_ORDERCHARGES_PROD', 'https://api.culqi.com/v2');
 define('MPCULQI_URLAPI_CHECKOUT_PROD', 'https://checkout.culqi.com/js/v4');
 
-define('MPCULQI_URLAPI_LOGIN_PROD', MPCULQI_URLAPI_PROD.'/user/login');
-define('MPCULQI_URLAPI_MERCHANT_PROD', MPCULQI_URLAPI_PROD.'/secure/merchant/');
-define('MPCULQI_URLAPI_MERCHANTSINGLE_PROD', MPCULQI_URLAPI_PROD.'/secure/keys/?merchant=');
-define('MPCULQI_URLAPI_WEBHOOK_PROD', MPCULQI_URLAPI_PROD.'/secure/events');
+define('MPCULQI_URLAPI_LOGIN_PROD', MPCULQI_URLAPI_PROD.'/or-dashboard/public/auth');
+define('MPCULQI_URLAPI_MERCHANT_PROD', MPCULQI_URLAPI_PROD.'/or-dashboard/secure/account-merchants');
+define('MPCULQI_URLAPI_MERCHANTSINGLE_PROD', MPCULQI_URLAPI_PROD.'/or-dashboard/secure/keys/get-keys');
+define('MPCULQI_URLAPI_WEBHOOK_PROD', MPCULQI_URLAPI_PROD.'/or-dashboard/secure/webhooks/create-merchant-event');
+define('MPCULQI_URLAPI_GET_WEBHOOK_PROD', MPCULQI_URLAPI_PROD.'/or-dashboard/secure/webhooks/get-merchant-events');
 
 define('TIME_EXPIRATION_DEFAULT', 24);
 
