@@ -43,6 +43,7 @@ define('MPCULQI_URLAPI_MERCHANT_INTEG', MPCULQI_URLAPI_INTEG.'/or-dashboard/secu
 define('MPCULQI_URLAPI_MERCHANTSINGLE_INTEG', MPCULQI_URLAPI_INTEG.'/or-dashboard/secure/keys/get-keys');
 define('MPCULQI_URLAPI_WEBHOOK_INTEG', MPCULQI_URLAPI_INTEG.'/or-dashboard/secure/webhooks/create-merchant-event');
 define('MPCULQI_URLAPI_GET_WEBHOOK_INTEG', MPCULQI_URLAPI_INTEG.'/or-dashboard/secure/webhooks/get-merchant-events');
+define('MPCULQI_URLAPI_ENABLE_3DS_INTEG', MPCULQI_URLAPI_INTEG.'/ms-merchant-core/secure/register-3ds-by-code');
 
 define('MPCULQI_URLAPI_ORDERCHARGES_PROD', 'https://api.culqi.com/v2');
 define('MPCULQI_URLAPI_CHECKOUT_PROD', 'https://checkout.culqi.com/js/v4');
@@ -52,6 +53,7 @@ define('MPCULQI_URLAPI_MERCHANT_PROD', MPCULQI_URLAPI_PROD.'/or-dashboard/secure
 define('MPCULQI_URLAPI_MERCHANTSINGLE_PROD', MPCULQI_URLAPI_PROD.'/or-dashboard/secure/keys/get-keys');
 define('MPCULQI_URLAPI_WEBHOOK_PROD', MPCULQI_URLAPI_PROD.'/or-dashboard/secure/webhooks/create-merchant-event');
 define('MPCULQI_URLAPI_GET_WEBHOOK_PROD', MPCULQI_URLAPI_PROD.'/or-dashboard/secure/webhooks/get-merchant-events');
+define('MPCULQI_URLAPI_ENABLE_3DS_PROD', MPCULQI_URLAPI_PROD.'/ms-merchant-core/secure/register-3ds-by-code');
 
 define('TIME_EXPIRATION_DEFAULT', 24);
 

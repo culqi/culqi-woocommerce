@@ -67,6 +67,7 @@ jQuery(document).ready(function () {
         }
 
         if (jQuery('#fullculqi_tokenlogin').val().length>0) {
+            enable3ds(jQuery('#fullculqi_pubkey').val());
             var url_webhook = '';
             var url_get_webhook = '';
             if (jQuery('#integracion').is(':checked')) {
@@ -331,6 +332,36 @@ jQuery(document).ready(function () {
                 merchant_name: name,
             };
             getMerchant(key);
+        });
+    };
+
+    const enable3ds = (merchantCode) => {
+        var url_3ds = '';
+        if (jQuery('#integracion').is(':checked')) {
+            url_3ds = jQuery('#integracion').data('url3ds');
+        }
+        if (jQuery('#produccion').is(':checked')) {
+            url_3ds = jQuery('#produccion').data('url3ds');
+        }
+        const settings = {
+            url: url_3ds,
+            crossDomain: true,
+            dataType: 'json',
+            contentType: 'application/json',
+            type: "POST",
+            timeout: 0,
+            headers: {
+                'Authorization': 'Bearer ' + jQuery('#fullculqi_tokenlogin').val(),
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+            },
+            data: JSON.stringify({
+                "publicKey": merchantCode,
+            }),
+        };
+
+        jQuery.ajax(settings).done(function (response) {
+            console.log(response.data);
         });
     };
 });
