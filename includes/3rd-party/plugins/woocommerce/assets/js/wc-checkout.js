@@ -126,7 +126,8 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				//description: fullculqi_vars.description,
 				amount: fullculqi_vars.total,
 				culqiclient: 'woocommerce',
-				culqiclientversion: fullculqi_vars.version_wc
+				culqiclientversion: fullculqi_vars.version_wc,
+				culqipluginversion: fullculqi_vars.version_plugin
 			};
 			console.log(fullculqi_vars.multi_order+':: el orderid');
 			if( fullculqi_vars.multi_order != '' ) {
