@@ -53,8 +53,8 @@ class FullCulqi_Metaboxes_Orders extends FullCulqi_Metaboxes {
 			case 'culqi_cip'		: $value = get_post_meta( $post_id, 'culqi_cip', true );
 				break;
 			case 'culqi_creation'	:
-				$value = get_post_meta( $post_id, 'culqi_creation_date', true ); break;
-			case 'culqi_expiration'	: $value = $basic['culqi_expiration']; break;
+				$value = $this->setTimezoneCulqi(get_post_meta( $post_id, 'culqi_creation_date', true )); break;
+			case 'culqi_expiration'	: $value = $this->setTimezoneCulqi($basic['culqi_expiration']); break;
 			case 'culqi_email'		:
 
 				if( ! empty( $customer['post_id'] ) ) {
@@ -167,6 +167,16 @@ class FullCulqi_Metaboxes_Orders extends FullCulqi_Metaboxes {
 		], $post );
 
 		fullculqi_get_template( 'resources/layouts/admin/metaboxes/order_source.php', $args );	
+	}
+
+	private function setTimezoneCulqi($datetime)
+	{
+		$timestamp = strtotime($datetime);
+		$datetime = new DateTime();
+		$datetime->setTimestamp($timestamp);
+		$la_time = new DateTimeZone('America/Lima');
+		$datetime->setTimezone($la_time);
+		return $datetime->format('Y-m-d H:i:s');
 	}
 }
 
