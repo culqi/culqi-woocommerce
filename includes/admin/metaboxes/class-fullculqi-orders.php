@@ -134,15 +134,15 @@ class FullCulqi_Metaboxes_Orders extends FullCulqi_Metaboxes {
 			'post_id'		=> $post->ID,
 			'id'			=> get_post_meta( $post->ID, 'culqi_id', true ),
 			'order_id'		=> get_post_meta( $post->ID, 'culqi_order_id', true ),
-			'creation'		=> get_post_meta( $post->ID, 'culqi_creation_date', true ),
-			'expiration'	=> $basic['culqi_expiration'],
+			'creation'		=> $this->setTimezoneCulqi(get_post_meta( $post->ID, 'culqi_creation_date', true )),
+			'expiration'	=> $this->setTimezoneCulqi($basic['culqi_expiration']),
 			'currency'		=> $basic['culqi_currency'],
 			'amount'		=> $basic['culqi_amount'],
 			'cip'			=> $cip,
 			'statuses'		=> fullculqi_multipayments_statuses(),
 			'status'		=> $status,
 			'status_class'	=> $status_class,
-			'status_date'	=> $status_date,
+			'status_date'	=> $this->setTimezoneCulqi($status_date),
 			'email'			=> $customer['culqi_email'],
 			'first_name'	=> $customer['culqi_first_name'],
 			'last_name'		=> $customer['culqi_last_name'],
@@ -167,16 +167,6 @@ class FullCulqi_Metaboxes_Orders extends FullCulqi_Metaboxes {
 		], $post );
 
 		fullculqi_get_template( 'resources/layouts/admin/metaboxes/order_source.php', $args );	
-	}
-
-	private function setTimezoneCulqi($datetime)
-	{
-		$timestamp = strtotime($datetime);
-		$datetime = new DateTime();
-		$datetime->setTimestamp($timestamp);
-		$la_time = new DateTimeZone('America/Lima');
-		$datetime->setTimezone($la_time);
-		return $datetime->format('Y-m-d H:i:s');
 	}
 }
 

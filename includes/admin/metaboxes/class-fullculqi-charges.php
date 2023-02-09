@@ -103,7 +103,7 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 			case 'culqi_id'			:
 					$value = get_post_meta( $post_id, 'culqi_id', true ); break;
 			case 'culqi_creation'	:
-					$value = get_post_meta( $post_id, 'culqi_creation_date', true ); break;
+					$value = $this->setTimezoneCulqi(get_post_meta( $post_id, 'culqi_creation_date', true )); break;
 			case 'culqi_email'		:
 
 				$culqi_customer_id 	= get_post_meta( $post_id, 'culqi_customer_id', true );
@@ -221,7 +221,7 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 			'id'			=> get_post_meta( $post->ID, 'culqi_id', true ),
 			'ip'			=> get_post_meta( $post->ID, 'culqi_ip', true ),
 			'order_id'		=> get_post_meta( $post->ID, 'culqi_order_id', true ),
-			'creation_date'	=> get_post_meta( $post->ID, 'culqi_creation_date', true ),
+			'creation_date'	=> $this->setTimezoneCulqi(get_post_meta( $post->ID, 'culqi_creation_date', true )),
 			'currency'		=> $basic['culqi_currency'],
 			'amount'		=> $basic['culqi_amount'],
 			'refunded'		=> $basic['culqi_amount_refunded'],
