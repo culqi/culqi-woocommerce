@@ -109,7 +109,7 @@ class FullCulqi_Metaboxes_Customers extends FullCulqi_Metaboxes {
 		$args = apply_filters( 'fullculqi/customers/metabox_basic/args', [
 			'id'			=> get_post_meta( $post->ID, 'culqi_id', true ),
 			'email'			=> get_post_meta( $post->ID, 'culqi_email', true ),
-			'creation'		=> get_post_meta( $post->ID, 'culqi_creation_date', true ),
+			'creation'		=> $this->setTimezoneCulqi(get_post_meta( $post->ID, 'culqi_creation_date', true )),
 			'names'			=> $basic['culqi_names'],
 			'first_name'	=> $basic['culqi_first_name'],
 			'last_name'		=> $basic['culqi_last_name'],

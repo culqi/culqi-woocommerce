@@ -53,8 +53,8 @@ class FullCulqi_Metaboxes_Orders extends FullCulqi_Metaboxes {
 			case 'culqi_cip'		: $value = get_post_meta( $post_id, 'culqi_cip', true );
 				break;
 			case 'culqi_creation'	:
-				$value = get_post_meta( $post_id, 'culqi_creation_date', true ); break;
-			case 'culqi_expiration'	: $value = $basic['culqi_expiration']; break;
+				$value = $this->setTimezoneCulqi(get_post_meta( $post_id, 'culqi_creation_date', true )); break;
+			case 'culqi_expiration'	: $value = $this->setTimezoneCulqi($basic['culqi_expiration']); break;
 			case 'culqi_email'		:
 
 				if( ! empty( $customer['post_id'] ) ) {
@@ -134,15 +134,15 @@ class FullCulqi_Metaboxes_Orders extends FullCulqi_Metaboxes {
 			'post_id'		=> $post->ID,
 			'id'			=> get_post_meta( $post->ID, 'culqi_id', true ),
 			'order_id'		=> get_post_meta( $post->ID, 'culqi_order_id', true ),
-			'creation'		=> get_post_meta( $post->ID, 'culqi_creation_date', true ),
-			'expiration'	=> $basic['culqi_expiration'],
+			'creation'		=> $this->setTimezoneCulqi(get_post_meta( $post->ID, 'culqi_creation_date', true )),
+			'expiration'	=> $this->setTimezoneCulqi($basic['culqi_expiration']),
 			'currency'		=> $basic['culqi_currency'],
 			'amount'		=> $basic['culqi_amount'],
 			'cip'			=> $cip,
 			'statuses'		=> fullculqi_multipayments_statuses(),
 			'status'		=> $status,
 			'status_class'	=> $status_class,
-			'status_date'	=> $status_date,
+			'status_date'	=> $this->setTimezoneCulqi($status_date),
 			'email'			=> $customer['culqi_email'],
 			'first_name'	=> $customer['culqi_first_name'],
 			'last_name'		=> $customer['culqi_last_name'],

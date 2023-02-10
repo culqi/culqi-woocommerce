@@ -147,6 +147,17 @@ abstract class FullCulqi_Metaboxes {
 		return true;
 	}
 
+	public function setTimezoneCulqi($datetime)
+	{
+		$timezone_config = get_option('gmt_offset');
+		$timestamp = strtotime($datetime);
+		$datetime = new DateTime();
+		$datetime->setTimestamp($timestamp);
+		$la_time = new DateTimeZone($timezone_config);
+		$datetime->setTimezone($la_time);
+		return $datetime->format('Y-m-d H:i:s');
+	}
+
 	public function save_post( $post_id = 0, $post, $update = false ) {}
 
 	public function delete_post( $post_id = 0, $post = array()) {}
