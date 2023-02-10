@@ -229,7 +229,7 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 			'status'		=> $status,
 			'status_class'	=> $status_class,
 			'capture'		=> $capture,
-			'capture_date'	=> $capture_date,
+			'capture_date'	=> $this->setTimezoneCulqi($capture_date),
 			'email'			=> $customer_email,
 			'first_name'	=> $customer['culqi_first_name'],
 			'last_name'		=> $customer['culqi_last_name'],
