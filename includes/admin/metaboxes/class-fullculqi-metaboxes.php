@@ -150,6 +150,9 @@ abstract class FullCulqi_Metaboxes {
 	public function setTimezoneCulqi($datetime)
 	{
 		$timezone_config = get_option('gmt_offset');
+		if(!$timezone_config) {
+			return $datetime;
+		}
 		$timestamp = strtotime($datetime);
 		$datetime = new DateTime();
 		$datetime->setTimestamp($timestamp);
