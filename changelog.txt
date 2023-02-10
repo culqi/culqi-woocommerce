@@ -1,5 +1,6 @@
-2022-12-28 - version 3.0.2
+2023-01-09 - version 3.0.2
 Fix: add versión plugin in token
+Fix: add date dinamico UTC
 
 2021-06-07 - version 2.0.5
 Fix: validate if method exists
