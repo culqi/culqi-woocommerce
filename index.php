@@ -3,7 +3,7 @@
 Plugin Name: Culqi
 Plugin URI:https://wordpress.org/plugins/culqi-checkout
 Description: Culqi acepta pago con tarjetas, pagoefectivo, billeteras móviles y cuotéalo desde tu tienda virtual.
-Version: 3.0.2
+Version: 3.0.3
 Author: Culqi
 Author URI: https://culqi.com/
 Developer: Culqi Team
@@ -22,7 +22,7 @@ WC tested up to:
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-define( 'MPCULQI_PLUGIN_VERSION' , 'v3.0.2');
+define( 'MPCULQI_PLUGIN_VERSION' , 'v3.0.3');
 
 define( 'MPCULQI_FILE' , __FILE__ );
 define( 'MPCULQI_DIR' , plugin_dir_path(__FILE__) );
