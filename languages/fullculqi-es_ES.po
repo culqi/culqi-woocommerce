@@ -1,0 +1,1202 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Culqi Integration\n"
+"POT-Creation-Date: 2021-03-03 02:46-0300\n"
+"PO-Revision-Date: 2021-03-03 02:49-0300\n"
+"Last-Translator: \n"
+"Language-Team: Letsgodev\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-admin.php:49
+msgid "Culqi Logs"
+msgstr "Logs de Culqi"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-admin.php:84
+msgid "WC Order"
+msgstr "WC Pedido"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-admin.php:206
+msgid "Post Charge empty"
+msgstr "Post Cargo vacío"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-admin.php:214
+msgid "WC Order doesnt exist"
+msgstr "WC Pedido no existe"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-main.php:125
+#, php-format
+msgid "The CIP %s was paid"
+msgstr "El CIP %s fue pagado"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-main.php:138
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:59
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:289
+#, php-format
+msgid "Status changed (to %s)"
+msgstr "Estado cambiado (a %s)"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-main.php:149
+#, php-format
+msgid "The CIP %s expired"
+msgstr "El CIP %s expiró"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-main.php:161
+#, php-format
+msgid "The CIP %s was deleted"
+msgstr "El CIP %s fue borrado"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:15
+msgid "Culqi Integration Popup"
+msgstr "Culqi Integración Popup"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:16
+msgid ""
+"Culqi Integration allows use the popup Culqi to enter the credit card and "
+"have a safe purchase."
+msgstr ""
+"Culqi Integración permite usar el popup de Culqi para ingresar la tarjeta de "
+"crédito y tener una compra segura."
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:153
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:73
+#, php-format
+msgid "Culqi Multipayment Error: %s"
+msgstr "Culqi Multipago Error: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:200
+msgid "Loading. Please wait."
+msgstr "Cargando. Espere por favor."
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:203
+msgid "There was some problem in the purchase process. Try again please"
+msgstr "Hubo un problema en el proceso de pago. Intenta otra vez por favor"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:223
+msgid "BASIC SETTING"
+msgstr "CONFIGURACION BÁSICA"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:227
+msgid "Enable/Disable"
+msgstr "Habilitar/Deshabilitar"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:229
+msgid "Enable Culqi"
+msgstr "Habilitar Culqi"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:233
+msgid "Installments"
+msgstr "Cuotas"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:234
+msgid ""
+"If checked, a selection field will appear in the modal with the available "
+"installments."
+msgstr ""
+"Si está marcado, aparecerá un campo de selección en el modal con las cuotas "
+"disponibles."
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:237
+msgid "Enable Installments"
+msgstr "Habilitar cuotas"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:242
+msgid "Title"
+msgstr "Título"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:244
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+"Esto controla el título que el usuario mira durante el proceso de pago."
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:246
+msgid "Culqi Popup"
+msgstr "Popup de Culqi"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:249
+msgid "Description"
+msgstr "Descripción"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:250
+msgid ""
+"Brief description of the payment gateway. This message will be seen by the "
+"buyer"
+msgstr ""
+"Breve descripción de la pasarela de pago. Este mensaje será visto por el "
+"comprador"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:252
+msgid ""
+"Payment gateway Culqi accepts VISA, Mastercard, Diners, American Express"
+msgstr ""
+"Payment gateway Culqi accepts VISA, Mastercard, Diners, American Express"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:257
+msgid "MULTIPAYMENT SETTING"
+msgstr "CONFIGURACIÓN MULTIPAGO"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:263
+msgid "Enable"
+msgstr "Habilitar"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:264
+msgid "If checked several tabs will appear in the modal with other payments"
+msgstr ""
+"Si está marcado, aparecerán pestañas en el modal de Culqi con otras formas "
+"de pago"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:267
+msgid "Enable Multipayment"
+msgstr "Habilitar Multipago"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:272
+msgid "Duration"
+msgstr "Duración"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:273
+msgid ""
+"If enable Multipayment option, you must choose the order duration. This is "
+"the time you give the customer to make the payment."
+msgstr ""
+"Si habilitas la opción de Multipago, debes elegir la duración del pedido. "
+"Este es el tiempo que tu le brindas al cliente para hacer el pago."
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:277
+msgid "1 Hour"
+msgstr "1 Hora"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:278
+msgid "2 Hours"
+msgstr "2 Horas"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:279
+msgid "4 Hours"
+msgstr "4 Horas"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:280
+msgid "8 Hours"
+msgstr "8 Horas"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:281
+msgid "12 Hours"
+msgstr "12 Horas"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:282
+msgid "1 Day"
+msgstr "1 Día"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:283
+msgid "2 Days"
+msgstr "2 Días"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:284
+msgid "4 Days"
+msgstr "4 Días"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:285
+msgid "7 Days"
+msgstr "7 Días"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:286
+msgid "15 Days"
+msgstr "15 Días"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:292
+#: includes/admin/metaboxes/class-fullculqi-charges.php:82
+#: includes/admin/metaboxes/class-fullculqi-orders.php:32
+msgid "Status"
+msgstr "Estado"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:293
+msgid "If the sale is made via multipayments, you must specify the status."
+msgstr "Si la venta es hecho via multipago, debes especificar el estado."
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:302
+msgid "ADDITIONAL SETTING"
+msgstr "CONFIGURACION ADICIONAL"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:307
+msgid "Success Status"
+msgstr "Estado satisfactorio"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:310
+msgid "If the purchase is success, apply this status to the order"
+msgstr "Si la compra es satisfactoria, aplica este estado al pedido"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:316
+msgid "Failed Message"
+msgstr "Mensaje de fallido"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:317
+msgid ""
+"This is the message will be shown to the customer if there is a error in the "
+"payment"
+msgstr ""
+"Este es el mensaje que será mostrado al comprador si hay un error en el pago"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:321
+msgid ""
+"Im sorry! an error occurred making the payment. A email was sent to shop "
+"manager with your information."
+msgstr ""
+"Lo sentimos! un error ocurrió haciendo el pago. Un emal fue enviado al "
+"administrador de la tienda con tu información."
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:324
+msgid "Popup/Modal Time"
+msgstr "Tiempo del Popup/Modal"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:326
+msgid ""
+"If you want the modal window to appear after a while without clicking \"buy"
+"\", put the seconds here. (Warning: may it not work in Safari). If you do "
+"not want to, leave it at zero."
+msgstr ""
+"Si quieres que el modal aparesca después de un tiempo sin hacer click en "
+"\"comprar\", pon los segundos aqui. (Advertencia: puede que eso no funcione "
+"en Safari). Si no lo quieres, déjalo en cero."
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:427
+msgid "The refund cannot be made from FullCulqi"
+msgstr "El reembolso no puede ser hecho desde FullCulqi"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:451
+#, php-format
+msgid "Culqi Refund Error : %s"
+msgstr "Culqi Reembolso Error : %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-method.php:460
+#, php-format
+msgid "Culqi Refund created: %s"
+msgstr "Reembolso Culqi creado: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:50
+#, php-format
+msgid "Culqi Multipayment CIP: %s"
+msgstr "Culqi Multipago CIP : %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:85
+#, php-format
+msgid "Post Multipayment Created: %s"
+msgstr "Post Multipago Creado: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:163
+#, php-format
+msgid "Culqi Card Error: %s"
+msgstr "Culqi Tarjeta Error: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:247
+#, php-format
+msgid "Culqi Charge Error: %s"
+msgstr "Culqi Cargo Error: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:265
+#, php-format
+msgid "Culqi Charge Created: %s"
+msgstr "Culqi Cargo Creado: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:275
+#, php-format
+msgid "Post Charge Created: %s"
+msgstr "Post Cargo creado : %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:321
+#, php-format
+msgid "Culqi Customer: %s"
+msgstr "Culqi Clientes: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:330
+#, php-format
+msgid "Post Customer: %s"
+msgstr "Post Cliente: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:383
+#, php-format
+msgid "Culqi Customer Error: %s"
+msgstr "Culqi Cliente Error: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:397
+#, php-format
+msgid "Culqi Customer Created: %s"
+msgstr "Culqi Cliente Creado: %s"
+
+#: includes/3rd-party/plugins/woocommerce/class-fullculqi-wc-process.php:406
+#, php-format
+msgid "Post Customer Created: %s"
+msgstr "Post Cliente Creado: %s"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/charge_basic.php:3
+msgid "WC Order ID"
+msgstr "WC Pedido ID"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/checkout-receipt.php:5
+msgid "Make the purchase clicking the "
+msgstr "Haz el pago clickeando al "
+
+#: includes/3rd-party/plugins/woocommerce/layouts/checkout-receipt.php:5
+msgid "pay button"
+msgstr "botón pagar"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/checkout-receipt.php:8
+msgid "If you wish change the payment method, click the "
+msgstr "Si deseas cambiar el método de pago, click en el "
+
+#: includes/3rd-party/plugins/woocommerce/layouts/checkout-receipt.php:8
+msgid "cancel button"
+msgstr "botón cancelar"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/checkout-receipt.php:12
+msgid "Pay with Culqi"
+msgstr "Pagar con Culqi"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/checkout-receipt.php:15
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/notice_currency.php:2
+msgid ""
+"Woocommerce Culqi Full Integration plugin needs the currency in the commerce "
+"be PEN or USD to work!"
+msgstr ""
+"El plugin Woocommerce Culqi Integración necesita que la moneda en el "
+"ecommerce sea PEN o USD para funcionar!"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/order_log.php:5
+#: includes/admin/metaboxes/class-fullculqi-charges.php:72
+#: includes/admin/metaboxes/class-fullculqi-customers.php:18
+#: includes/admin/metaboxes/class-fullculqi-orders.php:20
+msgid "ID"
+msgstr "ID"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/order_log.php:6
+msgid "Date/Hour"
+msgstr "Dia/Hora"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/order_log.php:7
+#: resources/layouts/admin/metaboxes/customer_cards.php:14
+msgid "Type"
+msgstr "Tipo"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/order_log.php:8
+msgid "Message"
+msgstr "Mensaje"
+
+#: includes/3rd-party/plugins/woocommerce/layouts/order_log.php:24
+msgid "there are no registered logs"
+msgstr "no hay logs registrados"
+
+#: includes/admin/class-fullculqi-settings.php:77
+#, php-format
+msgid "Deleting posts from %s."
+msgstr "Borrando posts desde %s."
+
+#: includes/admin/class-fullculqi-settings.php:78
+msgid "Error deleting a post"
+msgstr "Error borrando un post"
+
+#: includes/admin/class-fullculqi-settings.php:79
+#, php-format
+msgid "%s : Posts deleted."
+msgstr "%s : Posts borrados."
+
+#: includes/admin/class-fullculqi-settings.php:82
+#, php-format
+msgid "If you continue, you will delete all the posts in %s"
+msgstr "Si continuas, borrarás todos los posts en %s"
+
+#: includes/admin/class-fullculqi-settings.php:100
+#: includes/admin/class-fullculqi-settings.php:101
+msgid "Culqi Full Integration"
+msgstr "Culqi Integración"
+
+#: includes/admin/class-fullculqi-settings.php:113
+#: includes/admin/class-fullculqi-settings.php:114
+msgid "Settings"
+msgstr "Configuración"
+
+#: includes/admin/class-fullculqi-settings.php:122
+#: includes/admin/class-fullculqi-settings.php:123
+msgid "Webhooks"
+msgstr "Webhooks"
+
+#: includes/admin/class-fullculqi-settings.php:133
+#: includes/admin/class-fullculqi-settings.php:134
+msgid "Add-ons"
+msgstr "Add-ons"
+
+#: includes/admin/class-fullculqi-settings.php:172
+msgid "You do not have sufficient permissions to access this page."
+msgstr "No tienes suficientes permisos para acceder a esta página."
+
+#: includes/admin/class-fullculqi-settings.php:217
+msgid "Commerce name"
+msgstr "Nombre del Comercio"
+
+#: includes/admin/class-fullculqi-settings.php:225
+#: resources/layouts/admin/welcome-panel.php:57
+msgid "Public Key"
+msgstr "Lláve Pública"
+
+#: includes/admin/class-fullculqi-settings.php:233
+#: resources/layouts/admin/welcome-panel.php:64
+msgid "Secret Key"
+msgstr "Llave Secreta"
+
+#: includes/admin/class-fullculqi-settings.php:241
+msgid "Logo URL"
+msgstr "URL del Logo"
+
+#: includes/admin/class-fullculqi-settings.php:249
+msgid "Delete all the entities"
+msgstr "Borrar todas las entidades"
+
+#: includes/admin/class-fullculqi-updater.php:50
+msgid "Culqi Integration update required"
+msgstr "Culqi Integración actualización requerida"
+
+#: includes/admin/class-fullculqi-updater.php:51
+msgid ""
+"Culqi Integration plugin has been updated to 2.0.0 version! To keep things "
+"running smoothly, we have to update your database to the newest version"
+msgstr ""
+"El plugin Culqi Integración a sido actualizado a la version 2.0.0! Para que "
+"todo funcione sin problemas, debemos actualizar tu base de datos a la nueva "
+"versión"
+
+#: includes/admin/class-fullculqi-updater.php:52
+msgid "Continue"
+msgstr "Continuar"
+
+#: includes/admin/class-fullculqi-welcome.php:73
+msgid "Welcome to FullCulqi Integration"
+msgstr "Bienvenido a Culqi Integración"
+
+#: includes/admin/class-fullculqi-welcome.php:74
+#: resources/layouts/admin/welcome-panel.php:5
+msgid "FullCulqi Integration"
+msgstr "Culqi Integración"
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:54
+msgid "Do you want to start the refund?"
+msgstr "Quieres iniciar el reembolso?"
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:55
+msgid "Processing the refund."
+msgstr "Procesando el reembolso."
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:56
+msgid "Refund completed."
+msgstr "Reembolso completado."
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:57
+msgid "Refund Error."
+msgstr "Reembolso Error."
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:79
+#: includes/admin/metaboxes/class-fullculqi-customers.php:26
+#: includes/admin/metaboxes/class-fullculqi-orders.php:30
+#: resources/layouts/admin/metaboxes/charge_basic.php:64
+#: resources/layouts/admin/metaboxes/customer_basic.php:13
+msgid "Email"
+msgstr "Email"
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:80
+#: includes/admin/metaboxes/class-fullculqi-orders.php:31
+#: resources/layouts/admin/metaboxes/charge_basic.php:28
+#: resources/layouts/admin/metaboxes/order_basic.php:32
+msgid "Amount"
+msgstr "Monto"
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:81
+#: includes/functions.php:181
+msgid "Refunded"
+msgstr "Reembolsado"
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:83
+#: includes/admin/metaboxes/class-fullculqi-customers.php:25
+#: includes/admin/metaboxes/class-fullculqi-orders.php:28
+#: resources/layouts/admin/metaboxes/customer_basic.php:25
+#: resources/layouts/admin/metaboxes/customer_cards.php:15
+msgid "Creation"
+msgstr "Creación"
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:167
+#: includes/admin/metaboxes/class-fullculqi-customers.php:69
+#: includes/admin/metaboxes/class-fullculqi-orders.php:102
+msgid "Basic"
+msgstr "Básico"
+
+#: includes/admin/metaboxes/class-fullculqi-charges.php:176
+#: includes/admin/metaboxes/class-fullculqi-customers.php:91
+#: includes/admin/metaboxes/class-fullculqi-orders.php:111
+msgid "Source"
+msgstr "Fuente"
+
+#: includes/admin/metaboxes/class-fullculqi-customers.php:27
+msgid "Name"
+msgstr "Nombre"
+
+#: includes/admin/metaboxes/class-fullculqi-customers.php:28
+#: resources/layouts/admin/metaboxes/charge_basic.php:80
+#: resources/layouts/admin/metaboxes/customer_basic.php:41
+#: resources/layouts/admin/metaboxes/order_basic.php:66
+msgid "Country"
+msgstr "País"
+
+#: includes/admin/metaboxes/class-fullculqi-customers.php:29
+#: resources/layouts/admin/metaboxes/charge_basic.php:84
+#: resources/layouts/admin/metaboxes/customer_basic.php:45
+#: resources/layouts/admin/metaboxes/order_basic.php:70
+msgid "Phone"
+msgstr "Teléfono"
+
+#: includes/admin/metaboxes/class-fullculqi-customers.php:81
+#: resources/layouts/admin/metaboxes/customer_cards.php:3
+msgid "Cards"
+msgstr "Tarjetas"
+
+#: includes/admin/metaboxes/class-fullculqi-metaboxes.php:91
+msgid "Sync from Culqi"
+msgstr "Sincronizar desde Culqi"
+
+#: includes/admin/metaboxes/class-fullculqi-metaboxes.php:92
+msgid "Do you want to start the sync?"
+msgstr "Quieres iniciar la sincronización?"
+
+#: includes/admin/metaboxes/class-fullculqi-metaboxes.php:94
+msgid "Synchronizing. It may take several minutes."
+msgstr "Sincronizando. Esto puede tomar varios minutos."
+
+#: includes/admin/metaboxes/class-fullculqi-metaboxes.php:95
+msgid "Synchronization completed."
+msgstr "Sincronización completada."
+
+#: includes/admin/metaboxes/class-fullculqi-metaboxes.php:96
+msgid "Oh! there are more items. Please wait."
+msgstr "Oh! Hay más. Por favor espere."
+
+#: includes/admin/metaboxes/class-fullculqi-metaboxes.php:97
+msgid "Error in the synchronization."
+msgstr "Error en la sincronización."
+
+#: includes/admin/metaboxes/class-fullculqi-orders.php:27
+#: resources/layouts/admin/metaboxes/order_basic.php:36
+msgid "CIP Code"
+msgstr "Código CIP"
+
+#: includes/admin/metaboxes/class-fullculqi-orders.php:29
+msgid "Expiration"
+msgstr "Expiración"
+
+#: includes/class-fullculqi-cpt.php:24
+msgid "Culqi Charges"
+msgstr "Culqi Cargos"
+
+#: includes/class-fullculqi-cpt.php:25 includes/class-fullculqi-cpt.php:26
+#: includes/class-fullculqi-cpt.php:27 includes/functions.php:77
+msgid "Charges"
+msgstr "Cargos"
+
+#: includes/class-fullculqi-cpt.php:28
+msgid "Charge"
+msgstr "Cargo"
+
+#: includes/class-fullculqi-cpt.php:29 includes/class-fullculqi-cpt.php:30
+msgid "Add New Charge"
+msgstr "Agregar nuevo Cargo"
+
+#: includes/class-fullculqi-cpt.php:31
+msgid "Edit Charge"
+msgstr "Editar Cargo"
+
+#: includes/class-fullculqi-cpt.php:32
+msgid "New Charge"
+msgstr "Nuevo Cargo"
+
+#: includes/class-fullculqi-cpt.php:33
+msgid "View Charge"
+msgstr "Ver Cargo"
+
+#: includes/class-fullculqi-cpt.php:34
+msgid "Search Charges"
+msgstr "Buscar Cargos"
+
+#: includes/class-fullculqi-cpt.php:35 includes/class-fullculqi-cpt.php:92
+#: includes/class-fullculqi-cpt.php:149
+msgid "Nothing found"
+msgstr "Nada encontrado"
+
+#: includes/class-fullculqi-cpt.php:36 includes/class-fullculqi-cpt.php:93
+#: includes/class-fullculqi-cpt.php:150
+msgid "Nothing found in Trash"
+msgstr "Nada encontrado en la basura"
+
+#: includes/class-fullculqi-cpt.php:81
+msgid "Culqi Orders"
+msgstr "Culqi Ordenes"
+
+#: includes/class-fullculqi-cpt.php:82 includes/class-fullculqi-cpt.php:83
+#: includes/class-fullculqi-cpt.php:84 includes/functions.php:78
+msgid "Orders"
+msgstr "Ordenes"
+
+#: includes/class-fullculqi-cpt.php:85
+msgid "Order"
+msgstr "Pedido"
+
+#: includes/class-fullculqi-cpt.php:86 includes/class-fullculqi-cpt.php:87
+msgid "Add New Order"
+msgstr "Agregar nuevo Orden"
+
+#: includes/class-fullculqi-cpt.php:88
+msgid "Edit Order"
+msgstr "Editar Orden"
+
+#: includes/class-fullculqi-cpt.php:89
+msgid "New Order"
+msgstr "Nueva Orden"
+
+#: includes/class-fullculqi-cpt.php:90
+msgid "View Order"
+msgstr "Ver Orden"
+
+#: includes/class-fullculqi-cpt.php:91
+msgid "Search Orders"
+msgstr "Buscar Ordenes"
+
+#: includes/class-fullculqi-cpt.php:138
+msgid "Culqi Customers"
+msgstr "Culqi Clientes"
+
+#: includes/class-fullculqi-cpt.php:139 includes/class-fullculqi-cpt.php:140
+#: includes/class-fullculqi-cpt.php:141 includes/functions.php:79
+msgid "Customers"
+msgstr "Clientes"
+
+#: includes/class-fullculqi-cpt.php:142
+#: resources/layouts/admin/metaboxes/charge_basic.php:60
+#: resources/layouts/admin/metaboxes/order_basic.php:50
+msgid "Customer"
+msgstr "Cliente"
+
+#: includes/class-fullculqi-cpt.php:143 includes/class-fullculqi-cpt.php:144
+msgid "Add New Customer"
+msgstr "Agregar nuevo Cliente"
+
+#: includes/class-fullculqi-cpt.php:145
+msgid "Edit Customer"
+msgstr "Editar Cliente"
+
+#: includes/class-fullculqi-cpt.php:146
+msgid "New Customer"
+msgstr "Nuevo Cliente"
+
+#: includes/class-fullculqi-cpt.php:147
+msgid "View Customer"
+msgstr "Ver Cliente"
+
+#: includes/class-fullculqi-cpt.php:148
+msgid "Search Customers"
+msgstr "Buscar Clientes"
+
+#: includes/class-fullculqi-provider.php:14
+msgid "There is not Culqi credentials"
+msgstr "No hay Culqi credenciales"
+
+#: includes/class-fullculqi.php:61 includes/class-fullculqi.php:68
+msgid "Cheatin&#8217; huh?"
+msgstr "Cheatin&#8217; huh?"
+
+#: includes/functions.php:43
+msgid "Peruvian Sol"
+msgstr "Sol Peruano"
+
+#: includes/functions.php:44
+msgid "Dollars"
+msgstr "Dolares"
+
+#: includes/functions.php:160
+#, php-format
+msgid "File %s is not exists"
+msgstr "Fichero %s no existe"
+
+#: includes/functions.php:178
+msgid "Authorized"
+msgstr "Autorizado"
+
+#: includes/functions.php:179
+msgid "Captured"
+msgstr "Capturado"
+
+#: includes/functions.php:180 includes/functions.php:194
+msgid "Expired"
+msgstr "Expirado"
+
+#: includes/functions.php:193
+msgid "Paid"
+msgstr "Pagado"
+
+#: includes/functions.php:195
+msgid "Deleted"
+msgstr "Borrado"
+
+#: includes/functions.php:196
+msgid "Pending"
+msgstr "Pendiente"
+
+#: includes/functions.php:197
+msgid "Created"
+msgstr "Creado"
+
+#: includes/syncs/class-fullculqi-orders.php:119
+msgid "Culqi Order Data empty"
+msgstr "Culqi Ordenes Información vacía"
+
+#: resources/layouts/admin/addons_page.php:3
+msgid "Culqi Addons"
+msgstr "Culqi Addons"
+
+#: resources/layouts/admin/addons_page.php:13
+msgid "Culqi One Click Payments"
+msgstr "Culqi Pagos con un click"
+
+#: resources/layouts/admin/addons_page.php:14
+msgid ""
+"Your buyers will can do their purchase with a single click in the checkout "
+"page"
+msgstr ""
+"Sus compradores podrán hacer sus transacciones con un simple click en la "
+"página de pago"
+
+#: resources/layouts/admin/addons_page.php:20
+#: resources/layouts/admin/addons_page.php:43
+#: resources/layouts/admin/addons_page.php:66
+#: resources/layouts/admin/addons_page.php:91
+msgid "Installed"
+msgstr "Instalado"
+
+#: resources/layouts/admin/addons_page.php:23
+#: resources/layouts/admin/addons_page.php:46
+#: resources/layouts/admin/addons_page.php:70
+#: resources/layouts/admin/addons_page.php:95
+msgid "Download"
+msgstr "Descargar"
+
+#: resources/layouts/admin/addons_page.php:36
+msgid "Culqi Subscriptions"
+msgstr "Culqi Suscripciones"
+
+#: resources/layouts/admin/addons_page.php:37
+msgid ""
+"Your ecommerce will can sell products or services using Culqi recurring "
+"payment."
+msgstr ""
+"Su ecommerce podrá vender productos o servicios usando los pagos recurrentes "
+"de Culqi."
+
+#: resources/layouts/admin/addons_page.php:59
+msgid "Culqi Payment Buttons"
+msgstr "Culqi Botones de Pago"
+
+#: resources/layouts/admin/addons_page.php:60
+msgid ""
+"You can use Culqi payments buttons in everywhere of you website without have "
+"a ecommerce installed."
+msgstr ""
+"Podrás usar los botones de pago en cualquier lugar de tu website sin tener "
+"un ecommerce instalado."
+
+#: resources/layouts/admin/addons_page.php:84
+msgid "Culqi Deferred Payment"
+msgstr "Culqi Pagos Diferidos"
+
+#: resources/layouts/admin/addons_page.php:85
+msgid ""
+"You can authorize a payment, check its stocks, and then capture the payment."
+msgstr "Puedes autorizar pagos, revisar el stock, y luego capturar el pago."
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:3
+#: resources/layouts/admin/metaboxes/order_basic.php:3
+#, php-format
+msgid "Culqi ID : %s"
+msgstr "Culqi ID : %s"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:6
+#, php-format
+msgid "Charge via Culqi Checkout. Paid on %s. Customer IP: %s"
+msgstr "Cargo via Culqi Checkout. Pagado en %s. IP del cliente: %s"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:12
+msgid "Charge Data"
+msgstr "Cargo Data"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:16
+#: resources/layouts/admin/metaboxes/order_basic.php:16
+msgid "Creation Date"
+msgstr "Fecha de Creación"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:20
+msgid "Capture Date"
+msgstr "Fecha de Captura"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:24
+#: resources/layouts/admin/metaboxes/order_basic.php:28
+msgid "Currency"
+msgstr "Moneda"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:32
+msgid "Refund"
+msgstr "Reembolso"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:48
+msgid "Refund Charge"
+msgstr "Reembolsar cargo"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:68
+#: resources/layouts/admin/metaboxes/customer_basic.php:17
+#: resources/layouts/admin/metaboxes/order_basic.php:54
+msgid "First Name"
+msgstr "Primer Nombre"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:72
+#: resources/layouts/admin/metaboxes/customer_basic.php:21
+#: resources/layouts/admin/metaboxes/order_basic.php:58
+msgid "Last Name"
+msgstr "Segundo Nombre"
+
+#: resources/layouts/admin/metaboxes/charge_basic.php:76
+#: resources/layouts/admin/metaboxes/customer_basic.php:37
+#: resources/layouts/admin/metaboxes/order_basic.php:62
+msgid "City"
+msgstr "Ciudad"
+
+#: resources/layouts/admin/metaboxes/customer_basic.php:3
+#, php-format
+msgid "Customer ID : %s"
+msgstr "Cliente ID : %s"
+
+#: resources/layouts/admin/metaboxes/customer_basic.php:6
+#, php-format
+msgid "Customer via Culqi Checkout: %s"
+msgstr "Cliente via Culqi Checkout: %s"
+
+#: resources/layouts/admin/metaboxes/customer_basic.php:33
+msgid "Address"
+msgstr "Dirección"
+
+#: resources/layouts/admin/metaboxes/customer_cards.php:12
+msgid "Number"
+msgstr "Número"
+
+#: resources/layouts/admin/metaboxes/customer_cards.php:13
+msgid "Brand"
+msgstr "Marca"
+
+#: resources/layouts/admin/metaboxes/customer_cards.php:18
+msgid "Actions"
+msgstr "Acciones"
+
+#: resources/layouts/admin/metaboxes/customer_cards.php:46
+msgid "There is no cards"
+msgstr "No hay tarjetas"
+
+#: resources/layouts/admin/metaboxes/order_basic.php:6
+#, php-format
+msgid "Created via Culqi Checkout on %s."
+msgstr "Creado via Culqi Checkout en %s."
+
+#: resources/layouts/admin/metaboxes/order_basic.php:12
+msgid "Order Data"
+msgstr "Orden Data"
+
+#: resources/layouts/admin/metaboxes/order_basic.php:20
+msgid "Expiration Date"
+msgstr "Fecha de Expiración"
+
+#: resources/layouts/admin/metaboxes/order_basic.php:24
+msgid "Last Status Date"
+msgstr "Fecha de Último Estado"
+
+#: resources/layouts/admin/settings/input_delete_all.php:2
+msgid " Clear all"
+msgstr " Limpiar todo"
+
+#: resources/layouts/admin/settings/input_delete_all.php:3
+msgid ""
+"Only will delete the information in your WordPress, not in Culqi. Use this "
+"option when you changes from development to live mode or from live mode to "
+"development."
+msgstr ""
+"Sólo se borrará la información en tu WordPress, no en Culqi. Usa esta opción "
+"cuando cambies desde el modo desarrollo al modo en producción o desde "
+"producción a desarrollo."
+
+#: resources/layouts/admin/settings/input_logo.php:4
+msgid "This logo will appear in the Culqi Modal/Popup"
+msgstr "Este logo aparecerá en el Modal/Popup de Culqi"
+
+#: resources/layouts/admin/settings_page.php:3
+msgid "Culqi Full Integration Settings"
+msgstr "Configuración de Culqi Integración"
+
+#: resources/layouts/admin/webhooks-page.php:2
+msgid "Webhooks History"
+msgstr "Historial de Webhooks"
+
+#: resources/layouts/admin/webhooks-page.php:5
+msgid "You will be able to see the last 25 notifications from Culqi. "
+msgstr "Podrás ver las últimas 25 notificaciones desde Culqi. "
+
+#: resources/layouts/admin/webhooks-page.php:7
+msgid "What is a webhook? How can I use it?"
+msgstr "Qué es un Webhook? Cómo puedo usarlo?"
+
+#: resources/layouts/admin/webhooks-page.php:12
+#, php-format
+msgid "Webhook : %s"
+msgstr "Webhook : %s"
+
+#: resources/layouts/admin/webhooks-page.php:20
+msgid "Event Date"
+msgstr "Día del evento"
+
+#: resources/layouts/admin/webhooks-page.php:21
+msgid "Event ID"
+msgstr "ID del evento"
+
+#: resources/layouts/admin/webhooks-page.php:22
+msgid "Event Name"
+msgstr "Nombre del Evento"
+
+#: resources/layouts/admin/webhooks-page.php:23
+msgid "Webhook ID"
+msgstr "ID del Webhook"
+
+#: resources/layouts/admin/webhooks-page.php:24
+msgid "Webhook Description"
+msgstr "Descripción del Webhook"
+
+#: resources/layouts/admin/webhooks-page.php:31
+msgid "There are no events"
+msgstr "No hay eventos"
+
+#: resources/layouts/admin/welcome-panel.php:8
+msgid "Thanks for use the last version!"
+msgstr "Gracias por usar la útima versión!"
+
+#: resources/layouts/admin/welcome-panel.php:17
+msgid "This will just take a minute!"
+msgstr "Esto tomará un minuto!"
+
+#: resources/layouts/admin/welcome-panel.php:18
+msgid ""
+"To continue with this integration, you need provide the public and secret "
+"key."
+msgstr ""
+"Para continuar con la integración, necesitas la llave pública y secreta."
+
+#: resources/layouts/admin/welcome-panel.php:36
+msgid ""
+"We have realized that you have posts related to fullculqi plugin. It is "
+"advisable to delete that information before proceeding."
+msgstr ""
+"Nos hemos dado cuenta que tienes posts relacionados a nuestro plugin de "
+"Culqi. Es aconsejable borrar esta información antes de proceder."
+
+#: resources/layouts/admin/welcome-panel.php:39
+msgid "Clear all"
+msgstr "Limpiar todo"
+
+#: resources/layouts/admin/welcome-panel.php:50
+msgid "Commerce Name"
+msgstr "Nombre del Comercio"
+
+#: resources/layouts/admin/welcome-panel.php:70
+msgid "Synchronize with Culqi"
+msgstr "Sincronizar con Culqi"
+
+#: resources/layouts/admin/welcome-panel.php:77
+msgid "Not now"
+msgstr "No ahora"
+
+#~ msgid "Date"
+#~ msgstr "Fecha"
+
+#, fuzzy
+#~| msgid "Payment"
+#~ msgid "Card Payment"
+#~ msgstr "Pago"
+
+#, fuzzy
+#~| msgid "Culqi Charge Created: %s"
+#~ msgid "Culqi Credit Card"
+#~ msgstr "Culqi Cargo Creado: %s"
+
+#~ msgid ""
+#~ "Culqi is the simplest way to accept payments in any online store or "
+#~ "mobile application. Its function is to allow a store to accept payments "
+#~ "by credit or debit card, of any of the brands"
+#~ msgstr ""
+#~ "Culqi es la más simple forma de aceptar pagos en cualquier tienda online "
+#~ "o aplicación móvil. Su función es permitir a la tienda aceptar pagos por "
+#~ "tarjeta de crédito o tarjeta de débito, de cualquier marca"
+
+#, php-format
+#~ msgid "Culqi Multipayment Created : %s"
+#~ msgstr "Multipago Culqi creado : %s"
+
+#~ msgid ""
+#~ "If you have enabled the multipayment, so you need configure the webhooks "
+#~ "usign this URL"
+#~ msgstr ""
+#~ "Si habilitas Multipago, necesitas configurar el Webhook usando esta URL"
+
+#~ msgid "Bank"
+#~ msgstr "Banco"
+
+#~ msgid "Complete synchronization."
+#~ msgstr "Sincronización completa."
+
+#, php-format
+#~ msgid ""
+#~ "Currently you have the Woocommerce option activated on Fullculqi plugin, "
+#~ "but %s is not activated."
+#~ msgstr ""
+#~ "Actualmente tienes la opción de Woocommerce activado en el plugin "
+#~ "FullCulqi, pero %s no está activado."
+
+#~ msgid "Culqi Provider Payment error : There was not set any refund"
+#~ msgstr "Culqi Error de Pago : No se estableció ningún reembolso"
+
+#~ msgid "Gateway FullCulqi no customized"
+#~ msgstr "Pasarela de Pago de FullCulqi no configurado"
+
+#~ msgid "Card Brand"
+#~ msgstr "Marca de Tarjeta"
+
+#~ msgid "Card Type"
+#~ msgstr "Tipo de Tarjeta"
+
+#~ msgid "Card Number"
+#~ msgstr "Número de la tarjeta"
+
+#~ msgid "FullCulqi payment transactions log"
+#~ msgstr "Log de transacciones de Culqi"
+
+#~ msgid "Activate Payment Method in Woocommerce"
+#~ msgstr "Activar método de pago para Woocommerce"
+
+#~ msgid "Last"
+#~ msgstr "Últimos"
+
+#~ msgid "records"
+#~ msgstr "filas"
+
+#~ msgid "Synchronize Now"
+#~ msgstr "Sincronizar ahora"
+
+#~ msgid "You do not have Woocommerce activated"
+#~ msgstr "No tienes Woocommerce activado"
+
+#~ msgid "If checked, the Culqi payment method will appear in Woocommerce."
+#~ msgstr "Si marcas la casilla, el método de pago aparecerá en Woocommerce."
+
+#~ msgid "Customize Culqi Payment Gateway"
+#~ msgstr "Personalizar Pasarela de Pago Culqi"
+
+#~ msgid "Activate the payment method for Woocommerce"
+#~ msgstr "Activar método de pago para Woocommerce"
+
+#~ msgid "Busted!"
+#~ msgstr "Te atrapé!"
+
+#, php-format
+#~ msgid "%s is not a Fullculqi CPT"
+#~ msgstr "%s no es un tipo de post de este plugin"
+
+#~ msgid "This order is a simple payment"
+#~ msgstr "Este pedido es un simple pago"
+
+#, php-format
+#~ msgid "Culqi Payment error : %s"
+#~ msgstr "Culqi pago error : %s"
+
+#~ msgid "This order is a Multipayment"
+#~ msgstr "Este pedido es un Multipago"
+
+#~ msgid "Culqi Method: Multipayment"
+#~ msgstr "Culqi Método: Multipago"
+
+#~ msgid "Payments"
+#~ msgstr "Pagos"
+
+#~ msgid "New Payment"
+#~ msgstr "Nuevo Pago"
+
+#~ msgid ""
+#~ "Allows payments by Card Credit. This payment method will decide if it is "
+#~ "a simple payment or subscription or other"
+#~ msgstr ""
+#~ "Permite pagos via tarjeta de crédito. Este método de pago decidirá si es "
+#~ "un pago simple o una suscripción u otro"
+
+#~ msgid "Culqi Provider Payment error : There was not set any payment"
+#~ msgstr "Culqi Error de Pago : No se estableció ningún pago"
+
+#~ msgid "Culqi Provider Order error : There was not set any payment"
+#~ msgstr "Culqi Provider Order error : No se estableció ningún pago"
+
+#, php-format
+#~ msgid "The order was paid. The CIP %s was paid"
+#~ msgstr "El pedido fue pagado. El CIP %s fue pagado"
+
+#, php-format
+#~ msgid "The order was not paid on time. The CIP %s expired"
+#~ msgstr "El pedido no fue pagado a tiempo. El CIP %s expiró"
+
+#, php-format
+#~ msgid "The order was not paid on time. The CIP %s was deleted"
+#~ msgstr "El pedido no fue pagado a tiempo. El CIP %s fue borrado"
+
+#, php-format
+#~ msgid ""
+#~ "Woocommerce Culqi Full Integration plugin depends on the last version of "
+#~ "%s to work!"
+#~ msgstr ""
+#~ "Plugin Woocommerce Culqi Integración depende de la última versión de %s "
+#~ "para funcionar!"
+
+#~ msgid "Card Category"
+#~ msgstr "Categoría de la tarjeta"
+
+#~ msgid "Allows payments by Card Credit"
+#~ msgstr "Permitir pagos via Tarjeta de Crédito"
+
+#~ msgid "Payment Type"
+#~ msgstr "Tipo de producto"
+
+#~ msgid "You can choise how you want to work this method"
+#~ msgstr "Puedes elegir como quieres trabajar este método"
+
+#~ msgid "Simple Payment"
+#~ msgstr "Pago Simple"
+
+#~ msgid "Payments Log"
+#~ msgstr "Log de pagos"
+
+#~ msgid ""
+#~ "If you enable, a panel will appear bellow in the order detail with the "
+#~ "log of the payment transactions."
+#~ msgstr ""
+#~ "Si habilitas, un panel aparecerá debajo del detalle del pedido con el log "
+#~ "de las transacciones de pago."
+
+#~ msgid "Order pending confirmation"
+#~ msgstr "Pedido pendiente de confirmación"

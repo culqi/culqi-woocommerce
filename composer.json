@@ -1,0 +1,26 @@
+{
+    "name": "WordPress Culqi Integration",
+    "description": "WordPress Culqi Integration",
+    "keywords": ["culqi", "client", "api", "php", "wordpress"],
+    "type": "wordpress-plugin",
+    "homepage": "https://www.culqi.com/",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Culqi",
+            "email": "soporte@culqi.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+          "type": "git",
+          "url": "https://github.com/gonzalesc/culqi-php.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "gonzalesc/culqi-php": "dev-master"
+    }
+}

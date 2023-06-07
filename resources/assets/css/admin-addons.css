@@ -1,0 +1,79 @@
+#wpcontent {
+	padding-left: 0 !important;
+	position: relative;
+}
+
+.fullculqi_addons_wrap {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.fullculqi_addons_title {
+	background-color: #FFF;
+	width: 100%;
+}
+
+.fullculqi_addons_title h1 {
+	margin: 20px 0;
+    padding: 15px 40px;
+}
+
+.fullculqi_addons_all {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.fullculqi_addons_container {
+	float: left;
+	width: 29%;
+	padding: 0 20px;
+}
+
+.fullculqi_addons_item {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin: 0 0 40px 0;
+}
+
+.fullculqi_addons_header {
+	height: 170px;
+}
+
+.fullculqi_addons_header img {
+	max-width: 100%;
+}
+
+.fullculqi_addons_body {
+	height: 120px;
+	padding: 25px 20px;
+}
+
+.fullculqi_addons_body img {
+	float: right;
+}
+
+.fullculqi_addons_body h2 {
+	font-size: 20px;
+	margin: 10px 0;
+}
+
+.fullculqi_addons_body p {
+	margin: 30px 0;
+}
+
+.fullculqi_addons_footer {
+	height: 35px;
+	background-color: #FFFFFF;
+	border-top: 1px solid #ddd;
+	padding: 20px;
+	position: relative;
+	text-align: center;
+}
+
+.fullculqi_addons_footer a.button {
+	font-weight: 600;
+	width: 180px;
+	text-align: center;
+	background-color: #f7f7f7;
+}
