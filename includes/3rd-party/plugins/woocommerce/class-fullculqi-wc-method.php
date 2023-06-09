@@ -280,13 +280,21 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			);
 			//var_dump(isset($settings['methods']['tarjeta'])); exit(1);
 			// Waitme
+			//fix to use plain permalink structure
+			$permalink_structure = get_option('permalink_structure');
+			if(!$permalink_structure) {
+				$wc_action_url = '?fullculqi-api=wc-actions';
+			} else {
+				$wc_action_url = 'fullculqi-api/wc-actions';
+			}
+			//end fix
 			wp_enqueue_script( 'waitme-js', $js_waitme, [ 'jquery' ], false, true );
 			wp_enqueue_style( 'waitme-css', $css_waitme );
             $returnUrl3DS = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             $logo_url = (isset($settings['logo_url']) and $settings['logo_url']!='' and !is_null($settings['logo_url'])) ? $settings['logo_url'] :  MPCULQI_URL.'resources/assets/images/brand.svg';
             wp_localize_script( 'fullculqi-js', 'fullculqi_vars',
 				apply_filters('fullculqi/method/localize', [
-                    'url_actions'	=> site_url( 'fullculqi-api/wc-actions/' ),
+                    'url_actions'	=> site_url( $wc_action_url ),
 					'url_success'	=> $order->get_checkout_order_received_url(),
 					'public_key'	=> sanitize_text_field( $settings['public_key'] ),
 					'installments'	=> sanitize_title( $this->installments ),
