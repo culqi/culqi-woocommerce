@@ -101,7 +101,7 @@ class FullCulqi_WC {
 	 * @return mixed
 	 */
 	public function update_order( $culqi_order ) {
-
+		$settings = fullculqi_get_settings();
 		if( ! isset( $culqi_order->id ) )
 			return;
 
@@ -143,7 +143,7 @@ class FullCulqi_WC {
 
 				// Status
 
-					$order->update_status( 'processing',
+					$order->update_status( $settings['estado_pedido'],
 						sprintf(
 							esc_html__( 'Estado cambiado (a %s)', 'fullculqi' ),
 							$method['status_success']

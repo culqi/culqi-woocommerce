@@ -330,6 +330,15 @@ class FullCulqi_Settings {
 			array( 'class' => 'fullculqi_password' )
 		);
 
+		add_settings_field(
+			'fullculqi_estado_pedido', // ID
+			esc_html__( 'Estado final del pedido', 'fullculqi' )  , // Estado complete
+			[ $this, 'input_estado_pedido' ], // Callback
+			'fullculqi_page', // Page
+			'fullculqi_section', // Section
+			array( 'class' => 'fullculqi_estado_pedido' )
+		);
+
         add_settings_field(
             'fullculqi_buttoncustom', // ID
             esc_html__( 'Personalizar formulario de checkout', 'fullculqi' ), // Logo
@@ -474,6 +483,11 @@ class FullCulqi_Settings {
 		fullculqi_get_template( 'resources/layouts/admin/settings/input_password.php', $settings );
 	}
 
+	public function input_estado_pedido() {
+		$settings = fullculqi_get_settings();
+
+		fullculqi_get_template( 'resources/layouts/admin/settings/input_estado_pedido.php', $settings );
+	}
 	/**
 	 * Input URL logo
 	 * @return html

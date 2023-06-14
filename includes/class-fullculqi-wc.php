@@ -1,4 +1,4 @@
-<?php
+<?php/*
 class FullCulqi_WC {
 	public function __construct() {
 
@@ -168,4 +168,5 @@ class FullCulqi_WC {
 		die();
 	}
 }
+*/
 ?>
