@@ -38,6 +38,7 @@ function fullculqi_get_default() {
 		'notify_pay' 		=> '',
 		'username' 			=> '',
 		'password' 			=> '',
+		'estado_pedido'		=> '',
         'color_palette'     => ''
 	];
 

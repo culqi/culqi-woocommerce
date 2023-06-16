@@ -125,7 +125,7 @@ class FullCulqi_WC_Process {
 	 * @return bool
 	 */
 	public static function charge( $post_data = [] ) {
-
+		$settings = fullculqi_get_settings();
 		// Settings WC
 		$method = get_option( 'woocommerce_fullculqi_settings' );
 
@@ -414,8 +414,18 @@ class FullCulqi_WC_Process {
 				),
 			], $order );
 
-			// Change Status
+			// Change Status to processing
 			$order->update_status( $status['name'], $status['note'] );
+
+			// Change Status to completed
+			if ($settings['estado_pedido']=="completed"){
+				$order->update_status( $settings['estado_pedido'],
+							sprintf(
+								esc_html__( 'Estado cambiado (a %s)', 'fullculqi' ),
+								$method['status_success']
+							)
+						);
+			}
 		}
 
 		do_action( 'fullculqi/process/charge_success', $order );

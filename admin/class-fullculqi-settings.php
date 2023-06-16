@@ -168,6 +168,14 @@ class FullCulqi_Settings {
 			'fullculqi_section' // Section
 		);
 
+		add_settings_field(
+			'fullculqi_estado_pedido', // ID
+			esc_html__( 'Estado final del pedido', 'fullculqi' )  , // Estado complete
+			[ $this, 'input_estado_pedido' ], // Callback
+			'fullculqi_page', // Page
+			'fullculqi_section', // Section
+		);
+
 		do_action('fullculqi/settings/sync_fields', $settings, $this);
 
 		add_settings_field(
@@ -282,6 +290,14 @@ class FullCulqi_Settings {
 		echo '<label for="fullculqi_delete_all">
 				<button id="fullculqi_delete_all" class="fullculqi_delete_all button button-secondary button-hero">'.esc_html__('Clear all','culqi').'</button>
 				<div id="fullculqi_delete_all_loading"></div>
+			</label>';
+	}
+
+	public function input_estado_pedido() {
+		$settings = fullculqi_get_settings();
+
+		echo '<label for="fullculqi_estado_pedido">
+				<input type="text" id="fullculqi_estado_pedido" class="regular-text" name="fullculqi_options[estado_pedido]" value="'.$settings['estado_pedido'].'"/>
 			</label>';
 	}
 
