@@ -125,7 +125,7 @@ class FullCulqi_WC_Process {
 	 * @return bool
 	 */
 	public static function charge( $post_data = [] ) {
-
+		$settings = fullculqi_get_settings();
 		// Settings WC
 		$method = get_option( 'woocommerce_fullculqi_settings' );
 
