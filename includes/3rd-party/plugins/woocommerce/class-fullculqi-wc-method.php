@@ -42,9 +42,11 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'insert_fields_form' ] );
 		add_action( 'woocommerce_receipt_' . $this->id, [ $this, 'receipt_page' ] );
 		add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'thankyou_page' ] );
-
+		add_action( 'wp_ajax_my_ajax_action', [ $this, 'test_ajax' ] );
+		add_action( 'wp_ajax_nopriv_my_ajax_action', [ $this, 'test_ajax' ] );
+		add_action('wp_footer', [ $this, 'custom_checkout_js' ]);
 		// Script JS && CSS
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		//add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 	}
 
     public function insert_fields_form() {
@@ -54,18 +56,21 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
         update_option('fullculqi_options', $fullculqi_options );
     }
 
-	public function enqueue_scripts() {
+	 // If you want to allow non-logged-in users to access the AJAX endpoint
 
+
+	public static function test_ajax() {
+		$instance = new self();
+		$order_id  = $_POST['order_woo'];
+    	$instance->process_ajax($order_id);
+	}
+	public function process_ajax($order_id) {
 		// Check if it is /checkout/pay page
-		if( is_checkout_pay_page() ) {
-
+		//if( is_checkout_pay_page() ) {
+		//if( is_checkout() ) {
 			global $wp;
-			//var_dump($wp->query_vars); exit(1);
-			if( ! isset( $wp->query_vars['order-pay'] ) )
-				return;
 
 			$pnames = [];
-			$order_id = $wp->query_vars['order-pay'];
 			$order = new WC_Order( $order_id );
 			if (version_compare(WC_VERSION, "2.7", "<")) {
                 $log = new FullCulqi_Logs( $order_id );
@@ -292,8 +297,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			wp_enqueue_style( 'waitme-css', $css_waitme );
             $returnUrl3DS = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             $logo_url = (isset($settings['logo_url']) and $settings['logo_url']!='' and !is_null($settings['logo_url'])) ? $settings['logo_url'] :  MPCULQI_URL.'resources/assets/images/brand.svg';
-            wp_localize_script( 'fullculqi-js', 'fullculqi_vars',
-				apply_filters('fullculqi/method/localize', [
+            $localize_full_culqi_vars =  [
                     'url_actions'	=> site_url( $wc_action_url ),
 					'url_success'	=> $order->get_checkout_order_received_url(),
 					'public_key'	=> sanitize_text_field( $settings['public_key'] ),
@@ -326,12 +330,18 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 					'wpnonce'		=> wp_create_nonce( 'fullculqi' ),
 					'enviroment' 	=> $settings['enviroment'],
                     'url' 	=> $returnUrl3DS,
-				], $order )
-			);
+				];
 			do_action( 'fullculqi/method/enqueue_scripts/pay_page', $order );
-		}
+		//}
 
 		do_action( 'fullculqi/method/enqueue_scripts/after', $this );
+		$data = [
+			'checkout_js' => $js_checkout,
+			'js_library' => $js_library,
+			'js_3ds' => $js_3ds,
+			'full_culqi_vars' => $localize_full_culqi_vars
+		];
+		wp_send_json_success($data);
 	}
 
 	//OLANDA - FORM WOOCOMMERCE SETTINGS JS
@@ -709,6 +719,70 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		<?php
 		return ob_get_clean();
 	}
+
+	public function custom_checkout_js() {
+		if (is_checkout() && !is_wc_endpoint_url()) {
+			?>
+			<script>
+				jQuery(window).on('load',function() { 
+					setTimeout(function() {
+						console.log("test");
+						// Custom JavaScript code
+						jQuery('#place_order').click(function(e) {
+								e.preventDefault();
+								var formData = jQuery('form.checkout').serialize();
+								 jQuery.ajax({
+									type: 'POST',
+									url: wc_checkout_params.checkout_url,
+									data: formData,
+									success: function(response) {
+										console.log(response);
+										if(response.result == "success") {
+											var order_id = response.order_id;
+											jQuery.ajax({
+												type: 'POST',
+												url: "<?php echo admin_url('admin-ajax.php'); ?>", // Replace with your AJAX handler URL
+												dataType: 'json',
+												data: {
+													action: 'my_ajax_action', // Replace with your custom AJAX action
+													order_woo: order_id, // Replace with any additional data parameters
+													nonce: "<?php echo wp_create_nonce('my_ajax_nonce')?>"
+												},
+												success: function(response) {
+													console.log(response);
+													jQuery.getScript(response.data.js_library, function() {
+														console.log('Custom script js library loaded');
+														jQuery.getScript(response.data.js_3ds, function() {
+															console.log('Custom script js3ds loaded');
+															window.fullculqi_vars = response.data.full_culqi_vars;
+															console.log(fullculqi_vars);
+															jQuery.getScript(response.data.checkout_js, function() {
+																console.log('Custom script loaded');
+															});
+														
+														});
+													
+													});
+												},
+												error: function(jqXHR, textStatus, errorThrown) {
+													// Handle AJAX errors
+													console.log('AJAX request failed: ' + textStatus, errorThrown);
+												}
+											});
+											//window.location.href = response.redirect;
+										} else {
+											jQuery('form.checkout').submit();
+										}
+									}
+								});
+							
+						});
+					},1000); 
+				});
+			</script>
+			<?php
+		}
+	}
 }
 
 function add_type_attribute($tag, $handle, $src) {
@@ -720,5 +794,8 @@ function add_type_attribute($tag, $handle, $src) {
     $tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
     return $tag;
 }
+
+add_action('wp_ajax_my_ajax_action', array('WC_Gateway_FullCulqi', 'test_ajax' ));
+add_action('wp_ajax_nopriv_my_ajax_action', array('WC_Gateway_FullCulqi', 'test_ajax' ));
 
 ?>

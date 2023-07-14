@@ -95,14 +95,14 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @since 2.0.0
 		 */
 		bindUIActions: function () {
+			console.log("testsss");
 			//var device = await Culqi3DS.generateDevice();
 			const device_aux = Promise.resolve(Culqi3DS.generateDevice());
 			device_aux.then(value => {
-				$('#fullculqi_button').on('click', function (e) {
+
 					window.device = value;
-					e.preventDefault();
 					FullCulqi.openModal();
-				});
+				
 			}).catch(err => {
 			  console.log(err);
 			});
