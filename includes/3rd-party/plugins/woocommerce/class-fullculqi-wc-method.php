@@ -726,12 +726,12 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			<script>
 				jQuery(window).on('load',function() { 
 					setTimeout(function() {
-						console.log("test");
-						// Custom JavaScript code
 						jQuery('#place_order').click(function(e) {
-								e.preventDefault();
+							e.preventDefault();
+							const paymentMethod = jQuery('input[name="payment_method"]:checked').val();
+							if(paymentMethod == "fullculqi") {
 								var formData = jQuery('form.checkout').serialize();
-								 jQuery.ajax({
+								jQuery.ajax({
 									type: 'POST',
 									url: wc_checkout_params.checkout_url,
 									data: formData,
@@ -751,13 +751,9 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 												success: function(response) {
 													console.log(response);
 													jQuery.getScript(response.data.js_library, function() {
-														console.log('Custom script js library loaded');
 														jQuery.getScript(response.data.js_3ds, function() {
-															console.log('Custom script js3ds loaded');
 															window.fullculqi_vars = response.data.full_culqi_vars;
-															console.log(fullculqi_vars);
 															jQuery.getScript(response.data.checkout_js, function() {
-																console.log('Custom script loaded');
 															});
 														
 														});
@@ -775,7 +771,9 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 										}
 									}
 								});
-							
+							} else {
+								jQuery('form.checkout').submit();
+							}
 						});
 					},1000); 
 				});
