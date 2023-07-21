@@ -42,8 +42,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'insert_fields_form' ] );
 		add_action( 'woocommerce_receipt_' . $this->id, [ $this, 'receipt_page' ] );
 		add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'thankyou_page' ] );
-		add_action( 'wp_ajax_my_ajax_action', [ $this, 'test_ajax' ] );
-		add_action( 'wp_ajax_nopriv_my_ajax_action', [ $this, 'test_ajax' ] );
+		add_action( 'wp_ajax_load_culqi_checkout', [ $this, 'loadCulqiCheckout' ] );
+		add_action( 'wp_ajax_nopriv_load_culqi_checkout', [ $this, 'loadCulqiCheckout' ] );
 		add_action('wp_footer', [ $this, 'custom_checkout_js' ]);
 		// Script JS && CSS
 		//add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
@@ -59,7 +59,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	 // If you want to allow non-logged-in users to access the AJAX endpoint
 
 
-	public static function test_ajax() {
+	public static function loadCulqiCheckout() {
 		$instance = new self();
 		$order_id  = $_POST['order_woo'];
     	$instance->process_ajax($order_id);
@@ -730,34 +730,31 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 							e.preventDefault();
 							const paymentMethod = jQuery('input[name="payment_method"]:checked').val();
 							if(paymentMethod == "fullculqi") {
+								jQuery(this).attr("disabled", "disabled");
 								var formData = jQuery('form.checkout').serialize();
 								jQuery.ajax({
 									type: 'POST',
 									url: wc_checkout_params.checkout_url,
 									data: formData,
 									success: function(response) {
-										console.log(response);
 										if(response.result == "success") {
 											var order_id = response.order_id;
 											jQuery.ajax({
 												type: 'POST',
-												url: "<?php echo admin_url('admin-ajax.php'); ?>", // Replace with your AJAX handler URL
+												url: "<?php echo admin_url('admin-ajax.php'); ?>",
 												dataType: 'json',
 												data: {
-													action: 'my_ajax_action', // Replace with your custom AJAX action
-													order_woo: order_id, // Replace with any additional data parameters
+													action: 'load_culqi_checkout',
+													order_woo: order_id,
 													nonce: "<?php echo wp_create_nonce('my_ajax_nonce')?>"
 												},
 												success: function(response) {
-													console.log(response);
 													jQuery.getScript(response.data.js_library, function() {
 														jQuery.getScript(response.data.js_3ds, function() {
 															window.fullculqi_vars = response.data.full_culqi_vars;
 															jQuery.getScript(response.data.checkout_js, function() {
 															});
-														
 														});
-													
 													});
 												},
 												error: function(jqXHR, textStatus, errorThrown) {
@@ -793,7 +790,7 @@ function add_type_attribute($tag, $handle, $src) {
     return $tag;
 }
 
-add_action('wp_ajax_my_ajax_action', array('WC_Gateway_FullCulqi', 'test_ajax' ));
-add_action('wp_ajax_nopriv_my_ajax_action', array('WC_Gateway_FullCulqi', 'test_ajax' ));
+add_action('wp_ajax_load_culqi_checkout', array('WC_Gateway_FullCulqi', 'loadCulqiCheckout' ));
+add_action('wp_ajax_nopriv_load_culqi_checkout', array('WC_Gateway_FullCulqi', 'loadCulqiCheckout' ));
 
 ?>
