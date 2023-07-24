@@ -197,6 +197,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 			Culqi.open();
 			$('#culqi_notify').empty();
 			jQuery('#place_order').removeAttr("disabled");
+			jQuery('#loadingloginculqi').remove();
 		},
 		/**
 		 * waitMe to Ajax
