@@ -95,14 +95,12 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @since 2.0.0
 		 */
 		bindUIActions: function () {
+
 			//var device = await Culqi3DS.generateDevice();
 			const device_aux = Promise.resolve(Culqi3DS.generateDevice());
 			device_aux.then(value => {
-				$('#fullculqi_button').on('click', function (e) {
 					window.device = value;
-					e.preventDefault();
 					FullCulqi.openModal();
-				});
 			}).catch(err => {
 			  console.log(err);
 			});
@@ -198,6 +196,8 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 			//console.log(Culqi.open());
 			Culqi.open();
 			$('#culqi_notify').empty();
+			jQuery('#place_order').removeAttr("disabled");
+			jQuery('#loadingloginculqi').remove();
 		},
 		/**
 		 * waitMe to Ajax
