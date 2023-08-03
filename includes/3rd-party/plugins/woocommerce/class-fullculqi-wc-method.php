@@ -767,7 +767,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 										} else {
 											jQuery('form.checkout').submit();
 											jQuery('#place_order').removeAttr("disabled");
-											//jQuery('#loadingloginculqi').remove();
+											jQuery('#loadingloginculqi').remove();
 										}
 									}
 								});
