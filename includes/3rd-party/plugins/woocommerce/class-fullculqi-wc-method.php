@@ -726,7 +726,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			<script>
 				jQuery(window).on('load',function() { 
 					setTimeout(function() {
-						jQuery('#place_order').click(function(e) {
+						jQuery('form[name="checkout"]').on('click', '#place_order', function(e) {
 							e.preventDefault();
 							const paymentMethod = jQuery('input[name="payment_method"]:checked').val();
 							if(paymentMethod == "fullculqi") {
@@ -767,6 +767,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 										} else {
 											jQuery('form.checkout').submit();
 											jQuery('#place_order').removeAttr("disabled");
+											jQuery('#loadingloginculqi').remove();
 										}
 									}
 								});
