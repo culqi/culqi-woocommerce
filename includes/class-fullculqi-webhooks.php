@@ -52,11 +52,11 @@ class FullCulqi_Webhooks {
 
 		$data = json_decode( $input->data );
 
-        if (empty($data->metadata)) {
+        if (empty($data->metadata) && $input->type != 'charge.status.changed') {
             exit("Error: Metadata vacia");
         }
 
-        if (empty($data->amount)) {
+        if (empty($data->amount) && empty($data->actualAmount)) {
             exit("Error: No envió el amount");
         }
 
@@ -70,6 +70,7 @@ class FullCulqi_Webhooks {
 				}
                 FullCulqi_Orders::update($data, 1);
                 break;
+
             case 'refund.creation.succeeded' :
 				if (empty($data->chargeId)) {
 					exit("Error: No envió el chargeId");
@@ -98,6 +99,24 @@ class FullCulqi_Webhooks {
                 );
                 fullculqi_update_post_meta('culqi_status', $charge_id, 'refunded');
                 break;
+				
+			case 'charge.status.changed' :
+				$order = wc_get_order( $data->metadata->order_id );
+				if($order) {
+					$currency = $order->get_currency();
+					$amount = $order->get_total() * 100;
+					if($currency == $data->currency && $amount == $data->actualAmount) {
+						FullCulqi_Charges::create( $data , true);
+						die("Cargo actualizado con éxito");
+						break;
+					}
+					die("La moneda o monto no coinciden con la orden");
+					break;
+				}
+
+				die("No existe la orden");
+				break;
+
         }
 
 		do_action( 'fullculqi/webhooks/to_receive', $input, $data );

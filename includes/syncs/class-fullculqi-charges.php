@@ -6,6 +6,7 @@
  */
 class FullCulqi_Charges {
 
+	public static $log;
 	/**
 	 * Sync from Culqi
 	 * @param  integer $records
@@ -111,23 +112,35 @@ class FullCulqi_Charges {
 	 * @param  array  $post_data
 	 * @return bool
 	 */
-	public static function create( $args = [] ) {
+	public static function create( $args = [] , $is_webhook = false) {
 		global $culqi;
 		$args = apply_filters( 'fullculqi/charges/create/args', $args );
-
-		try {
-			$charge = $culqi->Charges->create( $args );
-		} catch(Exception $e) {
-			return [ 'status' => 'error', 'data' => $e->getMessage() ];
-		}
-
-		// Check request from Culqi
-		if( ! isset( $charge->object ) || $charge->object == 'error' ) {
-			return [ 'status' => 'error', 'data' => $charge->merchant_message, 'action_code'=> $charge->action_code];
+		if(!$is_webhook) {
+			try {
+				$charge = $culqi->Charges->create( $args );
+			} catch(Exception $e) {
+				return [ 'status' => 'error', 'data' => $e->getMessage() ];
+			}
+			// Check request from Culqi
+			if( ! isset( $charge->object ) || $charge->object == 'error' ) {
+				return [ 'status' => 'error', 'data' => $charge->merchant_message, 'action_code'=> $charge->action_code];
+			}
+		} else {
+			$charge = $args;
+			$charge->amount = $charge->actualAmount;
+			$charge->amount_refunded = $charge->refundedAmount;
+			$charge->currency_code = $charge->currency;
+			$charge->source->client = $charge->source->tokenClient;
+			$charge->creation_date = $charge->creationDate;
+			$charge->antifraud_details = (object)[];
+			$charge->antifraud_details->first_name = $charge->client->name;
+			$charge->antifraud_details->last_name = $charge->client->lastName;
+			$charge->antifraud_details->address_city = $charge->client->address;
+			$charge->antifraud_details->country_code = $charge->client->country;
 		}
 
 		// Create wppost
-		$post_id = self::create_wppost( $charge );
+		$post_id = self::create_wppost( $charge, false, $is_webhook );
 
 		do_action( 'fullculqi/charges/create', $post_id, $charge );
 		
@@ -144,7 +157,7 @@ class FullCulqi_Charges {
 	 * @param  integer $post_id 
 	 * @return mixed
 	 */
-	public static function create_wppost( $charge, $post_id = 0 ) {
+	public static function create_wppost( $charge, $post_id = 0, $is_webhook = false ) {
 
 		if( empty( $post_id ) ) {
 			
@@ -162,7 +175,9 @@ class FullCulqi_Charges {
 
 		update_post_meta( $post_id, 'culqi_id', $charge->id );
 		update_post_meta( $post_id, 'culqi_capture', $charge->capture );
-		update_post_meta( $post_id, 'culqi_capture_date', fullculqi_convertToDate( $charge->capture_date ) );
+		if($charge->capture) {
+			update_post_meta( $post_id, 'culqi_capture_date', fullculqi_convertToDate( $charge->capture_date ) );
+		}
 		update_post_meta( $post_id, 'culqi_data', $charge );
 
 
@@ -228,6 +243,54 @@ class FullCulqi_Charges {
 
 
 		update_post_meta( $post_id, 'culqi_customer', array_map( 'esc_html', $customer ) );
+
+		if($is_webhook) {
+			self::$log = new FullCulqi_Logs( $charge->metadata->order_id );
+			$method = get_option( 'woocommerce_fullculqi_settings' );
+			$settings = fullculqi_get_settings();
+			$order = wc_get_order( $charge->metadata->order_id );
+			// Meta value
+			update_post_meta( $charge->metadata->order_id, '_culqi_charge_id', $charge->id );
+			update_post_meta( $charge->metadata->order_id, '_post_charge_id', $post_id );
+			// Update OrderID in CulqiCharges
+			update_post_meta( $post_id, 'culqi_wc_order_id', $charge->metadata->order_id );
+			$status = apply_filters( 'fullculqi/process/change_status', [
+				'name'	=> $method['status_success'],
+				'note'	=> sprintf(
+					esc_html__( 'Estado cambiado (a %s)', 'fullculqi' ),
+					$method['status_success']
+				),
+			], $order );
+
+			// Change Status to processing
+			$order->update_status( $status['name'], $status['note'] );
+
+			// Change Status to completed
+			if ($settings['estado_pedido']=="completed"){
+				$order->update_status( $settings['estado_pedido'],
+					sprintf(
+						esc_html__( 'Estado cambiado (a %s)', 'fullculqi' ),
+						$method['status_success']
+					)
+				);
+			}
+			//
+			// Log
+			$notice = sprintf(
+				esc_html__( 'Culqi Charge Created: %s', 'fullculqi' ),
+				$charge->id
+			);
+
+			$order->add_order_note( $notice );
+			self::$log->set_notice( $notice );
+
+
+			// Log
+			$notice = sprintf(
+				esc_html__( 'Post Charge Created: %s', 'fullculqi' ), $post_id
+			);
+			self::$log->set_notice( $notice );
+		}
 
 		do_action( 'fullculqi/charges/wppost_create', $charge, $post_id );
 
