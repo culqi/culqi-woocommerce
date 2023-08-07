@@ -103,8 +103,12 @@ class FullCulqi_Webhooks {
 			case 'charge.status.changed' :
 				$order = wc_get_order( $data->metadata->order_id );
 				if($order) {
-					$currency = $order->get_currency();
 					$amount = $order->get_total() * 100;
+					if (version_compare(WC_VERSION, "2.7", "<")) {
+						$currency = $order->get_order_currency();
+					} else {
+						$currency = $order->get_currency();
+					}
 					if($currency == $data->currency && $amount == $data->actualAmount) {
 						FullCulqi_Charges::create( $data , true);
 						die("Cargo actualizado con éxito");
