@@ -52,7 +52,7 @@ class FullCulqi_Webhooks {
 
 		$data = json_decode( $input->data );
 
-        if (empty($data->metadata) && $input->type != 'charge.status.changed') {
+        if (empty($data->metadata)) {
             exit("Error: Metadata vacia");
         }
 
