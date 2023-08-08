@@ -725,12 +725,12 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			?>
 			<script>
 				jQuery(window).on('load',function() { 
+					jQuery('form[name="checkout"]').before('<div class="woocommerce-NoticeGroup-checkout"><ul id="fullculqi_notify" class="" style="margin:15px 0px;" role="alert"></ul></div>');
 					setTimeout(function() {
 						jQuery('form[name="checkout"]').on('click', '#place_order', function(e) {
 							e.preventDefault();
 							const paymentMethod = jQuery('input[name="payment_method"]:checked').val();
 							if(paymentMethod == "fullculqi") {
-								jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute;width: 100%;top: 50%;display: flex;justify-content: center;align-items: center;color: #fff;">Generando pedido en la tienda <img style="display: inline-block;margin-left: 8px;" width="30" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"></div></div>');
 								jQuery(this).attr("disabled", "disabled");
 								var formData = jQuery('form.checkout').serialize();
 								jQuery.ajax({
@@ -738,7 +738,9 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 									url: wc_checkout_params.checkout_url,
 									data: formData,
 									success: function(response) {
+										jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute;width: 100%;top: 50%;display: flex;justify-content: center;align-items: center;color: #fff;">Generando pedido en la tienda <img style="display: inline-block;margin-left: 8px;" width="30" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"></div></div>');
 										if(response.result == "success") {
+											jQuery(".woocommerce-NoticeGroup").remove();
 											var order_id = response.order_id;
 											jQuery.ajax({
 												type: 'POST',
