@@ -14,7 +14,9 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->id 					= 'fullculqi';
 		$this->method_title			= esc_html__( 'Culqi', 'fullculqi' );
 		$this->method_description 	= esc_html__( 'Conéctate a nuestra pasarela de pagos para aumentar tus ventas.', 'fullculqi' );
-		$this->icon 				= MPCULQI_WC_URL . 'assets/images/cards.png';
+		$this->icon 				= MPCULQI_WC_URL . 'assets/images/cards.svg';
+		$this->culqi_logo 			= MPCULQI_WC_URL . 'assets/images/culqi-logo.svg';
+		$this->payment_methods 		= 'Medios de pago';
 
 		// Define user set variables
 		$this->has_fields		= apply_filters( 'fullculqi/method/has_fields', false );
@@ -23,7 +25,11 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->multipayment 	= $this->get_option( 'multipayment', 'no' );
 		$this->multi_duration	= $this->get_option( 'multi_duration', 24 );
 		$this->multi_status		= $this->get_option( 'multi_status', 'wc-pending' );
-		$this->description		= esc_html__( 'Culqi acepta pagos con tarjeta de crédito/débito y más.', 'fullculqi' );
+		$allowed_html = array(
+			'strong' => array(),
+		);
+		
+		$this->description = wp_kses(__('Acepta pagos con tarjetas de <strong>débito y crédito; Yape, Cuotéalo BCP y PagoEfectivo</strong> (billeteras móviles, agentes y bodegas).', 'fullculqi'), $allowed_html);
 		$this->instructions		= $this->get_option( 'instructions', $this->description );
 		$this->msg_fail			= $this->get_option( 'msg_fail' );
 		$this->time_modal		= $this->get_option( 'time_modal', 0 );
@@ -536,6 +542,15 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		return apply_filters( 'fullculqi/method/process_payment', $output, $order, $this );
 	}
 
+	public function get_title() {
+        return '<img src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" />';
+    }
+
+    public function get_icon() {
+        // Return the icon image
+        return '<img class="wc-culqi-icon" src="' . esc_url($this->icon) . '" alt="'.$this->payment_methods.'" />';
+    }
+
 
 	/**
 	 * Can the order be refunded via Culqi?
@@ -722,6 +737,23 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	public function custom_checkout_js() {
 		if (is_checkout() && !is_wc_endpoint_url()) {
 			?>
+			<style>
+				.wc-culqi-icon {
+					float: right;
+				}
+				div.payment_method_fullculqi {
+					padding-left: 5px !important;
+				}
+				div.payment_method_fullculqi p {
+					font-size: 12px;
+				}
+				@media only screen and (max-width: 480px) {
+					.wc-culqi-icon {
+						float: none;
+						margin-top: 20px;
+					}
+				}
+			</style>
 			<script>
 				jQuery(window).on('load',function() { 
 					jQuery('form[name="checkout"]').before('<div class="woocommerce-NoticeGroup-checkout"><ul id="fullculqi_notify" class="" style="margin:15px 0px;" role="alert"></ul></div>');
