@@ -760,7 +760,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 													jQuery.getScript(response.data.js_library, function() {
 														jQuery.getScript(response.data.js_3ds, function() {
 															window.fullculqi_vars = response.data.full_culqi_vars;
-															jQuery.getScript(response.data.checkout_js, function() {
+															var noCacheUrl = response.data.checkout_js + "?_=" + Date.now();
+															jQuery.getScript(noCacheUrl, function() {
 															});
 														});
 													});
