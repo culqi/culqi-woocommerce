@@ -148,7 +148,6 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
                             'enviroment' 	=> $enviroment[0]
     					], $order);
     					$culqi_order = FullCulqi_Orders::create( $args_order );
-    					//echo var_dump($culqi_order);
     					if( $culqi_order['status'] == 'ok' ) {
     						$culqi_order_id = $culqi_order['data']['culqi_order_id'];
 
@@ -741,7 +740,13 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 										jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute;width: 100%;top: 50%;display: flex;justify-content: center;align-items: center;color: #fff;">Generando pedido en la tienda <img style="display: inline-block;margin-left: 8px;" width="30" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"></div></div>');
 										if(response.result == "success") {
 											jQuery(".woocommerce-NoticeGroup").remove();
-											var order_id = response.order_id;
+											if(!response.order_id) {
+												var url = response.redirect;
+												var order_id = url.match(/order-pay\/(\d+)/)[1];
+											} else {
+												var order_id = response.order_id;
+											}
+											
 											jQuery.ajax({
 												type: 'POST',
 												url: "<?php echo admin_url('admin-ajax.php'); ?>",
