@@ -245,6 +245,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		payProcess: function() {
 			if( Culqi.error ) {
 				$('#fullculqi_notify').addClass('woocommerce-error').html( Culqi.error.merchant_message );
+				scrollToCulqiError();
 			} else {
 				console.log('device:::::::'+device);
 				let data;
@@ -282,6 +283,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		payProcess3DS: function(parameters3DS) {
 			if( Culqi.error ) {
 				$('#fullculqi_notify').addClass('woocommerce-error').html( Culqi.error.merchant_message );
+				scrollToCulqiError();
 			} else {
 				console.log('device:::::::'+device);
 				jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando <img style="display: inline-block" width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div></div>');
@@ -331,7 +333,6 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 
 				success: function( response ) {
 					$( document.body ).trigger('fullculqi.checkout.success', [ post_data, response ]);
-					console.log(response);
 					if( response.success ) {
 						var enviroment = fullculqi_vars.enviroment.split('|');
 						$('#fullculqi_notify').empty();
@@ -368,10 +369,12 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 								Culqi3DS.initAuthentication(Culqi.token.id);
 							}else{
 								$('#fullculqi_notify').addClass('woocommerce-error').html( response.data.message);
+								scrollToCulqiError();
 							}
 
 						}else{
 							$('#fullculqi_notify').addClass('woocommerce-error').html( 'Ha ocurrido un error procesando el pago. Por favor intente nuevamente o comuníquese con su entidad bancaria.');
+							scrollToCulqiError();;
 						}
 
 					}			
@@ -384,6 +387,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 					$('#fullculqi_notify').addClass('woocommerce-error').html( fullculqi_vars.msg_error );
 					$( document.body ).trigger('fullculqi.checkout.error', [ post_data, jqXHR, textStatus, errorThrown ] );
 					Culqi.close();
+					scrollToCulqiError();
 				}
 			});
 		},
@@ -425,6 +429,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 					$('#fullculqi_notify').addClass('woocommerce-error').html( fullculqi_vars.msg_error );
 					$( document.body ).trigger('fullculqi.checkout.error', [ post_data, jqXHR, textStatus, errorThrown ] );
 					Culqi.close();
+					scrollToCulqiError();
 				}
 			});
 		}
@@ -438,5 +443,12 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 
 
 function culqi() {
-	window.fullculqi.payProcess();
+	setTimeout(function() {
+		window.fullculqi.payProcess();
+	}, 1000);
+}
+
+function scrollToCulqiError() {
+	var scrollPos =  jQuery("#fullculqi_notify").offset().top - 50;
+	jQuery(window).scrollTop(scrollPos);
 }
