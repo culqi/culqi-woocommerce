@@ -742,7 +742,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		if (is_checkout()) { ?>
 			<script>
 				var culqiLogoUrl = '<?php echo $this->culqi_logo;?>';
-				var targetHTML = '<img src="'+culqiLogoUrl+'" alt="Culqi" />';
+				var targetHTML = '<img class="wc-culqi-title" src="'+culqiLogoUrl+'" alt="Culqi" />';
 				var matchingElement = jQuery(".woocommerce-table td:contains('" + targetHTML + "')");
 				if(matchingElement) {
 					var culqiLogo = matchingElement.text();
@@ -756,10 +756,12 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			<style>
 				.wc-culqi-icon {
 					float: right;
+					height: 24px;
 				}
 				.wc-culqi-title {
 					float: none !important;
 					display: inline-block;
+					height: 20px;
 				}
 				div.payment_method_fullculqi {
 					padding-left: 5px !important;
