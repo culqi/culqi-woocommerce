@@ -104,15 +104,16 @@ class FullCulqi_Webhooks {
 				$order_id = $data->metadata->order_id;
 				$order = wc_get_order( $order_id );
 				if($order) {
+					$order_status = $order->get_status();
 					if (version_compare(WC_VERSION, "2.7", "<")) {
 						$currency = $order->get_order_currency();
-						$order_status = $order->get_post_status();
+						$payment_method = get_post_meta($order_id, '_payment_method', true);
 					} else {
+						$payment_method = $order->get_payment_method();
 						$currency = $order->get_currency();
-						$order_status = $order->get_status();
 					}
 
-					if($order->get_payment_method() == "fullculqi") {
+					if($payment_method == "fullculqi") {
 						if($order_status == "pending") {
 							$verifyCharge = $this->verifyChargeInOrders($data->id, $order_id);
 							if(!$verifyCharge) {
