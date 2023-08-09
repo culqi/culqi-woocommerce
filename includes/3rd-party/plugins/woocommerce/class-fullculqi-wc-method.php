@@ -780,7 +780,6 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 				var documentLoaded = false;
 				var interval = setInterval(function(){
 					jQuery("#place_order").attr("disabled", "disabled");
-					console.log(1);
 					if(documentLoaded){
 						clearInterval(interval);
 						jQuery("#place_order").removeAttr("disabled");
