@@ -114,24 +114,18 @@ class FullCulqi_Webhooks {
 
 					if($order->get_payment_method() == "fullculqi") {
 						if($order_status == "pending") {
-							$order_charge_id = get_post_meta($order_id, '_culqi_charge_id', true);
-							$order_culqiorder_id = get_post_meta($order_id, '_culqi_order_id', true);
-							if(!$order_charge_id && !$order_culqiorder_id) {
-								$verifyCharge = $this->verifyChargeInOrders($data->id, $order_id);
-								if(!$verifyCharge) {
-									$amount = $order->get_total() * 100;
-									if($currency == $data->currency && $amount == $data->actualAmount) {
-										FullCulqi_Charges::create( $data , true);
-										die("Cargo actualizado con éxito");
-										break;
-									}
-									die("La moneda o monto no coinciden con la orden.");
+							$verifyCharge = $this->verifyChargeInOrders($data->id, $order_id);
+							if(!$verifyCharge) {
+								$amount = $order->get_total() * 100;
+								if($currency == $data->currency && $amount == $data->actualAmount) {
+									FullCulqi_Charges::create( $data , true);
+									die("Cargo actualizado con éxito");
 									break;
 								}
-								die($verifyCharge);
+								die("La moneda o monto no coinciden con la orden.");
 								break;
 							}
-							die("La orden ya tiene un cargo u orden de culqi asignada.");
+							die($verifyCharge);
 							break;
 						}
 						die("No se puede actualizar, la orden no esta pendiente pago.");
@@ -181,23 +175,29 @@ class FullCulqi_Webhooks {
 
 	private function verifyChargeInOrders($charge_id, $current_order_id)
 	{
-				// Get all orders
-		$orders = wc_get_orders(array(
-			'status' => 'any', // Retrieve orders with any status
-			'exclude' => array($current_order_id),
-			'numberposts' => -1, // Retrieve all orders
-		));
-
-		$culqi_charge_id_to_find = $charge_id; // Replace with the charge ID you want to find
-
-		foreach ($orders as $order) {
-			$order_id = $order->get_id();
-			$charge_id = get_post_meta($order_id, '_culqi_charge_id', true);
-
-			if ($charge_id === $culqi_charge_id_to_find) {
-				return "Culqi Charge ID exists in Order ID: " . $order_id;
+		$args = array(
+			'post_type' => array('culqi_charges', 'culqi_orders'), 
+			'posts_per_page' => -1,
+		);
+		
+		$query = new WP_Query($args);
+		
+		if ($query->have_posts()) {
+			while ($query->have_posts()) {
+				$query->the_post();
+				
+				$order_title = get_the_title();
+				$order_id = get_post_meta(get_the_ID(), 'culqi_wc_order_id', true);
+				if ($order_title === $charge_id) {
+					return "El cargo ya fue asigando al pedido: " . $order_id;
+				}
 			}
+			
+			wp_reset_postdata(); // Restore the global post data
+		} else {
+			echo "No posts found.";
 		}
+
 		return false;
 	}
 }
