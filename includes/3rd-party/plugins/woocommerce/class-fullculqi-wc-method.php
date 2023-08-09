@@ -777,7 +777,17 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 				}
 			</style>
 			<script>
-				jQuery(window).on('load',function() { 
+				var documentLoaded = false;
+				var interval = setInterval(function(){
+					jQuery("#place_order").attr("disabled", "disabled");
+					console.log(1);
+					if(documentLoaded){
+						clearInterval(interval);
+						jQuery("#place_order").removeAttr("disabled");
+					}
+				}, 1000);
+				jQuery(window).on('load',function() {
+					documentLoaded = true;
 					jQuery('form[name="checkout"]').before('<div class="woocommerce-NoticeGroup-checkout"><ul id="fullculqi_notify" class="" style="margin:15px 0px;" role="alert"></ul></div>');
 					setTimeout(function() {
 						jQuery('form[name="checkout"]').on('click', '#place_order', function(e) {
