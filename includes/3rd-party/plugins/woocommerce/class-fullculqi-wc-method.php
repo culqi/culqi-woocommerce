@@ -741,8 +741,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	public function custom_checkout_js() {
 		if (is_checkout()) { ?>
 			<script>
-				var baseUrl = '<?php echo get_site_url();?>';
-				var targetHTML = '<img src="'+baseUrl+'/wp-content/plugins/culqi-checkout/includes/3rd-party/plugins/woocommerce/assets/images/culqi-logo.svg" alt="Culqi" />';
+				var culqiLogoUrl = '<?php echo $this->culqi_logo;?>';
+				var targetHTML = '<img src="'+culqiLogoUrl+'" alt="Culqi" />';
 				var matchingElement = jQuery(".woocommerce-table td:contains('" + targetHTML + "')");
 				if(matchingElement) {
 					var culqiLogo = matchingElement.text();
