@@ -101,20 +101,43 @@ class FullCulqi_Webhooks {
                 break;
 				
 			case 'charge.status.changed' :
-				$order = wc_get_order( $data->metadata->order_id );
+				$order_id = $data->metadata->order_id;
+				$order = wc_get_order( $order_id );
 				if($order) {
-					$amount = $order->get_total() * 100;
 					if (version_compare(WC_VERSION, "2.7", "<")) {
 						$currency = $order->get_order_currency();
+						$order_status = $order->get_post_status();
 					} else {
 						$currency = $order->get_currency();
+						$order_status = $order->get_status();
 					}
-					if($currency == $data->currency && $amount == $data->actualAmount) {
-						FullCulqi_Charges::create( $data , true);
-						die("Cargo actualizado con éxito");
+
+					if($order->get_payment_method() == "fullculqi") {
+						if($order_status == "pending") {
+							$order_charge_id = get_post_meta($order_id, '_culqi_charge_id', true);
+							$order_culqiorder_id = get_post_meta($order_id, '_culqi_order_id', true);
+							if(!$order_charge_id && !$order_culqiorder_id) {
+								$verifyCharge = $this->verifyChargeInOrders($data->id, $order_id);
+								if(!$verifyCharge) {
+									$amount = $order->get_total() * 100;
+									if($currency == $data->currency && $amount == $data->actualAmount) {
+										FullCulqi_Charges::create( $data , true);
+										die("Cargo actualizado con éxito");
+										break;
+									}
+									die("La moneda o monto no coinciden con la orden.");
+									break;
+								}
+								die($verifyCharge);
+								break;
+							}
+							die("La orden ya tiene un cargo u orden de culqi asignada.");
+							break;
+						}
+						die("No se puede actualizar, la orden no esta pendiente pago.");
 						break;
 					}
-					die("La moneda o monto no coinciden con la orden");
+					die("El método de pago usado en la orden no es Culqi.");
 					break;
 				}
 
@@ -154,6 +177,28 @@ class FullCulqi_Webhooks {
 		update_option( 'fullculqi_webhooks', $webhooks_saved );
 
 		return true;
+	}
+
+	private function verifyChargeInOrders($charge_id, $current_order_id)
+	{
+				// Get all orders
+		$orders = wc_get_orders(array(
+			'status' => 'any', // Retrieve orders with any status
+			'exclude' => array($current_order_id),
+			'numberposts' => -1, // Retrieve all orders
+		));
+
+		$culqi_charge_id_to_find = $charge_id; // Replace with the charge ID you want to find
+
+		foreach ($orders as $order) {
+			$order_id = $order->get_id();
+			$charge_id = get_post_meta($order_id, '_culqi_charge_id', true);
+
+			if ($charge_id === $culqi_charge_id_to_find) {
+				return "Culqi Charge ID exists in Order ID: " . $order_id;
+			}
+		}
+		return false;
 	}
 }
 
