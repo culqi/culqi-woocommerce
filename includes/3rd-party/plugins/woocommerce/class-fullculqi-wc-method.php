@@ -544,7 +544,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 	public function get_title() {
 		if (is_checkout() && !is_wc_endpoint_url()) {
-        	return '<img src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" />';
+        	return '<img class="wc-culqi-title" src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" />';
 		} else {
 			return esc_attr($this->title);
 		}
@@ -756,6 +756,10 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			<style>
 				.wc-culqi-icon {
 					float: right;
+				}
+				.wc-culqi-title {
+					float: none !important;
+					display: inline-block;
 				}
 				div.payment_method_fullculqi {
 					padding-left: 5px !important;
