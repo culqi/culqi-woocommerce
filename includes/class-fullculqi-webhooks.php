@@ -191,6 +191,9 @@ class FullCulqi_Webhooks {
 				if ($order_title === $charge_id) {
 					return "El cargo ya fue asigando al pedido: " . $order_id;
 				}
+				if ($order_id === $current_order_id) {
+					return "El pedido ya tiene una orden o cargo asignado.";
+				}
 			}
 			
 			wp_reset_postdata(); // Restore the global post data
@@ -200,6 +203,7 @@ class FullCulqi_Webhooks {
 
 		return false;
 	}
+	
 }
 
 new FullCulqi_Webhooks();
