@@ -543,7 +543,11 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	}
 
 	public function get_title() {
-        return '<img src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" />';
+		if (!is_checkout() && !is_wc_endpoint_url()) {
+        	return '<img src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" />';
+		} else {
+			return esc_attr($this->title);
+		}
     }
 
     public function get_icon() {
@@ -735,6 +739,18 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	}
 
 	public function custom_checkout_js() {
+		if (is_checkout()) { ?>
+			<script>
+				var baseUrl = '<?php echo get_site_url();?>';
+				var targetHTML = '<img src="'+baseUrl+'/wp-content/plugins/culqi-checkout/includes/3rd-party/plugins/woocommerce/assets/images/culqi-logo.svg" alt="Culqi" />';
+				var matchingElement = jQuery(".woocommerce-table td:contains('" + targetHTML + "')");
+				if(matchingElement) {
+					var culqiLogo = matchingElement.text();
+					matchingElement.html(culqiLogo);
+				}
+			</script>
+		<?php }
+
 		if (is_checkout() && !is_wc_endpoint_url()) {
 			?>
 			<style>
