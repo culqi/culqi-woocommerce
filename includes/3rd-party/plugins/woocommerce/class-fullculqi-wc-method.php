@@ -777,18 +777,10 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 				}
 			</style>
 			<script>
-				var documentLoaded = false;
-				var interval = setInterval(function(){
-					jQuery("#place_order").attr("disabled", "disabled");
-					if(documentLoaded){
-						clearInterval(interval);
-						jQuery("#place_order").removeAttr("disabled");
-					}
-				}, 1000);
 				jQuery(window).on('load',function() {
-					documentLoaded = true;
 					jQuery('form[name="checkout"]').before('<div class="woocommerce-NoticeGroup-checkout"><ul id="fullculqi_notify" class="" style="margin:15px 0px;" role="alert"></ul></div>');
 					setTimeout(function() {
+						documentLoaded = true;
 						jQuery('form[name="checkout"]').on('click', '#place_order', function(e) {
 							e.preventDefault();
 							const paymentMethod = jQuery('input[name="payment_method"]:checked').val();
@@ -876,4 +868,21 @@ function hide_payment_method() {
     } 
   </style>';
 }
+
+function disable_purchase_button()
+{
+	if (is_checkout() && !is_wc_endpoint_url()) { ?>
+		<script>
+			var documentLoaded = false;
+			var interval = setInterval(function() {
+				jQuery("#place_order").attr("disabled", "disabled");
+				if(documentLoaded){
+					clearInterval(interval);
+					jQuery("#place_order").removeAttr("disabled");
+				}
+			}, 100);
+		</script>
+	<?php }
+}
+add_action('wp_head', 'disable_purchase_button');
 ?>
