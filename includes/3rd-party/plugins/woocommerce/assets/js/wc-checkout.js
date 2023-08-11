@@ -281,7 +281,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		},
 
 		payProcess3DS: function(parameters3DS) {
-			if( Culqi.error ) {
+			if( Culqi.error && Culqi.error.merchant_message ) {
 				$('#fullculqi_notify').addClass('woocommerce-error').html( Culqi.error.merchant_message );
 				scrollToCulqiError();
 			} else {

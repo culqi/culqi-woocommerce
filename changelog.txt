@@ -1,4 +1,7 @@
-2023-08-10 - version 3.0.5
+2023-08-10 - version 3.0.6
+Fix: fix: 3ds-challengue
+
+2023-08-05 - version 3.0.5
 Fix: fix: open checkout place order
 
 2023-07-09 - version 3.0.4
