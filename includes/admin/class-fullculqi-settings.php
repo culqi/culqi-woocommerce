@@ -363,6 +363,22 @@ class FullCulqi_Settings {
             'fullculqi_section' // Section
         );
 
+		add_settings_field(
+			'fullculqi_rsa_id', //ID
+			esc_html__('RSA Id', 'fullculqi'),
+			[$this, 'input_rsa_id'],
+			'fullculqi_page',
+			'fullculqi_section'
+		);
+
+		add_settings_field(
+			'fullculqi_rsa_pk', //ID
+			esc_html__('RSA Publickey', 'fullculqi'),
+			[$this, 'input_rsa_pk'],
+			'fullculqi_page',
+			'fullculqi_section'
+		);
+
 
 
 		/* add_settings_field(
@@ -508,6 +524,18 @@ class FullCulqi_Settings {
 
         fullculqi_get_template( 'resources/layouts/admin/settings/input_buttoncustom.php', $settings );
     }
+
+	public function input_rsa_id() {
+		$settings = fullculqi_get_settings();
+
+		fullculqi_get_template( 'resources/layouts/admin/settings/input_rsa_id.php', $settings );
+	}
+
+	public function input_rsa_pk() {
+		$settings = fullculqi_get_settings();
+
+		fullculqi_get_template( 'resources/layouts/admin/settings/input_rsa_pk.php', $settings );
+	}
 
 	/**
 	 * Input Button Delete All

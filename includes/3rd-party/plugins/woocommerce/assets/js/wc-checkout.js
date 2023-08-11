@@ -117,6 +117,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @return mixed
 		 */
 		setSettings: function() {
+			console.log(fullculqi_vars.rsa_pk);
 			Culqi.publicKey = fullculqi_vars.public_key;
 			let args_settings = {
 				title: fullculqi_vars.commerce,
@@ -125,7 +126,9 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				amount: fullculqi_vars.total,
 				culqiclient: 'woocommerce',
 				culqiclientversion: fullculqi_vars.version_wc,
-				culqipluginversion: fullculqi_vars.version_plugin
+				culqipluginversion: fullculqi_vars.version_plugin,
+				xculqirsaid: fullculqi_vars.rsa_id,
+				rsapublickey: fullculqi_vars.rsa_pk
 			};
 			console.log(fullculqi_vars.multi_order+':: el orderid');
 			if( fullculqi_vars.multi_order != '' ) {

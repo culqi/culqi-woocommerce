@@ -39,7 +39,9 @@ function fullculqi_get_default() {
 		'username' 			=> '',
 		'password' 			=> '',
 		'estado_pedido'		=> '',
-        'color_palette'     => ''
+        'color_palette'     => '',
+		'rsa_id'			=> '',
+		'rsa_pk'			=> '',
 	];
 
 	return apply_filters( 'fullculqi/settings_default', $default );

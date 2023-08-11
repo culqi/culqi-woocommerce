@@ -306,6 +306,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
                     'url_actions'	=> site_url( $wc_action_url ),
 					'url_success'	=> $order->get_checkout_order_received_url(),
 					'public_key'	=> sanitize_text_field( $settings['public_key'] ),
+					'rsa_id'		=> sanitize_text_field( $settings['rsa_id'] ),
+					'rsa_pk'		=> sanitize_text_field( $settings['rsa_pk'] ),
 					'installments'	=> sanitize_title( $this->installments ),
 					'multipayment'	=> sanitize_title( $this->multipayment ),
 					'multi_order'	=> ((isset($settings['methods']['cuetealo']) and $settings['methods']['cuetealo']!='0') or (isset($settings['methods']['billetera']) and $settings['methods']['billetera']!='0') or (isset($settings['methods']['agente']) and $settings['methods']['agente']!='0') or (isset($settings['methods']['bancaMovil']) and $settings['methods']['bancaMovil']!='0')) ? $culqi_order_id : '',
