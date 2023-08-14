@@ -339,6 +339,22 @@ class FullCulqi_Settings {
 			array( 'class' => 'fullculqi_estado_pedido' )
 		);
 
+		add_settings_field(
+			'fullculqi_rsa_id', //ID
+			esc_html__('RSA Id', 'fullculqi'),
+			[$this, 'input_rsa_id'],
+			'fullculqi_page',
+			'fullculqi_section'
+		);
+
+		add_settings_field(
+			'fullculqi_rsa_pk', //ID
+			esc_html__('RSA Publickey', 'fullculqi'),
+			[$this, 'input_rsa_pk'],
+			'fullculqi_page',
+			'fullculqi_section'
+		);
+
         add_settings_field(
             'fullculqi_buttoncustom', // ID
             esc_html__( 'Personalizar formulario de checkout', 'fullculqi' ), // Logo
@@ -362,24 +378,6 @@ class FullCulqi_Settings {
             'fullculqi_page', // Page
             'fullculqi_section' // Section
         );
-
-		add_settings_field(
-			'fullculqi_rsa_id', //ID
-			esc_html__('RSA Id', 'fullculqi'),
-			[$this, 'input_rsa_id'],
-			'fullculqi_page',
-			'fullculqi_section'
-		);
-
-		add_settings_field(
-			'fullculqi_rsa_pk', //ID
-			esc_html__('RSA Publickey', 'fullculqi'),
-			[$this, 'input_rsa_pk'],
-			'fullculqi_page',
-			'fullculqi_section'
-		);
-
-
 
 		/* add_settings_field(
 			'fullculqi_button_clear', // ID
