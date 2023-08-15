@@ -2,6 +2,10 @@
   margin-bottom: 1rem;
 }
 
+.tool.custom-ml::after {
+  margin-left: -20px;
+}
+
 @media (max-width: 576px) {
   #woocommerce_culqi_login_button {
     margin-left: 0!important;
