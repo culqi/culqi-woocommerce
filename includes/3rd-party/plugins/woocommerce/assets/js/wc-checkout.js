@@ -126,10 +126,12 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				amount: fullculqi_vars.total,
 				culqiclient: 'woocommerce',
 				culqiclientversion: fullculqi_vars.version_wc,
-				culqipluginversion: fullculqi_vars.version_plugin,
-				xculqirsaid: fullculqi_vars.rsa_id,
-				rsapublickey: fullculqi_vars.rsa_pk
+				culqipluginversion: fullculqi_vars.version_plugin
 			};
+			if(fullculqi_vars.rsa_id && fullculqi_vars.rsa_pk) {
+				args_settings.xculqirsaid = fullculqi_vars.rsa_id;
+				args_settings.rsapublickey = fullculqi_vars.rsa_pk;
+			}
 			console.log(fullculqi_vars.multi_order+':: el orderid');
 			if( fullculqi_vars.multi_order != '' ) {
 				args_settings.order = fullculqi_vars.multi_order;
