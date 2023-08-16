@@ -78,9 +78,10 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 			$pnames = [];
 			$order = new WC_Order( $order_id );
+			$culqi_customer_email = "";
 			if (version_compare(WC_VERSION, "2.7", "<")) {
                 $log = new FullCulqi_Logs( $order_id );
-
+				$culqi_customer_email = $order->billing_email;
     			$settings = fullculqi_get_settings();
     			//var_dump($settings); exit(1);
     			// Disabled from thirds
@@ -171,6 +172,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     			}
             }else{
                 $log = new FullCulqi_Logs( $order->get_id() );
+				$culqi_customer_email = $order->get_billing_email();
 
     			$settings = fullculqi_get_settings();
     			//var_dump($settings); exit(1);
@@ -337,6 +339,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 					'wpnonce'		=> wp_create_nonce( 'fullculqi' ),
 					'enviroment' 	=> $settings['enviroment'],
                     'url' 	=> $returnUrl3DS,
+					'culqi_customer_email' => $culqi_customer_email
 				];
 			do_action( 'fullculqi/method/enqueue_scripts/pay_page', $order );
 		//}

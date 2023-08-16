@@ -138,6 +138,9 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 			}
 			console.log(args_settings);
 			Culqi.settings( args_settings );
+			Culqi.client = {
+				email: fullculqi_vars.culqi_customer_email
+			};
 		},
 		/**
 		 * Set Culqi Options 
