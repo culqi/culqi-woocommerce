@@ -381,8 +381,9 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 							}
 
 						}else{
+							jQuery('#loadingloginculqi').remove();
 							$('#fullculqi_notify').addClass('woocommerce-error').html( 'Ha ocurrido un error procesando el pago. Por favor intente nuevamente o comuníquese con su entidad bancaria.');
-							scrollToCulqiError();;
+							scrollToCulqiError();
 						}
 
 					}			
@@ -409,9 +410,8 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				data 		: post_data,
 
 				success: function( response ) {
-
-					$( document.body ).trigger('fullculqi.checkout.success', [ post_data, response ]);
-
+					if( response.success ) {
+						$( document.body ).trigger('fullculqi.checkout.success', [ post_data, response ]);
 						var enviroment = fullculqi_vars.enviroment.split('|');
 						$('#fullculqi_notify').empty();
 						if(Culqi.token==null){
@@ -426,6 +426,16 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 							//alert('stop');
 							location.href = fullculqi_vars.url_success;
 						}
+					} else {
+						jQuery('#loadingloginculqi').remove();
+						if(response.data && response.data.message) {
+							$('#fullculqi_notify').addClass('woocommerce-error').html(response.data.message);
+								scrollToCulqiError();
+						} else {
+							$('#fullculqi_notify').addClass('woocommerce-error').html( 'Ha ocurrido un error procesando el pago. Por favor intente nuevamente o comuníquese con su entidad bancaria.');
+								scrollToCulqiError();
+						}
+					}
 
 
 				},
