@@ -1,4 +1,6 @@
 <?php
+
+#[\AllowDynamicProperties]
 class FullCulqi_Checkout {
 
 	static public function simple($order, $culqi_token, $log) {

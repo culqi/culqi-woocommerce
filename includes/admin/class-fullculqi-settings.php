@@ -4,6 +4,8 @@
  * @since  1.0.0
  * @package Includes / Admin / Settings
  */
+
+#[\AllowDynamicProperties]
 class FullCulqi_Settings {
 
 	/**

@@ -4,6 +4,7 @@
  * @since  1.0.0
  * @package Includes / Endpoints
  */
+#[\AllowDynamicProperties]
 class FullCulqi_Endpoints {
 
 	/**

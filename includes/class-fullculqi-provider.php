@@ -1,4 +1,5 @@
 <?php
+#[\AllowDynamicProperties]
 class FullCulqi_Provider {
 
 	/**

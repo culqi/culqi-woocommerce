@@ -4,6 +4,8 @@
  * @since  1.0.0
  * @package Includes / Ajax
  */
+
+#[\AllowDynamicProperties]
 class FullCulqi_Ajax {
 
 	public function __construct() {

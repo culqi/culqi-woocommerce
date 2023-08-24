@@ -4,6 +4,8 @@
  * @since  1.0.0
  * @packkage Includes / Method Payment
  */
+
+ #[\AllowDynamicProperties]
 class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 	/**

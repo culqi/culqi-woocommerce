@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @since  1.0.0
  * @package Includes / FullCulqi
  */
+#[\AllowDynamicProperties]
 class FullCulqi {
 
 	/**

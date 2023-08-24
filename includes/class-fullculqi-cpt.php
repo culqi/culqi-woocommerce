@@ -4,6 +4,7 @@
  * @since  1.0.0
  * @package Includes / CPT
  */
+#[\AllowDynamicProperties]
 class FullCulqi_Cpt {
 
 	/**

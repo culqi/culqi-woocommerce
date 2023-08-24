@@ -4,6 +4,8 @@
  * @since  1.0.0
  * @package Includes / Admin / Welcome
  */
+
+#[\AllowDynamicProperties]
 class FullCulqi_Welcome {
 
 	/**

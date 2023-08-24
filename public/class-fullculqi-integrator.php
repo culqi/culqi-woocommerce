@@ -1,4 +1,5 @@
 <?php
+#[\AllowDynamicProperties]
 class FullCulqi_Integrator {
 
 	static function create_payment( $payment ) {

@@ -4,6 +4,7 @@
  * @since  1.0.0
  * @package Includes / Webhooks
  */
+#[\AllowDynamicProperties]
 class FullCulqi_Webhooks {
 
 	protected $limit = 25;
