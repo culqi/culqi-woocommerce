@@ -551,7 +551,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 	public function get_title() {
 		if (is_checkout() && !is_wc_endpoint_url()) {
-        	return '<img class="wc-culqi-title" src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" />';
+        	return '<div class="wc-culqi-container"><img class="wc-culqi-title" src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" />';
 		} else {
 			return esc_attr($this->title);
 		}
@@ -559,7 +559,30 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
     public function get_icon() {
         // Return the icon image
-        return '<img class="wc-culqi-icon" src="' . esc_url($this->icon) . '" alt="'.$this->payment_methods.'" />';
+		$settings = fullculqi_get_settings();
+		$tarjeta =	(isset($settings['methods']['tarjeta']) and $settings['methods']['tarjeta']!='0');
+		$yape = (isset($settings['methods']['yape']) and $settings['methods']['yape']!='0');
+		$billetera	= (isset($settings['methods']['billetera']) and $settings['methods']['billetera']!='0');
+		$bancaMovil = (isset($settings['methods']['bancaMovil']) and $settings['methods']['bancaMovil']!='0');
+		$agente = (isset($settings['methods']['agente']) and $settings['methods']['agente']!='0');
+		$cuetealo = (isset($settings['methods']['cuetealo']) and $settings['methods']['cuetealo']!='0');
+		//
+		$cards_img = MPCULQI_WC_URL . 'assets/images/cards.svg';
+		$yape_img = MPCULQI_WC_URL . 'assets/images/yape.svg';
+		$pagoefectivo_img = MPCULQI_WC_URL . 'assets/images/pagoefectivo.svg';
+		$final_image = '<div class="wc-culqi-icon-container">';
+		if($tarjeta) {
+			$final_image .= '<img class="wc-culqi-icon" src="' . esc_url($cards_img) . '" alt="'.$this->payment_methods.'" />';
+		}
+		if($yape) {
+			$final_image .= '<img class="wc-culqi-icon" src="' . esc_url($yape_img) . '" alt="'.$this->payment_methods.'" />';
+		}
+		if($billetera || $bancaMovil || $agente || $cuetealo) {
+			$final_image .= '<img class="wc-culqi-icon" src="' . esc_url($pagoefectivo_img) . '" alt="'.$this->payment_methods.'" />';
+		}
+		$final_image .= '</div></div>';
+
+        return $final_image;
     }
 
 
@@ -761,14 +784,27 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		if (is_checkout() && !is_wc_endpoint_url()) {
 			?>
 			<style>
-				.wc-culqi-icon {
+				.wc-culqi-container {
+					max-width: 431px;
+					width: calc(100% - 50px);
+					display: inline-flex !important;
+					align-items: center;
+					justify-content: space-between;
+					flex-wrap: wrap;
+				}
+				.wc-culqi-icon-container {
 					float: right;
-					height: 24px;
+					display: flex;
+				}
+				.wc-culqi-icon {
+					height: 24px !important;
+    				margin-left: 8px !important;
 				}
 				.wc-culqi-title {
 					float: none !important;
 					display: inline-block;
-					height: 20px;
+					height: 20px !important;
+					margin-left: 0 !important;
 				}
 				div.payment_method_fullculqi {
 					padding-left: 5px !important;
@@ -776,10 +812,18 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 				div.payment_method_fullculqi p {
 					font-size: 12px;
 				}
+				label[for=payment_method_fullculqi] {
+					width: calc(100% - 30px);
+				}
 				@media only screen and (max-width: 480px) {
 					.wc-culqi-icon {
-						float: none;
-						margin-top: 20px;
+						height: 23px !important;
+					}
+					.wc-culqi-title {
+						height: 18px !important;
+					}
+					label[for=payment_method_fullculqi] {
+						width: 100%;
 					}
 				}
 			</style>
