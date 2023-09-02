@@ -188,6 +188,7 @@ class FullCulqi_WC {
 	 * [old_update_order description]
 	 * @return [type] [description]
 	 */
+	/*
 	public function old_update_order() {
 
 		$inputJSON	= file_get_contents('php://input');
@@ -212,7 +213,7 @@ class FullCulqi_WC {
 		echo wp_send_json( ['result' => 'success' ] );
 		die();
 	}
-
+	*/
 	/**
 	 * Notice Currency
 	 * @return html
