@@ -27,12 +27,9 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->multipayment 	= $this->get_option( 'multipayment', 'no' );
 		$this->multi_duration	= $this->get_option( 'multi_duration', 24 );
 		$this->multi_status		= $this->get_option( 'multi_status', 'wc-pending' );
-		$allowed_html = array(
-			'strong' => array(),
-		);
 		
-		$this->description = wp_kses(__('Acepta pagos con tarjetas de <strong>débito y crédito; Yape, Cuotéalo BCP y PagoEfectivo</strong> (billeteras móviles, agentes y bodegas).', 'fullculqi'), $allowed_html);
-		$this->instructions		= $this->get_option( 'instructions', $this->description );
+		$this->description = $this->get_description();
+		$this->instructions		= $this->get_option( 'instructions', $this->get_description() );
 		$this->msg_fail			= $this->get_option( 'msg_fail' );
 		$this->time_modal		= $this->get_option( 'time_modal', 0 );
 
@@ -556,6 +553,43 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 			return esc_attr($this->title);
 		}
     }
+
+	public function get_description() {
+		$settings = fullculqi_get_settings();
+		$tarjeta =	(isset($settings['methods']['tarjeta']) and $settings['methods']['tarjeta']!='0');
+		$yape = (isset($settings['methods']['yape']) and $settings['methods']['yape']!='0');
+		$billetera	= (isset($settings['methods']['billetera']) and $settings['methods']['billetera']!='0');
+		$bancaMovil = (isset($settings['methods']['bancaMovil']) and $settings['methods']['bancaMovil']!='0');
+		$agente = (isset($settings['methods']['agente']) and $settings['methods']['agente']!='0');
+		$cuotealo = (isset($settings['methods']['cuetealo']) and $settings['methods']['cuetealo']!='0');
+		$txt_general = 'Acepta pagos con ';
+		$txt = '';
+		$txtPE = '';
+		if($tarjeta) {
+			$txt .= 'tarjetas de débito y crédito';
+		}
+		if($yape) {
+			if($tarjeta) {
+				$txt .= ', ';
+			}
+			$txt .= 'Yape';
+		}
+		if($billetera || $bancaMovil || $agente || $cuotealo) {
+			if($tarjeta || $yape) {
+				$txt .= ', ';
+			}
+			$txt .= 'Cuotéalo BCP y PagoEfectivo';
+			$txtPE = ' (billeteras móviles, agentes y bodegas)';
+		}
+		$txt = '<strong>'.$txt.'</strong>';
+		$txt = $txt_general. $txt. $txtPE;
+		$txt .= '.';
+		$allowed_html = array(
+			'strong' => array(),
+		);
+		
+		return wp_kses(__($txt, 'fullculqi'), $allowed_html);
+	}
 
     public function get_icon() {
         // Return the icon image
