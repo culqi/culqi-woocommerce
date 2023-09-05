@@ -16,7 +16,7 @@ Tested up to: 6.0
 Stable tag: 5.6
 Requires PHP: 5.6
 WC requires at least: 2.6.11
-WC tested up to:
+WC tested up to: 3.0.0
 */
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
