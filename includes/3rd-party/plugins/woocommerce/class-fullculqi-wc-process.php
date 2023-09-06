@@ -264,7 +264,7 @@ class FullCulqi_WC_Process {
                     $args_charges = apply_filters( 'fullculqi/process/charge_args', [
                         'amount'			=> fullculqi_format_total( $order->get_total() ),
                         'currency_code'		=> $order->order_currency,
-                        'description'		=> substr( str_pad( $desc, 5, '_' ), 0, 80 ),
+                        'description'		=> 'Venta desde plugin WooCommece',//substr( str_pad( $desc, 5, '_' ), 0, 80 ),
                         'capture'			=> true,
                         //'email'				=> $order->billing_email,
                         'email'				=> $post_data['email'],
@@ -279,7 +279,7 @@ class FullCulqi_WC_Process {
                     $args_charges = apply_filters( 'fullculqi/process/charge_args', [
                         'amount'			=> fullculqi_format_total( $order->get_total() ),
                         'currency_code'		=> $order->order_currency,
-                        'description'		=> substr( str_pad( $desc, 5, '_' ), 0, 80 ),
+                        'description'		=> 'Venta desde plugin WooCommece',//substr( str_pad( $desc, 5, '_' ), 0, 80 ),
                         'capture'			=> true,
                         //'email'				=> $order->billing_email,
                         'email'				=> $post_data['email'],
@@ -332,7 +332,7 @@ class FullCulqi_WC_Process {
                     $args_charges = apply_filters( 'fullculqi/process/charge_args', [
                         'amount'			=> fullculqi_format_total( $order->get_total() ),
                         'currency_code'		=> $order->get_currency(),
-                        'description'		=> substr( str_pad( $desc, 5, '_' ), 0, 80 ),
+                        'description'		=> 'Venta desde plugin WooCommece',//substr( str_pad( $desc, 5, '_' ), 0, 80 ),
                         'capture'			=> true,
                         //'email'				=> $order->get_billing_email(),
                         'email'				=> $post_data['email'],
@@ -347,7 +347,7 @@ class FullCulqi_WC_Process {
                     $args_charges = apply_filters( 'fullculqi/process/charge_args', [
                         'amount'			=> fullculqi_format_total( $order->get_total() ),
                         'currency_code'		=> $order->get_currency(),
-                        'description'		=> substr( str_pad( $desc, 5, '_' ), 0, 80 ),
+                        'description'		=> 'Venta desde plugin WooCommece',//substr( str_pad( $desc, 5, '_' ), 0, 80 ),
                         'capture'			=> true,
                         //'email'				=> $order->get_billing_email(),
                         'email'				=> $post_data['email'],
