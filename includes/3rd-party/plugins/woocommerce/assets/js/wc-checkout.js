@@ -117,6 +117,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @return mixed
 		 */
 		setSettings: function() {
+			console.log(fullculqi_vars.rsa_pk);
 			Culqi.publicKey = fullculqi_vars.public_key;
 			let args_settings = {
 				title: fullculqi_vars.commerce,
@@ -127,12 +128,19 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				culqiclientversion: fullculqi_vars.version_wc,
 				culqipluginversion: fullculqi_vars.version_plugin
 			};
+			if(fullculqi_vars.rsa_id && fullculqi_vars.rsa_pk) {
+				args_settings.xculqirsaid = fullculqi_vars.rsa_id;
+				args_settings.rsapublickey = fullculqi_vars.rsa_pk;
+			}
 			console.log(fullculqi_vars.multi_order+':: el orderid');
 			if( fullculqi_vars.multi_order != '' ) {
 				args_settings.order = fullculqi_vars.multi_order;
 			}
 			console.log(args_settings);
 			Culqi.settings( args_settings );
+			Culqi.client = {
+				email: fullculqi_vars.culqi_customer_email
+			};
 		},
 		/**
 		 * Set Culqi Options 
@@ -373,8 +381,9 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 							}
 
 						}else{
+							jQuery('#loadingloginculqi').remove();
 							$('#fullculqi_notify').addClass('woocommerce-error').html( 'Ha ocurrido un error procesando el pago. Por favor intente nuevamente o comuníquese con su entidad bancaria.');
-							scrollToCulqiError();;
+							scrollToCulqiError();
 						}
 
 					}			
@@ -401,9 +410,8 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				data 		: post_data,
 
 				success: function( response ) {
-
-					$( document.body ).trigger('fullculqi.checkout.success', [ post_data, response ]);
-
+					if( response.success ) {
+						$( document.body ).trigger('fullculqi.checkout.success', [ post_data, response ]);
 						var enviroment = fullculqi_vars.enviroment.split('|');
 						$('#fullculqi_notify').empty();
 						if(Culqi.token==null){
@@ -418,6 +426,16 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 							//alert('stop');
 							location.href = fullculqi_vars.url_success;
 						}
+					} else {
+						jQuery('#loadingloginculqi').remove();
+						if(response.data && response.data.message) {
+							$('#fullculqi_notify').addClass('woocommerce-error').html(response.data.message);
+								scrollToCulqiError();
+						} else {
+							$('#fullculqi_notify').addClass('woocommerce-error').html( 'Ha ocurrido un error procesando el pago. Por favor intente nuevamente o comuníquese con su entidad bancaria.');
+								scrollToCulqiError();
+						}
+					}
 
 
 				},

@@ -1,4 +1,6 @@
 <?php
+
+#[\AllowDynamicProperties]
 class FullCulqi_Checkout {
 
 	static public function simple($order, $culqi_token, $log) {
@@ -63,7 +65,7 @@ class FullCulqi_Checkout {
 		$args_payment = apply_filters('fullculqi/checkout/simple_args', [
 			'amount'			=> fullculqi_format_total($order->get_total()),
 			'currency_code'		=> $order->get_currency(),
-			'description'		=> substr(str_pad(implode(', ', $pnames), 5, '_'), 0, 80),
+			'description'		=> 'Venta desde plugin WooCommece',//substr(str_pad(implode(', ', $pnames), 5, '_'), 0, 80),
 			'capture'			=> true,
 			'email'				=> $order->get_billing_email(),
 			'installments'		=> $installments,

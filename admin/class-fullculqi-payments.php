@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
+#[\AllowDynamicProperties]
 class FullCulqi_Payments extends FullCulqi_Entities {
 
 	protected $post_type = 'culqi_payments';

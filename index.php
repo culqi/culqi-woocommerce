@@ -2,8 +2,8 @@
 /*
 Plugin Name: Culqi
 Plugin URI:https://wordpress.org/plugins/culqi-checkout
-Description: Culqi acepta pago con tarjetas, pagoefectivo, billeteras móviles y cuotéalo desde tu tienda virtual.
-Version: 3.0.6
+Description: Culqi acepta pagos con tarjetas de débito y crédito, Yape, Cuotéalo BCP y PagoEfectivo (billeteras móviles, agentes y bodegas).
+Version: 3.0.7
 Author: Culqi
 Author URI: https://culqi.com/
 Developer: Culqi Team
@@ -16,13 +16,13 @@ Tested up to: 6.0
 Stable tag: 5.6
 Requires PHP: 5.6
 WC requires at least: 2.6.11
-WC tested up to:
+WC tested up to: 3.0.0
 */
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-define( 'MPCULQI_PLUGIN_VERSION' , 'v3.0.6');
+define( 'MPCULQI_PLUGIN_VERSION' , 'v3.0.7');
 
 define( 'MPCULQI_FILE' , __FILE__ );
 define( 'MPCULQI_DIR' , plugin_dir_path(__FILE__) );

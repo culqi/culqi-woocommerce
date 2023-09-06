@@ -4,6 +4,7 @@
  * @since  1.0.0
  * @package Includes / Webhooks
  */
+#[\AllowDynamicProperties]
 class FullCulqi_Webhooks {
 
 	protected $limit = 25;
@@ -25,7 +26,8 @@ class FullCulqi_Webhooks {
 		$headers = getallheaders();
 		$headers = $headers['Authorization'];
 		if(!isset($headers)){
-			exit("Error: Cabecera Authorization no presente");
+			$this->set_json_response("Error", "Cabecera Authorization no presente", 400);
+			//exit("Error: Cabecera Authorization no presente");
 		}
 	    $authorization = substr($headers,6);
         $credenciales = base64_decode($authorization);
@@ -33,7 +35,8 @@ class FullCulqi_Webhooks {
         $username = $credenciales[0];
         $password = $credenciales[1];
 		if(!isset($username) or !isset($password)){
-			exit("Error: No Autorizado");
+			$this->set_json_response("error", "No Autorizado", 401);
+			//exit("Error: No Autorizado");
 		}
 		if( empty( $inputJSON ) )
 			return;
@@ -44,7 +47,8 @@ class FullCulqi_Webhooks {
 		$password_bd = $settings['password'];
 
 		if( $username != $username_bd || $password != $password_bd ){
-			exit("Error: Crendenciales Incorrectas");
+			$this->set_json_response("error", "Crendenciales Incorrectas", 400);
+			//exit("Error: Crendenciales Incorrectas");
 		}
 
 		if( $input->object != 'event' )
@@ -53,11 +57,13 @@ class FullCulqi_Webhooks {
 		$data = json_decode( $input->data );
 
         if (empty($data->metadata)) {
-            exit("Error: Metadata vacia");
+			$this->set_json_response("Error", "Metadata vacia", 400);
+            //exit("Error: Metadata vacia");
         }
 
         if (empty($data->amount) && empty($data->actualAmount)) {
-            exit("Error: No envió el amount");
+			$this->set_json_response("error", "No envió el amount", 400);
+            //exit("Error: No envió el amount");
         }
 
 		// Webhook History
@@ -66,14 +72,16 @@ class FullCulqi_Webhooks {
 		switch( $input->type ) {
             case 'order.status.changed' :
 				if (empty($data->id) || empty($data->order_number) || empty($data->currency_code) || empty($data->state)) {
-					exit("Error: order_id, order_number, currency_code o state vacios");
+					$this->set_json_response("error", "order_id, order_number, currency_code o state vacios", 400);
+					//exit("Error: order_id, order_number, currency_code o state vacios");
 				}
                 FullCulqi_Orders::update($data, 1);
                 break;
 
             case 'refund.creation.succeeded' :
 				if (empty($data->chargeId)) {
-					exit("Error: No envió el chargeId");
+					$this->set_json_response("error", "No envió el chargeId", 400);
+					//exit("Error: No envió el chargeId");
 				}
                 $order_id = fullculqi_post_from_meta('_culqi_charge_id', $data->chargeId);
                 $charge_id = fullculqi_post_from_meta('culqi_id', $data->chargeId);
@@ -120,28 +128,34 @@ class FullCulqi_Webhooks {
 								$amount = $order->get_total() * 100;
 								if($currency == $data->currency && $amount == $data->actualAmount) {
 									FullCulqi_Charges::create( $data , true);
-									die("Cargo actualizado con éxito");
+									$this->set_json_response("success", "Cargo actualizado con éxito", 200);
+									//die("Cargo actualizado con éxito");
 									break;
 								}
-								die("La moneda o monto no coinciden con la orden.");
+								$this->set_json_response("error", "La moneda o monto no coinciden con la orden", 400);
+								//die("La moneda o monto no coinciden con la orden.");
 								break;
 							}
-							die($verifyCharge);
+							$this->set_json_response("error", $verifyCharge, 400);
+							//die($verifyCharge);
 							break;
 						}
-						die("No se puede actualizar, la orden no esta pendiente pago.");
+						$this->set_json_response("error", "No se puede actualizar, la orden no esta pendiente pago", 400);
+						//die("No se puede actualizar, la orden no esta pendiente pago.");
 						break;
 					}
-					die("El método de pago usado en la orden no es Culqi.");
+					$this->set_json_response("error", "El método de pago usado en la orden no es Culqi", 400);
+					//die("El método de pago usado en la orden no es Culqi.");
 					break;
 				}
-
-				die("No existe la orden");
+				$this->set_json_response("error", "No existe la orden", 400);
+				//die("No existe la orden");
 				break;
 
         }
 
 		do_action( 'fullculqi/webhooks/to_receive', $input, $data );
+		$this->set_json_response("success", "Operación satisfactoria", 200);
 	}
 
 
@@ -203,6 +217,20 @@ class FullCulqi_Webhooks {
 		}
 
 		return false;
+	}
+
+	public function set_json_response($result, $msg, $statusCode) {
+		if($statusCode===200){
+			return wp_send_json_success( 
+				['result' => $result,
+				'message' => $msg ],
+				$statusCode );
+		}else{
+			return wp_send_json_error( 
+				['result' => $result,
+				'message' => $msg ],
+				$statusCode );
+		}
 	}
 	
 }

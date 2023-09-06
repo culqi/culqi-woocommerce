@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
+#[\AllowDynamicProperties]
 abstract class FullCulqi_Entities {
 
 	function __construct() {

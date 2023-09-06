@@ -4,6 +4,7 @@
  * @since  1.0.0
  * @package Includes / i18n
  */
+#[\AllowDynamicProperties]
 class FullCulqi_i18n {
 
 	/**

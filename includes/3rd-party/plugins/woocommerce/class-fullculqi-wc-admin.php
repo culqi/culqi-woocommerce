@@ -4,6 +4,8 @@
  * @since  1.0.0
  * @package Includes / 3rd-party / plugins / WooCommerce
  */
+
+ #[\AllowDynamicProperties]
 class FullCulqi_WC_Admin {
 
 	public function __construct() {

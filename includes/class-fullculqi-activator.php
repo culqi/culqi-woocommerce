@@ -3,6 +3,8 @@
 /**
  * Activator plugin
  */
+
+#[\AllowDynamicProperties]
 class fullculqi_Activator {
 	
 	/**

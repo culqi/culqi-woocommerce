@@ -4,6 +4,7 @@
  * @since  1.0.0
  * @package Includes / Logs
  */
+#[\AllowDynamicProperties]
 class FullCulqi_Logs {
 
 	protected $post_id = 0;
