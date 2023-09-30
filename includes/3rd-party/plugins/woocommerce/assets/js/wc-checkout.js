@@ -353,7 +353,13 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 							}, 1000);
 						}else{
 							console.log(response);
-							location.href = fullculqi_vars.url_success;
+							if(response.data.charge.data.card_brand.toUpperCase() == "MASTERCARD") {
+								jQuery("body").append('<mc-sonic id="mc-sonic"  clear-background></mc-sonic>');
+								jQuery('#loadingloginculqi').remove();
+								FullCulqi.playSonic(fullculqi_vars.url_success);
+							} else {
+								location.href = fullculqi_vars.url_success;
+							}
 						}
 
 					} else {
@@ -423,8 +429,13 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 							}, 1000);
 						}else{
 							console.log(response);
-							//alert('stop');
-							location.href = fullculqi_vars.url_success;
+							if(response.data.charge.data.card_brand.toUpperCase() == "MASTERCARD") {
+								jQuery("body").append('<mc-sonic id="mc-sonic"  clear-background></mc-sonic>');
+								jQuery('#loadingloginculqi').remove();
+								FullCulqi.playSonic(fullculqi_vars.url_success);
+							} else {
+								location.href = fullculqi_vars.url_success;
+							}
 						}
 					} else {
 						jQuery('#loadingloginculqi').remove();
@@ -450,6 +461,20 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 					scrollToCulqiError();
 				}
 			});
+		},
+
+		playSonic: function(succes_url) {
+			const mc_component = document.getElementById("mc-sonic");
+			console.log(mc_component);
+			document.addEventListener('sonicCompletion', FullCulqi.onCompletion(succes_url));
+			mc_component.play();
+		},
+		
+		onCompletion: function(succes_url) {
+			console.log("compeletado matercard");
+			setTimeout(() => {
+				location.href = succes_url;
+			}, 1000);
 		}
 	};
 
