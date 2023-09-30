@@ -87,7 +87,7 @@ class FullCulqi_WC {
 		//echo var_dump($return);
 		$return = apply_filters( 'fullculqi/wc-actions', $return, $post_data );
 
-		if($post_data['action'] == 'charge' && $return['data']['culqi_charge_id']) {
+		if($post_data['action'] == 'charge' && isset($return['data']['culqi_charge_id'])) {
 			wp_send_json_success(array('charge'=>$return));
 		}
 
