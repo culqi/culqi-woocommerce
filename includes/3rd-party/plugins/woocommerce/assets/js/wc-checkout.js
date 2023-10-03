@@ -354,7 +354,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 						}else{
 							console.log(response);
 							if(response.data.charge.data.card_brand.toUpperCase() == "MASTERCARD") {
-								jQuery("body").append('<mc-sonic id="mc-sonic"  clear-background></mc-sonic>');
+								jQuery("body").append('<div id= "d_mc-sonic"><mc-sonic id="mc-sonic"  clear-background></mc-sonic></div>');
 								jQuery('#loadingloginculqi').remove();
 								FullCulqi.playSonic(fullculqi_vars.url_success);
 							} else {
@@ -430,7 +430,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 						}else{
 							console.log(response);
 							if(response.data.charge.data.card_brand.toUpperCase() == "MASTERCARD") {
-								jQuery("body").append('<mc-sonic id="mc-sonic"  clear-background></mc-sonic>');
+								jQuery("body").append('<div id= "d_mc-sonic"><mc-sonic id="mc-sonic"  clear-background></mc-sonic></div>');
 								jQuery('#loadingloginculqi').remove();
 								FullCulqi.playSonic(fullculqi_vars.url_success);
 							} else {
