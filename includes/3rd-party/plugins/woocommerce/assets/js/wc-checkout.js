@@ -474,7 +474,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 			console.log("mastercard success");
 			setTimeout(() => {
 				location.href = succes_url;
-			}, 1000);
+			}, 2000);
 		}
 	};
 
