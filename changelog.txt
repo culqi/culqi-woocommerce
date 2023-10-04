@@ -1,3 +1,7 @@
+2023-09-01 - version 3.0.8
+Fix: solution multiple chargue request
+Fix: Add animation mastercard
+
 2023-09-01 - version 3.0.7
 Fix: Add RSA encrypt
 Fix: Add dynamic logos

@@ -146,7 +146,7 @@ class FullCulqi_Charges {
 		
 		return apply_filters( 'fullculqi/charges/create/success', [
 			'status'	=> 'ok',
-			'data'		=> [ 'culqi_charge_id' => $charge->id, 'post_charge_id' => $post_id ]
+			'data'		=> [ 'culqi_charge_id' => $charge->id, 'post_charge_id' => $post_id, 'card_brand' => $charge->source->iin->card_brand ]
 		] );
 	}
 

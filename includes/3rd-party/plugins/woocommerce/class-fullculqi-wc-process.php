@@ -365,7 +365,7 @@ class FullCulqi_WC_Process {
 			//echo var_dump($args_charges);
 			$culqi_charge = FullCulqi_Charges::create( $args_charges );
 			//echo var_dump($installments);
-            //echo var_dump($culqi_charge);
+            
 			if( $culqi_charge['status'] != 'ok' ) {
                 if(isset($culqi_charge['action_code']) and $culqi_charge['action_code']=='REVIEW'){
                     return $culqi_charge['action_code'];
@@ -432,7 +432,7 @@ class FullCulqi_WC_Process {
 
 		do_action( 'fullculqi/process/charge_success', $order );
 
-		return true;
+		return $culqi_charge;
 	}
 
 

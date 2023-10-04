@@ -897,13 +897,9 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 													nonce: "<?php echo wp_create_nonce('my_ajax_nonce')?>"
 												},
 												success: function(response) {
-													jQuery.getScript(response.data.js_library, function() {
-														jQuery.getScript(response.data.js_3ds, function() {
-															window.fullculqi_vars = response.data.full_culqi_vars;
-															var noCacheUrl = response.data.checkout_js + "?_=" + Date.now();
-															jQuery.getScript(noCacheUrl, function() {
-															});
-														});
+													window.fullculqi_vars = response.data.full_culqi_vars;
+													var noCacheUrl = response.data.checkout_js + "?_=" + Date.now();
+													jQuery.getScript(noCacheUrl, function() {
 													});
 												},
 												error: function(jqXHR, textStatus, errorThrown) {
@@ -970,4 +966,27 @@ function disable_purchase_button()
 	<?php }
 }
 add_action('wp_head', 'disable_purchase_button');
+
+function enqueue_culqi_checkout_script() {
+    // Register the Culqi script
+    wp_register_script('culqi-checkout', MPCULQI_URLAPI_CHECKOUT_PROD, array(), null, true);
+    wp_register_script('culqi-3ds', MPCULQI_URLAPI_PROD_3DS, array(), null, true);
+    wp_register_script('mastercardjs', MPCULQI_WC_URL.'/assets/js/mc-sonic.min.js', array(), null, true);
+
+    // Enqueue the Culqi script
+    wp_enqueue_script('culqi-checkout');
+    wp_enqueue_script('culqi-3ds');
+    wp_enqueue_script('mastercardjs');
+	//
+	wp_enqueue_style( 'mastercardcss', MPCULQI_WC_URL.'/assets/css/mastercard.css' );
+}
+
+// Hook the function to the 'wp_enqueue_scripts' action, which loads scripts on the front end
+add_action('wp_enqueue_scripts', 'enqueue_culqi_checkout_script');
+
+
+function my_theme_enqueue_styles() {
+    wp_enqueue_style( 'my_theme_style', get_stylesheet_uri() );
+}
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 ?>
