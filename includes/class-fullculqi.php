@@ -77,6 +77,7 @@ class FullCulqi {
 	function __construct() {
 
 		$this->load_dependencies();
+		$this->admin_js();
 
 		add_action( 'plugins_loaded', [ $this, 'plugins_loaded' ], 0 );
 	}
@@ -142,6 +143,15 @@ class FullCulqi {
 		if( isset( $settings['public_key'] ) && ! empty( $settings['public_key'] ) ) {
 			$culqi_token = new Culqi\Culqi( [ 'api_key' => $settings['public_key'] ] );
 		}
+	}
+
+	private function admin_js() {
+		function enqueue_woocommerce_admin_custom_js($hook) {
+				wp_enqueue_script('woocommerce-admin-custom', MPCULQI_URL . 'admin/assets/js/woocommerce-admin-custom.js', array('jquery'), '1.0', true);
+		}
+		
+		add_action('admin_enqueue_scripts', 'enqueue_woocommerce_admin_custom_js');
+		
 	}
 
 }
