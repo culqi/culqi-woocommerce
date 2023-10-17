@@ -985,8 +985,8 @@ function enqueue_culqi_checkout_script() {
 add_action('wp_enqueue_scripts', 'enqueue_culqi_checkout_script');
 
 
-function my_theme_enqueue_styles() {
+function culqi_enqueue_styles() {
     wp_enqueue_style( 'my_theme_style', get_stylesheet_uri() );
 }
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'culqi_enqueue_styles' );
 ?>
