@@ -28,7 +28,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$this->multi_duration	= $this->get_option( 'multi_duration', 24 );
 		$this->multi_status		= $this->get_option( 'multi_status', 'wc-pending' );
 		
-		$this->description = $this->get_description();
+		$this->description 		= $this->get_description();
 		$this->instructions		= $this->get_option( 'instructions', $this->get_description() );
 		$this->msg_fail			= $this->get_option( 'msg_fail' );
 		$this->time_modal		= $this->get_option( 'time_modal', 0 );
@@ -545,15 +545,17 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 		return apply_filters( 'fullculqi/method/process_payment', $output, $order, $this );
 	}
-
+/*
 	public function get_title() {
 		if (is_checkout() && !is_wc_endpoint_url()) {
-        	return '<div class="wc-culqi-container"><img class="wc-culqi-title" src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" />';
+			$logo = '<div class="wc-culqi-container"><img class="wc-culqi-title" src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" />';
+			echo $logo;
+        	return null;
 		} else {
 			return esc_attr($this->title);
 		}
     }
-
+*/
 	public function get_description() {
 		$settings = fullculqi_get_settings();
 		$tarjeta =	(isset($settings['methods']['tarjeta']) and $settings['methods']['tarjeta']!='0');
@@ -592,6 +594,69 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	}
 
     public function get_icon() {
+		?>
+			<script>
+				jQuery('label[for="payment_method_fullculqi"]').contents().filter(function() {
+					return this.nodeType === 3; // Filter text nodes
+				}).first().remove();
+			</script>
+			<style>
+				span.custom-checkbox{
+					width: 100%;
+				}
+				.wc-culqi-container {
+					width: 100%;
+					align-items: center;
+					justify-content: space-between;
+					
+					display: inline-grid !important;
+					grid-template-columns: auto auto;
+    				grid-template-rows: auto;
+				}
+				.wc-culqi-icon-container {
+					grid-row: 1;
+					grid-column: 2;
+					display: flex;
+					justify-content: right;
+				}
+				.wc-culqi-icon {
+    				margin-left: 8px !important;
+					height: 1.3em !important;
+				}
+				.wc-culqi-title {
+					float: none !important;
+					display: inline-block;
+					margin-left: 0 !important;
+
+					grid-row: 1;
+    				grid-column: 1;
+				}
+				div.payment_method_fullculqi {
+					/*padding-left: 5px !important;*/
+					width: 100%;
+				}
+				div.payment_method_fullculqi p {
+					font-size: 12px;
+				}
+				li.payment_method_fullculqi {
+					flex-wrap: wrap;
+					margin-top: 10px;
+				}
+				label[for=payment_method_fullculqi] ,li.payment_method_fullculqi {
+					vertical-align: initial !important;
+					width: 100%;
+					display: flex !important;
+					flex: 1;
+				}
+				@media only screen and (max-width: 480px) {
+					label[for=payment_method_fullculqi] {
+						width: 100%;
+					}
+				}
+			</style>
+			<?php
+		$logo = '<div class="wc-culqi-container"><img class="wc-culqi-title" src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" >';
+			
         // Return the icon image
 		$settings = fullculqi_get_settings();
 		$tarjeta =	(isset($settings['methods']['tarjeta']) and $settings['methods']['tarjeta']!='0');
@@ -614,9 +679,11 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		if($billetera || $bancaMovil || $agente || $cuetealo) {
 			$final_image .= '<img class="wc-culqi-icon" src="' . esc_url($pagoefectivo_img) . '" alt="'.$this->payment_methods.'" />';
 		}
-		$final_image .= '</div></div>';
+		$final_image .= '</div>';
+		$final_image = $logo.$final_image.'</div>';
 
-        return $final_image;
+		echo $final_image;
+        //echo $logo.$final_image;
     }
 
 
@@ -817,50 +884,6 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 
 		if (is_checkout() && !is_wc_endpoint_url()) {
 			?>
-			<style>
-				.wc-culqi-container {
-					max-width: 431px;
-					width: calc(100% - 50px);
-					display: inline-flex !important;
-					align-items: center;
-					justify-content: space-between;
-					flex-wrap: wrap;
-				}
-				.wc-culqi-icon-container {
-					float: right;
-					display: flex;
-				}
-				.wc-culqi-icon {
-					height: 24px !important;
-    				margin-left: 8px !important;
-				}
-				.wc-culqi-title {
-					float: none !important;
-					display: inline-block;
-					height: 20px !important;
-					margin-left: 0 !important;
-				}
-				div.payment_method_fullculqi {
-					padding-left: 5px !important;
-				}
-				div.payment_method_fullculqi p {
-					font-size: 12px;
-				}
-				label[for=payment_method_fullculqi] {
-					width: calc(100% - 30px);
-				}
-				@media only screen and (max-width: 480px) {
-					.wc-culqi-icon {
-						height: 23px !important;
-					}
-					.wc-culqi-title {
-						height: 18px !important;
-					}
-					label[for=payment_method_fullculqi] {
-						width: 100%;
-					}
-				}
-			</style>
 			<script>
 				jQuery(window).on('load',function() {
 					jQuery('form[name="checkout"]').before('<div class="woocommerce-NoticeGroup-checkout"><ul id="fullculqi_notify" class="" style="margin:15px 0px;" role="alert"></ul></div>');
@@ -985,8 +1008,8 @@ function enqueue_culqi_checkout_script() {
 add_action('wp_enqueue_scripts', 'enqueue_culqi_checkout_script');
 
 
-function my_theme_enqueue_styles() {
+function culqi_enqueue_styles() {
     wp_enqueue_style( 'my_theme_style', get_stylesheet_uri() );
 }
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'culqi_enqueue_styles' );
 ?>
