@@ -488,7 +488,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 function culqi() {
 	setTimeout(function() {
 		window.fullculqi.payProcess();
-	}, 1000);
+	}, 10);
 }
 
 function scrollToCulqiError() {
