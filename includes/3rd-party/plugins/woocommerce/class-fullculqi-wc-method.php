@@ -120,7 +120,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     						$client_details['last_name'] = $billing_last_name;
 
     					if( ! empty( $billing_phone ) )
-    						$client_details['phone_number'] = $billing_phone;
+    						$client_details['phone_number'] = str_replace(' ', '', $billing_phone);
                         $enviroment = explode('|',$settings['enviroment']);
 
                         $time_expiration = time() + ( TIME_EXPIRATION_DEFAULT * 60*60 );
@@ -216,7 +216,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
     						$client_details['last_name'] = $billing_last_name;
 
     					if( ! empty( $billing_phone ) )
-    						$client_details['phone_number'] = $billing_phone;
+    						$client_details['phone_number'] = str_replace(' ', '', $billing_phone);
                         $enviroment = explode('|',$settings['enviroment']);
                         $time_expiration = time() + ( TIME_EXPIRATION_DEFAULT * 60*60 );
                         if($settings['time_expiration']>0){

@@ -247,7 +247,7 @@ class FullCulqi_WC_Process {
                     $antifraud_charges['country_code']=$order->billing_country;
                 }
                 if(isset($order->billing_phone) and !empty($order->billing_phone) and !is_null($order->billing_phone) and $order->billing_phone!=''){
-                    $antifraud_charges['phone_number']=$order->billing_phone;
+                    $antifraud_charges['phone_number']=str_replace(' ', '', $order->billing_phone);
                 }
                 $antifraud_charges['device_finger_print_id']=$post_data['device'];
 
@@ -316,7 +316,7 @@ class FullCulqi_WC_Process {
                     $antifraud_charges['country_code']=$billing_country;
                 }
                 if(isset($billing_phone) and !empty($billing_phone) and !is_null($billing_phone) and $billing_phone!=''){
-                    $antifraud_charges['phone_number']=$billing_phone;
+                    $antifraud_charges['phone_number']=str_replace(' ', '', $billing_phone);
                 }
                 $antifraud_charges['device_finger_print_id']=$post_data['device'];
 
@@ -515,7 +515,7 @@ class FullCulqi_WC_Process {
 			$args_customer['last_name'] = $billing_last_name;
 
 		if( ! empty( $billing_phone ) )
-			$args_customer['phone_number'] = $billing_phone;
+			$args_customer['phone_number'] = str_replace(' ', '', $billing_phone);
 
 		if( ! empty( $billing_address_1 ) )
 			$args_customer['address'] = $billing_address_1;
