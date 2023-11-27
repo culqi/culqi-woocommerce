@@ -1,3 +1,6 @@
+2023-11-27 - version 3.0.11
+Fix: remove space in phone number
+
 2023-11-08 - version 3.0.10
 Fix: solution doble token
 

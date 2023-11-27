@@ -52,7 +52,7 @@ class FullCulqi_Checkout {
 			$antifraud['country_code'] = $country_code;
 
 		if( !empty( $billing_phone ) )
-			$antifraud['phone_number'] = $billing_phone;
+			$antifraud['phone_number'] = str_replace(' ', '', $billing_phone);
 
 
 		// Metadata Order
@@ -143,7 +143,7 @@ class FullCulqi_Checkout {
 			$client_details['last_name'] = $billing_last_name;
 
 		if( !empty( $billing_phone ) )
-			$client_details['phone_number'] = $billing_phone;
+			$client_details['phone_number'] = str_replace(' ', '', $billing_phone);
 
 		$args_order = apply_filters('fullculqi/checkout/order_args', [
 			'amount'			=> fullculqi_format_total($order->get_total()),
