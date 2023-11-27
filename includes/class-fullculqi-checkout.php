@@ -52,7 +52,7 @@ class FullCulqi_Checkout {
 			$antifraud['country_code'] = $country_code;
 
 		if( !empty( $billing_phone ) )
-			$antifraud['phone_number'] = $billing_phone;
+			$antifraud['phone_number'] = str_replace(' ', '', $billing_phone);
 
 
 		// Metadata Order
