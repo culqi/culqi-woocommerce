@@ -994,7 +994,7 @@ function enqueue_culqi_checkout_script() {
     // Register the Culqi script
     wp_register_script('culqi-checkout', MPCULQI_URLAPI_CHECKOUT_PROD, array(), null, true);
     wp_register_script('culqi-3ds', MPCULQI_URLAPI_PROD_3DS, array(), null, true);
-    wp_register_script('mastercardjs', MPCULQI_WC_URL.'/assets/js/mc-sonic.min.js', array(), null, true);
+    wp_register_script('mastercardjs', MPCULQI_WC_URL.'/assets/js/mc-sonic.min.js?_='.time(), array(), null, true);
 
     // Enqueue the Culqi script
     wp_enqueue_script('culqi-checkout');
