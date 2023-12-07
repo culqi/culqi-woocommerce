@@ -19,7 +19,7 @@ class FullCulqi_Settings {
 		) ) {
 			wp_enqueue_style(
 				'fullculqi-css',
-				MPCULQI_PLUGIN_URL . 'admin/assets/css/fullculqi_addons.css'
+				MPCULQI_PLUGIN_URL . 'admin/assets/css/fullculqi_addons.css?_='.time()
 			);
 		}
 
@@ -28,7 +28,7 @@ class FullCulqi_Settings {
 				$screen->base == 'culqi-full-integration_page_fullculqi_settings' ||
 				$screen->base == 'dashboard_page_fullculqi-welcome' )
 		) {
-			wp_enqueue_script( 'fullculqi-js', MPCULQI_PLUGIN_URL . 'admin/assets/js/fullculqi_admin.js', [ 'jquery' ], false, true );
+			wp_enqueue_script( 'fullculqi-js', MPCULQI_PLUGIN_URL . 'admin/assets/js/fullculqi_admin.js?_='.time(), [ 'jquery' ], false, true );
 
 			wp_localize_script( 'fullculqi-js', 'fullculqi',
 				[

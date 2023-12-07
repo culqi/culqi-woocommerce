@@ -196,13 +196,13 @@ class FullCulqi_Settings {
 			) );
         }
 
-				wp_enqueue_style( 'fullculqi-modal-css', plugin_dir_url( __FILE__ ) . '../../admin/assets/css/modal.css');
-				wp_enqueue_style( 'fullculqi-form-css', plugin_dir_url( __FILE__ ) . '../../admin/assets/css/form.css');
-				wp_enqueue_style( 'fullculqi-btn-css', plugin_dir_url( __FILE__ ) . '../../admin/assets/css/btn.css');
-                wp_enqueue_style( 'fullculqi-btncustom-css', plugin_dir_url( __FILE__ ) . '../../admin/assets/css/btncustom.css');
-				wp_enqueue_script( 'fullculqi-bootstrap-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/bootstrap.min.js', [ 'jquery' ], false, true );
-				wp_enqueue_script( 'fullculqi-login-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/fullculqi_login.js', [ 'jquery', 'fullculqi-bootstrap-js' ], false, true );
-                wp_enqueue_script( 'fullculqi-btncustom-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/fullculqi_btncustom.js', [ 'jquery' ], false, true );
+				wp_enqueue_style( 'fullculqi-modal-css', plugin_dir_url( __FILE__ ) . '../../admin/assets/css/modal.css?_='.time());
+				wp_enqueue_style( 'fullculqi-form-css', plugin_dir_url( __FILE__ ) . '../../admin/assets/css/form.css?_='.time());
+				wp_enqueue_style( 'fullculqi-btn-css', plugin_dir_url( __FILE__ ) . '../../admin/assets/css/btn.css?_='.time());
+                wp_enqueue_style( 'fullculqi-btncustom-css', plugin_dir_url( __FILE__ ) . '../../admin/assets/css/btncustom.css?_='.time());
+				wp_enqueue_script( 'fullculqi-bootstrap-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/bootstrap.min.js?_='.time(), [ 'jquery' ], false, true );
+				wp_enqueue_script( 'fullculqi-login-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/fullculqi_login.js?_='.time(), [ 'jquery', 'fullculqi-bootstrap-js' ], false, true );
+                wp_enqueue_script( 'fullculqi-btncustom-js', plugin_dir_url( __FILE__ ) . '../../admin/assets/js/fullculqi_btncustom.js?_='.time(), [ 'jquery' ], false, true );
 
 				wp_localize_script( 'fullculqi-login-js', 'fullculqi_merchants',
 						[
