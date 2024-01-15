@@ -155,6 +155,7 @@ jQuery(document).ready(function () {
             },
             data: JSON.stringify(data),
         };
+        console.log(settings);
         jQuery.ajax(settings).done(function (response) {
             console.log(response);
             if(typeof(response.message) != "undefined" && response.message !== null){

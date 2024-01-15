@@ -52,6 +52,12 @@ define('MPCULQI_URLAPI_MERCHANTSINGLE_PROD', MPCULQI_URLAPI_PROD.'/secure/keys/?
 define('MPCULQI_URLAPI_WEBHOOK_PROD', MPCULQI_URLAPI_PROD.'/secure/events');
 
 define('TIME_EXPIRATION_DEFAULT', 24);
+//
+define('BASE_URL_FN_PLUGINS', 'http://localhost:3800');
+define('FN_PLUGINS_LOGIN', BASE_URL_FN_PLUGINS.'/plugins/public/login');
+define('FN_PLUGINS_WEBHOOK', BASE_URL_FN_PLUGINS.'/plugins/public/create_webhook');
+define('FN_GET_MERCHANTS', BASE_URL_FN_PLUGINS.'/plugins/public/get_merchants');
+define('FN_GET_MERCHANT_BY_PK', BASE_URL_FN_PLUGINS.'/plugins/public/get_merchant?public_key=');
 
 /**
  * The core plugin class that is used to define internationalization,
