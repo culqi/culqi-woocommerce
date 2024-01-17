@@ -1,3 +1,7 @@
+2024-01-16 - version 3.0.12
+Fix: Compatilibity HPOS
+Fix: remove installments Yape
+
 2023-11-27 - version 3.0.11
 Fix: remove space in phone number
 
