@@ -108,7 +108,7 @@ function culqi() {
 								token_id		: Culqi.token.id,
 								order_id 		: fullculqi.order_id,
 								country_code	: Culqi.token.client.ip_country_code,
-								installments	: Culqi.token.metadata.installments,
+								installments	: (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined) ? 0 : Culqi.token.metadata.installments,
 								wpnonce			: fullculqi.wpnonce
 							},
 				
