@@ -1,3 +1,7 @@
+2024-02-22 - version 3.0.13
+Fix: Add cod referencia, brand, card number - Chargue
+Fix: Add order number - Order
+
 2024-01-16 - version 3.0.12
 Fix: Compatilibity HPOS
 Fix: remove installments Yape

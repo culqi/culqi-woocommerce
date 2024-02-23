@@ -57,10 +57,12 @@ class FullCulqi_WC_Process {
 
 		// Culqi Customer ID
 
-
-
 		$notice = sprintf(
-			esc_html__( 'Culqi Multipayment CIP: %s', 'fullculqi' ), $post_data['cip_code']
+			esc_html__( 'Culqi Multipayment: %s', 'fullculqi' ), 
+			'</br>'.
+			'Id: '. $post_data['id'].'</br>'.
+			'CIP: '.$post_data['cip_code'].'</br>'.
+			'Order Number: '.$post_data['order_number']
 		);
 
 		self::$log->set_notice( $notice );
@@ -379,6 +381,7 @@ class FullCulqi_WC_Process {
                     return $json['user_message'];
                 }
 			}
+			$culqi_charge_resp = $culqi_charge['data']['culqi_charge'];
 			$culqi_charge_id = $culqi_charge['data']['culqi_charge_id'];
 			$post_charge_id = $culqi_charge['data']['post_charge_id'];
 
@@ -388,7 +391,11 @@ class FullCulqi_WC_Process {
 			// Log
 			$notice = sprintf(
 				esc_html__( 'Culqi Charge Created: %s', 'fullculqi' ),
-				$culqi_charge_id
+				'</br>'.
+				'Id: '.$culqi_charge_id .'</br>'.
+				'Tarjeta: '. $culqi_charge_resp->source->card_number .'</br>'.
+				'Marca: '. $culqi_charge_resp->source->iin->card_brand  .'</br>'.
+				'Cod. Referencia: '. $culqi_charge_resp->reference_code
 			);
 
 			$order->add_order_note( $notice );
