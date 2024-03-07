@@ -264,6 +264,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 						id 			: Culqi.order.id,
 						cip_code	: Culqi.order.payment_code,
 						order_id	: Culqi.order.metadata.order_id,
+						order_number: Culqi.order.order_number,
 						wpnonce		: fullculqi_vars.wpnonce,
 						enviroment		: enviroment[0],
 						device			: device
