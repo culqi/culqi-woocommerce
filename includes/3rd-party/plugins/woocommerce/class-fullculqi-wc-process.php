@@ -58,7 +58,7 @@ class FullCulqi_WC_Process {
 		// Culqi Customer ID
 
 		$notice = sprintf(
-			esc_html__( 'Culqi Multipayment: %s', 'fullculqi' ), 
+			esc_html__( 'Culqi Order Created: %s', 'fullculqi' ), 
 			'</br>'.
 			'Id: '. $post_data['id'].'</br>'.
 			'CIP: '.$post_data['cip_code'].'</br>'.
