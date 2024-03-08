@@ -63,11 +63,14 @@ jQuery(document).ready(function () {
 
         if (jQuery('#fullculqi_tokenlogin').val().length>0) {
             var url_webhook = '';
+            var env = '';
             if (jQuery('#integracion').is(':checked')) {
                 url_webhook = jQuery('#integracion').data('urlwebhook');
+                env = 'test';
             }
             if (jQuery('#produccion').is(':checked')) {
                 url_webhook = jQuery('#produccion').data('urlwebhook');
+                env = 'live';
             }
             const settings = {
                 url: url_webhook,
@@ -80,7 +83,8 @@ jQuery(document).ready(function () {
                     'Authorization': 'Bearer ' + jQuery('#fullculqi_tokenlogin').val(),
                     //'Access-Control-Allow-Origin': '*',
                     "Content-Type": "application/json",
-                    "Accept": "*/*"
+                    "Accept": "*/*",
+                    "x-culqi-env": env
                 },
                 data: {
                     "merchant": jQuery('#fullculqi_pubkey').val(),
@@ -105,7 +109,8 @@ jQuery(document).ready(function () {
                         headers: {
                             'Authorization': 'Bearer ' + jQuery('#fullculqi_tokenlogin').val(),
                             "Content-Type": "application/json",
-                            "Accept": "*/*"
+                            "Accept": "*/*",
+                            "x-culqi-env": env
                         },
                         data: JSON.stringify({
                             "merchant": jQuery('#fullculqi_pubkey').val(),
@@ -138,13 +143,16 @@ jQuery(document).ready(function () {
     function fullculqi_login(data) {
         var url_login = '';
         var url_merchant = '';
+        var env = '';
         if (jQuery('#integracion').is(':checked')) {
             url_login = jQuery('#integracion').data('urllogin');
             url_merchant = jQuery('#integracion').data('urlmerchant');
+            env = 'test';
         }
         if (jQuery('#produccion').is(':checked')) {
             url_login = jQuery('#produccion').data('urllogin');
             url_merchant = jQuery('#produccion').data('urlmerchant');
+            env = 'live';
         }
         const settings = {
             url: url_login,
@@ -152,6 +160,7 @@ jQuery(document).ready(function () {
             timeout: 0,
             headers: {
                 "Content-Type": "application/json",
+                "x-culqi-env": env,
             },
             data: JSON.stringify(data),
         };
@@ -220,11 +229,14 @@ jQuery(document).ready(function () {
 
     const renderSettings = () => {
         var url_webhook = '';
+        var env = '';
         if (jQuery('#integracion').is(':checked')) {
             url_webhook = jQuery('#integracion').data('urlwebhook');
+            env = 'test';
         }
         if (jQuery('#produccion').is(':checked')) {
             url_webhook = jQuery('#produccion').data('urlwebhook');
+            env = 'live';
         }
         const settings = {
             url: url_webhook,
@@ -236,7 +248,8 @@ jQuery(document).ready(function () {
             headers: {
                 'Authorization': 'Bearer ' + window.culqi_token,
                 "Content-Type": "application/json",
-                "Accept": "*/*"
+                "Accept": "*/*",
+                "x-culqi-env": env
             },
             data: JSON.stringify({
                 "merchant": window.culqi_settings["public_key"],
