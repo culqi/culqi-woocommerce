@@ -207,7 +207,8 @@ jQuery(document).ready(function () {
                 action: "culqi_merchant",
                 token: window.culqi_token,
                 public_key: id,
-                url_merchant: url_merchantsingle
+                url_merchant: url_merchantsingle,
+                nonce : fullculqi_merchants.nonce,
             },
         };
 
