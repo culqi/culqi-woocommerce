@@ -1,3 +1,6 @@
+2024-03-19 - version 3.0.14
+Fix: solution Server Side Request Forgery (SSRF)
+
 2024-02-22 - version 3.0.13
 Fix: Add cod referencia, brand, card number - Chargue
 Fix: Add order number - Order
