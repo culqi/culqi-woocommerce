@@ -88,7 +88,7 @@ class FullCulqi_Ajax {
 			'body'    => '',
 		);
 
-		$response  = wp_remote_request( $url_get_merchants, $args );
+		$response  = wp_safe_remote_request( $url_get_merchants, $args );
 		$body      = $response['body'];
 		$obj       = json_decode( $body, true );
 		$merchants = $obj['data'];
@@ -129,7 +129,7 @@ class FullCulqi_Ajax {
 			'body'    => '',
 		);
 
-		$response = wp_remote_request( $url_get_merchant_info, $args );
+		$response = wp_safe_remote_request( $url_get_merchant_info, $args );
 		$body     = $response['body'];
 		$obj      = json_decode( $body, true );
 		$keys     = $obj['data'];
