@@ -177,8 +177,8 @@ jQuery(document).ready(function () {
             data: {
                 action: "culqi_merchants",
                 token: window.culqi_token,
-                url_merchant: url_merchant
-                // wpnonce: fullculqi_charges_vars.nonce,
+                url_merchant: url_merchant,
+                nonce : fullculqi_merchants.nonce,
             },
         };
         jQuery.ajax(settings).done(function (response) {

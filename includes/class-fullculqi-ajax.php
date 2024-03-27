@@ -66,6 +66,11 @@ class FullCulqi_Ajax {
 		// Only verificate the nonce for token.
 		check_ajax_referer( 'url-merc-wpnonce', 'nonce' );
 
+		// Check the permissions.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( esc_html__( 'You do not have permission.', 'fullculqi_subs' ) );
+		}
+
 		$token = isset( $_GET['token'] )
 		? sanitize_text_field( wp_unslash( $_GET['token'] ) )
 		: null;
@@ -102,6 +107,11 @@ class FullCulqi_Ajax {
 	public function get_merchant() {
 		// Only verificate the nonce for token.
 		check_ajax_referer( 'url-merc-wpnonce', 'nonce' );
+
+		// Check the permissions.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( esc_html__( 'You do not have permission.', 'fullculqi_subs' ) );
+		}
 
 		$token = isset( $_GET['token'] )
 		? sanitize_text_field( wp_unslash( $_GET['token'] ) )
