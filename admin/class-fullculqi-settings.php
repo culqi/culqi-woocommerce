@@ -219,7 +219,7 @@ class FullCulqi_Settings {
 		$settings = fullculqi_get_settings();
 
 		echo '<label for="fullculqi_commerce">
-				<input type="text" id="fullculqi_commerce" class="regular-text" name="fullculqi_options[commerce]" value="'.$settings['commerce'].'"/>
+				<input type="text" id="fullculqi_commerce" class="regular-text" name="fullculqi_options[commerce]" value="' . esc_html( $settings['commerce'] ) . '"/>
 			</label>';
 	}
 
@@ -227,7 +227,7 @@ class FullCulqi_Settings {
 		$settings = fullculqi_get_settings();
 
 		echo '<label for="fullculqi_pubkey">
-				<input type="text" id="fullculqi_pubkey" class="regular-text" name="fullculqi_options[public_key]" value="'.$settings['public_key'].'"/>
+				<input type="text" id="fullculqi_pubkey" class="regular-text" name="fullculqi_options[public_key]" value="' . esc_html( $settings['public_key'] ) . '"/>
 			</label>';
 	}
 
@@ -235,7 +235,7 @@ class FullCulqi_Settings {
 		$settings = fullculqi_get_settings();
 
 		echo '<label for="fullculqi_seckey">
-				<input type="text" id="fullculqi_seckey" class="regular-text" name="fullculqi_options[secret_key]" value="'.$settings['secret_key'].'"/>
+				<input type="text" id="fullculqi_seckey" class="regular-text" name="fullculqi_options[secret_key]" value="' . esc_html( $settings['secret_key'] ) . '"/>
 			</label>';
 	}
 
@@ -243,7 +243,7 @@ class FullCulqi_Settings {
 		$settings = fullculqi_get_settings();
 
 		echo '<label for="fullculqi_logo">
-				<input type="text" id="fullculqi_logo" class="regular-text" name="fullculqi_options[logo_url]" value="'.$settings['creditcard'].'"/>
+				<input type="text" id="fullculqi_logo" class="regular-text" name="fullculqi_options[logo_url]" value="' . esc_html( $settings['creditcard'] ) . '"/>
 				<p class="help">'.esc_html__('This logo will appear in the Culqi Modal/Popup','culqi').'</p>
 			</label>';
 	}
@@ -252,7 +252,7 @@ class FullCulqi_Settings {
 		$settings = fullculqi_get_settings();
 
 		echo '<label for="fullculqi_logo">
-				<input type="text" id="fullculqi_logo" class="regular-text" name="fullculqi_options[logo_url]" value="'.$settings['logo_url'].'"/>
+				<input type="text" id="fullculqi_logo" class="regular-text" name="fullculqi_options[logo_url]" value="' . esc_html( $settings['logo_url'] ) . '"/>
 				<p class="help">'.esc_html__('This logo will appear in the Culqi Modal/Popup','culqi').'</p>
 			</label>';
 	}
@@ -282,7 +282,7 @@ class FullCulqi_Settings {
 			</label>';
 
 		if( $settings['woo_payment'] == 'yes' ) {
-			echo '<a href="'.admin_url('admin.php?page=wc-settings&tab=checkout&section=fullculqi').'">'.esc_html__('Customize Culqi Payment Gateway','culqi').'</a>';
+			echo '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=fullculqi' ) ) . '">' . esc_html__( 'Customize Culqi Payment Gateway', 'culqi' ) . '</a>';
 		}
 	}
 
@@ -297,7 +297,7 @@ class FullCulqi_Settings {
 		$settings = fullculqi_get_settings();
 
 		echo '<label for="fullculqi_estado_pedido">
-				<input type="text" id="fullculqi_estado_pedido" class="regular-text" name="fullculqi_options[estado_pedido]" value="'.$settings['estado_pedido'].'"/>
+				<input type="text" id="fullculqi_estado_pedido" class="regular-text" name="fullculqi_options[estado_pedido]" value="' . esc_html( $settings['estado_pedido'] ) . '"/>
 			</label>';
 	}
 

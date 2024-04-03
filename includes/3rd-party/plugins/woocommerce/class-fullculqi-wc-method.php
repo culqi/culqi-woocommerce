@@ -655,9 +655,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 				}
 			</style>
 			<?php
-		$logo = '<div class="wc-culqi-container"><img class="wc-culqi-title" src="' . esc_url($this->culqi_logo) . '" alt="' . esc_attr($this->title) . '" >';
 			
-        // Return the icon image
+		// Return the icon image
 		$settings = fullculqi_get_settings();
 		$tarjeta =	(isset($settings['methods']['tarjeta']) and $settings['methods']['tarjeta']!='0');
 		$yape = (isset($settings['methods']['yape']) and $settings['methods']['yape']!='0');
@@ -669,21 +668,25 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		$cards_img = MPCULQI_WC_URL . 'assets/images/cards.svg';
 		$yape_img = MPCULQI_WC_URL . 'assets/images/yape.svg';
 		$pagoefectivo_img = MPCULQI_WC_URL . 'assets/images/pagoefectivo.svg';
-		$final_image = '<div class="wc-culqi-icon-container">';
-		if($tarjeta) {
-			$final_image .= '<img class="wc-culqi-icon" src="' . esc_url($cards_img) . '" alt="'.$this->payment_methods.'" />';
-		}
-		if($yape) {
-			$final_image .= '<img class="wc-culqi-icon" src="' . esc_url($yape_img) . '" alt="'.$this->payment_methods.'" />';
-		}
-		if($billetera || $bancaMovil || $agente || $cuetealo) {
-			$final_image .= '<img class="wc-culqi-icon" src="' . esc_url($pagoefectivo_img) . '" alt="'.$this->payment_methods.'" />';
-		}
-		$final_image .= '</div>';
-		$final_image = $logo.$final_image.'</div>';
 
-		echo $final_image;
-        //echo $logo.$final_image;
+		?>
+
+		<div class="wc-culqi-container">
+			<img class="wc-culqi-title" src="<?php echo esc_url( $this->culqi_logo ); ?>" alt="<?php echo esc_attr( $this->title ); ?>" />
+			<div class="wc-culqi-icon-container">
+				<?php if( $tarjeta ) : ?>
+					<img class="wc-culqi-icon" src="<?php echo esc_url( $cards_img ); ?>" alt="<?php echo esc_attr( $this->payment_methods ); ?>" />
+				<?php endif; ?>
+				<?php if( $yape ) : ?>
+					<img class="wc-culqi-icon" src="<?php echo esc_url( $yape_img ); ?>" alt="<?php echo esc_attr( $this->payment_methods ); ?>" />
+				<?php endif; ?>
+				<?php if( $billetera || $bancaMovil || $agente || $cuetealo ) : ?>
+					<img class="wc-culqi-icon" src="<?php echo esc_url( $pagoefectivo_img ); ?>" alt="<?php echo esc_attr( $this->payment_methods ); ?>" />
+				<?php endif; ?>
+			</div>
+		</div>
+
+		<?php
     }
 
 
@@ -817,7 +820,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		<tr valign="top">
 			<th scope="row" class="titledesc">
 				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?></label>
-				<?php echo $this->get_tooltip_html( $data ); ?>
+				<?php echo esc_html( $this->get_tooltip_html( $data ) ); ?>
 			</th>
 			<td class="forminp">
 				<fieldset>
@@ -830,7 +833,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 						<br />
 					<?php endforeach; ?>
 
-					<?php echo $this->get_description_html( $data ); ?>
+					<?php echo esc_html( $this->get_description_html( $data ) ); ?>
 				</fieldset>
 			</td>
 		</tr>
@@ -854,13 +857,13 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 		<tr valign="top">
 			<th scope="row" class="titledesc">
 				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?></label>
-				<?php echo $this->get_tooltip_html( $data ); ?>
+				<?php echo esc_html( $this->get_tooltip_html( $data ) ); ?>
 			</th>
 			<td class="forminp">
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
-					<b><?php echo site_url('wc-api/fullculqi_update_order'); ?></b>
-					<?php echo $this->get_description_html( $data ); ?>
+					<b><?php echo esc_url( site_url( 'wc-api/fullculqi_update_order' ) ); ?></b>
+					<?php echo esc_html( $this->get_description_html( $data ) ); ?>
 				</fieldset>
 			</td>
 		</tr>
@@ -872,7 +875,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 	public function custom_checkout_js() {
 		if (is_checkout()) { ?>
 			<script>
-				var culqiLogoUrl = '<?php echo $this->culqi_logo;?>';
+				var culqiLogoUrl = '<?php echo esc_url( $this->culqi_logo );?>';
 				var targetHTML = '<img class="wc-culqi-title" src="'+culqiLogoUrl+'" alt="Culqi" />';
 				var matchingElement = jQuery(".woocommerce-table td:contains('" + targetHTML + "')");
 				if(matchingElement) {
@@ -912,12 +915,12 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 											
 											jQuery.ajax({
 												type: 'POST',
-												url: "<?php echo admin_url('admin-ajax.php'); ?>",
+												url: "<?php echo esc_url( admin_url('admin-ajax.php' ) ); ?>",
 												dataType: 'json',
 												data: {
 													action: 'load_culqi_checkout',
 													order_woo: order_id,
-													nonce: "<?php echo wp_create_nonce('my_ajax_nonce')?>"
+													nonce: "<?php echo esc_html( wp_create_nonce( 'my_ajax_nonce' ) );?>"
 												},
 												success: function(response) {
 													window.fullculqi_vars = response.data.full_culqi_vars;

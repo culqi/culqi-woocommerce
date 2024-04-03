@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) )
 ?>
 
 <div class="culqi_payments_box">
-	<h2 class="culqi_payments_h2">Culqi ID : <?php echo esc_html($id); ?></h2>
-	<p class="culqi_payments_subh2"><?php printf(__('Payment via FullCulqi. Paid on %s. Customer IP: %s','culqi'), $creation, $ip); ?></p>
+	<h2 class="culqi_payments_h2">Culqi ID : <?php echo esc_html( $id ); ?></h2>
+	<p class="culqi_payments_subh2"><?php printf( esc_html__( 'Payment via FullCulqi. Paid on %s. Customer IP: %s', 'culqi' ), esc_html( $creation ), esc_html( $ip ) ); ?></p>
 
 	<div class="culqi_data_column_container">
 		<div class="culqi_data_column">
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) )
 			<?php
 				printf(
 					'<mark class="culqi_status_2 %s"><span>%s</span></mark>',
-					$status, $statuses[$status]
+					esc_html( $status ), esc_html( $statuses[ $status ] )
 				);
 
 				if( $status == 'captured' || $status == 'authorized' ) {
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) )
 
 					printf(
 						'<a href="%s" class="fullculqi_refund_link">%s</a>',
-						wp_nonce_url( admin_url( 'admin-ajax.php?action=fullculqi_refund&post_id=' . $post_id ), 'fullculqi-wpnonce' ),
+						esc_url( wp_nonce_url( admin_url( 'admin-ajax.php?action=fullculqi_refund&post_id=' . $post_id ) ), 'fullculqi-wpnonce' ),
 						esc_html__( 'Refund payment', 'culqi' )
 					);
 				}
