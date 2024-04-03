@@ -16,7 +16,7 @@
 				<div class="fullculqi_addons_footer">
 					<?php if( $has_oneclick ) : ?>
 						<a href="https://bit.ly/375PcbS" target="_blank" class="button">
-							<img src="<?php echo admin_url('images/yes.png'); ?>" alt="check" style="vertical-align: middle" />
+							<img src="<?php echo esc_url( admin_url( 'images/yes.png' ) ); ?>" alt="check" style="vertical-align: middle" />
 							<?php esc_html_e( 'Installed','fullculqi' ); ?>
 						</a>
 					<?php else : ?>
@@ -39,7 +39,7 @@
 				<div class="fullculqi_addons_footer">
 					<?php if( $has_subscribers ) : ?>
 						<a href="https://bit.ly/2Y8qoMi" target="_blank" class="button">
-							<img src="<?php echo admin_url('images/yes.png'); ?>" alt="check" style="vertical-align: middle" />
+							<img src="<?php echo esc_url( admin_url( 'images/yes.png' ) ); ?>" alt="check" style="vertical-align: middle" />
 							<?php esc_html_e( 'Installed', 'fullculqi' ); ?>
 						</a>
 					<?php else : ?>
@@ -62,7 +62,7 @@
 				<div class="fullculqi_addons_footer">
 					<?php if( $has_button ) : ?>
 						<a href="https://bit.ly/3dMEpGc" target="_blank" class="button">
-							<img src="<?php echo admin_url('images/yes.png'); ?>" alt="check" style="vertical-align: middle" />
+							<img src="<?php echo esc_url( admin_url( 'images/yes.png' ) ); ?>" alt="check" style="vertical-align: middle" />
 							<?php esc_html_e( 'Installed', 'fullculqi' ); ?>
 						</a>
 					<?php else : ?>
@@ -87,7 +87,7 @@
 				<div class="fullculqi_addons_footer">
 					<?php if( $has_deferred ) : ?>
 						<a href="https://bit.ly/2Mye7v8" target="_blank" class="button">
-							<img src="<?php echo admin_url('images/yes.png'); ?>" alt="check" style="vertical-align: middle" />
+							<img src="<?php echo esc_url( admin_url( 'images/yes.png' ) ); ?>" alt="check" style="vertical-align: middle" />
 							<?php esc_html_e( 'Installed', 'fullculqi' ); ?>
 						</a>
 					<?php else : ?>

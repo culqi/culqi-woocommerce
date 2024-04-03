@@ -6,10 +6,10 @@ if ( ! defined( 'ABSPATH' ) )
 	<table class="widefat">
 		<thead>
 			<tr>
-				<th><?php _e('ID','culqi'); ?></th>
-				<th><?php _e('Date/Hour','culqi'); ?></th>
-				<th><?php _e('Type','culqi'); ?></th>
-				<th><?php _e('Message','culqi'); ?></th>
+				<th><?php esc_html_e( 'ID', 'culqi' ); ?></th>
+				<th><?php esc_html_e( 'Date/Hour', 'culqi' ); ?></th>
+				<th><?php esc_html_e( 'Type', 'culqi' ); ?></th>
+				<th><?php esc_html_e( 'Message', 'culqi' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,5 +25,5 @@ if ( ! defined( 'ABSPATH' ) )
 		</tbody>
 	</table>
 <?php else : ?>
-	<h2><?php _e('there are no registered logs','culqi'); ?></h2>
+	<h2><?php esc_html_e( 'there are no registered logs', 'culqi' ); ?></h2>
 <?php endif; ?>

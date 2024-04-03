@@ -1,9 +1,9 @@
 <div class="culqi_orders_box">
 	<h2 class="metabox_h2">
-		<?php printf( esc_html__( 'Culqi ID : %s','fullculqi'), $id ); ?>
+		<?php printf( esc_html__( 'Culqi ID : %s', 'fullculqi' ), esc_html( $id ) ); ?>
 	</h2>
 	<p class="metabox_subh2">
-		<?php printf( esc_html__( 'Created via FullCulqi on %s.', 'fullculqi' ), $creation ); ?>
+		<?php printf( esc_html__( 'Created via FullCulqi on %s.', 'fullculqi' ), esc_html( $creation ) ); ?>
 	</p>
 
 	<div class="metabox_column_container">
@@ -41,7 +41,7 @@
 			<?php
 				printf(
 					'<mark class="metabox_badged %s"><span>%s</span></mark>',
-					$status_class, $statuses[$status]
+					esc_html( $status_class ), esc_html( $statuses[$status] )
 				);
 			?>
 		</div>
