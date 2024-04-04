@@ -53,7 +53,7 @@ class FullCulqi_Metaboxes_Customers extends FullCulqi_Metaboxes {
 			case 'culqi_phone'		: $value = $basic['culqi_phone']; break;
 		}
 
-		echo apply_filters( 'fullculqi/customers/value_column', $value, $col, $post_id );
+		echo wp_kses_post( apply_filters( 'fullculqi/customers/value_column', $value, $col, $post_id ) );
 	}
 
 

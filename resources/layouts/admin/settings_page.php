@@ -1,7 +1,7 @@
 <div class="wrap">
     <h1 class="wp-heading-inline">
         <?php esc_html_e('Culqi', 'fullculqi'); ?>
-        <?php echo MPCULQI_PLUGIN_VERSION; ?>
+        <?php echo esc_html( MPCULQI_PLUGIN_VERSION ); ?>
     </h1>
 
     <nav class="nav-tab-wrapper woo-nav-tab-wrapper">
@@ -52,7 +52,7 @@
                       method="post" enctype="multipart/form-data">
                     <div>
                         <div>
-                            <img src="<?php echo MPCULQI_URL . 'resources/assets/images/icon-check.png'; ?>" />
+                            <img src="<?php echo esc_url( MPCULQI_URL . 'resources/assets/images/icon-check.png' ); ?>" />
                         </div>
                         <div>
                             <h1>¡Configuración registrada<br/> con éxito!</h1>

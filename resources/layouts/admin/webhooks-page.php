@@ -15,7 +15,7 @@
 	</p>
 
 	<p>
-		<b><?php printf( esc_html__( 'Webhook : %s', 'fullculqi' ), $webhook_url ); ?></b>
+		<b><?php printf( esc_html__( 'Webhook : %s', 'fullculqi' ), esc_html( $webhook_url ) ); ?></b>
 	</p>
 
 	<br />

@@ -153,7 +153,7 @@ class FullCulqi_Metaboxes_Charges extends FullCulqi_Metaboxes {
 				break;
 		}
 
-		echo apply_filters( 'fullculqi/charges/column_value', $value, $col, $post_id );
+		echo wp_kses_post( apply_filters( 'fullculqi/charges/column_value', $value, $col, $post_id ) );
 	}
 
 	/**
