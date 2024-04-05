@@ -176,7 +176,7 @@ function fullculqi_get_template( $template_name = '', $args = [], $template_path
 	$located = apply_filters( 'fullculqi/global/located', $located, $args );
 	//var_dump($located); exit(1);
 	if( ! file_exists( $located ) ) {
-		printf( esc_html__('File %s is not exists','fullculqi'), $located );
+		printf( esc_html__('File %s is not exists','fullculqi'), esc_html( $located ) );
 		return;
 	}
 
@@ -278,10 +278,9 @@ function fullculqi_post_from_meta( $meta_key = '', $meta_value = '' ) {
 
 	global $wpdb;
 
-	$query = 'SELECT post_id FROM '.$wpdb->postmeta.' WHERE meta_key=%s && meta_value=%s LIMIT 1';
-	$query = $wpdb->prepare( $query, $meta_key, $meta_value );
-
-	$post_id = $wpdb->get_var( $query );
+	// @codingStandardsIgnoreStart
+	$post_id = $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = %s AND meta_value = %s LIMIT 1", $meta_key, $meta_value ) );
+	// @codingStandardsIgnoreEnd
 
 	return apply_filters( 'fullculqi/post_from_meta', $post_id, $meta_key, $meta_value );
 }
@@ -293,9 +292,10 @@ function fullculqi_update_post_meta( $meta_key = '', $post_id = '', $meta_value 
 
     global $wpdb;
 
-    $query = 'UPDATE '.$wpdb->postmeta.' SET meta_value = %s WHERE meta_key=%s && post_id=%s LIMIT 1';
-    $query = $wpdb->prepare( $query, $meta_value, $meta_key, $post_id );
-    $wpdb->get_var( $query );
+	// @codingStandardsIgnoreStart
+    $wpdb->get_var( $wpdb->prepare( "UPDATE {$wpdb->postmeta} SET meta_value = %s WHERE meta_key = %s AND post_id = %s LIMIT 1", $meta_value, $meta_key, $post_id ) );
+	// @codingStandardsIgnoreEnd
+
     return true;
 }
 
@@ -311,11 +311,10 @@ function fullculqi_user_from_meta( $meta_key = '', $meta_value = '' ) {
 		return false;
 
 	global $wpdb;
-
-	$query = 'SELECT user_id FROM '.$wpdb->usermeta.' WHERE meta_key=%s && meta_value=%s LIMIT 1';
-	$query = $wpdb->prepare( $query, $meta_key, $meta_value );
-
-	$post_id = $wpdb->get_var( $query );
+	
+	// @codingStandardsIgnoreStart
+	$post_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key = %s AND meta_value = %s LIMIT 1", $meta_key, $meta_value ) );
+	// @codingStandardsIgnoreEnd
 
 	return apply_filters( 'fullculqi/user_from_meta', $post_id, $meta_key, $meta_value );
 }

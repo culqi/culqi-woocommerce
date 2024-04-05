@@ -58,7 +58,10 @@ class FullCulqi_Charges {
 						m.meta_key = "culqi_id" AND
 						m.meta_value <> ""';
 
+		// @codingStandardsIgnoreStart
 		$results = $wpdb->get_results( $query );
+		// @codingStandardsIgnoreEnd
+
 		$keys = [];
 
 		// Keys Post Type 
@@ -325,8 +328,9 @@ class FullCulqi_Charges {
 			$wpdb->postmeta
 		);
 
-
+		// @codingStandardsIgnoreStart
 		$wpdb->query( $query );
+		// @codingStandardsIgnoreEnd
 
 		do_action( 'fullculqi/charges/wpdelete' );
 

@@ -55,7 +55,10 @@ class FullCulqi_Orders {
 					m.meta_key = "culqi_id" AND
 					m.meta_value <> ""';
 
+		// @codingStandardsIgnoreStart
 		$results = $wpdb->get_results( $query );
+		// @codingStandardsIgnoreEnd
+
 		$keys = [];
 
 		// Keys Post Type
@@ -388,8 +391,9 @@ class FullCulqi_Orders {
 			$wpdb->postmeta
 		);
 
-
+		// @codingStandardsIgnoreStart
 		$wpdb->query( $query );
+		// @codingStandardsIgnoreEnd
 
 		do_action( 'fullculqi/orders/wpdelete' );
 

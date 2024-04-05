@@ -57,7 +57,10 @@ class FullCulqi_Customers {
 						m.meta_key = "culqi_id" AND
 						m.meta_value <> ""';
 
+		// @codingStandardsIgnoreStart
 		$results = $wpdb->get_results( $query );
+		// @codingStandardsIgnoreEnd
+
 		$keys = [];
 
 		// Keys Post Type
@@ -294,7 +297,9 @@ class FullCulqi_Customers {
 			$wpdb->postmeta
 		);
 
+		// @codingStandardsIgnoreStart
 		$wpdb->query( $query );
+		// @codingStandardsIgnoreEnd
 
 		// Usermeta
 		$query = sprintf(
@@ -305,7 +310,9 @@ class FullCulqi_Customers {
 			$wpdb->usermeta
 		);
 
+		// @codingStandardsIgnoreStart
 		$wpdb->query( $query );
+		// @codingStandardsIgnoreEnd
 
 		do_action( 'fullculqi/customers/wpdelete' );
 

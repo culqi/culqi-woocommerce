@@ -76,7 +76,7 @@ class FullCulqi_Payments extends FullCulqi_Entities {
 				break;
 		}
 
-		echo apply_filters('fullculqi/payments/manage_columns/value', $value_column, $column, $post_id);
+		echo wp_kses_post( apply_filters( 'fullculqi/payments/manage_columns/value', $value_column, $column, $post_id ) );
 	}
 
 	public function metabox_basic() {
@@ -164,8 +164,11 @@ class FullCulqi_Payments extends FullCulqi_Entities {
 							m.meta_value <> ""';
 
 			$query = apply_filters('fullculqi/payments/sync_posts/query', $query, $payments, $post);
-
+			
+			// @codingStandardsIgnoreStart
 			$results = $wpdb->get_results($query);
+			// @codingStandardsIgnoreEnd
+
 			$keys = array();
 
 			// Keys Post Type
