@@ -51,12 +51,10 @@ class FullCulqi_Welcome {
 			! empty( $_POST['fullculqi_options']['public_key'] ) &&
 			isset( $_POST['fullculqi_options']['secret_key'] ) &&
 			! empty( $_POST['fullculqi_options']['secret_key'] ) &&
-			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['fullculqi_install'] ) ), 'fullculqi_wpnonce' )
+			wp_verify_nonce( $_POST['fullculqi_install'], 'fullculqi_wpnonce' )
 		) {
-			$fullculqi_options = array_map(
-				'esc_html',
-				sanitize_text_field( wp_unslash( $_POST['fullculqi_options'] ) )
-			);
+			$fullculqi_options = array_map( 'esc_html', $_POST['fullculqi_options'] );
+
 			// var _ dump ( $ fullculqi_options ) ; exit ( 1 ) ;.
 			update_option( 'fullculqi_options', $fullculqi_options );
 
@@ -69,9 +67,7 @@ class FullCulqi_Welcome {
 		}
 
 		if ( isset( $_POST['fullculqi_options'] ) ) {
-			$options = is_array( $_POST['fullculqi_options'] )
-			? sanitize_text_field( wp_unslash( $_POST['fullculqi_options'] ) )
-			: [];
+			$options = is_array($_POST['fullculqi_options']) ? $_POST['fullculqi_options'] : [];
 
 			$settings = new WC_Gateway_FullCulqi();
 			if ( isset( $options['enabled'] ) ) {
