@@ -107,7 +107,7 @@ class FullCulqi_WC_Admin {
 		if( ! empty( $order_id ) ) {
 			$url = get_edit_post_link( $order_id );
 			if(!$url) {
-				$url = admin_url( 'admin.php?page=wc-orders&action=edit&id=' . $order_id );
+				$url = esc_url( admin_url( 'admin.php?page=wc-orders&action=edit&id=' . $order_id ) );
 			}
 
 			$value = sprintf(
