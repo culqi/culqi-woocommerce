@@ -1,9 +1,9 @@
 <div class="culqi_customers_box">
 	<h2 class="metabox_h2">
-		<?php printf( esc_html__( 'Customer ID : %s','fullculqi'), $id ); ?>
+		<?php printf( esc_html__( 'Customer ID : %s', 'fullculqi' ), esc_html( $id ) ); ?>
 	</h2>
 	<p class="metabox_subh2">
-		<?php printf( esc_html__( 'Customer via FullCulqi: %s', 'fullculqi' ), $names ); ?>
+		<?php printf( esc_html__( 'Customer via FullCulqi: %s', 'fullculqi' ), esc_html( $names ) ); ?>
 	</p>
 
 	<div class="metabox_column_container">

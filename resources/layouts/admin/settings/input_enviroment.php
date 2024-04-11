@@ -1,5 +1,31 @@
-<input type="radio" name="fullculqi_options[enviroment]" value="<?php echo MPCULQI_URLAPI_ORDERCHARGES_INTEG; ?>|<?php echo MPCULQI_URLAPI_CHECKOUT_INTEG; ?>|<?php echo MPCULQI_URLAPI_INTEG_3DS; ?>|integ" <?php echo ($enviroment === MPCULQI_URLAPI_ORDERCHARGES_INTEG.'|'.MPCULQI_URLAPI_CHECKOUT_INTEG.'|'.MPCULQI_URLAPI_INTEG_3DS.'|integ' or $enviroment=='' or is_null($enviroment)) ? 'checked="true"' : '' ; ?> id="integracion" data-urllogin="<?php echo MPCULQI_URLAPI_LOGIN_INTEG ?>" data-urlmerchant="<?php echo MPCULQI_URLAPI_MERCHANT_INTEG ?>" data-urlmerchantsingle="<?php echo MPCULQI_URLAPI_MERCHANTSINGLE_INTEG ?>" data-urlwebhook="<?php echo MPCULQI_URLAPI_WEBHOOK_INTEG ?>" /> <label for="integracion">Integración</label>
-<input style="margin-left: 25px" type="radio" name="fullculqi_options[enviroment]" value="<?php echo MPCULQI_URLAPI_ORDERCHARGES_PROD; ?>|<?php echo MPCULQI_URLAPI_CHECKOUT_PROD; ?>|<?php echo MPCULQI_URLAPI_PROD_3DS; ?>|prod" <?php echo ($enviroment === MPCULQI_URLAPI_ORDERCHARGES_PROD.'|'.MPCULQI_URLAPI_CHECKOUT_PROD.'|'.MPCULQI_URLAPI_PROD_3DS.'|prod') ? 'checked="true"' : '' ; ?> id="produccion" data-urllogin="<?php echo MPCULQI_URLAPI_LOGIN_PROD ?>" data-urlmerchant="<?php echo MPCULQI_URLAPI_MERCHANT_PROD ?>" data-urlmerchantsingle="<?php echo MPCULQI_URLAPI_MERCHANTSINGLE_PROD ?>" data-urlwebhook="<?php echo MPCULQI_URLAPI_WEBHOOK_PROD ?>" /> <label for="produccion"> Producción</label>
+<input type="radio" name="fullculqi_options[enviroment]" 
+    value="<?php echo esc_url( MPCULQI_URLAPI_ORDERCHARGES_INTEG ) . '|' .
+                    esc_url( MPCULQI_URLAPI_CHECKOUT_INTEG ) . '|' .
+                    esc_url( MPCULQI_URLAPI_INTEG_3DS ) . '|integ'; ?>"
+    <?php echo ( $enviroment === esc_url( MPCULQI_URLAPI_ORDERCHARGES_INTEG ) . '|' .
+                    esc_url( MPCULQI_URLAPI_CHECKOUT_INTEG ) . '|' .
+                    esc_url( MPCULQI_URLAPI_INTEG_3DS ) . '|integ'
+                || $enviroment === ''
+                || is_null( $enviroment ) ) ? 'checked="true"' : ''; ?>
+    id="integracion"
+    data-urllogin="<?php echo esc_url( MPCULQI_URLAPI_LOGIN_INTEG ); ?>"
+    data-urlmerchant="<?php echo esc_url( MPCULQI_URLAPI_MERCHANT_INTEG ); ?>"
+    data-urlmerchantsingle="<?php echo esc_url( MPCULQI_URLAPI_MERCHANTSINGLE_INTEG ); ?>"
+    data-urlwebhook="<?php echo esc_url( MPCULQI_URLAPI_WEBHOOK_INTEG ); ?>" />
+    <label for="integracion">Integración</label>
+<input style="margin-left: 25px" type="radio" name="fullculqi_options[enviroment]"
+    value="<?php echo esc_url( MPCULQI_URLAPI_ORDERCHARGES_PROD ) . '|' .
+                    esc_url( MPCULQI_URLAPI_CHECKOUT_PROD ) . '|' .
+                    esc_url( MPCULQI_URLAPI_PROD_3DS ) . '|prod'; ?>"
+    <?php echo ( $enviroment === esc_url( MPCULQI_URLAPI_ORDERCHARGES_PROD ) . '|' .
+                esc_url( MPCULQI_URLAPI_CHECKOUT_PROD ) . '|' .
+                esc_url( MPCULQI_URLAPI_PROD_3DS ) . '|prod' ) ? 'checked="true"' : ''; ?>
+    id="produccion"
+    data-urllogin="<?php echo esc_url( MPCULQI_URLAPI_LOGIN_PROD ); ?>"
+    data-urlmerchant="<?php echo esc_url( MPCULQI_URLAPI_MERCHANT_PROD ); ?>"
+    data-urlmerchantsingle="<?php echo esc_url( MPCULQI_URLAPI_MERCHANTSINGLE_PROD ); ?>"
+    data-urlwebhook="<?php echo esc_url( MPCULQI_URLAPI_WEBHOOK_PROD ); ?>" />
+    <label for="produccion"> Producción</label>
 </td>
 </tr>
 <tr>

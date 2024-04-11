@@ -105,9 +105,14 @@ class FullCulqi_WC_Admin {
 		$order_id = get_post_meta( $post_id, 'culqi_wc_order_id', true );
 
 		if( ! empty( $order_id ) ) {
+			$url = get_edit_post_link( $order_id );
+			if(!$url) {
+				$url = esc_url( admin_url( 'admin.php?page=wc-orders&action=edit&id=' . $order_id ) );
+			}
+
 			$value = sprintf(
 				'<a target="_blank" href="%s">%s</a>',
-				get_edit_post_link( $order_id ), $order_id
+				$url, $order_id
 			);
 		}
 

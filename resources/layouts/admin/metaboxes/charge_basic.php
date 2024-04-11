@@ -1,9 +1,9 @@
 <div class="culqi_charges_box">
 	<h2 class="metabox_h2">
-		<?php printf( esc_html__( 'Culqi ID : %s','fullculqi'), $id ); ?>
+		<?php printf( esc_html__( 'Culqi ID : %s','fullculqi'), esc_html( $id ) ); ?>
 	</h2>
 	<p class="metabox_subh2">
-		<?php printf( esc_html__( 'Charge via FullCulqi. Paid on %s. Customer IP: %s', 'fullculqi' ), $creation_date, $ip ); ?>
+		<?php printf( esc_html__( 'Charge via FullCulqi. Paid on %s. Customer IP: %s', 'fullculqi' ), esc_html( $creation_date ), esc_html( $ip ) ); ?>
 	</p>
 
 	<div class="metabox_column_container">
@@ -38,7 +38,7 @@
 				if( ! empty( $status ) && isset( $statuses[$status] ) ) {
 					printf(
 						'<mark class="metabox_badged %s"><span>%s</span></mark>',
-						$status_class, $statuses[$status]
+						esc_html( $status_class ), esc_html( $statuses[$status] )
 					);
 
 					if( $status == 'captured' || $status == 'authorized' ) {
@@ -46,7 +46,7 @@
 
 						printf(
 							'<a href="" id="culqi_refunds" class="metabox_simple_link" data-post="%d">%s</a>',
-							$post_id, esc_html__( 'Refund Charge', 'fullculqi' )
+							esc_html( $post_id ), esc_html__( 'Refund Charge', 'fullculqi' )
 						);
 
 						echo '&nbsp';
