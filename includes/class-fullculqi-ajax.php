@@ -46,6 +46,7 @@ class FullCulqi_Ajax {
 
 	 public function get_merchants() {
 		 $token = sanitize_text_field($_GET['token']);
+		 $env = sanitize_text_field($_GET['env']);
 		 // Run a security check.
 		 $url_get_merchants = sanitize_url($_GET['url_merchant']);
 
@@ -54,7 +55,8 @@ class FullCulqi_Ajax {
 					'headers'       => array(
 							'Content-Type'     => 'application/json',
 							'Accept'         => 'application/json',
-							'Authorization' => 'Bearer ' . $token
+							'Authorization' => 'Bearer ' . $token,
+							"x-culqi-env"=> $env
 					),
 					'timeout'       => 120,
 					'body'          => ''
@@ -69,6 +71,7 @@ class FullCulqi_Ajax {
 
 	 public function get_merchant() {
 		 $token = sanitize_text_field($_GET['token']);
+		 $env = sanitize_text_field($_GET['env']);
          $url_get_merchant = sanitize_url($_GET['url_merchant']);
 
 		 $public_key = sanitize_text_field($_GET['public_key']);
@@ -80,7 +83,8 @@ class FullCulqi_Ajax {
             'headers'       => array(
               'Content-Type'     => 'application/json',
               'Accept'         => 'application/json',
-							'Authorization' => 'Bearer ' . $token
+			  'Authorization' => 'Bearer ' . $token,
+			  "x-culqi-env"=> $env
             ),
             'timeout'       => 120,
             'body'          => ''

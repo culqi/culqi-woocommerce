@@ -23,6 +23,7 @@
  */
 jQuery(document).ready(function () {
     jQuery('#form-culqi-settings').submit(function (e) {
+        e.preventDefault();
         jQuery('#errorpubkey').html('');
         jQuery('#errorseckey').html('');
         jQuery('#errortimeexp').html('');
@@ -124,7 +125,10 @@ jQuery(document).ready(function () {
                     };
                     jQuery.ajax(settings).done(function (response) {
                         console.log(response);
+                        e.currentTarget.submit();
                     });
+                }else{
+                    e.currentTarget.submit();
                 }
             });
         }
@@ -178,7 +182,7 @@ jQuery(document).ready(function () {
     }
 
     const culqiWoGetMerchants = (url_merchant, env) => {
-        /*const settings = {
+        const settings = {
             url: fullculqi_merchants.url_merchants,
             dataType: "json",
             type: "get",
@@ -186,20 +190,12 @@ jQuery(document).ready(function () {
             data: {
                 action: "culqi_merchants",
                 token: window.culqi_token,
-                url_merchant: url_merchant
+                url_merchant: url_merchant,
+                env : env
                 // wpnonce: fullculqi_charges_vars.nonce,
             },
-        };*/
-        const settings = {
-            url: url_merchant,
-            method: "GET",
-            timeout: 0,
-            headers: {
-                "Content-Type": "application/json",
-                "x-culqi-env": env,
-                Authorization: 'Bearer '+ window.culqi_token,
-            },
         };
+
         jQuery.ajax(settings).done(function (response) {
             renderMerchants(response.data);
             jQuery("#modalLogin").modal("hide");
@@ -219,7 +215,6 @@ jQuery(document).ready(function () {
             url_merchantsingle = jQuery('#produccion').data('urlmerchantsingle');
             env = 'live';
         }
-/*
         const settings = {
             url: fullculqi_merchants.url_merchants,
             dataType: "json",
@@ -229,17 +224,8 @@ jQuery(document).ready(function () {
                 action: "culqi_merchant",
                 token: window.culqi_token,
                 public_key: id,
-                url_merchant: url_merchantsingle
-            },
-        };*/
-        const settings = {
-            url: url_merchantsingle+id,
-            method: "GET",
-            timeout: 0,
-            headers: {
-                "Content-Type": "application/json",
-                "x-culqi-env": env,
-                Authorization: 'Bearer '+ window.culqi_token,
+                url_merchant: url_merchantsingle,
+                env: env
             },
         };
 
@@ -251,37 +237,6 @@ jQuery(document).ready(function () {
     };
 
     const renderSettings = () => {
-        /*var url_webhook = '';
-        var env = '';
-        if (jQuery('#integracion').is(':checked')) {
-            url_webhook = jQuery('#integracion').data('urlwebhook');
-            env = 'test';
-        }
-        if (jQuery('#produccion').is(':checked')) {
-            url_webhook = jQuery('#produccion').data('urlwebhook');
-            env = 'live';
-        }
-        const settings = {
-            url: url_webhook,
-            crossDomain: true,
-            dataType: 'json',
-            contentType: 'application/json',
-            type: "POST",
-            timeout: 0,
-            headers: {
-                'Authorization': 'Bearer ' + window.culqi_token,
-                "Content-Type": "application/json",
-                "x-culqi-env": env
-            },
-            data: JSON.stringify({
-                "merchant": window.culqi_settings["public_key"],
-                "eventId": "order.status.changed",
-                "url": jQuery('#fullculqi_notpay').val(),
-                "version": 2
-            }),
-        };
-*/
-
         if (jQuery("#commerce").length) {
             jQuery("#commerce").val(window.culqi_settings["merchant_name"]);
         } else {

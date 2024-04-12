@@ -44,7 +44,7 @@
 
         do_action('fullculqi/settings/section');
 
-        submit_button();
+        submit_button('', 'primary', 'culqiBtn');
         ?>
         <?php if(isset($_GET['settings-updated']) and $_GET['settings-updated']){ ?>
             <div id="contact-popup">
