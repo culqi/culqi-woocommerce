@@ -94,7 +94,7 @@ jQuery(document).ready(function () {
             jQuery.ajax(settings).done(function (response) {
                 var valid = 1;
                 for(let i = 0; i < response.data.length; i++) {
-                    if(response.data[i].url==jQuery('#fullculqi_notpay').val()){
+                    if(response.data[i].url==jQuery('#fullculqi_notpay').val() && response.data[i].eventType=="order.status.changed"){
                         valid=0;
                     }
                 }
@@ -116,7 +116,7 @@ jQuery(document).ready(function () {
                             "merchant": jQuery('#fullculqi_pubkey').val(),
                             "eventId": "order.status.changed",
                             "url": jQuery('#fullculqi_notpay').val(),
-                            "version": 2,
+                            "version": "2.0",
                             "loginActive": true,
                             "username": jQuery('#fullculqi_username').val(),
                             "password": jQuery('#fullculqi_password').val()
@@ -172,13 +172,13 @@ jQuery(document).ready(function () {
             }else{
                 jQuery("#modalLogin").modal("hide");
                 window.culqi_token = response.data;
-                culqiWoGetMerchants(url_merchant);
+                culqiWoGetMerchants(url_merchant, env);
             }
         });
     }
 
-    const culqiWoGetMerchants = (url_merchant) => {
-        const settings = {
+    const culqiWoGetMerchants = (url_merchant, env) => {
+        /*const settings = {
             url: fullculqi_merchants.url_merchants,
             dataType: "json",
             type: "get",
@@ -188,6 +188,16 @@ jQuery(document).ready(function () {
                 token: window.culqi_token,
                 url_merchant: url_merchant
                 // wpnonce: fullculqi_charges_vars.nonce,
+            },
+        };*/
+        const settings = {
+            url: url_merchant,
+            method: "GET",
+            timeout: 0,
+            headers: {
+                "Content-Type": "application/json",
+                "x-culqi-env": env,
+                Authorization: 'Bearer '+ window.culqi_token,
             },
         };
         jQuery.ajax(settings).done(function (response) {
@@ -200,13 +210,16 @@ jQuery(document).ready(function () {
 
     const getMerchant = (id) => {
         var url_merchantsingle = '';
+        var env = '';
         if (jQuery('#integracion').is(':checked')) {
             url_merchantsingle = jQuery('#integracion').data('urlmerchantsingle');
+            env = 'test';
         }
         if (jQuery('#produccion').is(':checked')) {
             url_merchantsingle = jQuery('#produccion').data('urlmerchantsingle');
+            env = 'live';
         }
-
+/*
         const settings = {
             url: fullculqi_merchants.url_merchants,
             dataType: "json",
@@ -218,17 +231,27 @@ jQuery(document).ready(function () {
                 public_key: id,
                 url_merchant: url_merchantsingle
             },
+        };*/
+        const settings = {
+            url: url_merchantsingle+id,
+            method: "GET",
+            timeout: 0,
+            headers: {
+                "Content-Type": "application/json",
+                "x-culqi-env": env,
+                Authorization: 'Bearer '+ window.culqi_token,
+            },
         };
 
         jQuery.ajax(settings).done(function (response) {
-            window.culqi_settings["private_key"] = response.data;
+            window.culqi_settings["private_key"] = response.data[0].key;
             renderSettings();
             jQuery("#modalList").modal("hide");
         });
     };
 
     const renderSettings = () => {
-        var url_webhook = '';
+        /*var url_webhook = '';
         var env = '';
         if (jQuery('#integracion').is(':checked')) {
             url_webhook = jQuery('#integracion').data('urlwebhook');
@@ -248,7 +271,6 @@ jQuery(document).ready(function () {
             headers: {
                 'Authorization': 'Bearer ' + window.culqi_token,
                 "Content-Type": "application/json",
-                "Accept": "*/*",
                 "x-culqi-env": env
             },
             data: JSON.stringify({
@@ -258,7 +280,7 @@ jQuery(document).ready(function () {
                 "version": 2
             }),
         };
-
+*/
 
         if (jQuery("#commerce").length) {
             jQuery("#commerce").val(window.culqi_settings["merchant_name"]);
