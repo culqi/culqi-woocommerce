@@ -908,7 +908,12 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 											jQuery(".woocommerce-NoticeGroup").remove();
 											if(!response.order_id) {
 												var url = response.redirect;
-												var order_id = url.match(/order-pay\/(\d+)/)[1];
+												var pay = url.match(/order-pay\/(\d+)/);
+												if(pay != null){
+													var order_id = url.match(/order-pay\/(\d+)/)[1];
+												}else{
+													var order_id = url.match(/order-pay\=(\d+)/)[1];
+												}
 											} else {
 												var order_id = response.order_id;
 											}
