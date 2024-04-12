@@ -1,6 +1,6 @@
 {
-  "name": "gonzalesc/culqi-php",
-  "description": "Culqi API to PHP",
+  "name": "culqi/culqi-php",
+  "description": "Cliente Culqi API para PHP",
   "keywords": ["culqi", "client", "api", "peru", "php", "payments", "pagos"],
   "homepage": "https://culqi.com",
   "type": "library",
