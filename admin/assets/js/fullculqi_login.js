@@ -23,6 +23,7 @@
  */
 jQuery(document).ready(function () {
     jQuery('#form-culqi-settings').submit(function (e) {
+        e.preventDefault();
         jQuery('#errorpubkey').html('');
         jQuery('#errorseckey').html('');
         jQuery('#errortimeexp').html('');
@@ -63,11 +64,14 @@ jQuery(document).ready(function () {
 
         if (jQuery('#fullculqi_tokenlogin').val().length>0) {
             var url_webhook = '';
+            var env = '';
             if (jQuery('#integracion').is(':checked')) {
                 url_webhook = jQuery('#integracion').data('urlwebhook');
+                env = 'test';
             }
             if (jQuery('#produccion').is(':checked')) {
                 url_webhook = jQuery('#produccion').data('urlwebhook');
+                env = 'live';
             }
             const settings = {
                 url: url_webhook,
@@ -80,7 +84,8 @@ jQuery(document).ready(function () {
                     'Authorization': 'Bearer ' + jQuery('#fullculqi_tokenlogin').val(),
                     //'Access-Control-Allow-Origin': '*',
                     "Content-Type": "application/json",
-                    "Accept": "*/*"
+                    "Accept": "*/*",
+                    "x-culqi-env": env
                 },
                 data: {
                     "merchant": jQuery('#fullculqi_pubkey').val(),
@@ -90,7 +95,7 @@ jQuery(document).ready(function () {
             jQuery.ajax(settings).done(function (response) {
                 var valid = 1;
                 for(let i = 0; i < response.data.length; i++) {
-                    if(response.data[i].url==jQuery('#fullculqi_notpay').val()){
+                    if(response.data[i].url==jQuery('#fullculqi_notpay').val() && response.data[i].eventType=="order.status.changed"){
                         valid=0;
                     }
                 }
@@ -105,13 +110,14 @@ jQuery(document).ready(function () {
                         headers: {
                             'Authorization': 'Bearer ' + jQuery('#fullculqi_tokenlogin').val(),
                             "Content-Type": "application/json",
-                            "Accept": "*/*"
+                            "Accept": "*/*",
+                            "x-culqi-env": env
                         },
                         data: JSON.stringify({
                             "merchant": jQuery('#fullculqi_pubkey').val(),
                             "eventId": "order.status.changed",
                             "url": jQuery('#fullculqi_notpay').val(),
-                            "version": 2,
+                            "version": "2.0",
                             "loginActive": true,
                             "username": jQuery('#fullculqi_username').val(),
                             "password": jQuery('#fullculqi_password').val()
@@ -119,7 +125,10 @@ jQuery(document).ready(function () {
                     };
                     jQuery.ajax(settings).done(function (response) {
                         console.log(response);
+                        e.currentTarget.submit();
                     });
+                }else{
+                    e.currentTarget.submit();
                 }
             });
         }
@@ -138,13 +147,16 @@ jQuery(document).ready(function () {
     function fullculqi_login(data) {
         var url_login = '';
         var url_merchant = '';
+        var env = '';
         if (jQuery('#integracion').is(':checked')) {
             url_login = jQuery('#integracion').data('urllogin');
             url_merchant = jQuery('#integracion').data('urlmerchant');
+            env = 'test';
         }
         if (jQuery('#produccion').is(':checked')) {
             url_login = jQuery('#produccion').data('urllogin');
             url_merchant = jQuery('#produccion').data('urlmerchant');
+            env = 'live';
         }
         const settings = {
             url: url_login,
@@ -152,6 +164,7 @@ jQuery(document).ready(function () {
             timeout: 0,
             headers: {
                 "Content-Type": "application/json",
+                "x-culqi-env": env,
             },
             data: JSON.stringify(data),
         };
@@ -163,12 +176,12 @@ jQuery(document).ready(function () {
             }else{
                 jQuery("#modalLogin").modal("hide");
                 window.culqi_token = response.data;
-                culqiWoGetMerchants(url_merchant);
+                culqiWoGetMerchants(url_merchant, env);
             }
         });
     }
 
-    const culqiWoGetMerchants = (url_merchant) => {
+    const culqiWoGetMerchants = (url_merchant, env) => {
         const settings = {
             url: fullculqi_merchants.url_merchants,
             dataType: "json",
@@ -178,9 +191,11 @@ jQuery(document).ready(function () {
                 action: "culqi_merchants",
                 token: window.culqi_token,
                 url_merchant: url_merchant,
+                env : env,
                 nonce : fullculqi_merchants.nonce,
             },
         };
+
         jQuery.ajax(settings).done(function (response) {
             renderMerchants(response.data);
             jQuery("#modalLogin").modal("hide");
@@ -191,13 +206,15 @@ jQuery(document).ready(function () {
 
     const getMerchant = (id) => {
         var url_merchantsingle = '';
+        var env = '';
         if (jQuery('#integracion').is(':checked')) {
             url_merchantsingle = jQuery('#integracion').data('urlmerchantsingle');
+            env = 'test';
         }
         if (jQuery('#produccion').is(':checked')) {
             url_merchantsingle = jQuery('#produccion').data('urlmerchantsingle');
+            env = 'live';
         }
-
         const settings = {
             url: fullculqi_merchants.url_merchants,
             dataType: "json",
@@ -208,6 +225,7 @@ jQuery(document).ready(function () {
                 token: window.culqi_token,
                 public_key: id,
                 url_merchant: url_merchantsingle,
+                env: env,
                 nonce : fullculqi_merchants.nonce,
             },
         };
@@ -220,34 +238,6 @@ jQuery(document).ready(function () {
     };
 
     const renderSettings = () => {
-        var url_webhook = '';
-        if (jQuery('#integracion').is(':checked')) {
-            url_webhook = jQuery('#integracion').data('urlwebhook');
-        }
-        if (jQuery('#produccion').is(':checked')) {
-            url_webhook = jQuery('#produccion').data('urlwebhook');
-        }
-        const settings = {
-            url: url_webhook,
-            crossDomain: true,
-            dataType: 'json',
-            contentType: 'application/json',
-            type: "POST",
-            timeout: 0,
-            headers: {
-                'Authorization': 'Bearer ' + window.culqi_token,
-                "Content-Type": "application/json",
-                "Accept": "*/*"
-            },
-            data: JSON.stringify({
-                "merchant": window.culqi_settings["public_key"],
-                "eventId": "order.status.changed",
-                "url": jQuery('#fullculqi_notpay').val(),
-                "version": 2
-            }),
-        };
-
-
         if (jQuery("#commerce").length) {
             jQuery("#commerce").val(window.culqi_settings["merchant_name"]);
         } else {

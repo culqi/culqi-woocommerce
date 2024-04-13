@@ -1,4 +1,7 @@
-2024-05-04 - version 3.0.17
+2024-04-12 - version 3.0.18
+Fix: fix backend-plugin integration
+
+2024-04-05 - version 3.0.17
 Fix: fix Wordpress.DB and Wordpress.Security
 
 2024-03-22 - version 3.0.16
