@@ -230,7 +230,7 @@ jQuery(document).ready(function () {
         };
 
         jQuery.ajax(settings).done(function (response) {
-            window.culqi_settings["private_key"] = response.data[0].key;
+            window.culqi_settings["private_key"] = response.data;
             renderSettings();
             jQuery("#modalList").modal("hide");
         });
