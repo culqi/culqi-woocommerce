@@ -191,8 +191,8 @@ jQuery(document).ready(function () {
                 action: "culqi_merchants",
                 token: window.culqi_token,
                 url_merchant: url_merchant,
-                env : env
-                // wpnonce: fullculqi_charges_vars.nonce,
+                env : env,
+                nonce : fullculqi_merchants.nonce,
             },
         };
 
@@ -225,7 +225,8 @@ jQuery(document).ready(function () {
                 token: window.culqi_token,
                 public_key: id,
                 url_merchant: url_merchantsingle,
-                env: env
+                env: env,
+                nonce : fullculqi_merchants.nonce,
             },
         };
 
