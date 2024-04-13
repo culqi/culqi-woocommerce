@@ -75,6 +75,10 @@ class FullCulqi_Ajax {
 		? sanitize_text_field( wp_unslash( $_GET['token'] ) )
 		: null;
 
+		$env =  isset( $_GET['token'] )
+		? sanitize_text_field($_GET['env'])
+		: null;
+
 		// Run a security check.
 		$urlMerc = isset( $_GET['url_merchant'] )
 		? sanitize_text_field( wp_unslash( $_GET['url_merchant'] ) )
@@ -88,6 +92,7 @@ class FullCulqi_Ajax {
 				'Content-Type'  => 'application/json',
 				'Accept'        => 'application/json',
 				'Authorization' => 'Bearer ' . $token,
+				"x-culqi-env"=> $env,
 			),
 			'timeout' => 120,
 			'body'    => '',
@@ -117,6 +122,10 @@ class FullCulqi_Ajax {
 		? sanitize_text_field( wp_unslash( $_GET['token'] ) )
 		: null;
 
+		$env =  isset( $_GET['token'] )
+		? sanitize_text_field($_GET['env'])
+		: null;
+
 		// Run a security check.
 		$url_get_merchant = isset( $_GET['url_merchant'] )
 		? sanitize_text_field( wp_unslash( $_GET['url_merchant'] ) )
@@ -134,6 +143,7 @@ class FullCulqi_Ajax {
 				'Content-Type'  => 'application/json',
 				'Accept'        => 'application/json',
 				'Authorization' => 'Bearer ' . $token,
+				"x-culqi-env"=> $env,
 			),
 			'timeout' => 120,
 			'body'    => '',
