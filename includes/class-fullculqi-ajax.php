@@ -75,7 +75,7 @@ class FullCulqi_Ajax {
 		? sanitize_text_field( wp_unslash( $_GET['token'] ) )
 		: null;
 
-		$env =  isset( $_GET['token'] )
+		$env =  isset( $_GET['env'] )
 		? sanitize_text_field($_GET['env'])
 		: null;
 
@@ -122,7 +122,7 @@ class FullCulqi_Ajax {
 		? sanitize_text_field( wp_unslash( $_GET['token'] ) )
 		: null;
 
-		$env =  isset( $_GET['token'] )
+		$env =  isset( $_GET['env'] )
 		? sanitize_text_field($_GET['env'])
 		: null;
 
@@ -156,7 +156,7 @@ class FullCulqi_Ajax {
 
 		foreach ( $keys as $key => $keyValue ) {
 			if ( $keyValue['active'] === true ) {
-				wp_send_json_ssuccess( $keyValue['key'] );
+				wp_send_json_success( $keyValue['key'] );
 			}
 		}
 	}
