@@ -23,18 +23,29 @@ class Orders extends Resource {
     /**
      * @param array|null $options
      *
+     * @return create Order 
      */
     public function create($options = NULL) {
         return $this->request("POST", self::URL_ORDERS, $api_key = $this->culqi->api_key, $options);
+    } 
+
+
+    /**
+     * @param array|null $options
+     *
+     * @return confirm Order 
+     */
+    public function confirm($id = NULL) {
+        return $this->request("POST", self::URL_ORDERS . $id . "/confirm/", $api_key = $this->culqi->api_key);
     }
 
     /**
      * @param array|null $options
      *
-     * @return confirm Order
+     * @return confirm Order 
      */
-    public function confirm($id = NULL) {
-        return $this->request("POST", self::URL_ORDERS . $id . "/confirm/", $api_key = $this->culqi->api_key);
+    public function confirm_order_type($options = NULL) {
+        return $this->request("POST", self::URL_ORDERS . "confirm/", $api_key = $this->culqi->api_key, $options);
     }
 
     /**

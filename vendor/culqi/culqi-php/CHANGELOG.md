@@ -1,6 +1,4 @@
-### 1.3.6 30-11-2020
-* Fix: we convert amount field in string because json_decode modify the precision of decimals
-* Fix: we change the accept encoding variable in the headers
+
 
 ### 1.3.5 12-04-2019
 * Se actualiza la URL base para creación de tokens.
