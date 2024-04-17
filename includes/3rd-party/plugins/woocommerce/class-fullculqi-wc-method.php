@@ -923,6 +923,8 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 													nonce: "<?php echo esc_html( wp_create_nonce( 'my_ajax_nonce' ) );?>"
 												},
 												success: function(response) {
+													console.log("response.data.full_culqi_vars: ", response);
+
 													window.fullculqi_vars = response.data.full_culqi_vars;
 													var noCacheUrl = response.data.checkout_js + "?_=" + Date.now();
 													jQuery.getScript(noCacheUrl, function() {
@@ -935,6 +937,7 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 											});
 											//window.location.href = response.redirect;
 										} else {
+											console.log("Entro al error: ", response);
 											jQuery('form.checkout').submit();
 											jQuery('#place_order').removeAttr("disabled");
 											jQuery('#loadingloginculqi').remove();
