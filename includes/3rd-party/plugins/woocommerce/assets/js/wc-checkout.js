@@ -54,7 +54,6 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 
 
 		init: function () {
-			console.log("Init")
 
 			$(document).ready(FullCulqi.ready);
 
@@ -67,8 +66,6 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @since 2.0.0
 		 */
 		ready: function () {
-			console.log("ready")
-			// Execute
 			FullCulqi.executeUIActions();
 		},
 		/**
@@ -77,8 +74,6 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @since 2.0.0
 		 */
 		load: function () {
-			console.log("load")
-
 			FullCulqi.bindUIActions();
 		},
 
@@ -87,11 +82,6 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @return mixed
 		 */
 		executeUIActions: function () {
-			console.log("executeUIActions")
-
-			//FullCulqi.setSettings();
-			//FullCulqi.setOptions();
-			//FullCulqi.timeModal();
 			FullCulqi.setCheckout();
 		},
 
@@ -101,8 +91,6 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @since 2.0.0
 		 */
 		bindUIActions: function () {
-			console.log("bindUIActions")
-
 			//var device = await Culqi3DS.generateDevice();
 			const device_aux = Promise.resolve(Culqi3DS.generateDevice());
 			device_aux.then(value => {
@@ -125,14 +113,8 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		setCheckout: function () {
 			const publicKey = FullCulqi.setPublicKey();
 			const config = FullCulqi.setConfigCheckout();
-			console.log("Payload fullculqi_vars:", JSON.stringify(fullculqi_vars))
-
-			console.log("New Config Custom:", JSON.stringify(config))
-			console.log("publicKey",publicKey)
 			Culqi = new CulqiCheckout(publicKey, config);
 			Culqi.culqi = culqi
-	
-			console.log("Culqi:", Culqi)
 		},
 		setConfigCheckout: function () {
 			const settings = FullCulqi.setSetting();
@@ -159,8 +141,8 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 			let setting = {
 				title: fullculqi_vars.commerce,
 				currency: fullculqi_vars.currency,
-				amount: fullculqi_vars.total
-
+				amount: fullculqi_vars.total,
+				culqiclient: 'woocommerce',
 			}
 
 			// Agregar el orden si existe
@@ -211,25 +193,6 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 			return options;
 		},
 		setAppearance: function () {
-			let defaultStyle = {
-				bannerColor: "blue", // hexadecimal
-				buttonBackground: "yellow", // hexadecimal
-				menuColor: "pink", // hexadecimal
-				linksColor: "green", // hexadecimal
-				buttonTextColor: "blue", // hexadecimal
-				priceColor: "red",
-			}
-
-			if (fullculqi_vars.color_palette.length > 0) {
-				const colors = fullculqi_vars.color_palette.split('-');
-				defaultStyle.bannerColor = colors[0];
-				defaultStyle.linksColor = colors[1];
-				defaultStyle.menuColor = colors[1];
-				defaultStyle.priceColor = colors[1];
-				defaultStyle.buttonBackground = colors[1];
-			}
-
-
 			let appearence = {
 				theme: "default",
 				hiddenCulqiLogo: false,
@@ -237,94 +200,28 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				hiddenBanner: false,
 				hiddenToolBarAmount: false,
 				menuType: "sidebar", // sidebar / sliderTop / select
-				buttonCardPayText: "Pagar tal monto", // 
-				logo: null,
-				logo: fullculqi_vars.url_logo,
-				defaultStyle
+				logo: fullculqi_vars.url_logo
 			}
 
+			appearence.defaultStyle = {
+				bannerColor: '#715091',
+				buttonBackground: '#25a69f', 
+				menuColor: '#715091',
+				linksColor: '#00A19B',
+				buttonTextColor: '#ffffff', 
+				priceColor: '',
+			}
+
+			if (fullculqi_vars.color_palette.length > 0) {
+				const colors = fullculqi_vars.color_palette.split('-');
+				appearence.defaultStyle.bannerColor = colors[0];
+				appearence.defaultStyle.buttonBackground = colors[1];
+				appearence.defaultStyle.menuColor = colors[1];
+				appearence.defaultStyle.linksColor = colors[1];
+				appearence.defaultStyle.priceColor = colors[1];
+			}
 			return appearence;
 		},
-		/**
-		 * Set Culqi Settings
-		 * @return mixed
-		 */
-		/*setSettings: function() {
-			console.log(fullculqi_vars.rsa_pk);
-			Culqi.publicKey = fullculqi_vars.public_key;
-			let args_settings = {
-				title: fullculqi_vars.commerce,
-				currency: fullculqi_vars.currency,
-				//description: fullculqi_vars.description,
-				amount: fullculqi_vars.total,
-				culqiclient: 'woocommerce',
-				culqiclientversion: fullculqi_vars.version_wc,
-				culqipluginversion: fullculqi_vars.version_plugin
-			};
-			if(fullculqi_vars.rsa_id && fullculqi_vars.rsa_pk) {
-				args_settings.xculqirsaid = fullculqi_vars.rsa_id;
-				args_settings.rsapublickey = fullculqi_vars.rsa_pk;
-			}
-			console.log(fullculqi_vars.multi_order+':: el orderid');
-			if( fullculqi_vars.multi_order != '' ) {
-				args_settings.order = fullculqi_vars.multi_order;
-			}
-			console.log(args_settings);
-			Culqi.settings( args_settings );
-			Culqi.client = {
-				email: fullculqi_vars.culqi_customer_email
-			};
-		},*/
-		/**
-		 * Set Culqi Options 
-		 * @return mixed
-		 */
-		/*setOptions: function() {
-			console.log('Obtener las opciones');
-
-			let args_options = {};
-			//args_options.lang = fullculqi_vars.lang;
-			//args_options.installments = true;
-			//args_options.modal = true;
-			args_options.lang = fullculqi_vars.lang;
-
-			args_options.paymentMethods = {
-				tarjeta: fullculqi_vars.methods.tarjeta,
-				yape: fullculqi_vars.methods.yape,
-				billetera: fullculqi_vars.methods.billetera,
-				bancaMovil: fullculqi_vars.methods.bancaMovil,
-				agente: fullculqi_vars.methods.agente,
-				cuotealo: fullculqi_vars.methods.cuetealo
-			};
-
-			args_options.style = {
-				bannerColor: '#715091', // hexadecimal
-				imageBanner: '', 
-				buttonBackground: '#25a69f', // hexadecimal
-				menuColor: '#715091', // hexadecimal
-				linksColor: '#00A19B', // hexadecimal
-				buttontext: '#ffffff', // hexadecimal
-				priceColor: '', // hexadecimal
-			}
-
-			args_options.installments = true;
-				args_options.style.logo = fullculqi_vars.url_logo;
-			if(fullculqi_vars.color_palette.length > 0 ){
-				var colors = fullculqi_vars.color_palette.split('-');
-				args_options.style.bannerColor=colors[0];
-				args_options.style.linksColor=colors[1];
-				args_options.style.menuColor=colors[1];
-				args_options.style.priceColor=colors[1];
-				args_options.style.buttonBackground=colors[1];
-			}
-			console.log(args_options);
-			console.log('Obtener las opciones', args_options);
-
-			if( Object.keys( args_options ).length > 0 ) {
-				Culqi.options( args_options );
-			}
-
-		},*/
 		/**
 		 * Time to open modal
 		 * @return mixed
