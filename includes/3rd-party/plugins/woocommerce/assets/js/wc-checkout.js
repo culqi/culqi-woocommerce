@@ -138,7 +138,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 			return fullculqi_vars.public_key
 		},
 		setSetting: function () {
-			let setting = {
+			const setting = {
 				title: fullculqi_vars.commerce,
 				currency: fullculqi_vars.currency,
 				amount: fullculqi_vars.total,
