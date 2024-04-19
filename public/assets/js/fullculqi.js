@@ -29,7 +29,6 @@ if( fullculqi.url_logo.length > 0 ) {
 }
 
 if( Object.keys(args_options).length > 0 ) {
-	console.log("Tabmien aqui")
 	Culqi.options(args_options);
 }
 

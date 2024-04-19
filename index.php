@@ -36,7 +36,6 @@ define('MPCULQI_URLAPI_INTEG_3DS', 'https://3ds.culqi.com');
 define('MPCULQI_URLAPI_PROD_3DS', 'https://3ds.culqi.com');
 
 define('MPCULQI_URLAPI_ORDERCHARGES_INTEG', 'https://api.culqi.com/v2');
-//define('MPCULQI_URLAPI_CHECKOUT_INTEG', 'https://checkout.culqi.com/js/v4');
 define('MPCULQI_URLAPI_CHECKOUT_INTEG', 'https://js.culqi.com/checkout-js');
 
 define('MPCULQI_URLAPI_LOGIN_INTEG', MPCULQI_URLAPI_INTEG.'/plugins/public/login');
@@ -45,7 +44,6 @@ define('MPCULQI_URLAPI_MERCHANTSINGLE_INTEG', MPCULQI_URLAPI_INTEG.'/plugins/pub
 define('MPCULQI_URLAPI_WEBHOOK_INTEG', MPCULQI_URLAPI_INTEG.'/plugins/public/webhook');
 
 define('MPCULQI_URLAPI_ORDERCHARGES_PROD', 'https://api.culqi.com/v2');
-//define('MPCULQI_URLAPI_CHECKOUT_PROD', 'https://checkout.culqi.com/js/v4');
 define('MPCULQI_URLAPI_CHECKOUT_PROD', 'https://js.culqi.com/checkout-js');
 
 define('MPCULQI_URLAPI_LOGIN_PROD', MPCULQI_URLAPI_PROD.'/plugins/public/login');

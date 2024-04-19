@@ -937,7 +937,6 @@ class WC_Gateway_FullCulqi extends WC_Payment_Gateway {
 											});
 											//window.location.href = response.redirect;
 										} else {
-											console.log("Entro al error: ", response);
 											jQuery('form.checkout').submit();
 											jQuery('#place_order').removeAttr("disabled");
 											jQuery('#loadingloginculqi').remove();

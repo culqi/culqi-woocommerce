@@ -288,7 +288,6 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @return mixed
 		 */
 		payProcess: function () {
-			console.log('payProcess:::');
 			if (Culqi.error) {
 				$('#fullculqi_notify').addClass('woocommerce-error').html(Culqi.error.merchant_message);
 				scrollToCulqiError();
