@@ -143,6 +143,8 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				currency: fullculqi_vars.currency,
 				amount: fullculqi_vars.total,
 				culqiclient: 'woocommerce',
+				culqiclientversion: fullculqi_vars.version_wc,
+				culqipluginversion: fullculqi_vars.version_plugin
 			}
 
 			// Agregar el orden si existe
@@ -186,14 +188,13 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				lang: fullculqi_vars.lang,
 				installments: true,
 				modal: true,
-				container: "#culqi-container",
 				paymentMethods,
 				paymentMethodsSort: Object.keys(paymentMethods)
 			}
 			return options;
 		},
 		setAppearance: function () {
-			let appearence = {
+			const appearence = {
 				theme: "default",
 				hiddenCulqiLogo: false,
 				hiddenBannerContent: false,
@@ -203,22 +204,17 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				logo: fullculqi_vars.url_logo
 			}
 
-			appearence.defaultStyle = {
-				bannerColor: '#715091',
-				buttonBackground: '#25a69f', 
-				menuColor: '#715091',
-				linksColor: '#00A19B',
-				buttonTextColor: '#ffffff', 
-				priceColor: '',
-			}
 
 			if (fullculqi_vars.color_palette.length > 0) {
+				const defaultStyle = {};
 				const colors = fullculqi_vars.color_palette.split('-');
-				appearence.defaultStyle.bannerColor = colors[0];
-				appearence.defaultStyle.buttonBackground = colors[1];
-				appearence.defaultStyle.menuColor = colors[1];
-				appearence.defaultStyle.linksColor = colors[1];
-				appearence.defaultStyle.priceColor = colors[1];
+				defaultStyle.bannerColor = colors[0];
+				defaultStyle.buttonBackground = colors[1];
+				defaultStyle.menuColor = colors[1];
+				defaultStyle.linksColor = colors[1];
+				defaultStyle.priceColor = colors[1];
+
+				appearence.defaultStyle = defaultStyle;
 			}
 			return appearence;
 		},
@@ -288,6 +284,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		 * @return mixed
 		 */
 		payProcess: function () {
+			console.log('payProcess:::');
 			if (Culqi.error) {
 				$('#fullculqi_notify').addClass('woocommerce-error').html(Culqi.error.merchant_message);
 				scrollToCulqiError();
@@ -326,8 +323,8 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 			}
 		},
 
-		payProcess3DS: function (parameters3DS) {		
-				console.log('payProcess3DS:::');
+		payProcess3DS: function (parameters3DS) {
+			console.log('payProcess3DS:::');
 
 			if (Culqi.error && Culqi.error.merchant_message) {
 				$('#fullculqi_notify').addClass('woocommerce-error').html(Culqi.error.merchant_message);
