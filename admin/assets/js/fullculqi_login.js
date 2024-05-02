@@ -60,6 +60,17 @@ jQuery(document).ready(function () {
             jQuery('#errorpaymentmethods').html('Debe seleccionar por lo menos 1 método de pago.');
             isValid = false;
         }
+        
+        if (jQuery('#fullculqi_rsa_id').val() === '' && jQuery('#fullculqi_rsa_pk').val()){
+            jQuery('#errorrsa_id').html('Ingrese el RSA Id.');
+            isValid = false;
+        }
+        
+        if (jQuery('#fullculqi_rsa_id').val() && jQuery('#fullculqi_rsa_pk').val() === '' ){
+            jQuery('#errorrsa_pk').html('Ingrese el RSA Publickey.');
+            isValid = false;
+        }
+
         if (!isValid){
             return false;
         }
