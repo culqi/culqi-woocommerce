@@ -3,7 +3,7 @@
 Plugin Name: Culqi
 Plugin URI:https://wordpress.org/plugins/culqi-checkout
 Description: Culqi acepta pagos con tarjetas de débito y crédito, Yape, Cuotéalo BCP y PagoEfectivo (billeteras móviles, agentes y bodegas).
-Version: 3.0.18
+Version: 3.1.0
 Author: Culqi
 Author URI: https://culqi.com/
 Developer: Culqi Team
@@ -22,7 +22,7 @@ WC tested up to: 3.0.0
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-define( 'MPCULQI_PLUGIN_VERSION' , 'v3.0.18');
+define( 'MPCULQI_PLUGIN_VERSION' , 'v3.1.0');
 
 define( 'MPCULQI_FILE' , __FILE__ );
 define( 'MPCULQI_DIR' , plugin_dir_path(__FILE__) );
@@ -36,7 +36,7 @@ define('MPCULQI_URLAPI_INTEG_3DS', 'https://3ds.culqi.com');
 define('MPCULQI_URLAPI_PROD_3DS', 'https://3ds.culqi.com');
 
 define('MPCULQI_URLAPI_ORDERCHARGES_INTEG', 'https://api.culqi.com/v2');
-define('MPCULQI_URLAPI_CHECKOUT_INTEG', 'https://checkout.culqi.com/js/v4');
+define('MPCULQI_URLAPI_CHECKOUT_INTEG', 'https://js.culqi.com/checkout-js');
 
 define('MPCULQI_URLAPI_LOGIN_INTEG', MPCULQI_URLAPI_INTEG.'/plugins/public/login');
 define('MPCULQI_URLAPI_MERCHANT_INTEG', MPCULQI_URLAPI_INTEG.'/plugins/public/get_merchants');
@@ -44,7 +44,7 @@ define('MPCULQI_URLAPI_MERCHANTSINGLE_INTEG', MPCULQI_URLAPI_INTEG.'/plugins/pub
 define('MPCULQI_URLAPI_WEBHOOK_INTEG', MPCULQI_URLAPI_INTEG.'/plugins/public/webhook');
 
 define('MPCULQI_URLAPI_ORDERCHARGES_PROD', 'https://api.culqi.com/v2');
-define('MPCULQI_URLAPI_CHECKOUT_PROD', 'https://checkout.culqi.com/js/v4');
+define('MPCULQI_URLAPI_CHECKOUT_PROD', 'https://js.culqi.com/checkout-js');
 
 define('MPCULQI_URLAPI_LOGIN_PROD', MPCULQI_URLAPI_PROD.'/plugins/public/login');
 define('MPCULQI_URLAPI_MERCHANT_PROD', MPCULQI_URLAPI_PROD.'/plugins/public/get_merchants');
