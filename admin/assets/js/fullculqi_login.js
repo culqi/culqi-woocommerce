@@ -29,38 +29,51 @@ jQuery(document).ready(function () {
         jQuery('#errortimeexp').html('');
         var llavepublica = jQuery('#fullculqi_pubkey').val().split('_');
         var llaveprivada = jQuery('#fullculqi_seckey').val().split('_');
+        var isValid = true;
         if(jQuery('#integracion').is(':checked')){
             if(!(llavepublica.length==3 && llavepublica[1]=='test')){
                 jQuery('#errorpubkey').html('La llave pública no pertenece al ambiente de integración');
-                e.preventDefault();
+                isValid = false;
             }
             if(!(llaveprivada.length==3 && llaveprivada[1]=='test')){
                 jQuery('#errorseckey').html('La llave privada no pertenece al ambiente de integración');
-                e.preventDefault();
+                isValid = false;
             }
         }
         if(jQuery('#produccion').is(':checked')){
             if(!(llavepublica.length==3 && llavepublica[1]=='live')){
                 jQuery('#errorpubkey').html('La llave pública no pertenece al ambiente de producción');
-                e.preventDefault();
+                isValid = false;
             }
             if(!(llaveprivada.length==3 && llaveprivada[1]=='live')){
                 jQuery('#errorseckey').html('La llave privada no pertenece al ambiente de producción');
-                e.preventDefault();
+                isValid = false;
             }
         }
 
         if(!(jQuery('#fullculqi_timexp').val()=='' || (jQuery('#fullculqi_timexp').val()>0 && jQuery('#fullculqi_timexp').val().length <= 10 && jQuery('#fullculqi_timexp').val().length > 0))){
             jQuery('#errortimeexp').html('El tiempo de expiración debe ser un valor numérico, mayor a 0 y no mayor a 10 dígitos.');
-            e.preventDefault();
+            isValid = false;
         }
 
         if(!(jQuery('#fullculqi_methods_tarjeta').is(':checked') || jQuery('#fullculqi_methods_yape').is(':checked') || jQuery('#fullculqi_methods_bancaMovil').is(':checked') || jQuery('#fullculqi_methods_agents').is(':checked') || jQuery('#fullculqi_methods_wallets').is(':checked') || jQuery('#fullculqi_methods_quotedbcp').is(':checked'))){
             jQuery('#errorpaymentmethods').html('Debe seleccionar por lo menos 1 método de pago.');
-            e.preventDefault();
+            isValid = false;
+        }
+        
+        if (jQuery('#fullculqi_rsa_id').val() === '' && jQuery('#fullculqi_rsa_pk').val()){
+            jQuery('#errorrsa_id').html('Ingrese el RSA Id.');
+            isValid = false;
+        }
+        
+        if (jQuery('#fullculqi_rsa_id').val() && jQuery('#fullculqi_rsa_pk').val() === '' ){
+            jQuery('#errorrsa_pk').html('Ingrese el RSA Publickey.');
+            isValid = false;
         }
 
-
+        if (!isValid){
+            return false;
+        }
 
         if (jQuery('#fullculqi_tokenlogin').val().length>0) {
             var url_webhook = '';
