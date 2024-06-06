@@ -389,12 +389,18 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 								}
 							}, 1000);
 						} else {
-							console.log(response);
+							console.log("RESPONSE:::", response);
 							if (response.data.charge.data.card_brand.toUpperCase() == "MASTERCARD") {
 								jQuery("body").append('<div id= "d_mc-sonic"><mc-sonic id="mc-sonic"  clear-background></mc-sonic></div>');
 								jQuery('#loadingloginculqi').remove();
 								FullCulqi.playSonic(fullculqi_vars.url_success);
-							} else {
+							} else if (response.data.charge.data.card_brand.toUpperCase() == "VISA") {  
+								jQuery("body").append('<link id="visa-css" rel="stylesheet" href="/wp-content/plugins/culqi-woocommerce/includes/3rd-party/plugins/woocommerce/assets/lib/visa/css/visa.css?_=' + new Date().getTime() + '">');
+								jQuery("body").children().first().before('<div id="visa-branding"><div class="flag-container"><div class="flag-mask-top flag-mask"></div><div class="constrained-flag-mask constrained-top-flag-mask"></div><div class="flag-slider flag-slider-top"><img class="top-flag flag"></div><div class="top-flag-fade-mask flag-fade-mask"></div></div><div class="visa-container"><div class="visa-wrapper"><img class="visa-logo"><div class="wipers-container"><div class="wiper-left wiper"></div><div class="wiper-middle wiper"></div><div class="wiper-right wiper"></div></div><div class="checkmark-container"><img class="checkmark-circle"><div class="rotate-container"><img class="checkmark"><div class="checkmark-mask"></div></div></div></div></div><div class="flag-container"><div class="flag-mask-bottom flag-mask"></div><div class="constrained-flag-mask constrained-bottom-flag-mask"></div><div class="flag-slider flag-slider-bottom"><img class="bottom-flag flag"></div><div class="bottom-flag-fade-mask flag-fade-mask"></div></div></div>');
+								jQuery("body").append('<script id="visa-js" src="/wp-content/plugins/culqi-woocommerce/includes/3rd-party/plugins/woocommerce/assets/lib/visa/js/visa-sonic-min.js?_=' + new Date().getTime() + '"></script>');
+								FullCulqi.stopVisa(fullculqi_vars.url_success);
+							}
+							else {
 								location.href = fullculqi_vars.url_success;
 							}
 						}
@@ -470,6 +476,11 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 								jQuery("body").append('<div id= "d_mc-sonic"><mc-sonic id="mc-sonic"  clear-background></mc-sonic></div>');
 								jQuery('#loadingloginculqi').remove();
 								FullCulqi.playSonic(fullculqi_vars.url_success);
+							} else if (response.data.charge.data.card_brand.toUpperCase() == "VISA") {  
+								jQuery("body").append('<link id="visa-css" rel="stylesheet" href="/wp-content/plugins/culqi-woocommerce/includes/3rd-party/plugins/woocommerce/assets/lib/visa/css/visa.css?_=' + new Date().getTime() + '">');
+								jQuery("body").children().first().before('<div id="visa-branding"><div class="flag-container"><div class="flag-mask-top flag-mask"></div><div class="constrained-flag-mask constrained-top-flag-mask"></div><div class="flag-slider flag-slider-top"><img class="top-flag flag"></div><div class="top-flag-fade-mask flag-fade-mask"></div></div><div class="visa-container"><div class="visa-wrapper"><img class="visa-logo"><div class="wipers-container"><div class="wiper-left wiper"></div><div class="wiper-middle wiper"></div><div class="wiper-right wiper"></div></div><div class="checkmark-container"><img class="checkmark-circle"><div class="rotate-container"><img class="checkmark"><div class="checkmark-mask"></div></div></div></div></div><div class="flag-container"><div class="flag-mask-bottom flag-mask"></div><div class="constrained-flag-mask constrained-bottom-flag-mask"></div><div class="flag-slider flag-slider-bottom"><img class="bottom-flag flag"></div><div class="bottom-flag-fade-mask flag-fade-mask"></div></div></div>');
+								jQuery("body").append('<script id="visa-js" src="/wp-content/plugins/culqi-woocommerce/includes/3rd-party/plugins/woocommerce/assets/lib/visa/js/visa-sonic-min.js?_=' + new Date().getTime() + '"></script>');
+								FullCulqi.stopVisa(fullculqi_vars.url_success);
 							} else {
 								location.href = fullculqi_vars.url_success;
 							}
@@ -500,6 +511,18 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 			});
 		},
 
+		stopVisa: function (succes_url) { 
+			jQuery('#loadingloginculqi').remove(); 
+			document.addEventListener('sonicCompletion', FullCulqi.onCompletion(succes_url));
+			
+			setTimeout(function() { 
+				jQuery("#visa-css").remove();
+				jQuery("#visa-branding").remove();
+				jQuery("#visa-js").remove();
+			}, 1500);
+			
+		},
+
 		playSonic: function (succes_url) {
 			const mc_component = document.getElementById("mc-sonic");
 			console.log(mc_component);
@@ -508,7 +531,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 		},
 
 		onCompletion: function (succes_url) {
-			console.log("mastercard success");
+			console.log("Sonic success");
 			setTimeout(() => {
 				location.href = succes_url;
 			}, 2000);
