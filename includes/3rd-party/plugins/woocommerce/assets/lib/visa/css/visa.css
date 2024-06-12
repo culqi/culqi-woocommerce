@@ -21,6 +21,7 @@ html {
   position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 99999999;
   align-items: center;
   animation: 1.88s scaleXY 0ms steps(117);
   -webkit-animation: 1.88s scaleXY 0ms steps(117);

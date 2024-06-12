@@ -999,10 +999,15 @@ function enqueue_culqi_checkout_script() {
     wp_register_script('culqi-3ds', MPCULQI_URLAPI_PROD_3DS, array(), null, true);
     wp_register_script('mastercardjs', MPCULQI_WC_URL.'/assets/lib/mastercard/js/mc-sonic.min.js?_='.time(), array(), null, true);
 
+    wp_localize_script('culqi-checkout', 'visa_lib', array(
+        'plugin_url' => MPCULQI_WC_URL . '/assets/lib/visa/'
+    ));
+
     // Enqueue the Culqi script
     wp_enqueue_script('culqi-checkout');
     wp_enqueue_script('culqi-3ds');
     wp_enqueue_script('mastercardjs');
+
 	//
 	wp_enqueue_style('mastercardcss', MPCULQI_WC_URL.'/assets/lib/mastercard/css/mastercard.css?_='.time() );
 }

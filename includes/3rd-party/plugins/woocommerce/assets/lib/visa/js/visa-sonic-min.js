@@ -107,7 +107,7 @@
                     .classList.add('greater-than-ar')
               var g = e('sound')
               if (!g || 'true' === g) {
-                var d = new Audio('/wp-content/plugins/culqi-woocommerce/includes/3rd-party/plugins/woocommerce/assets/lib/visa/theme/visa_branding_sound.mp3')
+                var d = new Audio(visa_lib.plugin_url + 'theme/visa_branding_sound.mp3')
                 o
                   ? c()
                   : setTimeout(function () {
@@ -179,7 +179,7 @@
                 } else
                   console.error('An invalid hex color was passed:', f),
                     (f = 'blue')
-              var b = '/wp-content/plugins/culqi-woocommerce/includes/3rd-party/plugins/woocommerce/assets/lib/visa/theme',
+              var b = visa_lib.plugin_url + 'theme',
                 _ = r('top-flag')[0],
                 p = r('checkmark-circle')[0],
                 w = r('checkmark')[0],
