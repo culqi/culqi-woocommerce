@@ -1,0 +1,425 @@
+.no-animation *,
+.no-animation :after,
+.no-animation :before {
+  animation: none !important
+}
+
+.no-animation .visa-container {
+  display: none !important
+}
+
+#visa-branding,
+body,
+html {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  overflow: hidden;
+}
+
+#visa-branding {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 99999999;
+  align-items: center;
+  animation: 1.88s scaleXY 0ms steps(117);
+  -webkit-animation: 1.88s scaleXY 0ms steps(117);
+}
+
+@keyframes scaleXY {
+  0% {
+    transform: scale(1)
+  }
+
+  to {
+    transform: scale(1.141)
+  }
+}
+
+#visa-branding.background-dark,
+#visa-branding.background-dark .checkmark-mask,
+#visa-branding.background-dark .constrained-flag-mask,
+#visa-branding.background-dark .flag-container,
+#visa-branding.background-dark .flag-mask,
+#visa-branding.background-dark .visa-container,
+#visa-branding.background-dark .wiper-left,
+#visa-branding.background-dark .wiper-middle,
+#visa-branding.background-dark .wiper-right {
+  background-color: #15195a
+}
+
+#visa-branding.background-dark .top-flag-fade-mask {
+  background: linear-gradient(270deg, rgba(21, 25, 90, 0) 0, #15195a 95%)
+}
+
+#visa-branding.background-dark .bottom-flag-fade-mask {
+  background: linear-gradient(90deg, rgba(21, 25, 90, 0) 0, #15195a 95%)
+}
+
+#visa-branding.background-light,
+#visa-branding.background-light .checkmark-mask,
+#visa-branding.background-light .constrained-flag-mask,
+#visa-branding.background-light .flag-container,
+#visa-branding.background-light .flag-mask,
+#visa-branding.background-light .visa-container,
+#visa-branding.background-light .wiper-left,
+#visa-branding.background-light .wiper-middle,
+#visa-branding.background-light .wiper-right {
+  background-color: #fff
+}
+
+#visa-branding.background-light .top-flag-fade-mask {
+  background: linear-gradient(270deg, hsla(0, 0%, 100%, 0) 0, #fff 95%)
+}
+
+#visa-branding.background-light .bottom-flag-fade-mask {
+  background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff 95%)
+}
+
+#visa-branding.no-checkmark .checkmark-circle,
+#visa-branding.no-checkmark .checkmark-container,
+#visa-branding.no-checkmark .rotate-container {
+  display: none
+}
+
+.flag-container {
+  flex: 1 1 auto;
+  width: 100vw;
+  position: relative
+}
+
+.visa-container {
+  min-height: 1px;
+  width: 40vw;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.visa-logo {
+  width: 100%;
+  transform: scale(.85)
+}
+
+.visa-wrapper {
+  width: 100%;
+  position: relative
+}
+
+.checkmark-container,
+.wipers-container {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0
+}
+
+.wiper {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: skew(-22.8deg) translate(0)
+}
+
+@keyframes logo-mask-slide-left {
+  to {
+    transform: skew(-22.8deg) translate(-100%)
+  }
+}
+
+@keyframes logo-mask-slide-right {
+  to {
+    transform: skew(-22.8deg) translate(100%)
+  }
+}
+
+.wiper-left {
+  left: -7%;
+  animation: .2s logo-mask-slide-left 0ms steps(13) forwards
+}
+
+.wiper-right {
+  right: -7%;
+  animation: .2s logo-mask-slide-right 0ms steps(13) forwards
+}
+
+@keyframes logo-mask-mask-middle {
+  0% {
+    opacity: 1;
+    transform: skew(-22.8deg) scaleX(1)
+  }
+
+  to {
+    opacity: 1;
+    transform: skew(-22.8deg) scaleX(125)
+  }
+}
+
+.wiper-middle {
+  left: 50%;
+  width: 2%;
+  opacity: 0;
+  will-change: transform;
+  animation: .2068s logo-mask-mask-middle .6956s steps(13) forwards
+}
+
+.flag-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  z-index: 101
+}
+
+.flag-mask-bottom {
+  left: 0
+}
+
+.flag-mask-top {
+  right: 0
+}
+
+.flag {
+  position: absolute;
+  transform: rotate(180deg) scale(.8524, .8124);
+  width: 40vw;
+  backface-visibility: hidden;
+  z-index: 100
+}
+
+@keyframes slide-left {
+  to {
+    animation-timing-function: linear;
+    transform: translate(-108%)
+  }
+}
+
+@keyframes slide-right {
+  to {
+    animation-timing-function: linear;
+    transform: translate(108%)
+  }
+}
+
+.flag-slider {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0
+}
+
+.flag-slider-bottom {
+  will-change: transform;
+  animation: .4078s slide-right 30.2ms forwards steps(29)
+}
+
+.flag-slider-top {
+  will-change: transform;
+  animation: .4078s slide-left 30.2ms forwards steps(29)
+}
+
+.top-flag {
+  right: -8%;
+  bottom: 10%
+}
+
+.bottom-flag {
+  left: -8%;
+  top: 10%
+}
+
+@keyframes checkmark-rotate {
+  0% {
+    transform: rotate(80deg)
+  }
+
+  to {
+    transform: rotate(0deg)
+  }
+}
+
+@keyframes checkmark-fadeIn {
+  0% {
+    opacity: 0
+  }
+
+  40% {
+    opacity: 1
+  }
+
+  80% {
+    opacity: 1
+  }
+
+  to {
+    opacity: 0
+  }
+}
+
+.checkmark-container {
+  opacity: 0;
+  will-change: opacity;
+  animation: 1.1296s checkmark-fadeIn .7504s steps(70) forwards
+}
+
+.checkmark-circle {
+  height: 100%!important;
+  width: 100%;
+  position: absolute;
+  transform: scale(.965);
+  z-index: 10
+}
+
+.rotate-container {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  transform: rotate(80deg);
+  will-change: transform;
+  animation: .4228s checkmark-rotate .7804s steps(25) forwards
+}
+
+.checkmark {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-3deg) scale(.4);
+  z-index: 0
+}
+
+@keyframes checkmark-cover {
+  0% {
+    transform: translate(-50%, -50%) rotate(-43deg)
+  }
+
+  50% {
+    transform: translate(-16%, -5%) rotate(-43deg)
+  }
+
+  to {
+    transform: translate(50%, -97%) rotate(-43deg)
+  }
+}
+
+.checkmark-mask {
+  position: absolute;
+  height: 25%;
+  width: 25%;
+  top: 45%;
+  left: 50%;
+  z-index: 5;
+  transform: translate(-50%, -50%) rotate(-43deg);
+  animation: .3664s checkmark-cover .7804s forwards
+}
+
+.constrained-flag-mask {
+  display: none
+}
+
+#visa-branding.constrained .visa-container {
+  width: 90vw
+}
+
+#visa-branding.constrained .flag {
+  width: 80vw
+}
+
+#visa-branding.constrained .flag-mask {
+  width: 5%
+}
+
+@keyframes constrained-slide-left {
+  to {
+    animation-timing-function: linear;
+    transform: translate(-168%)
+  }
+}
+
+@keyframes constrained-slide-right {
+  to {
+    animation-timing-function: linear;
+    transform: translate(168%)
+  }
+}
+
+#visa-branding.constrained .flag-slider-bottom {
+  will-change: transform;
+  animation: .4078s constrained-slide-right 30.2ms forwards steps(29)
+}
+
+#visa-branding.constrained .flag-slider-top {
+  will-change: transform;
+  animation: .4078s constrained-slide-left 30.2ms forwards steps(29)
+}
+
+#visa-branding.constrained .top-flag {
+  right: -69%
+}
+
+#visa-branding.constrained .bottom-flag {
+  left: -69%
+}
+
+#visa-branding.constrained .flag-fade-mask {
+  width: 30%
+}
+
+#visa-branding.constrained .constrained-flag-mask {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 101;
+  width: 7%
+}
+
+#visa-branding.constrained .flag-fade-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10%;
+  z-index: 102
+}
+
+#visa-branding.constrained .top-flag-fade-mask {
+  left: 5%
+}
+
+#visa-branding.constrained .bottom-flag-fade-mask {
+  right: 5%
+}
+
+#visa-branding.constrained .constrained-bottom-flag-mask {
+  right: 0
+}
+
+#visa-branding.constrained .constrained-top-flag-mask {
+  left: 0
+}
+
+#visa-branding.constrained #visa-branding.greater-than-ar .flag-mask {
+  width: calc((100vw - 150vh) / 2)
+}
+
+#visa-branding.constrained #visa-branding.greater-than-ar .constrained-flag-mask {
+  width: calc(((100vw - (100vh * 1.5)) / 1.9))
+}
+
+#visa-branding.constrained #visa-branding.greater-than-ar .flag-fade-mask {
+  width: 37.5vh
+}
+
+#visa-branding.constrained #visa-branding.greater-than-ar .bottom-flag-fade-mask {
+  right: calc((100vw - 150vh) / 2)
+}
+
+#visa-branding.constrained #visa-branding.greater-than-ar .top-flag-fade-mask {
+  left: calc((100vw - 150vh) / 2)
+}
+
+#visa-branding.greater-than-ar .flag,
+#visa-branding.greater-than-ar .visa-container {
+  width: 150vh
+}

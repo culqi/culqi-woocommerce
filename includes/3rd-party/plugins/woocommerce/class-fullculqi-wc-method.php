@@ -997,14 +997,19 @@ function enqueue_culqi_checkout_script() {
     // Register the Culqi script
     wp_register_script('culqi-checkout', MPCULQI_URLAPI_CHECKOUT_PROD, array(), null, true);
     wp_register_script('culqi-3ds', MPCULQI_URLAPI_PROD_3DS, array(), null, true);
-    wp_register_script('mastercardjs', MPCULQI_WC_URL.'/assets/js/mc-sonic.min.js?_='.time(), array(), null, true);
+    wp_register_script('mastercardjs', MPCULQI_WC_URL.'/assets/lib/mastercard/js/mc-sonic.min.js?_='.time(), array(), null, true);
+
+    wp_localize_script('culqi-checkout', 'visa_lib', array(
+        'plugin_url' => MPCULQI_WC_URL . '/assets/lib/visa/'
+    ));
 
     // Enqueue the Culqi script
     wp_enqueue_script('culqi-checkout');
     wp_enqueue_script('culqi-3ds');
     wp_enqueue_script('mastercardjs');
+
 	//
-	wp_enqueue_style( 'mastercardcss', MPCULQI_WC_URL.'/assets/css/mastercard.css?_='.time() );
+	wp_enqueue_style('mastercardcss', MPCULQI_WC_URL.'/assets/lib/mastercard/css/mastercard.css?_='.time() );
 }
 
 // Hook the function to the 'wp_enqueue_scripts' action, which loads scripts on the front end
