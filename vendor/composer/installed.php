@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'wordress/culqi-integration',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '3a0e34c2519b6660074c2c68f76051da429ff5c7',
+        'type' => 'wordpress-plugin',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'culqi/culqi-php' => array(
+            'pretty_version' => 'v2.0.0',
+            'version' => '2.0.0.0',
+            'reference' => '0fa5db04c7f596d95dc7366d8b3988d3843fc451',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../culqi/culqi-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'rmccue/requests' => array(
+            'pretty_version' => 'v2.0.11',
+            'version' => '2.0.11.0',
+            'reference' => '31435a468e2357e68df743f2527bda32556a0818',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../rmccue/requests',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'wordress/culqi-integration' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '3a0e34c2519b6660074c2c68f76051da429ff5c7',
+            'type' => 'wordpress-plugin',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

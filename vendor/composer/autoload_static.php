@@ -4,19 +4,28 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1208fd3a4ecf6b2936ad497eeba734f5
+class ComposerStaticInit675319176a923f42b031aa568dc542ba
 {
-    public static $prefixesPsr0 = array (
-        'R' => 
+    public static $files = array (
+        '941748b3c8cae4466c827dfb5ca9602a' => __DIR__ . '/..' . '/rmccue/requests/library/Deprecated.php',
+    );
+
+    public static $prefixLengthsPsr4 = array (
+        'W' => 
         array (
-            'Requests' => 
-            array (
-                0 => __DIR__ . '/..' . '/rmccue/requests/library',
-            ),
+            'WpOrg\\Requests\\' => 15,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'WpOrg\\Requests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rmccue/requests/src',
         ),
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Culqi\\Cards' => __DIR__ . '/..' . '/culqi/culqi-php/lib/Culqi/Cards.php',
         'Culqi\\Charges' => __DIR__ . '/..' . '/culqi/culqi-php/lib/Culqi/Charges.php',
         'Culqi\\Client' => __DIR__ . '/..' . '/culqi/culqi-php/lib/Culqi/Client.php',
@@ -39,13 +48,15 @@ class ComposerStaticInit1208fd3a4ecf6b2936ad497eeba734f5
         'Culqi\\Subscriptions' => __DIR__ . '/..' . '/culqi/culqi-php/lib/Culqi/Subscriptions.php',
         'Culqi\\Tokens' => __DIR__ . '/..' . '/culqi/culqi-php/lib/Culqi/Tokens.php',
         'Culqi\\Transfers' => __DIR__ . '/..' . '/culqi/culqi-php/lib/Culqi/Transfers.php',
+        'Requests' => __DIR__ . '/..' . '/rmccue/requests/library/Requests.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixesPsr0 = ComposerStaticInit1208fd3a4ecf6b2936ad497eeba734f5::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit1208fd3a4ecf6b2936ad497eeba734f5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit675319176a923f42b031aa568dc542ba::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit675319176a923f42b031aa568dc542ba::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit675319176a923f42b031aa568dc542ba::$classMap;
 
         }, null, ClassLoader::class);
     }

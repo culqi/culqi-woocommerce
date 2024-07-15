@@ -1,10 +1,10 @@
 <?php
-$tarjeta = $methods['tarjeta'] ?? '';
-$yape = $methods['yape'] ?? '';
-$billetera = $methods['billetera'] ?? '';
-$bancaMovil = $methods['bancaMovil'] ?? '';
-$agente = $methods['agente'] ?? '';
-$cuetealo = $methods['cuetealo'] ?? '';
+  $tarjeta = isset($methods['tarjeta']) ? $methods['tarjeta'] : '';
+  $yape = isset($methods['yape']) ? $methods['yape'] : '';
+  $billetera = isset($methods['billetera']) ? $methods['billetera'] : '';
+  $bancaMovil = isset($methods['bancaMovil']) ? $methods['bancaMovil'] : '';
+  $agente = isset($methods['agente']) ? $methods['agente'] : '';
+  $cuetealo = isset($methods['cuetealo']) ? $methods['cuetealo'] : '';
 ?>
 <label for="fullculqi_logo">
   <div>

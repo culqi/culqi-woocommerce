@@ -1,98 +1,153 @@
-[
-    {
-        "name": "gonzalesc/culqi-php",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/gonzalesc/culqi-php.git",
-            "reference": "24021e711f8eee6ea51630a25665232e6189f474"
+{
+    "packages": [
+        {
+            "name": "culqi/culqi-php",
+            "version": "v2.0.0",
+            "version_normalized": "2.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/culqi/culqi-php.git",
+                "reference": "0fa5db04c7f596d95dc7366d8b3988d3843fc451"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/culqi/culqi-php/zipball/0fa5db04c7f596d95dc7366d8b3988d3843fc451",
+                "reference": "0fa5db04c7f596d95dc7366d8b3988d3843fc451",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "rmccue/requests": ">=1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.4.* || 4.8.*"
+            },
+            "time": "2022-12-13T22:06:00+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "lib/Culqi/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Culqi and contributors",
+                    "homepage": "https://github.com/culqi/culqi-php/contributors"
+                }
+            ],
+            "description": "Cliente Culqi API para PHP",
+            "homepage": "https://culqi.com",
+            "keywords": [
+                "api",
+                "client",
+                "culqi",
+                "pagos",
+                "payments",
+                "peru",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/culqi/culqi-php/issues",
+                "source": "https://github.com/culqi/culqi-php/tree/v2.0.0"
+            },
+            "install-path": "../culqi/culqi-php"
         },
-        "require": {
-            "php": ">=5.3.3",
-            "rmccue/requests": ">=1.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.4.* || 4.8.*"
-        },
-        "time": "2020-11-30T19:50:48+00:00",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "lib/Culqi/"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Culqi and contributors",
-                "homepage": "https://github.com/culqi/culqi-php/contributors"
-            }
-        ],
-        "description": "Culqi API to PHP",
-        "homepage": "https://culqi.com",
-        "keywords": [
-            "api",
-            "client",
-            "culqi",
-            "pagos",
-            "payments",
-            "peru",
-            "php"
-        ]
-    },
-    {
-        "name": "rmccue/requests",
-        "version": "v1.7.0",
-        "version_normalized": "1.7.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/rmccue/Requests.git",
-            "reference": "87932f52ffad70504d93f04f15690cf16a089546"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/rmccue/Requests/zipball/87932f52ffad70504d93f04f15690cf16a089546",
-            "reference": "87932f52ffad70504d93f04f15690cf16a089546",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2"
-        },
-        "require-dev": {
-            "requests/test-server": "dev-master"
-        },
-        "time": "2016-10-13T00:11:37+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Requests": "library/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "ISC"
-        ],
-        "authors": [
-            {
-                "name": "Ryan McCue",
-                "homepage": "http://ryanmccue.info"
-            }
-        ],
-        "description": "A HTTP library written in PHP, for human beings.",
-        "homepage": "http://github.com/rmccue/Requests",
-        "keywords": [
-            "curl",
-            "fsockopen",
-            "http",
-            "idna",
-            "ipv6",
-            "iri",
-            "sockets"
-        ]
-    }
-]
+        {
+            "name": "rmccue/requests",
+            "version": "v2.0.11",
+            "version_normalized": "2.0.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WordPress/Requests.git",
+                "reference": "31435a468e2357e68df743f2527bda32556a0818"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WordPress/Requests/zipball/31435a468e2357e68df743f2527bda32556a0818",
+                "reference": "31435a468e2357e68df743f2527bda32556a0818",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+                "php-parallel-lint/php-console-highlighter": "^0.5.0",
+                "php-parallel-lint/php-parallel-lint": "^1.3.1",
+                "phpcompatibility/php-compatibility": "^9.0",
+                "requests/test-server": "dev-main",
+                "roave/security-advisories": "dev-latest",
+                "squizlabs/php_codesniffer": "^3.6",
+                "wp-coding-standards/wpcs": "^2.0",
+                "yoast/phpunit-polyfills": "^1.0.0"
+            },
+            "suggest": {
+                "art4/requests-psr18-adapter": "For using Requests as a PSR-18 HTTP Client",
+                "ext-curl": "For improved performance",
+                "ext-openssl": "For secure transport support",
+                "ext-zlib": "For improved performance when decompressing encoded streams"
+            },
+            "time": "2024-03-25T10:48:46+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "library/Deprecated.php"
+                ],
+                "psr-4": {
+                    "WpOrg\\Requests\\": "src/"
+                },
+                "classmap": [
+                    "library/Requests.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ISC"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan McCue",
+                    "homepage": "https://rmccue.io/"
+                },
+                {
+                    "name": "Alain Schlesser",
+                    "homepage": "https://github.com/schlessera"
+                },
+                {
+                    "name": "Juliette Reinders Folmer",
+                    "homepage": "https://github.com/jrfnl"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/WordPress/Requests/graphs/contributors"
+                }
+            ],
+            "description": "A HTTP library written in PHP, for human beings.",
+            "homepage": "https://requests.ryanmccue.info/",
+            "keywords": [
+                "curl",
+                "fsockopen",
+                "http",
+                "idna",
+                "ipv6",
+                "iri",
+                "sockets"
+            ],
+            "support": {
+                "docs": "https://requests.ryanmccue.info/",
+                "issues": "https://github.com/WordPress/Requests/issues",
+                "source": "https://github.com/WordPress/Requests"
+            },
+            "install-path": "../rmccue/requests"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
