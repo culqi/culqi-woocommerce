@@ -312,12 +312,14 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 						token_id: Culqi.token.id,
 						order_id: fullculqi_vars.order_id,
 						country_code: Culqi.token.client.ip_country_code,
-						installments: (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined) ? 0 : Culqi.token.metadata.installments,
 						wpnonce: fullculqi_vars.wpnonce,
 						enviroment: enviroment[0],
 						device: device,
 						email: Culqi.token.email
 					};
+					if (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined){
+						data.installments = Culqi.token.metadata.installments;
+					}
 				}
 				FullCulqi.loadAjax(data);
 			}
@@ -352,13 +354,15 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 						token_id: Culqi.token.id,
 						order_id: fullculqi_vars.order_id,
 						country_code: Culqi.token.client.ip_country_code,
-						installments: (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined) ? 0 : Culqi.token.metadata.installments,
 						wpnonce: fullculqi_vars.wpnonce,
 						enviroment: enviroment[0],
 						device: device,
 						parameters3DS: parameters3DS,
 						email: Culqi.token.email
 					};
+					if (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined){
+						data.installments = Culqi.token.metadata.installments;
+					}
 				}
 				FullCulqi.loadAjax3DS(data);
 			}
