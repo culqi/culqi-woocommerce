@@ -138,10 +138,10 @@ class FullCulqi_WC_Process {
 
 		// Get WC Order
 		$order = wc_get_order( absint( $post_data['order_id'] ) );
-		$installments = sanitize_text_field( $post_data['installments'] );
-		if(!$installments>0){
-            $installments=1;
-        }
+		$installments = 0;
+		if(array_key_exists('installments', $post_data)) {
+			$installments = sanitize_text_field( $post_data['installments'] );
+		}
 		$country_code = sanitize_text_field( $post_data['country_code'] );
 
 		if( isset( $post_data['token_id'] ) )
@@ -362,11 +362,11 @@ class FullCulqi_WC_Process {
                 }
 			}
 
+			if(!$installments) {
+				unset($args_charges['installments']);
+			}
 
-
-			//echo var_dump($args_charges);
 			$culqi_charge = FullCulqi_Charges::create( $args_charges );
-			//echo var_dump($installments);
             
 			if( $culqi_charge['status'] != 'ok' ) {
                 if(isset($culqi_charge['action_code']) and $culqi_charge['action_code']=='REVIEW'){
