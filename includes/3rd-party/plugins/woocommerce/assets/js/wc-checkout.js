@@ -21,25 +21,28 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
-var is3ds = false;
 Culqi3DS.options = {
 	closeModalAction: () => window.location.reload(true), // ACTION CUANDO SE CIERRA EL MODAL
 };
-window.addEventListener("message", async function (event) {
 
-	if (event.origin === window.location.origin) {
-		const { parameters3DS, error } = event.data;
+function handleMessage(event) {
+    if (event.origin === window.location.origin) {
+        const { parameters3DS, error } = event.data;
 
-		if (parameters3DS) {
-			is3ds = true;
-			window.fullculqi.payProcess3DS(parameters3DS);
-		}
+        if (parameters3DS) {
+            window.fullculqi.payProcess3DS(parameters3DS);
+			window.removeEventListener("message", handleMessage);
+        }
 
-		if (error) {
+        if (error) {
+            // Handle error if needed
+        }
 
-		}
-	}
-}, false);
+        // Remove the event listener after the first call
+    }
+}
+
+window.addEventListener("message", handleMessage, false);
 Culqi3DS.publicKey = fullculqi_vars.public_key;
 
 (function ($) {
@@ -555,9 +558,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 
 function culqi() {
 	setTimeout(function () {
-		if(!is3ds) {
-			window.fullculqi.payProcess();
-		}
+		window.fullculqi.payProcess();
 	}, 10);
 }
 
