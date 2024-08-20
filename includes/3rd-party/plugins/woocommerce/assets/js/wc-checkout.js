@@ -21,6 +21,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
+var is3ds = false;
 Culqi3DS.options = {
 	closeModalAction: () => window.location.reload(true), // ACTION CUANDO SE CIERRA EL MODAL
 };
@@ -30,6 +31,7 @@ window.addEventListener("message", async function (event) {
 		const { parameters3DS, error } = event.data;
 
 		if (parameters3DS) {
+			is3ds = true;
 			window.fullculqi.payProcess3DS(parameters3DS);
 		}
 
@@ -553,7 +555,9 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 
 function culqi() {
 	setTimeout(function () {
-		window.fullculqi.payProcess();
+		if(!is3ds) {
+			window.fullculqi.payProcess();
+		}
 	}, 10);
 }
 
