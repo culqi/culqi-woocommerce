@@ -24,20 +24,25 @@
 Culqi3DS.options = {
 	closeModalAction: () => window.location.reload(true), // ACTION CUANDO SE CIERRA EL MODAL
 };
-window.addEventListener("message", async function (event) {
 
-	if (event.origin === window.location.origin) {
-		const { parameters3DS, error } = event.data;
+function handleMessage(event) {
+    if (event.origin === window.location.origin) {
+        const { parameters3DS, error } = event.data;
 
-		if (parameters3DS) {
-			window.fullculqi.payProcess3DS(parameters3DS);
-		}
+        if (parameters3DS) {
+            window.fullculqi.payProcess3DS(parameters3DS);
+			window.removeEventListener("message", handleMessage);
+        }
 
-		if (error) {
+        if (error) {
+            // Handle error if needed
+        }
 
-		}
-	}
-}, false);
+        // Remove the event listener after the first call
+    }
+}
+
+window.addEventListener("message", handleMessage, false);
 Culqi3DS.publicKey = fullculqi_vars.public_key;
 
 (function ($) {
@@ -307,17 +312,20 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				} else if (Culqi.token) {
 					Culqi.close();
 					jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando <img style="display: inline-block" width="14" src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg" /></div></div>');
+					const installments = (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined) ? 0 : Culqi.token.metadata.installments;
 					data = {
 						action: 'charge',
 						token_id: Culqi.token.id,
 						order_id: fullculqi_vars.order_id,
 						country_code: Culqi.token.client.ip_country_code,
-						installments: (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined) ? 0 : Culqi.token.metadata.installments,
 						wpnonce: fullculqi_vars.wpnonce,
 						enviroment: enviroment[0],
 						device: device,
 						email: Culqi.token.email
 					};
+					if(installments) {
+						data.installments = installments;
+					}
 				}
 				FullCulqi.loadAjax(data);
 			}
@@ -347,18 +355,21 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 					};
 
 				} else if (Culqi.token) {
+					const installments = (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined) ? 0 : Culqi.token.metadata.installments;
 					data = {
 						action: 'charge',
 						token_id: Culqi.token.id,
 						order_id: fullculqi_vars.order_id,
 						country_code: Culqi.token.client.ip_country_code,
-						installments: (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined) ? 0 : Culqi.token.metadata.installments,
 						wpnonce: fullculqi_vars.wpnonce,
 						enviroment: enviroment[0],
 						device: device,
 						parameters3DS: parameters3DS,
 						email: Culqi.token.email
 					};
+					if(installments) {
+						data.installments = installments;
+					}
 				}
 				FullCulqi.loadAjax3DS(data);
 			}

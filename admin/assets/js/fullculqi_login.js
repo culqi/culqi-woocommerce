@@ -27,9 +27,18 @@ jQuery(document).ready(function () {
         jQuery('#errorpubkey').html('');
         jQuery('#errorseckey').html('');
         jQuery('#errortimeexp').html('');
+        jQuery('#errorpaymentmethods').html('');
         var llavepublica = jQuery('#fullculqi_pubkey').val().split('_');
         var llaveprivada = jQuery('#fullculqi_seckey').val().split('_');
         var isValid = true;
+        if(!llavepublica){
+            jQuery('#errorpubkey').html('La llave pública es requerida');
+            isValid = false;
+        }
+        if(!llaveprivada){
+            jQuery('#errorpubkey').html('La llave privada es requerida');
+            isValid = false;
+        }
         if(jQuery('#integracion').is(':checked')){
             if(!(llavepublica.length==3 && llavepublica[1]=='test')){
                 jQuery('#errorpubkey').html('La llave pública no pertenece al ambiente de integración');
