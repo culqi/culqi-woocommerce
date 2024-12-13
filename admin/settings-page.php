@@ -4,7 +4,7 @@ $config = culqi_get_config();
 $status = $config->plugin_status ?? '';
 $pk = $config->public_key ?? '';
 $merchant = $config->merchant ?? '';
-$payment_methods = $config->payment_methods ?? '';
+$payment_methods = $config->payment_methods;
 ?>
 
 <style>
@@ -30,6 +30,9 @@ $payment_methods = $config->payment_methods ?? '';
 
 <div class="wrap">
     <div class="iframe-container">
-        <iframe src="https://configonlineplatform.culqi.com?platform=woocommerce&status=<?=$status?>&pk=<?=$pk?>&merchant=<?=$merchant?>&activePaymentMethods=<?=$payment_methods?>" width="100%"></iframe>
+        <iframe 
+            src="<?php echo esc_url( 'http://localhost:5173/?platform=woocommerce&status=' . urlencode( $status ) . '&pk=' . urlencode( $pk ) . '&merchant=' . urlencode( $merchant ) . '&activePaymentMethods=' . urlencode( $payment_methods ) ); ?>" 
+            width="100%">
+        </iframe>
     </div>
 </div>

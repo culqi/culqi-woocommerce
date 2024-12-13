@@ -1,10 +1,22 @@
 <?php
-/**
- * Plugin Name: Culqi Payment Gateway
- * Description: Adds Culqi as a payment method in WooCommerce.
- * Version: 1.0.0
- * Author: Your Name
- */
+/*
+Plugin Name: Culqi
+Plugin URI:https://wordpress.org/plugins/culqi-checkout
+Description: Culqi acepta pagos con tarjetas de débito y crédito, Yape, Cuotéalo BCP y PagoEfectivo (billeteras móviles, agentes y bodegas).
+Version: 3.1.2
+Author: Culqi
+Author URI: https://culqi.com/
+Developer: Culqi Team
+Developer URI: https://culqi.com/
+License: GPLv2 or later
+Text Domain: culqi
+Requires at least: 5.0
+Tested up to: 6.0
+Stable tag: 5.6
+Requires PHP: 5.6
+WC requires at least: 2.6.11
+WC tested up to: 3.0.0
+*/
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly

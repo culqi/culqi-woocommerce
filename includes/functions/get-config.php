@@ -2,9 +2,15 @@
 
 function culqi_get_config() {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'culqi_merchant_data';
+    $limit = 1;
+    $cache_key = 'culqi_merchant_data_' . $limit;
+    $existing_config = wp_cache_get($cache_key, 'culqi');
 
-    $existing_config = $wpdb->get_row("SELECT * FROM $table_name LIMIT 1");
+    if ($existing_config === false) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $existing_config = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}culqi_merchant_data LIMIT 1");
+        wp_cache_set($cache_key, $existing_config, 'culqi', HOUR_IN_SECONDS);
+    }
 
     return $existing_config ?? [];
 }

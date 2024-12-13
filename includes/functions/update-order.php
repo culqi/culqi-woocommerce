@@ -30,5 +30,5 @@ function culqi_update_order(WP_REST_Request $request) {
             }
         }
     }
-    return new WP_REST_Response(['message' => 'Error on update order status.'], 200);
+    return new WP_REST_Response(['message' => 'Error on update order status.'], 400);
 }

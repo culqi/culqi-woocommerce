@@ -1,5 +1,4 @@
 jQuery(document).ready(function($) {
-    console.log(555555);
     jQuery('tr[data-gateway_id="culqi"] .wc-payment-gateway-method-toggle-enabled').click(function(e) {
         e.preventDefault();
         var isEnabled = 'no';
@@ -16,7 +15,8 @@ jQuery(document).ready(function($) {
                 type: 'POST',
                 data: {
                     action: 'culqi_gateway_toggle',
-                    enabled: isEnabled
+                    enabled: isEnabled,
+                    nonce: culqiGatewayAjax.nonce,
                 },
                 success: function(response) {
                     console.log(response);
@@ -38,9 +38,6 @@ jQuery(document).ready(function($) {
     
         if (event.data.action === 'saveConfig') {
             const data = event.data.data;
-            console.log(1111);
-            console.log(data);
-            console.log(22222);
 
             $.ajax({
                 url: culqiGatewayAjax.ajax_url,
@@ -50,6 +47,9 @@ jQuery(document).ready(function($) {
                     pluginStatus: data.pluginStatus,
                     publicKey: data.publicKey,
                     merchant: data.merchant,
+                    rsa_pk: data.rsaPkPlugin,
+                    payment_methods: data.paymentMethods,
+                    nonce: culqiGatewayAjax.nonce,
                 },
                 success: function(response) {
                     console.log(response);

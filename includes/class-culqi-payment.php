@@ -57,7 +57,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             "gid" => "gid://woocommerce/PaymentSession/" . $order_id,
             "amount" => number_format($order->get_total(), 2, '.', ''),
             "currency" => $order->get_currency(),
-            "proposed_at" => date('Y-m-d\TH:i:s'),
+            "proposed_at" => gmdate('Y-m-d\TH:i:s'),
             "kind" => "sale",
             "test" => true,
             "payment_method" => array(
@@ -98,7 +98,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
         $response = wp_remote_post($api_url, array(
             'method'    => 'POST',
-            'body'      => json_encode($body),
+            'body'      => wp_json_encode($body),
             'timeout'   => 45,
             'headers'   => array(
                 'Content-Type' => 'application/json',
@@ -108,7 +108,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         ));
 
         if (is_wp_error($response)) {
-            wc_add_notice(__('Payment error: Could not connect to the payment gateway.', 'culqi-payment'), 'error');
+            wc_add_notice(__('Payment error: Could not connect to the payment gateway.', 'culqi'), 'error');
             return;
         }
 
@@ -118,11 +118,11 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         if (isset($result['redirect_url'])) {
             $gateway_url = $result['redirect_url'];
         } else {
-            wc_add_notice(__('Payment error: Invalid response from payment gateway.', 'culqi-payment'), 'error');
+            wc_add_notice(__('Payment error: Invalid response from payment gateway.', 'culqi'), 'error');
             return;
         }
 
-        $order->update_status('on-hold', __('Awaiting payment', 'culqi-payment'));
+        $order->update_status('on-hold', __('Awaiting payment', 'culqi'));
         // $order->update_meta_data('culqi_redirect_url', $gateway_url);
         $order->save();
         //WC()->cart->empty_cart();

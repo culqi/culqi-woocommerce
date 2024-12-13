@@ -23,14 +23,14 @@ function generate_token()
 
     $config = culqi_get_config();
     if(!$config->rsa_pk) {
-        wc_add_notice(__('Debes configurar tu llave pública.', 'culqi-payment'), 'error');
+        wc_add_notice(__('Debes configurar tu llave pública.', 'culqi'), 'error');
         return;
     }
     $data = [
         "pk" => $config->public_key,
         "exp" => $exp
     ];
-    $encryptedData = encrypt_data_with_rsa(json_encode($data), $config->rsa_pk);
+    $encryptedData = encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk);
     return $encryptedData;
 }
 
@@ -49,7 +49,7 @@ function verify_jwt_token($token)
         $decoded = JWT::decode($token, $key_data, $headers);
         return (isset($decoded->exp) && time() < $decoded->exp);
     } catch (Exception $e) {
-        echo "Error decoding token: " . $e->getMessage();
+        return false;
     }
 }
 
