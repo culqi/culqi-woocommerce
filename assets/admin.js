@@ -5,7 +5,6 @@ jQuery(document).ready(function($) {
         const toggleClassList = $(this).find('.woocommerce-input-toggle').attr('class').split(/\s+/);
         $.each(toggleClassList, function(index, item) {
             if (item === 'woocommerce-input-toggle--disabled') {
-                console.log(item);
                 isEnabled = 'yes';
             }
         });
@@ -19,7 +18,6 @@ jQuery(document).ready(function($) {
                     nonce: culqiGatewayAjax.nonce,
                 },
                 success: function(response) {
-                    console.log(response);
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error: ' + status + error);
@@ -30,12 +28,6 @@ jQuery(document).ready(function($) {
     });
     //
     window.addEventListener('message', function(event) {
-        console.log(event);
-        // Ensure the message is coming from a trusted iframe origin
-        /*if (event.origin !== 'https://your-iframe-origin.com') {
-            return;
-        }*/
-    
         if (event.data.action === 'saveConfig') {
             const data = event.data.data;
 
@@ -52,7 +44,6 @@ jQuery(document).ready(function($) {
                     nonce: culqiGatewayAjax.nonce,
                 },
                 success: function(response) {
-                    console.log(response);
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error: ' + status + error);

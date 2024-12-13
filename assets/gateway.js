@@ -8,7 +8,6 @@ jQuery(function($) {
             data: $('form.checkout').serialize(),
             success: function(response) {
                 if (response.result === 'success') {
-                    console.log(response);
                     if(response.show_modal) {
                         $('#order-created-modal').fadeIn();
                         $('#order-created-modal iframe').attr('src', response.redirect);
@@ -29,11 +28,6 @@ jQuery(function($) {
     });
 
     window.addEventListener('message', function(event) {
-        // Ensure the message is coming from a trusted iframe origin
-        /*if (event.origin !== 'https://your-iframe-origin.com') {
-            return;
-        }*/
-    
         if (event.data.action === 'closeModal') {
             $('#order-created-modal').fadeOut();
             $('body').removeClass('no-scroll');
