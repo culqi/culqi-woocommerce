@@ -35,20 +35,20 @@ function culqi_gateway_toggle_action()
             $wpdb->prepare("SELECT * FROM {$wpdb->prefix}culqi_merchant_data LIMIT %d", $limit)
         );
         wp_cache_set($cache_key, $existing_user, 'culqi', HOUR_IN_SECONDS);
-    } else {
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $wpdb->update(
-            $table_name,
-            [
-                'plugin_status' => $plugin_status,
-                'updated_at' => current_time('mysql'),
-            ],
-            ['id' => $existing_user[0]->id],
-            ['%d', '%s'],
-            ['%d']
-        );
-        wp_cache_delete($cache_key, 'culqi');
     }
+    
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+    $wpdb->update(
+        $table_name,
+        [
+            'plugin_status' => $plugin_status,
+            'updated_at' => current_time('mysql'),
+        ],
+        ['id' => $existing_user[0]->id],
+        ['%d', '%s'],
+        ['%d']
+    );
+    wp_cache_delete($cache_key, 'culqi');
 
     wp_send_json_success(['message' => 'Toggle state updated to ' . $enabled]);
 }

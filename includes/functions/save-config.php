@@ -5,7 +5,7 @@ add_action('wp_ajax_culqi_save_config', 'culqi_save_config');
 function culqi_save_config() 
 {
     $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
-    if (empty($nonce) || !wp_verify_nonce($nonce, 'culqi_save_config')) {
+    if (empty($nonce) || !wp_verify_nonce($nonce, 'culqi_gateway_toggle')) {
         wp_send_json_error(['message' => 'Nonce verification failed.'], 403);
     }
     global $wpdb;

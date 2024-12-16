@@ -21,11 +21,23 @@ function culqi_update_order(WP_REST_Request $request) {
                 $order->update_status($status, 'Order status updated.', true);
                 $order->add_order_note('Order status changed to ' . $status);
                 if(get_payment_type($transaction_id) == "charge") {
+                    $card_number = sanitize_text_field($data['cardNumber']) ?? '';
+                    $card_brand = sanitize_text_field($data['cardBrand']) ?? '';
+                    $reference_code = sanitize_text_field($data['referenceCode']) ?? '';
                     $note_order_text = "charge";
                     wc_reduce_stock_levels($order_id);
-                }
-                $order->add_order_note('Culqi '. $note_order_text .' created: '. $transaction_id);
+                    $note_order_text = 'Culqi Charge Created:' . "\n" .
+                        'Id: ' . $transaction_id . "\n" .
+                        'Tarjeta: ' . $card_number . "\n" .
+                        'Marca: ' . $card_brand . "\n" .
+                        'Cod. Referencia: ' . $reference_code;
 
+                    // Add the order note
+                    $order->add_order_note($note_order_text);
+                } else {
+                    $order->add_order_note('Culqi '. $note_order_text .' created: '. $transaction_id);
+                }
+                
                 return new WP_REST_Response(['message' => 'Order status updated successfully.'], 200);
             }
         }

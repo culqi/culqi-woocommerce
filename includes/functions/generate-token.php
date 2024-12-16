@@ -54,32 +54,24 @@ function verify_jwt_token($token)
 }
 
 function getKidFromJwt($jwt) {
-    // Split the JWT into its three parts
     $tks = explode('.', $jwt);
-    
-    // Ensure the JWT has the correct number of segments
     if (count($tks) !== 3) {
         throw new UnexpectedValueException('Wrong number of segments');
     }
-    
-    // Get the header part and decode it
+
     $headerB64 = $tks[0];
     $headerJson = base64UrlDecode($headerB64);
-    
-    // Decode the JSON string to a PHP array
+
     $header = json_decode($headerJson);
     
-    // Check if the header contains the 'kid' field
     if (isset($header->kid)) {
         return $header->kid;
     }
 
-    return null; // Return null if 'kid' is not set
+    return null;
 }
 
-// Function to Base64 URL decode
 function base64UrlDecode($data) {
-    // Replace URL-safe characters and add padding
     $data .= str_repeat('=', (4 - strlen($data) % 4) % 4);
     return base64_decode(strtr($data, '-_', '+/'));
 }
