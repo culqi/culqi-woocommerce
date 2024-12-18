@@ -13,7 +13,7 @@ Text Domain: culqi
 Requires at least: 5.0
 Tested up to: 6.0
 Stable tag: 5.6
-Requires PHP: 5.6
+Requires PHP: 7.4
 WC requires at least: 2.6.11
 WC tested up to: 3.0.0
 */
@@ -42,6 +42,7 @@ function culqi_payment_activate() {
         deactivate_plugins(plugin_basename(__FILE__));
         wp_die('WooCommerce is required to use the Culqi Payment Gateway plugin. Please install and activate WooCommerce.');
     }
+    
     culqi_create_table();
 }
 
@@ -54,6 +55,11 @@ function culqi_payment_deactivate() {
 // Load plugin after WooCommerce is initialized
 add_action('plugins_loaded', 'culqi_gateway_init', 11);
 
+add_action( 'before_woocommerce_init', function () {
+    if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+    }
+});
 function culqi_gateway_init() {
     if (!class_exists('WC_Payment_Gateway')) {
         return;

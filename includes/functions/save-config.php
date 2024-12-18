@@ -67,20 +67,8 @@ function culqi_save_config()
             ]
         );
     }
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-    $wpdb->insert(
-        $table_name,
-        [
-            'plugin_status' => $plugin_status,
-            'public_key' => $public_key,
-            'merchant' => $merchant,
-            'rsa_pk' => $rsa_pk,
-            'payment_methods' => $payment_methods,
-            'created_at' => current_time('mysql'),
-        ]
-    );
 
-    $available_gateways = get_option('woocommerce_gateway_order');
+    $available_gateways = get_option('woocommerce_gateway_order') ? get_option('woocommerce_gateway_order') : [];
     if ($plugin_status) {
         if (!in_array('culqi', $available_gateways)) {
             $available_gateways[] = 'culqi';

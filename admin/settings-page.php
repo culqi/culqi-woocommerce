@@ -4,7 +4,7 @@ $config = culqi_get_config();
 $status = $config->plugin_status ?? '';
 $pk = $config->public_key ?? '';
 $merchant = $config->merchant ?? '';
-$payment_methods = $config->payment_methods;
+$payment_methods = $config->payment_methods ?? '';
 ?>
 
 <style>
