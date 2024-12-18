@@ -4,8 +4,8 @@ Tags: culqi, checkout, payment method, Perú, woocommerce
 Donate link: https://culqi.com/
 Requires at least: 4.5
 Tested up to: 6.7
-Stable tag: 3.1.2
-Requires PHP: 7.4
+Stable tag: 4.0.0
+Requires PHP: 7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,9 +99,9 @@ Sí, para trabajar con estas opciones de pago se requiere de ordenes de compra, 
 == Changelog ==
 
 = 1.0.0 =
-* Feature: Checkout Culqi V4
+* Feature: Custom Checkout V4
 * Feature: 3DS
 
 == Upgrade Notice ==
 
-El plugin cuenta con la integración de Culqi Checkout v4 y Culqi 3DS
+El plugin cuenta con la integración de Culqi Custom Checkout y Culqi 3DS
