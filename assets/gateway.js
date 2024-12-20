@@ -1,5 +1,6 @@
 jQuery(function($) {
-    $('form.checkout').on('checkout_place_order', function(e){
+    $('form.checkout').on('checkout_place_order', function(e) {
+        jQuery('#place_order').attr('disabled', true);
         e.preventDefault();
 
         $.ajax({
@@ -15,6 +16,7 @@ jQuery(function($) {
                     } else {
                         window.location.href = response.redirect;
                     }
+                    jQuery('#place_order').attr('disabled', false);
                 } else {
                     alert('Order creation failed. Please try again.');
                 }
