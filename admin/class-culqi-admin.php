@@ -4,18 +4,17 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-add_action('admin_menu', 'culqi_payment_settings_page');
+add_action('admin_menu', 'custom_plugin_add_submenu');
 
-function culqi_payment_settings_page()
+function custom_plugin_add_submenu()
 {
-    add_menu_page(
-        'Culqi Payment Settings',
-        'Culqi Settings',
+    add_submenu_page(
+        'woocommerce',
+        'Culqi',
+        'Culqi',
         'manage_options',
         'culqi-settings',
-        'culqi_settings_page_callback',
-        '',
-        100
+        'culqi_settings_page_callback'
     );
 }
 

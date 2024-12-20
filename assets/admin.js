@@ -50,6 +50,10 @@ jQuery(document).ready(function($) {
                 }
             });
         }
+        //if (event.origin !== 'http://localhost:5173') return;
+        if (event.data.action === 'reload') {
+            location.reload();
+        }
     }, false);
 });
 

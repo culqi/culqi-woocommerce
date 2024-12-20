@@ -18,3 +18,11 @@ function culqi_create_table() {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
 }
+
+function culqi_delete_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'culqi_merchant_data';
+
+    $sql = "DROP TABLE IF EXISTS $table_name;";
+    $wpdb->query($sql);
+}

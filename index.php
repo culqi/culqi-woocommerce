@@ -49,17 +49,11 @@ function culqi_payment_activate() {
 // Deactivation Hook
 register_deactivation_hook(__FILE__, 'culqi_payment_deactivate');
 function culqi_payment_deactivate() {
-    // Perform cleanup tasks, if necessary
+    culqi_delete_table();
 }
 
-// Load plugin after WooCommerce is initialized
 add_action('plugins_loaded', 'culqi_gateway_init', 11);
 
-add_action( 'before_woocommerce_init', function () {
-    if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
-    }
-});
 function culqi_gateway_init() {
     if (!class_exists('WC_Payment_Gateway')) {
         return;
@@ -67,6 +61,8 @@ function culqi_gateway_init() {
 
     // Include the Culqi Payment Gateway Class
     require_once plugin_dir_path(__FILE__) . 'includes/class-culqi-payment.php';
+    require_once plugin_dir_path( __FILE__ ) . 'includes/block-support/class-culqi-integration.php';
+    require_once plugin_dir_path( __FILE__ ) . 'includes/block-support/class-culqi-block.php';
 
     // Add the gateway to WooCommerce
     add_filter('woocommerce_payment_gateways', 'add_culqi_gateway');
@@ -78,6 +74,30 @@ function culqi_gateway_init() {
     }
 }
 
+use Automattic\WooCommerce\Utilities\FeaturesUtil;
+
+add_action('before_woocommerce_init', function () {
+    if (class_exists(FeaturesUtil::class)) {
+        FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__);
+    }
+
+    if (class_exists(FeaturesUtil::class)) {
+        FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__);
+    }
+});
+
 // Include admin functions
 require_once plugin_dir_path(__FILE__) . 'admin/class-culqi-admin.php';
 require_once plugin_dir_path(__FILE__) . 'includes/functions/disable-reduce-stock.php';
+
+function enqueue_culqi_block() {
+    wp_enqueue_script(
+        'culqi-block',
+        plugins_url( 'assets/js/culqi-block.js', __FILE__ ),
+        [ 'wp-element', 'wc-blocks-registry' ],
+        '1.0.0',
+        true
+    );
+}
+add_action( 'enqueue_block_editor_assets', 'enqueue_culqi_block' );
+add_action( 'wp_enqueue_scripts', 'enqueue_culqi_block' );

@@ -18,6 +18,14 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         $this->title = $this->get_option('title');
         $this->description = $this->get_option('description');
         add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
+        // Add block support
+
+        add_filter('woocommerce_blocks_payment_gateway_support', array($this, 'add_blocks_support'));
+    }
+
+    public function add_blocks_support($gateways) {
+        $gateways[] = $this->id;
+        return $gateways;
     }
 
     public function init_form_fields()
@@ -106,6 +114,20 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
                 'authorization' => 'Bearer '. $token,
             ),
         ));
+
+        var_dump($response);
+        die();
+
+        $order = wc_get_order( $order_id );
+
+        // Process payment logic
+        $order->payment_complete();
+
+        // Redirect to thank you page
+        return [
+            'result'   => 'success',
+            'redirect' => $this->get_return_url( $order ),
+        ];
 
         if (is_wp_error($response)) {
             wc_add_notice(__('Payment error: Could not connect to the payment gateway.', 'culqi'), 'error');

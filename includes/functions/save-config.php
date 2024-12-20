@@ -15,6 +15,7 @@ function culqi_save_config()
     
     $plugin_status = isset($data['pluginStatus']) ? $data['pluginStatus'] : null;
     $plugin_status = (bool) ($plugin_status == "true");
+    $plugin_status = true;
     $public_key = sanitize_text_field($data['publicKey']);
     $merchant = isset($data['merchant']) ? sanitize_text_field($data['merchant']) : null;
     $rsa_pk = isset($data['rsa_pk']) ? sanitize_text_field($data['rsa_pk']) : null;
