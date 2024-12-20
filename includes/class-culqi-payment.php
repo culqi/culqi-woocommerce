@@ -115,20 +115,6 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             ),
         ));
 
-        var_dump($response);
-        die();
-
-        $order = wc_get_order( $order_id );
-
-        // Process payment logic
-        $order->payment_complete();
-
-        // Redirect to thank you page
-        return [
-            'result'   => 'success',
-            'redirect' => $this->get_return_url( $order ),
-        ];
-
         if (is_wp_error($response)) {
             wc_add_notice(__('Payment error: Could not connect to the payment gateway.', 'culqi'), 'error');
             return;

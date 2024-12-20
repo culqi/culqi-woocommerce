@@ -37,4 +37,25 @@ jQuery(function($) {
             window.location.href = event.data.redirectUrl;
         }
     }, false);
+
+    //
+
+
+        
+});
+document.addEventListener('DOMContentLoaded', function () {
+    console.log(2345);
+    // Check if WooCommerce Blocks is initialized
+    if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+        // Check if wc/store is available in wp.data
+        const store = wp.data.dispatch('wc/store');
+
+        if (store) {
+            console.log('WooCommerce Blocks is initialized and wc/store is available.');
+        } else {
+            console.error('WooCommerce Blocks is not initialized or wc/store is not available.');
+        }
+    } else {
+        console.error('WooCommerce Blocks or wp.data is not loaded.');
+    }
 });
