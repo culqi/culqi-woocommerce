@@ -6,14 +6,37 @@ use phpseclib3\Crypt\PublicKeyLoader;
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\JWK;
 
-function encrypt_data_with_rsa($data, $publicKey) {
+/*function encrypt_data_with_rsa($data, $publicKey) {
     $rsa = PublicKeyLoader::load($publicKey)
         ->withPadding(RSA::ENCRYPTION_OAEP)
         ->withHash('sha256')
         ->withMGFHash('sha256');
 
     return base64_encode($rsa->encrypt($data));
+}*/
+function encrypt_data_with_rsa(string $jsonData, string $publicKeyString): ?string {
+    try {
+        $publicKey = openssl_pkey_get_public($publicKeyString);
+        if ($publicKey === false) {
+            throw new Exception("Invalid public key: " . openssl_error_string());
+        }
+
+        $encrypted = '';
+        $result = openssl_public_encrypt($jsonData, $encrypted, $publicKey, OPENSSL_PKCS1_OAEP_PADDING);
+
+        openssl_free_key($publicKey);
+
+        if ($result === false) {
+            throw new Exception("Encryption failed: " . openssl_error_string());
+        }
+
+        return base64_encode($encrypted);
+    } catch (Exception $e) {
+        error_log("RSA Encryption Error: " . $e->getMessage());
+        return null;
+    }
 }
+
 
 function generate_token()
 {
@@ -30,6 +53,7 @@ function generate_token()
         "pk" => $config->public_key,
         "exp" => $exp
     ];
+
     $encryptedData = encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk);
     return $encryptedData;
 }

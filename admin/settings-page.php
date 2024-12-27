@@ -31,7 +31,7 @@ $payment_methods = $config->payment_methods ?? '';
 <div class="wrap">
     <div class="iframe-container">
         <iframe 
-            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=woocommerce&status=' . urlencode( $status ) . '&pk=' . urlencode( $pk ) . '&merchant=' . urlencode( $merchant ) . '&activePaymentMethods=' . urlencode( $payment_methods ) ); ?>" 
+            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=woocommerce&status=' . urlencode( $status ) . '&pk=' . urlencode( $pk ) . '&merchant=' . urlencode( $merchant ) . '&activePaymentMethods=' . urlencode( $payment_methods ) . '&shop=' . get_site_url() ); ?>" 
             width="100%">
         </iframe>
     </div>

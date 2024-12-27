@@ -15,10 +15,9 @@ function culqi_save_config()
     
     $plugin_status = isset($data['pluginStatus']) ? $data['pluginStatus'] : null;
     $plugin_status = (bool) ($plugin_status == "true");
-    $plugin_status = true;
     $public_key = sanitize_text_field($data['publicKey']);
     $merchant = isset($data['merchant']) ? sanitize_text_field($data['merchant']) : null;
-    $rsa_pk = isset($data['rsa_pk']) ? sanitize_text_field($data['rsa_pk']) : null;
+    $rsa_pk = isset($data['rsa_pk']) ? $data['rsa_pk'] : null;
     $payment_methods = isset($data['payment_methods']) ? sanitize_text_field($data['payment_methods']) : null;
 
     $limit = 1;
@@ -48,18 +47,21 @@ function culqi_save_config()
         }
         $update_data['created_at'] = current_time('mysql');
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+        
         $wpdb->update(
             $table_name,
             $update_data,
             ['public_key' => $public_key]
         );
+
         wp_cache_delete($cache_key, 'culqi');
     } else {
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $wpdb->query('TRUNCATE TABLE '. $table_name);
         $wpdb->insert(
             $table_name,
             [
-                'plugin_status' => $plugin_status,
+                'plugin_status' => true,
                 'public_key' => $public_key,
                 'merchant' => $merchant,
                 'rsa_pk' => $rsa_pk,

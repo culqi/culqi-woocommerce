@@ -8,7 +8,7 @@ function culqi_create_table() {
         id bigint(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         plugin_status tinyint(1) NOT NULL,
         public_key varchar(255) NOT NULL,
-        merchant varchar(255) NOT NULL UNIQUE,
+        merchant varchar(255) NOT NULL,
         rsa_pk text,
         payment_methods text,
         created_at datetime DEFAULT CURRENT_TIMESTAMP,
