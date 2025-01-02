@@ -147,37 +147,37 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
     public function get_description() {
 		$config = culqi_get_config();
         $payment_methods = $config->payment_methods ?? '';
+        $txt = '';
         if($payment_methods) {
             $payment_methods = explode(',', $payment_methods);
+            $tarjeta = in_array('tarjeta', $payment_methods);
+            $yape =	in_array('yape', $payment_methods);
+            $billetera = in_array('billetera', $payment_methods);
+            $bancaMovil = in_array('bancaMovil', $payment_methods);
+            $agente = in_array('agente', $payment_methods);
+            $cuotealo =	in_array('cuotealo', $payment_methods);
+            $txt_general = 'Acepta pagos con ';
+            $txtPE = '';
+            if($tarjeta) {
+                $txt .= 'tarjetas de débito y crédito';
+            }
+            if($yape) {
+                if($tarjeta) {
+                    $txt .= ', ';
+                }
+                $txt .= 'Yape';
+            }
+            if($billetera || $bancaMovil || $agente || $cuotealo) {
+                if($tarjeta || $yape) {
+                    $txt .= ', ';
+                }
+                $txt .= 'Cuotéalo BCP y PagoEfectivo';
+                $txtPE = ' (billeteras móviles, agentes y bodegas)';
+            }
+            $txt = '<strong>'.$txt.'</strong>';
+            $txt = $txt_general. $txt. $txtPE;
+            $txt .= '.';
         }
-		$tarjeta = in_array('tarjeta', $payment_methods);
-		$yape =	in_array('yape', $payment_methods);
-		$billetera = in_array('billetera', $payment_methods);
-		$bancaMovil = in_array('bancaMovil', $payment_methods);
-		$agente = in_array('agente', $payment_methods);
-		$cuotealo =	in_array('cuotealo', $payment_methods);
-		$txt_general = 'Acepta pagos con ';
-		$txt = '';
-		$txtPE = '';
-		if($tarjeta) {
-			$txt .= 'tarjetas de débito y crédito';
-		}
-		if($yape) {
-			if($tarjeta) {
-				$txt .= ', ';
-			}
-			$txt .= 'Yape';
-		}
-		if($billetera || $bancaMovil || $agente || $cuotealo) {
-			if($tarjeta || $yape) {
-				$txt .= ', ';
-			}
-			$txt .= 'Cuotéalo BCP y PagoEfectivo';
-			$txtPE = ' (billeteras móviles, agentes y bodegas)';
-		}
-		$txt = '<strong>'.$txt.'</strong>';
-		$txt = $txt_general. $txt. $txtPE;
-		$txt .= '.';
 		$allowed_html = array(
 			'strong' => array(),
 		);
