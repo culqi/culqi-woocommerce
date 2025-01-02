@@ -26,3 +26,22 @@
     border: 0;
     border-radius: 4px;
 }
+
+.woocommerce-loader {
+    display: none;
+    background-color: rgb(0 0 0 / .6);
+    place-items: center;
+    z-index: 100;
+    inset: 0px;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 7px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.flex {
+    display: flex !important;
+}

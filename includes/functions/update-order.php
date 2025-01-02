@@ -36,6 +36,7 @@ function culqi_update_order(WP_REST_Request $request) {
                     $order->add_order_note($note_order_text);
                 } else {
                     $order->add_order_note('Culqi '. $note_order_text .' created: '. $transaction_id);
+                    wc_reduce_stock_levels($order_id);
                 }
                 
                 return new WP_REST_Response(['message' => 'Order status updated successfully.'], 200);

@@ -1,32 +1,43 @@
 jQuery(function($) {
     $('form.checkout').on('checkout_place_order', function(e) {
-        jQuery('#place_order').attr('disabled', true);
-        e.preventDefault();
+        const paymentGateway = jQuery('input[name="payment_method"]:checked').val();
+        if(paymentGateway === 'culqi') {
+            $('.woocommerce-loader').addClass('flex');
+            jQuery('#place_order').attr('disabled', true);
+            e.preventDefault();
 
-        $.ajax({
-            type: 'POST',
-            url: wc_checkout_params.checkout_url,
-            data: $('form.checkout').serialize(),
-            success: function(response) {
-                if (response.result === 'success') {
-                    if(response.show_modal) {
-                        $('#order-created-modal').fadeIn();
-                        $('#order-created-modal iframe').attr('src', response.redirect);
-                        $('body').addClass('no-scroll');
+            $.ajax({
+                type: 'POST',
+                url: wc_checkout_params.checkout_url,
+                data: $('form.checkout').serialize(),
+                success: function(response) {
+                    if (response.result === 'success') {
+                        if(response.show_modal) {
+                            $('#order-created-modal').fadeIn();
+                            $('#order-created-modal iframe').attr('src', response.redirect);
+                            $('body').addClass('no-scroll');
+                            $('.woocommerce-loader').removeClass('flex');
+                        } else {
+                            window.location.href = response.redirect;
+                        }
+                        jQuery('#place_order').attr('disabled', false);
                     } else {
-                        window.location.href = response.redirect;
+                        alert('Order creation failed. Please try again.');
+                        $('.woocommerce-loader').fadeOut();
+                        $('.woocommerce-loader').removeClass('flex');
+                        jQuery('#place_order').attr('disabled', false);
                     }
+                },
+                error: function(err) {
+                    alert('Error while creating order. Please try again.');
+                    $('.woocommerce-loader').fadeOut();
+                    $('.woocommerce-loader').removeClass('flex');
                     jQuery('#place_order').attr('disabled', false);
-                } else {
-                    alert('Order creation failed. Please try again.');
                 }
-            },
-            error: function(err) {
-                alert('Error while creating order. Please try again.');
-            }
-        });
-
-        return false;
+            });
+    
+            return false;
+        }
     });
 
     window.addEventListener('message', function(event) {
@@ -39,14 +50,8 @@ jQuery(function($) {
             window.location.href = event.data.redirectUrl;
         }
     }, false);
-
-    //
-
-
-        
 });
 document.addEventListener('DOMContentLoaded', function () {
-    console.log(2345);
     // Check if WooCommerce Blocks is initialized
     if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
         // Check if wc/store is available in wp.data

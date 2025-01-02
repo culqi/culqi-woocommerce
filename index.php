@@ -90,6 +90,9 @@ add_action('before_woocommerce_init', function () {
 require_once plugin_dir_path(__FILE__) . 'admin/class-culqi-admin.php';
 require_once plugin_dir_path(__FILE__) . 'includes/functions/disable-reduce-stock.php';
 
+// Loader
+require_once plugin_dir_path(__FILE__) . 'admin/loader.php';
+
 function enqueue_culqi_block() {
     wp_enqueue_script(
         'culqi-block',
