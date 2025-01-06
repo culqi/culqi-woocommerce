@@ -135,7 +135,6 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
         $order->update_status('pending', __('Payment pending, redirecting to gateway.', 'culqi'));
         $order->save();
-
         
         return array(
             'result'     => 'success',
@@ -146,7 +145,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
     public function get_description() {
 		$config = culqi_get_config();
-        $payment_methods = $config->payment_methods ?? '';
+        $payment_methods = $config->payment_methods ?? [];
         $txt = '';
         if($payment_methods) {
             $payment_methods = explode(',', $payment_methods);
@@ -247,7 +246,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 			</style>
 		<?php
 		$config = culqi_get_config();
-        $payment_methods = $config->payment_methods ?? '';
+        $payment_methods = $config->payment_methods ?? [];
         if($payment_methods) {
             $payment_methods = explode(',', $payment_methods);
         }
