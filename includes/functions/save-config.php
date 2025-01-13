@@ -17,7 +17,8 @@ function culqi_save_config()
     $plugin_status = (bool) ($plugin_status == "true");
     $public_key = sanitize_text_field($data['publicKey']);
     $merchant = isset($data['merchant']) ? sanitize_text_field($data['merchant']) : null;
-    $rsa_pk = isset($data['rsa_pk']) ? $data['rsa_pk'] : null;
+    $rsa_pk_culqi = isset($data['rsa_pk_culqi']) ? $data['rsa_pk_culqi'] : null;
+    $rsa_sk_plugin = isset($data['rsa_sk_plugin']) ? $data['rsa_sk_plugin'] : null;
     $payment_methods = isset($data['payment_methods']) ? sanitize_text_field($data['payment_methods']) : null;
 
     $limit = 1;
@@ -39,8 +40,11 @@ function culqi_save_config()
         if (!is_null($merchant)) {
             $update_data['merchant'] = $merchant;
         }
-        if (!is_null($rsa_pk)) {
-            $update_data['rsa_pk'] = $rsa_pk;
+        if (!is_null($rsa_pk_culqi)) {
+            $update_data['rsa_pk_culqi'] = $rsa_pk_culqi;
+        }
+        if (!is_null($rsa_sk_plugin)) {
+            $update_data['rsa_sk_plugin'] = $rsa_sk_plugin;
         }
         if (!is_null($payment_methods)) {
             $update_data['payment_methods'] = $payment_methods;
@@ -64,7 +68,8 @@ function culqi_save_config()
                 'plugin_status' => true,
                 'public_key' => $public_key,
                 'merchant' => $merchant,
-                'rsa_pk' => $rsa_pk,
+                'rsa_pk_culqi' => $rsa_pk_culqi,
+                'rsa_sk_plugin' => $rsa_sk_plugin,
                 'payment_methods' => $payment_methods,
                 'created_at' => current_time('mysql'),
             ]

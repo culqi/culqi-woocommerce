@@ -23,8 +23,10 @@ function encrypt_data_with_rsa(string $jsonData, string $publicKeyString): ?stri
 
         $encrypted = '';
         $result = openssl_public_encrypt($jsonData, $encrypted, $publicKey, OPENSSL_PKCS1_OAEP_PADDING);
-
-        openssl_free_key($publicKey);
+        
+        if (PHP_VERSION_ID < 80000) {
+            openssl_free_key($publicKey);
+        }
 
         if ($result === false) {
             throw new Exception("Encryption failed: " . openssl_error_string());
@@ -45,7 +47,7 @@ function generate_token()
     $exp = time() + $expirationTimeInSeconds;
 
     $config = culqi_get_config();
-    if(!$config->rsa_pk) {
+    if(!$config->rsa_pk_culqi) {
         wc_add_notice(__('Debes configurar tu llave pública.', 'culqi'), 'error');
         return;
     }
@@ -54,7 +56,7 @@ function generate_token()
         "exp" => $exp
     ];
 
-    $encryptedData = encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk);
+    $encryptedData = encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk_culqi);
     return $encryptedData;
 }
 
@@ -62,7 +64,7 @@ function verify_jwt_token($token)
 {
     $kid = getKidFromJwt($token);
     $config = culqi_get_config();
-    $publicKey = $config->rsa_pk;
+    $publicKey = $config->rsa_pk_culqi;
     $headers = new stdClass();
     $headers->alg = 'RS256';
     $key_data = [

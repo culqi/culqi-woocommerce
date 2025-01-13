@@ -30,6 +30,7 @@ jQuery(function($) {
                 },
                 error: function(err) {
                     alert('Error while creating order. Please try again.');
+                    console.log(err);
                     $('.woocommerce-loader').fadeOut();
                     $('.woocommerce-loader').removeClass('flex');
                     jQuery('#place_order').attr('disabled', false);
@@ -41,9 +42,11 @@ jQuery(function($) {
     });
 
     window.addEventListener('message', function(event) {
+        console.log(event.data);
         if (event.data.action === 'closeModal') {
             $('#order-created-modal').fadeOut();
             $('body').removeClass('no-scroll');
+            $('.woocommerce-loader').removeClass('flex');
         }
 
         if (event.data.redirectUrl) {
