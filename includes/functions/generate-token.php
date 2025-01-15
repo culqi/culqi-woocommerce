@@ -62,19 +62,28 @@ function generate_token()
 
 function verify_jwt_token($token)
 {
-    $kid = getKidFromJwt($token);
-    $config = culqi_get_config();
-    $publicKey = $config->rsa_pk_culqi;
-    $headers = new stdClass();
-    $headers->alg = 'RS256';
-    $key_data = [
-        $kid => new Key($publicKey, 'RS256')
-    ];
-
     try {
-        $decoded = JWT::decode($token, $key_data, $headers);
-        return (isset($decoded->exp) && time() < $decoded->exp);
+        $config = culqi_get_config();
+        $encryptedToken = base64_decode($token);
+        if ($encryptedToken === false) {
+            throw new Exception('Invalid Base64 token.');
+        }
+        $decrypted = '';
+        $success = openssl_private_decrypt($encryptedToken, $decrypted, $config->rsa_sk_plugin, OPENSSL_PKCS1_OAEP_PADDING);
+        if (!$success) {
+            throw new Exception('Failed to decrypt the token.');
+        }
+        $payload = json_decode($decrypted, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception('Invalid token payload format.');
+        }
+        // Validate the expiration time
+        if (!isset($payload['exp']) || $payload['exp'] < time()) {
+            throw new Exception('Token has expired.');
+        }
+        return $payload;
     } catch (Exception $e) {
+        // throw new Exception('Token validation failed: ' . $e->getMessage());
         return false;
     }
 }

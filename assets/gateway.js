@@ -16,7 +16,7 @@ jQuery(function($) {
                             $('#order-created-modal').fadeIn();
                             $('#order-created-modal iframe').attr('src', response.redirect);
                             $('body').addClass('no-scroll');
-                            $('.woocommerce-loader').removeClass('flex');
+                            // $('.woocommerce-loader').removeClass('flex');
                         } else {
                             window.location.href = response.redirect;
                         }
@@ -43,14 +43,21 @@ jQuery(function($) {
 
     window.addEventListener('message', function(event) {
         console.log(event.data);
+        if (event.data.object == "appCulqiStoreLoaded") {
+            $('.woocommerce-loader').removeClass('flex');
+        }
+        if (event.data.redirectUrl) {
+            window.redirectUrl = event.data.redirectUrl;
+        }
         if (event.data.action === 'closeModal') {
             $('#order-created-modal').fadeOut();
             $('body').removeClass('no-scroll');
             $('.woocommerce-loader').removeClass('flex');
-        }
-
-        if (event.data.redirectUrl) {
-            window.location.href = event.data.redirectUrl;
+            if (window.redirectUrl) {
+                const redirectUrl = window.redirectUrl;
+                delete window.redirectUrl;
+                window.location.href = redirectUrl;
+            }
         }
     }, false);
 });
