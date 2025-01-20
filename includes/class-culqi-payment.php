@@ -26,7 +26,8 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         add_filter('woocommerce_blocks_payment_gateway_support', array($this, 'add_blocks_support'));
     }
 
-    public function add_blocks_support($gateways) {
+    public function add_blocks_support($gateways) 
+    {
         $gateways[] = $this->id;
         return $gateways;
     }
@@ -61,6 +62,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         $shop_domain = get_site_url();
         $api_url = CULQI_API_URL . 'shopify/public/save-order';
         $platform = "woocommerce";
+        $env = $this->get_env();
 
         $body = array(
             "id" => $order_id,
@@ -70,7 +72,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             "currency" => $order->get_currency(),
             "proposed_at" => gmdate('Y-m-d\TH:i:s'),
             "kind" => "sale",
-            "test" => true,
+            "test" => $env,
             "payment_method" => array(
                 "type" => "offsite",
                 "data" => array(
@@ -143,7 +145,8 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         );
     }
 
-    public function get_description() {
+    public function get_description()
+    {
 		$config = culqi_get_config();
         $payment_methods = $config->payment_methods ?? [];
         $txt = '';
@@ -184,7 +187,8 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 		return wp_kses(__($txt, 'culqi'), $allowed_html);
 	}
 
-    public function get_icon() {
+    public function get_icon() 
+    {
 		?>
 			<script>
 				jQuery('label[for="payment_method_culqi"]').contents().filter(function() {
@@ -278,5 +282,23 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 		</div>
 
 		<?php
+    }
+
+    private function get_env()
+    {
+        $config = culqi_get_config();
+        if(!$config->public_key) {
+            wc_add_notice(__('Debes configurar tu llave pública.', 'culqi'), 'error');
+            return;
+        }
+
+        $public_key = $config->public_key;
+
+        if (str_starts_with($public_key, 'pk_test')) {
+            return 'test';
+        } elseif (str_starts_with($public_key, 'pk_live')) {
+            return 'live';
+        }
+        return false;
     }
 }

@@ -1,19 +1,5 @@
 <?php
 
-use Firebase\JWT\Key;
-use phpseclib3\Crypt\RSA;
-use phpseclib3\Crypt\PublicKeyLoader;
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\JWK;
-
-/*function encrypt_data_with_rsa($data, $publicKey) {
-    $rsa = PublicKeyLoader::load($publicKey)
-        ->withPadding(RSA::ENCRYPTION_OAEP)
-        ->withHash('sha256')
-        ->withMGFHash('sha256');
-
-    return base64_encode($rsa->encrypt($data));
-}*/
 function encrypt_data_with_rsa(string $jsonData, string $publicKeyString): ?string {
     try {
         $publicKey = openssl_pkey_get_public($publicKeyString);
@@ -77,7 +63,6 @@ function verify_jwt_token($token)
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new Exception('Invalid token payload format.');
         }
-        // Validate the expiration time
         if (!isset($payload['exp']) || $payload['exp'] < time()) {
             throw new Exception('Token has expired.');
         }
@@ -86,24 +71,6 @@ function verify_jwt_token($token)
         // throw new Exception('Token validation failed: ' . $e->getMessage());
         return false;
     }
-}
-
-function getKidFromJwt($jwt) {
-    $tks = explode('.', $jwt);
-    if (count($tks) !== 3) {
-        throw new UnexpectedValueException('Wrong number of segments');
-    }
-
-    $headerB64 = $tks[0];
-    $headerJson = base64UrlDecode($headerB64);
-
-    $header = json_decode($headerJson);
-    
-    if (isset($header->kid)) {
-        return $header->kid;
-    }
-
-    return null;
 }
 
 function base64UrlDecode($data) {
