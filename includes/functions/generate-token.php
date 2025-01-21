@@ -20,7 +20,10 @@ function encrypt_data_with_rsa(string $jsonData, string $publicKeyString): ?stri
 
         return base64_encode($encrypted);
     } catch (Exception $e) {
-        error_log("RSA Encryption Error: " . $e->getMessage());
+        if (defined('WP_DEBUG') && WP_DEBUG) {
+            $logger = wc_get_logger();
+            $logger->error('RSA Encryption Error: ' . $e->getMessage(), array('source' => 'culqi'));
+        }
         return null;
     }
 }

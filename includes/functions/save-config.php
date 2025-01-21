@@ -25,9 +25,9 @@ function culqi_save_config()
     $cache_key = 'culqi_merchant_data_' . $limit;
     $existing_entry = wp_cache_get($cache_key, 'culqi');
     if ($existing_entry === false) {
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         $existing_entry = $wpdb->get_var(
-            $wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->prefix}culqi_merchant_data WHERE public_key = %s", $public_key)
+            $wpdb->prepare("SELECT COUNT(*) FROM %s WHERE public_key = %s", $table_name, $public_key)
         );
         wp_cache_set($cache_key, $existing_entry, 'culqi', HOUR_IN_SECONDS);
     }
@@ -50,8 +50,8 @@ function culqi_save_config()
             $update_data['payment_methods'] = $payment_methods;
         }
         $update_data['created_at'] = current_time('mysql');
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
         $wpdb->update(
             $table_name,
             $update_data,
@@ -60,8 +60,9 @@ function culqi_save_config()
 
         wp_cache_delete($cache_key, 'culqi');
     } else {
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $wpdb->query("TRUNCATE TABLE {$table_name}");
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $wpdb->query('TRUNCATE TABLE '. $table_name);
         $wpdb->insert(
             $table_name,
             [

@@ -158,7 +158,6 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             $bancaMovil = in_array('bancaMovil', $payment_methods);
             $agente = in_array('agente', $payment_methods);
             $cuotealo =	in_array('cuotealo', $payment_methods);
-            $txt_general = 'Acepta pagos con ';
             $txtPE = '';
             if($tarjeta) {
                 $txt .= 'tarjetas de débito y crédito';
@@ -177,14 +176,18 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
                 $txtPE = ' (billeteras móviles, agentes y bodegas)';
             }
             $txt = '<strong>'.$txt.'</strong>';
-            $txt = $txt_general. $txt. $txtPE;
+            $txt = $txt. $txtPE;
             $txt .= '.';
         }
+
 		$allowed_html = array(
 			'strong' => array(),
 		);
-		
-		return wp_kses(__($txt, 'culqi'), $allowed_html);
+
+        /* translators: %s refers to payment methods. */
+        $translated_string = sprintf(__('Acepta pagos con %s', 'culqi'), $txt);
+
+		return wp_kses($translated_string, $allowed_html);
 	}
 
     public function get_icon() 
@@ -263,19 +266,22 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 		$cards_img = PLUGIN_CULQI_URL . 'assets/images/cards.svg';
 		$yape_img = PLUGIN_CULQI_URL . 'assets/images/yape.svg';
 		$pagoefectivo_img = PLUGIN_CULQI_URL . 'assets/images/pagoefectivo.svg';
-
 		?>
 
 		<div class="wc-culqi-container">
+             <?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 			<img class="wc-culqi-title" src="<?php echo esc_url( $this->culqi_logo ); ?>" alt="<?php echo esc_attr( $this->title ); ?>" />
 			<div class="wc-culqi-icon-container">
 				<?php if( $tarjeta ) : ?>
+                    <?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 					<img class="wc-culqi-icon" src="<?php echo esc_url( $cards_img ); ?>" alt="<?php echo esc_attr( $this->payment_methods ); ?>" />
 				<?php endif; ?>
 				<?php if( $yape ) : ?>
+                    <?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 					<img class="wc-culqi-icon" src="<?php echo esc_url( $yape_img ); ?>" alt="<?php echo esc_attr( $this->payment_methods ); ?>" />
 				<?php endif; ?>
 				<?php if( $billetera || $bancaMovil || $agente || $cuotealo ) : ?>
+                    <?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 					<img class="wc-culqi-icon" src="<?php echo esc_url( $pagoefectivo_img ); ?>" alt="<?php echo esc_attr( $this->payment_methods ); ?>" />
 				<?php endif; ?>
 			</div>
