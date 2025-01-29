@@ -29,24 +29,31 @@ function encrypt_data_with_rsa(string $jsonData, string $publicKeyString): ?stri
 }
 
 
-function generate_token()
+function generate_token($is_admin = false)
 {
-    $minutes = EXPIRATION_TIME;
-    $expirationTimeInSeconds = $minutes * 60;
-    $exp = time() + $expirationTimeInSeconds;
+    try {
+        $minutes = EXPIRATION_TIME;
+        $expirationTimeInSeconds = $minutes * 60;
+        $exp = time() + $expirationTimeInSeconds;
 
-    $config = culqi_get_config();
-    if(!$config->rsa_pk_culqi) {
-        wc_add_notice(__('Debes configurar tu llave pública.', 'culqi'), 'error');
-        return;
+        $config = culqi_get_config();
+        if(!$config->rsa_pk_culqi) {
+            if(!$is_admin) {
+                wc_add_notice(__('Debes configurar tu llave pública.', 'culqi'), 'error');
+                return;
+            }
+        } else {
+            $data = [
+                "pk" => $config->public_key,
+                "exp" => $exp
+            ];
+    
+            $encryptedData = encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk_culqi);
+            return $encryptedData;
+        }
+    } catch(Exception $e) {
+        return '';
     }
-    $data = [
-        "pk" => $config->public_key,
-        "exp" => $exp
-    ];
-
-    $encryptedData = encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk_culqi);
-    return $encryptedData;
 }
 
 function verify_jwt_token($token)
@@ -71,6 +78,7 @@ function verify_jwt_token($token)
         }
         return $payload;
     } catch (Exception $e) {
+        var_dump($e);
         // throw new Exception('Token validation failed: ' . $e->getMessage());
         return false;
     }

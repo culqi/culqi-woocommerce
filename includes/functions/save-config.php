@@ -24,14 +24,13 @@ function culqi_save_config()
     $limit = 1;
     $cache_key = 'culqi_merchant_data_' . $limit;
     $existing_entry = wp_cache_get($cache_key, 'culqi');
-    if ($existing_entry === false) {
+    if ($existing_entry === false || is_null($existing_entry)) {
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         $existing_entry = $wpdb->get_var(
-            $wpdb->prepare("SELECT COUNT(*) FROM %s WHERE public_key = %s", $table_name, $public_key)
+            $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE public_key = %s", $public_key)
         );
         wp_cache_set($cache_key, $existing_entry, 'culqi', HOUR_IN_SECONDS);
     }
-    
     if ($existing_entry > 0) {
         $update_data = [];
         if (!is_null($plugin_status)) {

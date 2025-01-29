@@ -5,6 +5,7 @@ $status = $config->plugin_status ?? '';
 $pk = $config->public_key ?? '';
 $merchant = $config->merchant ?? '';
 $payment_methods = $config->payment_methods ?? '';
+$token = generate_token(true);
 ?>
 
 <style>
@@ -31,7 +32,7 @@ $payment_methods = $config->payment_methods ?? '';
 <div class="wrap">
     <div class="iframe-container">
         <iframe 
-            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=woocommerce&status=' . urlencode( $status ) . '&pk=' . urlencode( $pk ) . '&merchant=' . urlencode( $merchant ) . '&activePaymentMethods=' . urlencode( $payment_methods ) . '&shop=' . get_site_url() ); ?>" 
+            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=woocommerce&status=' . urlencode( $status ) . '&pk=' . urlencode( $pk ) . '&merchant=' . urlencode( $merchant ) . '&activePaymentMethods=' . urlencode( $payment_methods ) . '&shop=' . get_site_url() . '&token=' . $token ); ?>" 
             width="100%">
         </iframe>
     </div>

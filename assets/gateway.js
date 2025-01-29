@@ -1,4 +1,5 @@
 jQuery(function($) {
+    const operationProcessing = 'processing';
     $('form.checkout').on('checkout_place_order', function(e) {
         const paymentGateway = jQuery('input[name="payment_method"]:checked').val();
         if(paymentGateway === 'culqi') {
@@ -49,14 +50,17 @@ jQuery(function($) {
         if (event.data.redirectUrl) {
             window.redirectUrl = event.data.redirectUrl;
         }
+        if (event.data.operationType == operationProcessing) {
+            if (window.redirectUrl) {
+                customRedirect();
+            }
+        }
         if (event.data.action === 'closeModal') {
             $('#order-created-modal').fadeOut();
             $('body').removeClass('no-scroll');
             $('.woocommerce-loader').removeClass('flex');
             if (window.redirectUrl) {
-                const redirectUrl = window.redirectUrl;
-                delete window.redirectUrl;
-                window.location.href = redirectUrl;
+                customRedirect();
             }
         }
     }, false);
@@ -76,3 +80,9 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('WooCommerce Blocks or wp.data is not loaded.');
     }
 });
+
+function customRedirect() {
+    const redirectUrl = window.redirectUrl;
+    delete window.redirectUrl;
+    window.location.href = redirectUrl;
+}
