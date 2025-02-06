@@ -505,10 +505,15 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 								FullCulqi.playSonic(fullculqi_vars.url_success);
 							} else if (response.data.charge.data.card_brand.toUpperCase() == "VISA") {
 								const url_plugin = visa_lib.plugin_url; 
-								jQuery("body").append('<link id="visa-css" rel="stylesheet" href="' + url_plugin + 'css/visa.css?_=' + new Date().getTime() + '">');
-								jQuery("body").children().first().before('<div id="visa-branding"><div class="flag-container"><div class="flag-mask-top flag-mask"></div><div class="constrained-flag-mask constrained-top-flag-mask"></div><div class="flag-slider flag-slider-top"><img class="top-flag flag"></div><div class="top-flag-fade-mask flag-fade-mask"></div></div><div class="visa-container"><div class="visa-wrapper"><img class="visa-logo"><div class="wipers-container"><div class="wiper-left wiper"></div><div class="wiper-middle wiper"></div><div class="wiper-right wiper"></div></div><div class="checkmark-container"><img class="checkmark-circle"><div class="rotate-container"><img class="checkmark"><div class="checkmark-mask"></div></div></div></div></div><div class="flag-container"><div class="flag-mask-bottom flag-mask"></div><div class="constrained-flag-mask constrained-bottom-flag-mask"></div><div class="flag-slider flag-slider-bottom"><img class="bottom-flag flag"></div><div class="bottom-flag-fade-mask flag-fade-mask"></div></div></div>');
-								jQuery("body").append('<script id="visa-js" src="' + url_plugin + 'js/visa-sonic-min.js?_=' + new Date().getTime() + '"></script>');
-								FullCulqi.stopVisa(fullculqi_vars.url_success);
+                                jQuery("body").append('<link id="visa-css" rel="stylesheet" href="' + url_plugin + 'css/visa.css?_=' + new Date().getTime() + '">');
+                                jQuery("body").children().first().before('<div id="visa-branding" style="display:flex;"><div class="flag-container"><div class="flag-mask-top flag-mask"></div><div class="constrained-flag-mask constrained-top-flag-mask"></div><div class="flag-slider flag-slider-top"><img class="top-flag flag"></div><div class="top-flag-fade-mask flag-fade-mask"></div></div><div class="visa-container"><div class="visa-wrapper"><img class="visa-logo"><div class="wipers-container"><div class="wiper-left wiper"></div><div class="wiper-middle wiper"></div><div class="wiper-right wiper"></div></div><div class="checkmark-container"><img class="checkmark-circle"><div class="rotate-container"><img class="checkmark"><div class="checkmark-mask"></div></div></div></div></div><div class="flag-container"><div class="flag-mask-bottom flag-mask"></div><div class="constrained-flag-mask constrained-bottom-flag-mask"></div><div class="flag-slider flag-slider-bottom"><img class="bottom-flag flag"></div><div class="bottom-flag-fade-mask flag-fade-mask"></div></div></div>');
+                                jQuery("body").css("display", "none");
+                                jQuery("body").append('<script id="visa-js" src="' + url_plugin + 'js/visa-sonic-min.js?_=' + new Date().getTime() + '"></script>');
+                                setTimeout(function () {
+                                    jQuery("body").css("display", "");
+                                }, 100);
+
+                                FullCulqi.stopVisa(fullculqi_vars.url_success);
 							} else {
 								location.href = fullculqi_vars.url_success;
 							}
