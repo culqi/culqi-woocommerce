@@ -311,7 +311,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 
 				} else if (Culqi.token) {
 					Culqi.close();
-					jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando  <span style="display: inline-block; margin-left: 8px; width: 30px; height: 30px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="25" height="25" style="shape-rendering: auto; display: block; padding-top: 12px; background: rgba(255, 255, 255, 0);" xmlns:xlink="http://www.w3.org/1999/xlink"><g><circle stroke-dasharray="164.93361431346415 56.97787143782138" r="35" stroke-width="10" stroke="#ffffff" fill="none" cy="50" cx="50"><animateTransform keyTimes="0;1" values="0 50 50;360 50 50" dur="1s" repeatCount="indefinite" type="rotate" attributeName="transform"></animateTransform></circle><g></g></g></svg></span></div></div>');
+					jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando  <span style="display: inline-block; margin-left: 8px; width: 30px; height: 30px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="35" height="35" style="shape-rendering: auto; display: block; padding-top: 12px; background: rgba(255, 255, 255, 0);" xmlns:xlink="http://www.w3.org/1999/xlink"><g><circle stroke-dasharray="164.93361431346415 56.97787143782138" r="35" stroke-width="10" stroke="#ffffff" fill="none" cy="50" cx="50"><animateTransform keyTimes="0;1" values="0 50 50;360 50 50" dur="1s" repeatCount="indefinite" type="rotate" attributeName="transform"></animateTransform></circle><g></g></g></svg></span></div></div>');
 					const installments = (Culqi.token.metadata == undefined || Culqi.token.metadata.installments == undefined) ? 0 : Culqi.token.metadata.installments;
 					data = {
 						action: 'charge',
@@ -339,7 +339,7 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 				scrollToCulqiError();
 			} else {
 				console.log('device:::::::' + device);
-				jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando  <span style="display: inline-block; margin-left: 8px; width: 30px; height: 30px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="25" height="25" style="shape-rendering: auto; display: block; padding-top: 12px; background: rgba(255, 255, 255, 0);" xmlns:xlink="http://www.w3.org/1999/xlink"><g><circle stroke-dasharray="164.93361431346415 56.97787143782138" r="35" stroke-width="10" stroke="#ffffff" fill="none" cy="50" cx="50"><animateTransform keyTimes="0;1" values="0 50 50;360 50 50" dur="1s" repeatCount="indefinite" type="rotate" attributeName="transform"></animateTransform></circle><g></g></g></svg></span></div></div>');
+				jQuery('body').append('<div id="loadingloginculqi" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999999; top: 0; text-align: center; justify-content: center; align-content: center; flex-direction: column; color: white; font-size: 14px; display:table-cell; vertical-align:middle;"><div style="position: absolute; width: 100%; top: 50%">Cargando  <span style="display: inline-block; margin-left: 8px; width: 30px; height: 30px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="35" height="35" style="shape-rendering: auto; display: block; padding-top: 12px; background: rgba(255, 255, 255, 0);" xmlns:xlink="http://www.w3.org/1999/xlink"><g><circle stroke-dasharray="164.93361431346415 56.97787143782138" r="35" stroke-width="10" stroke="#ffffff" fill="none" cy="50" cx="50"><animateTransform keyTimes="0;1" values="0 50 50;360 50 50" dur="1s" repeatCount="indefinite" type="rotate" attributeName="transform"></animateTransform></circle><g></g></g></svg></span></div></div>');
 				let data;
 				var enviroment = fullculqi_vars.enviroment.split('|');
 				if (Culqi.order) {
@@ -405,11 +405,16 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 								jQuery('#loadingloginculqi').remove();
 								FullCulqi.playSonic(fullculqi_vars.url_success);
 							} else if (response.data.charge.data.card_brand.toUpperCase() == "VISA") {  
-								const url_plugin = visa_lib.plugin_url; 
-								jQuery("body").append('<link id="visa-css" rel="stylesheet" href="' + url_plugin + 'css/visa.css?_=' + new Date().getTime() + '">');
-								jQuery("body").children().first().before('<div id="visa-branding"><div class="flag-container"><div class="flag-mask-top flag-mask"></div><div class="constrained-flag-mask constrained-top-flag-mask"></div><div class="flag-slider flag-slider-top"><img class="top-flag flag"></div><div class="top-flag-fade-mask flag-fade-mask"></div></div><div class="visa-container"><div class="visa-wrapper"><img class="visa-logo"><div class="wipers-container"><div class="wiper-left wiper"></div><div class="wiper-middle wiper"></div><div class="wiper-right wiper"></div></div><div class="checkmark-container"><img class="checkmark-circle"><div class="rotate-container"><img class="checkmark"><div class="checkmark-mask"></div></div></div></div></div><div class="flag-container"><div class="flag-mask-bottom flag-mask"></div><div class="constrained-flag-mask constrained-bottom-flag-mask"></div><div class="flag-slider flag-slider-bottom"><img class="bottom-flag flag"></div><div class="bottom-flag-fade-mask flag-fade-mask"></div></div></div>');
-								jQuery("body").append('<script id="visa-js" src="' + url_plugin + 'js/visa-sonic-min.js?_=' + new Date().getTime() + '"></script>');
-								FullCulqi.stopVisa(fullculqi_vars.url_success);
+                                const url_plugin = visa_lib.plugin_url; 
+                                jQuery("body").append('<link id="visa-css" rel="stylesheet" href="' + url_plugin + 'css/visa.css?_=' + new Date().getTime() + '">');
+                                jQuery("body").children().first().before('<div id="visa-branding" style="display:flex;"><div class="flag-container"><div class="flag-mask-top flag-mask"></div><div class="constrained-flag-mask constrained-top-flag-mask"></div><div class="flag-slider flag-slider-top"><img class="top-flag flag"></div><div class="top-flag-fade-mask flag-fade-mask"></div></div><div class="visa-container"><div class="visa-wrapper"><img class="visa-logo"><div class="wipers-container"><div class="wiper-left wiper"></div><div class="wiper-middle wiper"></div><div class="wiper-right wiper"></div></div><div class="checkmark-container"><img class="checkmark-circle"><div class="rotate-container"><img class="checkmark"><div class="checkmark-mask"></div></div></div></div></div><div class="flag-container"><div class="flag-mask-bottom flag-mask"></div><div class="constrained-flag-mask constrained-bottom-flag-mask"></div><div class="flag-slider flag-slider-bottom"><img class="bottom-flag flag"></div><div class="bottom-flag-fade-mask flag-fade-mask"></div></div></div>');
+                                jQuery("body").css("display", "none");
+                                jQuery("body").append('<script id="visa-js" src="' + url_plugin + 'js/visa-sonic-min.js?_=' + new Date().getTime() + '"></script>');
+                                setTimeout(function () {
+                                    jQuery("body").css("display", "");
+                                }, 100);
+
+                                FullCulqi.stopVisa(fullculqi_vars.url_success);
 							}
 							else {
 								location.href = fullculqi_vars.url_success;
@@ -459,6 +464,18 @@ Culqi3DS.publicKey = fullculqi_vars.public_key;
 					scrollToCulqiError();
 				}
 			});
+		},
+        testBrands: function () { 
+            const url_plugin = visa_lib.plugin_url; 
+            jQuery("body").append('<link id="visa-css" rel="stylesheet" href="' + url_plugin + 'css/visa.css?_=' + new Date().getTime() + '">');
+            jQuery("body").children().first().before('<div id="visa-branding" style="display:flex;"><div class="flag-container"><div class="flag-mask-top flag-mask"></div><div class="constrained-flag-mask constrained-top-flag-mask"></div><div class="flag-slider flag-slider-top"><img class="top-flag flag"></div><div class="top-flag-fade-mask flag-fade-mask"></div></div><div class="visa-container"><div class="visa-wrapper"><img class="visa-logo"><div class="wipers-container"><div class="wiper-left wiper"></div><div class="wiper-middle wiper"></div><div class="wiper-right wiper"></div></div><div class="checkmark-container"><img class="checkmark-circle"><div class="rotate-container"><img class="checkmark"><div class="checkmark-mask"></div></div></div></div></div><div class="flag-container"><div class="flag-mask-bottom flag-mask"></div><div class="constrained-flag-mask constrained-bottom-flag-mask"></div><div class="flag-slider flag-slider-bottom"><img class="bottom-flag flag"></div><div class="bottom-flag-fade-mask flag-fade-mask"></div></div></div>');
+            jQuery("body").css("display", "none");
+            jQuery("body").append('<script id="visa-js" src="' + url_plugin + 'js/visa-sonic-min.js?_=' + new Date().getTime() + '"></script>');
+            setTimeout(function () {
+                jQuery("body").css("display", "");
+            }, 100);
+            
+            // FullCulqi.stopVisa(fullculqi_vars.url_success);
 		},
 		loadAjax3DS: function (post_data) {
 			console.log('enviando al cargo con 3DS');
