@@ -1,4 +1,4 @@
-2024-12-26 - version 3.1.4
+2025-02-06 - version 3.1.4
 Fix: Fix spinner
 
 2024-12-26 - version 3.1.3
