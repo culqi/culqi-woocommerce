@@ -37,14 +37,14 @@ function generate_token($is_admin = false)
         $exp = time() + $expirationTimeInSeconds;
 
         $config = culqi_get_config();
-        if(!$config->rsa_pk_culqi) {
+        if(!$config->env) {
             if(!$is_admin) {
                 wc_add_notice(__('Debes configurar tu llave pública.', 'culqi'), 'error');
                 return;
             }
         } else {
             $data = [
-                "pk" => $config->public_key,
+                "pk" => $config->env,
                 "exp" => $exp
             ];
     

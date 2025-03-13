@@ -293,18 +293,11 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
     private function get_env()
     {
         $config = culqi_get_config();
-        if(!$config->public_key) {
-            wc_add_notice(__('Debes configurar tu llave pública.', 'culqi'), 'error');
-            return;
+        if(!$config->env) {
+            wc_add_notice(__('Debes guardar tu configuración.', 'culqi'), 'error');
+            return false;
         }
 
-        $public_key = $config->public_key;
-
-        if (str_starts_with($public_key, 'pk_test')) {
-            return 'test';
-        } elseif (str_starts_with($public_key, 'pk_live')) {
-            return 'live';
-        }
-        return false;
+        return $config->env;
     }
 }

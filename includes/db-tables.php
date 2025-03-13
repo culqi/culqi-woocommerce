@@ -6,12 +6,10 @@ function culqi_create_table() {
 
     $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id bigint(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        env varchar(255) NOT NULL,
         plugin_status tinyint(1) NOT NULL,
-        public_key varchar(255) NOT NULL,
-        merchant varchar(255) NOT NULL,
         rsa_pk_culqi text,
         rsa_sk_plugin text,
-        payment_methods text,
         created_at datetime DEFAULT CURRENT_TIMESTAMP,
         updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     ) $charset_collate;";

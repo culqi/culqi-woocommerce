@@ -15,11 +15,9 @@ function culqi_save_config()
     
     $plugin_status = isset($data['pluginStatus']) ? $data['pluginStatus'] : null;
     $plugin_status = (bool) ($plugin_status == "true");
-    $public_key = sanitize_text_field($data['publicKey']);
-    $merchant = isset($data['merchant']) ? sanitize_text_field($data['merchant']) : null;
+    $env = sanitize_text_field($data['env']);
     $rsa_pk_culqi = isset($data['rsa_pk_culqi']) ? $data['rsa_pk_culqi'] : null;
     $rsa_sk_plugin = isset($data['rsa_sk_plugin']) ? $data['rsa_sk_plugin'] : null;
-    $payment_methods = isset($data['payment_methods']) ? sanitize_text_field($data['payment_methods']) : null;
 
     $limit = 1;
     $cache_key = 'culqi_merchant_data_' . $limit;
@@ -27,7 +25,7 @@ function culqi_save_config()
     if ($existing_entry === false || is_null($existing_entry)) {
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         $existing_entry = $wpdb->get_var(
-            $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE public_key = %s", $public_key)
+            $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE env = %s", $env)
         );
         wp_cache_set($cache_key, $existing_entry, 'culqi', HOUR_IN_SECONDS);
     }
@@ -36,17 +34,11 @@ function culqi_save_config()
         if (!is_null($plugin_status)) {
             $update_data['plugin_status'] = $plugin_status;
         }
-        if (!is_null($merchant)) {
-            $update_data['merchant'] = $merchant;
-        }
         if (!is_null($rsa_pk_culqi)) {
             $update_data['rsa_pk_culqi'] = $rsa_pk_culqi;
         }
         if (!is_null($rsa_sk_plugin)) {
             $update_data['rsa_sk_plugin'] = $rsa_sk_plugin;
-        }
-        if (!is_null($payment_methods)) {
-            $update_data['payment_methods'] = $payment_methods;
         }
         $update_data['created_at'] = current_time('mysql');
         
@@ -54,7 +46,7 @@ function culqi_save_config()
         $wpdb->update(
             $table_name,
             $update_data,
-            ['public_key' => $public_key]
+            ['env' => $env]
         );
 
         wp_cache_delete($cache_key, 'culqi');
@@ -66,11 +58,9 @@ function culqi_save_config()
             $table_name,
             [
                 'plugin_status' => true,
-                'public_key' => $public_key,
-                'merchant' => $merchant,
+                'env' => $env,
                 'rsa_pk_culqi' => $rsa_pk_culqi,
                 'rsa_sk_plugin' => $rsa_sk_plugin,
-                'payment_methods' => $payment_methods,
                 'created_at' => current_time('mysql'),
             ]
         );

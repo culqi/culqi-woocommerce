@@ -1,10 +1,6 @@
 <?php if (!defined('ABSPATH')) exit; 
 
 $config = culqi_get_config();
-$status = $config->plugin_status ?? '';
-$pk = $config->public_key ?? '';
-$merchant = $config->merchant ?? '';
-$payment_methods = $config->payment_methods ?? '';
 $token = generate_token(true);
 ?>
 
@@ -32,7 +28,7 @@ $token = generate_token(true);
 <div class="wrap">
     <div class="iframe-container">
         <iframe 
-            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=woocommerce&status=' . urlencode( $status ) . '&pk=' . urlencode( $pk ) . '&merchant=' . urlencode( $merchant ) . '&activePaymentMethods=' . urlencode( $payment_methods ) . '&shop=' . get_site_url() . '&token=' . urlencode($token) ); ?>" 
+            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=' . PLATFORM . '&shop=' . get_site_url() . '&token=' . urlencode($token) ); ?>" 
             width="100%">
         </iframe>
     </div>

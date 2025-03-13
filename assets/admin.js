@@ -37,11 +37,9 @@ jQuery(document).ready(function($) {
                 data: {
                     action: 'culqi_save_config',
                     pluginStatus: data.pluginStatus,
-                    publicKey: data.publicKey,
-                    merchant: data.merchant,
+                    env: data.publicKey,
                     rsa_pk_culqi: data.rsaPkCulqi,
                     rsa_sk_plugin: data.rsaSkPlugin,
-                    payment_methods: data.paymentMethods,
                     nonce: culqiGatewayAjax.nonce,
                 },
                 success: function(response) {
