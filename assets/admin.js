@@ -29,8 +29,8 @@ jQuery(document).ready(function($) {
     //
     window.addEventListener('message', function(event) {
         if (event.data.action === 'saveConfig') {
-            const data = event.data.data;
 
+            const data = event.data.data;
             $.ajax({
                 url: culqiGatewayAjax.ajax_url,
                 type: 'POST',

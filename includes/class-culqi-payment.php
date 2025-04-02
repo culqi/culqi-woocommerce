@@ -298,6 +298,15 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             return false;
         }
 
-        return $config->env;
+        return $this->getKeyType($config->env);
+    }
+
+    private function getKeyType(string $key): string {
+        if (strpos($key, 'pk_test') === 0) {
+            return TEST;
+        } elseif (strpos($key, 'pk_live') === 0) {
+            return LIVE;
+        }
+        return LIVE;
     }
 }
