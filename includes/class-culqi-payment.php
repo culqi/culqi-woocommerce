@@ -105,7 +105,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             ),
             "cancel_url" => wc_get_checkout_url(),
             "merchant_locale" => "en-PE",
-            "shop_domain" => $shop_domain,
+            "shop_domain" =>  str_replace(['http://', 'https://'], '', $shop_domain),
             "order_key" => $order_key,
         );
 
