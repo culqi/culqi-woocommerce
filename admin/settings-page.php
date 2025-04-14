@@ -1,6 +1,5 @@
 <?php if (!defined('ABSPATH')) exit; 
 
-$config = culqi_get_config();
 $token = generate_token(true);
 ?>
 
