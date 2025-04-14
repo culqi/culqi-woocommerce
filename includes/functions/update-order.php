@@ -35,8 +35,8 @@ function culqi_update_order(WP_REST_Request $request) {
                     // Add the order note
                     $order->add_order_note($note_order_text);
                 } else {
-                    $cip = sanitize_text_field($data['payment_code']) ?? '';
-                    $orderNumber = sanitize_text_field($data['order_number']) ?? '';
+                    $cip = sanitize_text_field($data['cip']) ?? '';
+                    $orderNumber = sanitize_text_field($data['orderNumber']) ?? '';
 
                     $order->add_order_note('Culqi '. $note_order_text .' created: '. $transaction_id);
 
@@ -44,7 +44,7 @@ function culqi_update_order(WP_REST_Request $request) {
                         'Id: ' . $transaction_id . "\n" .
                         'CIP: ' . $cip . "\n" .
                         'Order Number: ' . $orderNumber;
-                        
+
                     $order->add_order_note($note_order_text);
 
                     wc_reduce_stock_levels($order_id);
