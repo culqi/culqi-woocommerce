@@ -35,17 +35,18 @@ function culqi_update_order(WP_REST_Request $request) {
                     // Add the order note
                     $order->add_order_note($note_order_text);
                 } else {
-                    $cip = sanitize_text_field($data['cip']) ?? '';
-                    $orderNumber = sanitize_text_field($data['orderNumber']) ?? '';
+                    if ($status = 'pending') {
+                        $order->add_order_note('Culqi '. $note_order_text .' created: '. $transaction_id);
+                        $cip = sanitize_text_field($data['cip']) ?? '';
+                        $orderNumber = sanitize_text_field($data['orderNumber']) ?? '';
 
-                    $order->add_order_note('Culqi '. $note_order_text .' created: '. $transaction_id);
+                        $note_order_text = 'Culqi Order Created:' . "\n" .
+                            'Id: ' . $transaction_id . "\n" .
+                            'CIP: ' . $cip . "\n" .
+                            'Order Number: ' . $orderNumber;
 
-                    $note_order_text = 'Culqi Order Created:' . "\n" .
-                        'Id: ' . $transaction_id . "\n" .
-                        'CIP: ' . $cip . "\n" .
-                        'Order Number: ' . $orderNumber;
-
-                    $order->add_order_note($note_order_text);
+                        $order->add_order_note($note_order_text);
+                    }
 
                     wc_reduce_stock_levels($order_id);
                 }
