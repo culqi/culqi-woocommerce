@@ -40,6 +40,7 @@ jQuery(document).ready(function($) {
                     env: data.publicKey,
                     rsa_pk_culqi: data.rsaPkCulqi,
                     rsa_sk_plugin: data.rsaSkPlugin,
+                    payment_methods: data.paymentMethods,
                     nonce: culqiGatewayAjax.nonce,
                 },
                 success: function(response) {
