@@ -1,6 +1,6 @@
 <?php
 
-function encrypt_data_with_rsa(string $jsonData, string $publicKeyString): ?string {
+function encrypt_data_with_rsa(string $jsonData, string $publicKeyString = ''): ?string {
     try {
         $publicKey = openssl_pkey_get_public($publicKeyString);
         if ($publicKey === false) {
@@ -48,7 +48,7 @@ function generate_token($is_admin = false)
                 "exp" => $exp
             ];
     
-            $encryptedData = encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk_culqi);
+            $encryptedData = encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk_culqi ?? '');
             return $encryptedData;
         }
     } catch(Exception $e) {

@@ -1,7 +1,6 @@
 <?php if (!defined('ABSPATH')) exit; 
 
 $token = generate_token(true);
-$payment_methods = $config->payment_methods ?? '';
 ?>
 
 <style>
@@ -28,7 +27,7 @@ $payment_methods = $config->payment_methods ?? '';
 <div class="wrap">
     <div class="iframe-container">
         <iframe 
-            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=' . PLATFORM . '&activePaymentMethods=' . urlencode( $payment_methods ). '&shop=' . get_site_url() . '&token=' . urlencode($token) ); ?>" 
+            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=' . PLATFORM . '&shop=' . get_site_url() . '&token=' . urlencode($token) ); ?>" 
             width="100%">
         </iframe>
     </div>
