@@ -18,6 +18,7 @@ function culqi_save_config()
     $env = sanitize_text_field($data['env']);
     $rsa_pk_culqi = isset($data['rsa_pk_culqi']) ? $data['rsa_pk_culqi'] : null;
     $rsa_sk_plugin = isset($data['rsa_sk_plugin']) ? $data['rsa_sk_plugin'] : null;
+    $payment_methods = isset($data['payment_methods']) ? sanitize_text_field($data['payment_methods']) : null;
 
     $limit = 1;
     $cache_key = 'culqi_merchant_data_' . $limit;
@@ -40,6 +41,9 @@ function culqi_save_config()
         if (!is_null($rsa_sk_plugin)) {
             $update_data['rsa_sk_plugin'] = $rsa_sk_plugin;
         }
+        if (!is_null($payment_methods)) {
+            $update_data['payment_methods'] = $payment_methods;
+        }
         $update_data['created_at'] = current_time('mysql');
         
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
@@ -61,6 +65,7 @@ function culqi_save_config()
                 'env' => $env,
                 'rsa_pk_culqi' => $rsa_pk_culqi,
                 'rsa_sk_plugin' => $rsa_sk_plugin,
+                'payment_methods' => $payment_methods,
                 'created_at' => current_time('mysql'),
             ]
         );

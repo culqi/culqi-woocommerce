@@ -2,6 +2,7 @@
 
 $config = culqi_get_config();
 $token = generate_token(true);
+$payment_methods = $config->payment_methods ?? '';
 ?>
 
 <style>
@@ -28,7 +29,7 @@ $token = generate_token(true);
 <div class="wrap">
     <div class="iframe-container">
         <iframe 
-            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=' . PLATFORM . '&shop=' . get_site_url() . '&token=' . urlencode($token) ); ?>" 
+            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=' . PLATFORM . '&activePaymentMethods=' . urlencode( $payment_methods ). '&shop=' . get_site_url() . '&token=' . urlencode($token) ); ?>" 
             width="100%">
         </iframe>
     </div>

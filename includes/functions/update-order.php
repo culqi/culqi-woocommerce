@@ -35,7 +35,7 @@ function culqi_update_order(WP_REST_Request $request) {
                     // Add the order note
                     $order->add_order_note($note_order_text);
                 } else {
-                    if ($status = 'pending') {
+                    if ($status == 'pending') {
                         //$order->add_order_note('Culqi '. $note_order_text .' created: '. $transaction_id);
                         $cip = sanitize_text_field($data['cip']) ?? '';
                         $orderNumber = sanitize_text_field($data['orderNumber']) ?? '';
