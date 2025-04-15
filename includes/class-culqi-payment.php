@@ -151,7 +151,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         $txt = '';
         if($config->payment_methods) {
             $cleaned = stripslashes($config->payment_methods);
-            $payment_methods = json_decode($cleaned, true);
+            $payment_methods = json_decode($cleaned, true) ?? explode(',', $config->payment_methods);
             $tarjeta = in_array('tarjeta', $payment_methods);
             $yape =	in_array('yape', $payment_methods);
             $billetera = in_array('billetera', $payment_methods);
@@ -255,17 +255,18 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 		$config = culqi_get_config();
         $payment_methods = $config->payment_methods ?? [];
         if($payment_methods) {
-            $payment_methods = explode(',', $payment_methods);
+            $cleaned = stripslashes($config->payment_methods);
+            $payment_methods = json_decode($cleaned, true) ?? explode(',', $config->payment_methods);
+            $tarjeta = in_array('tarjeta', $payment_methods);
+            $yape =	in_array('yape', $payment_methods);
+            $billetera = in_array('billetera', $payment_methods);
+            $bancaMovil = in_array('bancaMovil', $payment_methods);
+            $agente = in_array('agente', $payment_methods);
+            $cuotealo =	in_array('cuotealo', $payment_methods);
+            $cards_img = PLUGIN_CULQI_URL . 'assets/images/cards.svg';
+            $yape_img = PLUGIN_CULQI_URL . 'assets/images/yape.svg';
+            $pagoefectivo_img = PLUGIN_CULQI_URL . 'assets/images/pagoefectivo.svg';
         }
-		$tarjeta = in_array('tarjeta', $payment_methods);
-		$yape =	in_array('yape', $payment_methods);
-		$billetera = in_array('billetera', $payment_methods);
-		$bancaMovil = in_array('bancaMovil', $payment_methods);
-		$agente = in_array('agente', $payment_methods);
-		$cuotealo =	in_array('cuotealo', $payment_methods);
-		$cards_img = PLUGIN_CULQI_URL . 'assets/images/cards.svg';
-		$yape_img = PLUGIN_CULQI_URL . 'assets/images/yape.svg';
-		$pagoefectivo_img = PLUGIN_CULQI_URL . 'assets/images/pagoefectivo.svg';
 		?>
 
 		<div class="wc-culqi-container">
