@@ -148,10 +148,10 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
     public function get_description()
     {
 		$config = culqi_get_config();
-        $payment_methods = $config->payment_methods ?? [];
         $txt = '';
-        if($payment_methods) {
-            $payment_methods = explode(',', $payment_methods);
+        if($config->payment_methods) {
+            $cleaned = stripslashes($config->payment_methods);
+            $payment_methods = json_decode($cleaned, true);
             $tarjeta = in_array('tarjeta', $payment_methods);
             $yape =	in_array('yape', $payment_methods);
             $billetera = in_array('billetera', $payment_methods);
