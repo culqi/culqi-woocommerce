@@ -35,7 +35,7 @@ function culqi_update_order(WP_REST_Request $request) {
                     // Add the order note
                     $order->add_order_note($note_order_text);
                 } else {
-                    if ($status == 'pending') {
+                    if ($status === "pending") {
                         //$order->add_order_note('Culqi '. $note_order_text .' created: '. $transaction_id);
                         $cip = sanitize_text_field($data['cip']) ?? '';
                         $orderNumber = sanitize_text_field($data['orderNumber']) ?? '';
@@ -47,8 +47,9 @@ function culqi_update_order(WP_REST_Request $request) {
 
                         $order->add_order_note($note_order_text);
                     }
-
-                    wc_reduce_stock_levels($order_id);
+                    if ($status === "processing" || $status === "completed") {
+                        wc_reduce_stock_levels($order_id);
+                    }
                 }
                 
                 return new WP_REST_Response(['message' => 'Order status updated successfully.'], 200);
