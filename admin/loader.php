@@ -4,7 +4,7 @@ add_action('wp_enqueue_scripts', 'culqi_woocommerce_loader_html');
 function culqi_woocommerce_loader_html() {
     if (is_checkout()) {
         $image_url = plugin_dir_url(__DIR__) . 'assets/images/culqi_brand.svg';
-        echo '<div class="woocommerce-loader">
+        echo '<div class="woocommerce-loader" style="display:none;">
                 <style> 
                     @keyframes animate-svg-stroke { 
                     0% {\
