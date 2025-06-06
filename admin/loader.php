@@ -47,3 +47,12 @@ function culqi_woocommerce_loader_html() {
               </div>';
     }
 }
+
+add_filter('woocommerce_order_button_html', function($button) {
+    // Add both 'disabled' attribute and a custom class
+    return str_replace(
+        'id="place_order"',
+        'id="place_order" disabled="disabled"',
+        $button
+    );
+});

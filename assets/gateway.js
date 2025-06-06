@@ -65,6 +65,42 @@ jQuery(function($) {
         }
     }, false);
 });
+
+jQuery(function($) {
+    $(document.body).on('updated_checkout', function() {
+        const checkoutIsReady = function() {
+            return (
+                $('#place_order').length && 
+                $('.woocommerce-checkout').length &&
+                (typeof wc_checkout_params !== 'undefined') &&
+                (typeof Culqi === 'undefined' || Culqi.options)
+            );
+        };
+        
+        const maxAttempts = 10;
+        let attempts = 0;
+        
+        const checkReadyState = setInterval(function() {
+            attempts++;
+            
+            if (checkoutIsReady()) {
+                clearInterval(checkReadyState);
+                enableButton();
+            } 
+            else if (attempts >= maxAttempts) {
+                clearInterval(checkReadyState);
+                console.warn('Checkout elements not fully loaded after attempts');
+                $('#place_order').prop('disabled', false);
+            }
+        }, 500);
+    });
+});
+
+function enableButton() {
+    console.log('Checkout fully loaded');
+    jQuery('#place_order').prop('disabled', false);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Check if WooCommerce Blocks is initialized
     if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
