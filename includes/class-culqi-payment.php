@@ -141,7 +141,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         return array(
             'result'     => 'success',
             'show_modal' => true,
-            'redirect'   => $gateway_url
+            'redirect'   => $this->formatGatewayUrl($gateway_url)
         );
     }
 
@@ -309,5 +309,9 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             return LIVE;
         }
         return LIVE;
+    }
+
+    private function formatGatewayUrl(string $url): string {
+        return $url . '&culqiPluginVersion=' . PLUGIN_VERSION . '&culqiClientVersion=' . WC()->version;
     }
 }
