@@ -28,6 +28,27 @@ jQuery(document).ready(function($) {
     });
     //
     window.addEventListener('message', function(event) {
+        if (event.data.action === 'checkPluginSession') {
+            jQuery(document).ready(function($) {
+                $.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'check_admin_session',
+                        _wpnonce: wpApiSettings.nonce // Security
+                    },
+                    success: function(response) {
+                        if (!response.success || !response.data.active) {
+                            location.reload();
+                        }
+                    },
+                    error: function() {
+                        console.error('Session check failed');
+                        location.reload();
+                    }
+                });
+            });
+        }
         if (event.data.action === 'saveConfig') {
 
             const data = event.data.data;

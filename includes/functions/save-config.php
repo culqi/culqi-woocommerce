@@ -89,3 +89,15 @@ function culqi_save_config()
 
     wp_send_json_success(['message' => 'Payment gateway updated.']);
 }
+
+add_action('admin_enqueue_scripts', function() {
+    wp_enqueue_script('wp-api'); // Loads wpApiSettings
+});
+
+add_action('wp_ajax_check_admin_session', function() {
+    if (is_user_logged_in() && current_user_can('manage_options')) {
+        wp_send_json_success(['active' => true]);
+    } else {
+        wp_send_json_error(['active' => false]);
+    }
+});
