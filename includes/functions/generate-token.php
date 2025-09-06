@@ -78,8 +78,8 @@ function verify_jwt_token($token)
         }
         return $payload;
     } catch (Exception $e) {
-        var_dump($e);
-        // throw new Exception('Token validation failed: ' . $e->getMessage());
+        // var_dump($e);
+        throw new Exception('Token validation failed: ' . $e->getMessage());
         return false;
     }
 }

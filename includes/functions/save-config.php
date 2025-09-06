@@ -25,9 +25,8 @@ function culqi_save_config()
     $existing_entry = wp_cache_get($cache_key, 'culqi');
     if ($existing_entry === false || is_null($existing_entry)) {
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-        $existing_entry = $wpdb->get_var(
-            $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE env = %s", $env)
-        );
+        $sql = $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE env = %s", $env);
+        $existing_entry = $wpdb->get_var($sql);
         wp_cache_set($cache_key, $existing_entry, 'culqi', HOUR_IN_SECONDS);
     }
     if ($existing_entry > 0) {
