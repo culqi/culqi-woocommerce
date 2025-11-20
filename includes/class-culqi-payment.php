@@ -56,7 +56,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
     public function process_payment($order_id)
     {
-        $token = generate_token();
+        $token = culqi_generate_token();
         $order = wc_get_order($order_id);
         $order_key = $order->get_order_key();
         $shop_domain = get_site_url();

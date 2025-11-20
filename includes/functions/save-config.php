@@ -24,9 +24,9 @@ function culqi_save_config()
     $cache_key = 'culqi_merchant_data_' . $limit;
     $existing_entry = wp_cache_get($cache_key, 'culqi');
     if ($existing_entry === false || is_null($existing_entry)) {
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
         $existing_entry = $wpdb->get_var(
-            $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE env = %s", $env)
+            $wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->prefix}culqi_merchant_data WHERE env = %s", $env)
         );
         wp_cache_set($cache_key, $existing_entry, 'culqi', HOUR_IN_SECONDS);
     }
@@ -56,7 +56,7 @@ function culqi_save_config()
         wp_cache_delete($cache_key, 'culqi');
     } else {
         // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $wpdb->query("TRUNCATE TABLE {$table_name}");
+        $wpdb->query("TRUNCATE TABLE {$wpdb->prefix}culqi_merchant_data");
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
         $wpdb->insert(
             $table_name,
@@ -91,7 +91,7 @@ function culqi_save_config()
 }
 
 add_action('admin_enqueue_scripts', function() {
-    wp_enqueue_script('wp-api'); // Loads wpApiSettings
+    wp_enqueue_script('wp-api');
 });
 
 add_action('wp_ajax_check_admin_session', function() {

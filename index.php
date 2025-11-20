@@ -65,9 +65,9 @@ function culqi_gateway_init() {
     require_once plugin_dir_path( __FILE__ ) . 'includes/block-support/class-culqi-block.php';
 
     // Add the gateway to WooCommerce
-    add_filter('woocommerce_payment_gateways', 'add_culqi_gateway');
+    add_filter('woocommerce_payment_gateways', 'culqi_add_culqi_gateway');
     
-    function add_culqi_gateway($methods)
+    function culqi_add_culqi_gateway($methods)
     {
         $methods[] = 'WC_Gateway_Culqi'; // Payment Gateway class
         return $methods;
@@ -93,7 +93,7 @@ require_once plugin_dir_path(__FILE__) . 'includes/functions/disable-reduce-stoc
 // Loader
 require_once plugin_dir_path(__FILE__) . 'admin/loader.php';
 
-function enqueue_culqi_block() {
+function culqi_enqueue_culqi_block() {
     wp_enqueue_script(
         'culqi-block',
         plugins_url( 'assets/js/culqi-block.js', __FILE__ ),
@@ -102,5 +102,5 @@ function enqueue_culqi_block() {
         true
     );
 }
-add_action( 'enqueue_block_editor_assets', 'enqueue_culqi_block' );
-add_action( 'wp_enqueue_scripts', 'enqueue_culqi_block' );
+add_action( 'enqueue_block_editor_assets', 'culqi_enqueue_culqi_block' );
+add_action( 'wp_enqueue_scripts', 'culqi_enqueue_culqi_block' );

@@ -1,6 +1,6 @@
 <?php
 
-function encrypt_data_with_rsa(string $jsonData, string $publicKeyString = ''): ?string {
+function culqi_encrypt_data_with_rsa(string $jsonData, string $publicKeyString = ''): ?string {
     try {
         $publicKey = openssl_pkey_get_public($publicKeyString);
         if ($publicKey === false) {
@@ -29,7 +29,7 @@ function encrypt_data_with_rsa(string $jsonData, string $publicKeyString = ''): 
 }
 
 
-function generate_token($is_admin = false)
+function culqi_generate_token($is_admin = false)
 {
     try {
         $minutes = EXPIRATION_TIME;
@@ -48,7 +48,7 @@ function generate_token($is_admin = false)
                 "exp" => $exp
             ];
     
-            $encryptedData = encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk_culqi ?? '');
+            $encryptedData = culqi_encrypt_data_with_rsa(wp_json_encode($data), $config->rsa_pk_culqi ?? '');
             return $encryptedData;
         }
     } catch(Exception $e) {
@@ -56,7 +56,7 @@ function generate_token($is_admin = false)
     }
 }
 
-function verify_jwt_token($token)
+function culqi_verify_jwt_token($token)
 {
     try {
         $config = culqi_get_config();
@@ -78,13 +78,8 @@ function verify_jwt_token($token)
         }
         return $payload;
     } catch (Exception $e) {
-        var_dump($e);
         // throw new Exception('Token validation failed: ' . $e->getMessage());
         return false;
     }
 }
 
-function base64UrlDecode($data) {
-    $data .= str_repeat('=', (4 - strlen($data) % 4) % 4);
-    return base64_decode(strtr($data, '-_', '+/'));
-}

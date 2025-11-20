@@ -28,7 +28,6 @@
 }
 
 .woocommerce-loader {
-    display: none;
     background-color: rgb(0 0 0 / .6);
     place-items: center;
     z-index: 100;

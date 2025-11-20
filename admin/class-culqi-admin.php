@@ -4,9 +4,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-add_action('admin_menu', 'custom_plugin_add_submenu');
+add_action('admin_menu', 'culqi_custom_plugin_add_submenu');
 
-function custom_plugin_add_submenu()
+function culqi_custom_plugin_add_submenu()
 {
     add_submenu_page(
         'woocommerce',

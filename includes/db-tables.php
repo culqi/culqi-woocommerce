@@ -21,8 +21,7 @@ function culqi_create_table() {
 
 function culqi_delete_table() {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'culqi_merchant_data';
 
-    $sql = "DROP TABLE IF EXISTS ". esc_sql($table_name) . ";";
-    $wpdb->query($sql); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.SchemaChange
+    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}culqi_merchant_data");
 }
