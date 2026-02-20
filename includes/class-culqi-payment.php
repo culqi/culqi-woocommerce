@@ -58,6 +58,24 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
     {
         $token = culqi_generate_token();
         $order = wc_get_order($order_id);
+        $items = $order->get_items('line_item');
+        $products = null;
+
+        if (!empty($items)) {
+            $products = array();
+            foreach ($items as $item) {
+                $quantity = (int) $item->get_quantity();
+                $line_total = (float) $item->get_total();
+                $unit_price = $quantity > 0 ? $line_total / $quantity : $line_total;
+
+                $products[] = array(
+                    "name" => $item->get_name() ?? '',
+                    "quantity" => $quantity > 0 ? $quantity : 1,
+                    "unit_price" => $unit_price,
+                );
+            }
+        }
+
         $order_key = $order->get_order_key();
         $shop_domain = get_site_url();
         $api_url = CULQI_API_URL . 'shopify/public/save-order';
@@ -107,6 +125,9 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             "merchant_locale" => "en-PE",
             "shop_domain" =>  str_replace(['http://', 'https://'], '', $shop_domain),
             "order_key" => $order_key,
+            "phone" => $order->get_billing_phone() ?? '',
+            "browser" => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown',
+            "products" => $products,
         );
 
         $response = wp_remote_post($api_url, array(
