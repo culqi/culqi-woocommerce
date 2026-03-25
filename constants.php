@@ -1,8 +1,8 @@
 <?php
 
 define( 'PLUGIN_CULQI_URL' , plugin_dir_url(__FILE__) );
-define( 'CULQI_API_URL' , 'https://c1-ag-online.qas.nonprodculqi.com/gateway/' );
-define( 'CULQI_CONFIG_URL' , 'https://c1-configonlineplatform.qas.nonprodculqi.com' );
+define( 'CULQI_API_URL' , 'https://ag-online.culqi.com/gateway/' );
+define( 'CULQI_CONFIG_URL' , 'https://configonlineplatform.culqi.com' );
 define( 'EXPIRATION_TIME' , 24 );
 define('PLUGIN_VERSION', 'v4.0.0');
 define('PROCESSING', 'processing');
