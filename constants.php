@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 define( 'PLUGIN_CULQI_URL' , plugin_dir_url(__FILE__) );
 define( 'CULQI_API_URL' , 'https://ag-online.culqi.com/gateway/' );

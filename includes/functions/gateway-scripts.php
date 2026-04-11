@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 add_action('wp_enqueue_scripts', 'culqi_payment_enqueue_scripts');
 
 function culqi_payment_enqueue_scripts() {

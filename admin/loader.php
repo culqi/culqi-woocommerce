@@ -1,5 +1,7 @@
 <?php 
-
+if (!defined('ABSPATH')) {
+    exit;
+}
 add_action('wp_enqueue_scripts', 'culqi_woocommerce_loader_html');
 function culqi_woocommerce_loader_html() {
     if (is_checkout()) {

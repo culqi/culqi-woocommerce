@@ -1,5 +1,7 @@
 <?php
-
+if (!defined('ABSPATH')) {
+    exit;
+}
 function culqi_encrypt_data_with_rsa(string $jsonData, string $publicKeyString = ''): ?string {
     try {
         $publicKey = openssl_pkey_get_public($publicKeyString);

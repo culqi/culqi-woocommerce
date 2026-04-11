@@ -1,4 +1,8 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 function culqi_create_table() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'culqi_merchant_data';

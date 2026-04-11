@@ -1,4 +1,8 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 add_action('rest_api_init', 'culqi_register_custom_route');
 function culqi_register_custom_route() {
     $namespace = 'culqi-api';

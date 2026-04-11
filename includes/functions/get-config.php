@@ -1,5 +1,7 @@
 <?php
-
+if (!defined('ABSPATH')) {
+    exit;
+}
 function culqi_get_config() {
     global $wpdb;
     $limit = 1;

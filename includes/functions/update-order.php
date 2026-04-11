@@ -1,5 +1,7 @@
 <?php
-
+if (!defined('ABSPATH')) {
+    exit;
+}
 function culqi_get_payment_type($id) {
     $type = (substr( $id, 0, 4 ) === "ord_") ? "order" : "charge";
     return $type;

@@ -1,5 +1,7 @@
 <?php
-
+if (!defined('ABSPATH')) {
+    exit;
+}
 add_action('woocommerce_before_checkout_form', 'culqi_custom_order_created_modal');
 function culqi_custom_order_created_modal() {
     ?>

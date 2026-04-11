@@ -11,7 +11,7 @@ Developer URI: https://culqi.com/
 License: GPLv2 or later
 Text Domain: culqi
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 6.9
 Stable tag: 5.6
 Requires PHP: 7.0
 WC requires at least: 2.6.11

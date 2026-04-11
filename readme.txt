@@ -3,14 +3,15 @@ Contributors: culqionline
 Tags: culqi, checkout, payment method, Perú, woocommerce
 Donate link: https://culqi.com/
 Requires at least: 5.0
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 4.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Short Description: Culqi accepts payments with debit and credit cards, Yape, Cuotéalo BCP, and PagoEfectivo.
 
-
-Conéctate a nuestra pasarela de pago CulqiOnline de forma segura y estable en tu tienda virtual.
+== Description ==
+Culqi accepts payments with debit and credit cards, Yape, Cuotéalo BCP, and PagoEfectivo (mobile wallets, agents, and stores).
 
 == Description ==
 

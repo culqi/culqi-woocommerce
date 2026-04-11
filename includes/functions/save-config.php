@@ -1,5 +1,7 @@
 <?php
-
+if (!defined('ABSPATH')) {
+    exit;
+}
 add_action('wp_ajax_culqi_save_config', 'culqi_save_config');
 
 function culqi_save_config() 
