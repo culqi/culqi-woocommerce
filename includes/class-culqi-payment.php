@@ -79,7 +79,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         $order_key = $order->get_order_key();
         $shop_domain = get_site_url();
         $api_url = CULQI_API_URL . 'shopify/public/save-order';
-        $platform = "woocommerce";
+        $platform = PLATFORM;
         $env = $this->get_env();
 
         $body = array(
@@ -118,6 +118,11 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
                     "province" => $order->get_shipping_state(),
                     "country_code" => $order->get_shipping_country()
                 ),
+                "shipping_data" => array(
+                    "method" => $order->get_shipping_method() ?: 'No method selected',
+                    "total" => $order->get_shipping_total(),
+                    "tax" =>$order->get_shipping_tax(),
+                ),
                 "email" => $order->get_billing_email(),
                 "locale" => "en-PE"
             ),
@@ -126,8 +131,19 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             "shop_domain" =>  str_replace(['http://', 'https://'], '', $shop_domain),
             "order_key" => $order_key,
             "phone" => $order->get_billing_phone() ?? '',
-            "browser" => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown',
+            "browser" => sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'] ?? '')) ?? 'unknown',
             "products" => $products,
+            "audit_data" => array(
+                'ip'=>  $this->obtener_ip_real(),
+                "plugin_version" => $platform_version,
+                'cms' => $platform,
+                'cms_version' => WC()->version,
+                'wordpress_version' => get_bloginfo( 'version' ),
+                'php_version' => phpversion(),
+                'name_theme'=> $mechant_theme->get( 'Name' ),
+                'version_theme'=> $mechant_theme->get( 'Version' ),
+                'url_theme'=> $mechant_theme->get( 'ThemeURI' ),
+            ),
         );
 
         $response = wp_remote_post($api_url, array(
