@@ -170,7 +170,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
     {
 		$config = culqi_get_config();
         $txt = '';
-        if($config->payment_methods) {
+        if(isset($config->payment_methods)) {
             $cleaned = stripslashes($config->payment_methods);
             $payment_methods = json_decode($cleaned, true) ?? explode(',', $config->payment_methods);
             $tarjeta = in_array('tarjeta', $payment_methods);
@@ -287,7 +287,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             $cards_img = PLUGIN_CULQI_URL . 'assets/images/cards.svg';
             $yape_img = PLUGIN_CULQI_URL . 'assets/images/yape.svg';
             $pagoefectivo_img = PLUGIN_CULQI_URL . 'assets/images/pagoefectivo.svg';
-        }
+        
 		?>
 
 		<div class="wc-culqi-container">
@@ -310,6 +310,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 		</div>
 
 		<?php
+        }
     }
 
     private function get_env()

@@ -37,7 +37,7 @@ function culqi_generate_token($is_admin = false)
         $exp = time() + $expirationTimeInSeconds;
 
         $config = culqi_get_config();
-        if(!$config->env) {
+        if(!isset($config->env)) {
             if(!$is_admin) {
                 wc_add_notice(__('Debes configurar tu llave pública.', 'culqi'), 'error');
                 return;
