@@ -80,7 +80,11 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         $shop_domain = get_site_url();
         $api_url = CULQI_API_URL . 'shopify/public/save-order';
         $platform = PLATFORM;
+        $platform_version = PLUGIN_VERSION;
+        $checkout_version = CHECKOUT_VERSION;
+        $culqi_3ds = CULQI_3DS;
         $env = $this->get_env();
+        $mechant_theme = wp_get_theme();
 
         $body = array(
             "id" => $order_id,
@@ -135,6 +139,8 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             "products" => $products,
             "audit_data" => array(
                 'ip'=>  $this->obtener_ip_real(),
+                "checkout_version" => $checkout_version,
+                "3ds" => $culqi_3ds,
                 "plugin_version" => $platform_version,
                 'cms' => $platform,
                 'cms_version' => WC()->version,
