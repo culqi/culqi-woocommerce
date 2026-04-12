@@ -1,4 +1,7 @@
-2024-12-23 - version 4.0.0
+2026-04-13 - version 4.0.1
+Fix: Include MDD
+
+2026-03-01 - version 4.0.0
 Fix: New version of the plugin
 
 2024-08-08 - version 3.1.2
