@@ -1,5 +1,5 @@
 2026-04-13 - version 4.0.1
-Fix: Include MDD
+Fix: Include MDD fields
 
 2026-03-01 - version 4.0.0
 Fix: New version of the plugin

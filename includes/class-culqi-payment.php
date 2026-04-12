@@ -85,6 +85,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         $culqi_3ds = CULQI_3DS;
         $env = $this->get_env();
         $mechant_theme = wp_get_theme();
+        $user_agent = sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'] ?? '')) ?? 'unknown';
 
         $body = array(
             "id" => $order_id,
@@ -135,10 +136,12 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             "shop_domain" =>  str_replace(['http://', 'https://'], '', $shop_domain),
             "order_key" => $order_key,
             "phone" => $order->get_billing_phone() ?? '',
-            "browser" => sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'] ?? '')) ?? 'unknown',
+            "browser" => $user_agent,
             "products" => $products,
             "audit_data" => array(
+                "integration_type"=> 'plugin',
                 "ip"=>  $this->obtener_ip_real(),
+                "user_agent" =>  $user_agent,
                 "checkout_version" => $checkout_version,
                 "3ds" => $culqi_3ds,
                 "plugin_version" => $platform_version,
@@ -357,5 +360,16 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
     private function formatGatewayUrl(string $url): string {
         return $url . '&culqiPluginVersion=' . PLUGIN_VERSION . '&culqiClientVersion=' . WC()->version;
+    }
+
+    private function obtener_ip_real() {
+        if ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+            $ip = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] )[0];
+        } elseif ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return sanitize_text_field( $ip );
     }
 }
