@@ -1,0 +1,5 @@
+.git/
+dist/
+build/
+.editorconfig
+mise.toml
