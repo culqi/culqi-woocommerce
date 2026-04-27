@@ -26,7 +26,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         add_filter('woocommerce_blocks_payment_gateway_support', array($this, 'add_blocks_support'));
     }
 
-    public function add_blocks_support($gateways) 
+    public function add_blocks_support($gateways)
     {
         $gateways[] = $this->id;
         return $gateways;
@@ -143,7 +143,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
                 "ip"=>  $this->obtener_ip_real(),
                 "user_agent" =>  $user_agent,
                 "checkout_version" => $checkout_version,
-                "3ds" => $culqi_3ds,
+                "threeds" => $culqi_3ds,
                 "plugin_version" => $platform_version,
                 "cms" => $platform,
                 "cms_version" => WC()->version,
@@ -183,7 +183,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
         $order->update_status('pending', __('Payment pending, redirecting to gateway.', 'culqi'));
         $order->save();
-        
+
         return array(
             'result'     => 'success',
             'show_modal' => true,
@@ -236,7 +236,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 		return wp_kses($translated_string, $allowed_html);
 	}
 
-    public function get_icon() 
+    public function get_icon()
     {
 		?>
 			<script>
@@ -252,7 +252,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 					width: 100%;
 					align-items: center;
 					justify-content: space-between;
-					
+
 					display: inline-grid !important;
 					grid-template-columns: auto auto;
     				grid-template-rows: auto;
@@ -312,7 +312,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             $cards_img = PLUGIN_CULQI_URL . 'assets/images/cards.svg';
             $yape_img = PLUGIN_CULQI_URL . 'assets/images/yape.svg';
             $pagoefectivo_img = PLUGIN_CULQI_URL . 'assets/images/pagoefectivo.svg';
-        
+
 		?>
 
 		<div class="wc-culqi-container">
