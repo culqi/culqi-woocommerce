@@ -34,6 +34,7 @@ require_once plugin_dir_path(__FILE__) . 'includes/functions/gateway-scripts.php
 require_once plugin_dir_path(__FILE__) . 'includes/functions/iframe-modal.php';
 require_once plugin_dir_path(__FILE__) . 'includes/functions/get-config.php';
 require_once plugin_dir_path(__FILE__) . 'includes/functions/generate-token.php';
+require_once plugin_dir_path(__FILE__) . 'includes/functions/get-config-url.php';
 
 // Activation Hook
 register_activation_hook(__FILE__, 'culqi_payment_activate');
@@ -42,7 +43,7 @@ function culqi_payment_activate() {
         deactivate_plugins(plugin_basename(__FILE__));
         wp_die('WooCommerce is required to use the Culqi Payment Gateway plugin. Please install and activate WooCommerce.');
     }
-    
+
     culqi_create_table();
 }
 
@@ -66,7 +67,7 @@ function culqi_gateway_init() {
 
     // Add the gateway to WooCommerce
     add_filter('woocommerce_payment_gateways', 'culqi_add_culqi_gateway');
-    
+
     function culqi_add_culqi_gateway($methods)
     {
         $methods[] = 'WC_Gateway_Culqi'; // Payment Gateway class
