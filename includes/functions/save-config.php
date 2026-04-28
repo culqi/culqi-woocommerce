@@ -78,6 +78,8 @@ function culqi_save_config()
             'payment_methods' => $payment_methods,
             'created_at' => current_time('mysql'),
         ];
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery
         $wpdb->insert(
             $table_name,
             $data
