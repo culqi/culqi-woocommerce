@@ -23,27 +23,31 @@ jQuery(function($) {
                         }
                         jQuery('#place_order').attr('disabled', false);
                     } else {
-                        alert('Order creation failed. Please try again.');
+                        if (response.messages) {
+                            showWooCommerceError(response.messages);
+                        } else {
+                            showWooCommerceError('Order creation failed. Please try again.');
+                        }
                         $('.woocommerce-loader').fadeOut();
                         $('.woocommerce-loader').removeClass('flex');
                         jQuery('#place_order').attr('disabled', false);
                     }
                 },
                 error: function(err) {
-                    alert('Error while creating order. Please try again.');
+                    showWooCommerceError('Error while creating order. Please try again.');
                     console.log(err);
                     $('.woocommerce-loader').fadeOut();
                     $('.woocommerce-loader').removeClass('flex');
                     jQuery('#place_order').attr('disabled', false);
                 }
             });
-    
+
             return false;
         }
     });
 
     window.addEventListener('message', function(event) {
-        console.log(event.data);
+        console.log('onMessage = ', event.data);
         if (event.data.object == "appCulqiStoreLoaded") {
             $('.woocommerce-loader').removeClass('flex');
         }
@@ -70,23 +74,23 @@ jQuery(function($) {
     $(document.body).on('updated_checkout', function() {
         const checkoutIsReady = function() {
             return (
-                $('#place_order').length && 
+                $('#place_order').length &&
                 $('.woocommerce-checkout').length &&
                 (typeof wc_checkout_params !== 'undefined') &&
                 (typeof Culqi === 'undefined' || Culqi.options)
             );
         };
-        
+
         const maxAttempts = 10;
         let attempts = 0;
-        
+
         const checkReadyState = setInterval(function() {
             attempts++;
-            
+
             if (checkoutIsReady()) {
                 clearInterval(checkReadyState);
                 enableButton();
-            } 
+            }
             else if (attempts >= maxAttempts) {
                 clearInterval(checkReadyState);
                 console.warn('Checkout elements not fully loaded after attempts');
@@ -121,4 +125,24 @@ function customRedirect() {
     const redirectUrl = window.redirectUrl;
     delete window.redirectUrl;
     window.location.href = redirectUrl;
+}
+
+function showWooCommerceError(htmlContent) {
+    jQuery('.wc-block-components-notice-banner').remove();
+    jQuery('#culqi-checkout-error').remove();
+
+    const errorContainer = jQuery('<div id="culqi-checkout-error"></div>');
+    errorContainer.html(htmlContent);
+
+    jQuery('form.checkout').prepend(errorContainer);
+
+    jQuery('html, body').animate({
+        scrollTop: errorContainer.offset().top - 100
+    }, 300);
+
+    setTimeout(() => {
+        errorContainer.fadeOut(300, function() {
+            jQuery(this).remove();
+        });
+    }, 10000);
 }
