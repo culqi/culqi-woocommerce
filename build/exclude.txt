@@ -3,3 +3,5 @@ dist/
 build/
 .editorconfig
 mise.toml
+.prettierrc
+.gitignore

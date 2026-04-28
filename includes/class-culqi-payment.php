@@ -380,14 +380,19 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         return $url . '&culqiPluginVersion=' . PLUGIN_VERSION . '&culqiClientVersion=' . WC()->version;
     }
 
-    private function obtener_ip_real() {
-        if ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-            $ip = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] )[0];
-        } elseif ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
+    private function obtener_ip_real(): string
+    {
+        $ip = '';
+
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $forwarded = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_FORWARDED_FOR']));
+            $ip = explode(',', $forwarded)[0] ?? '';
+        } elseif (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = sanitize_text_field(wp_unslash($_SERVER['HTTP_CLIENT_IP']));
+        } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
+            $ip = sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR']));
         }
-        return sanitize_text_field( $ip );
+
+        return $ip ?: 'unknown';
     }
 }
