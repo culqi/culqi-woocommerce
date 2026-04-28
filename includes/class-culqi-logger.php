@@ -194,6 +194,9 @@ class Culqi_Logger
 
     private function looks_like_sensitive_string(string $value): bool
     {
+        if (filter_var($value, FILTER_VALIDATE_URL)) {
+            return false;
+        }
         if (strlen($value) > 50 && strpos($value, '.') !== false) {
             return true;
         }

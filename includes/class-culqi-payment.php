@@ -8,9 +8,11 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 {
     protected $culqi_logo, $payment_methods;
     private $logger_module = 'PAYMENT GATEWAY';
+    private $logger;
 
     public function __construct()
     {
+        $this->logger = Culqi_Logger::get_instance();
         $this->id = 'culqi';
         $this->icon = PLUGIN_CULQI_URL . 'assets/images/cards.svg';
 		$this->culqi_logo = PLUGIN_CULQI_URL . 'assets/images/culqi-logo.svg';
@@ -65,7 +67,11 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
     public function process_payment($order_id)
     {
-        $logger = Culqi_Logger::get_instance();
+        $this->logger->info($this->logger_module, 'Starting payment process', [
+            'order_id' => $order_id,
+            'amount' => wc_get_order($order_id)->get_total(),
+            'currency' => wc_get_order($order_id)->get_currency()
+        ]);
         $token = culqi_generate_token();
         $order = wc_get_order($order_id);
         $items = $order->get_items('line_item');
@@ -165,8 +171,8 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             ),
         );
 
-        $logger->info($this->logger_module, 'Send ' . $api_url);
-        $logger->info($this->logger_module, 'Body to send ', $body);
+        $this->logger->info($this->logger_module, 'Send ' . $api_url);
+        $this->logger->info($this->logger_module, 'Body to send ', $body);
         $response = wp_remote_post($api_url, array(
             'method'    => 'POST',
             'body'      => wp_json_encode($body),
@@ -179,8 +185,8 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         ));
 
         if (is_wp_error($response)) {
-            $logger->error($this->logger_module, 'Error ' . $response);
-            $logger->error($this->logger_module, 'Error Body ' . json_decode(wp_remote_retrieve_body($response)));
+            $this->logger->error($this->logger_module, 'Error ' . $response);
+            $this->logger->error($this->logger_module, 'Error Body ' . json_decode(wp_remote_retrieve_body($response)));
             wc_add_notice(__('Payment error: Could not connect to the payment gateway.', 'culqi'), 'error');
             return;
         }
@@ -189,18 +195,25 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         $response_body = wp_remote_retrieve_body($response);
         $result = json_decode($response_body, true);
 
-        $logger->info($this->logger_module, 'Status: ' . wp_remote_retrieve_response_code( $response ));
-        $logger->info($this->logger_module, 'Body: ', $result);
+        $this->logger->info($this->logger_module, 'Status: ' . wp_remote_retrieve_response_code( $response ));
+        $this->logger->info($this->logger_module, 'Body: ', $result);
 
         if (isset($result['redirect_url'])) {
             $gateway_url = $result['redirect_url'];
         } else {
+            $this->logger->warning($this->logger_module, 'Invalid gateway response - no redirect_url', [
+                'order_id' => $order_id
+            ]);
             wc_add_notice(__('Payment error: Invalid response from payment gateway.', 'culqi'), 'error');
             return;
         }
 
         $order->update_status('pending', __('Payment pending, redirecting to gateway.', 'culqi'));
         $order->save();
+
+        $this->logger->info($this->logger_module, 'Order status updated to pending', [
+            'order_id' => $order_id
+        ]);
 
         return array(
             'result'     => 'success',
@@ -358,13 +371,17 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
     private function get_env()
     {
+        $this->logger->debug($this->logger_module, 'Getting environment from config');
         $config = culqi_get_config();
         if(!$config->env) {
+            $this->logger->warning($this->logger_module, 'Environment not configured, prompt shown to user');
             wc_add_notice(__('Debes guardar tu configuración.', 'culqi'), 'error');
             return false;
         }
 
-        return $this->getKeyType($config->env);
+        $env = $this->getKeyType($config->env);
+        $this->logger->debug($this->logger_module, 'Environment determined', ['env' => $env]);
+        return $env;
     }
 
     private function getKeyType(string $key): string {

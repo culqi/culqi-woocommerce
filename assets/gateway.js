@@ -47,7 +47,6 @@ jQuery(function($) {
     });
 
     window.addEventListener('message', function(event) {
-        console.log('onMessage = ', event.data);
         if (event.data.object == "appCulqiStoreLoaded") {
             $('.woocommerce-loader').removeClass('flex');
         }
