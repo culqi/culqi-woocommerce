@@ -1,3 +1,4 @@
 dist
 composer.phar
 vendor/
+constants-dev.php

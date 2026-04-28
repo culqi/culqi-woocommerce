@@ -5,3 +5,4 @@ build/
 mise.toml
 .prettierrc
 .gitignore
+constants-dev.php

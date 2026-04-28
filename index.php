@@ -26,6 +26,9 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
+if (file_exists(plugin_dir_path(__FILE__) . 'constants-dev.php')) {
+    require_once plugin_dir_path(__FILE__) . 'constants-dev.php';
+}
 require_once plugin_dir_path(__FILE__) . 'constants.php';
 require_once plugin_dir_path(__FILE__) . 'includes/db-tables.php';
 require_once plugin_dir_path(__FILE__) . 'includes/routes.php';
