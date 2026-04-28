@@ -1,2 +1,3 @@
 dist
 composer.phar
+vendor/

@@ -4,7 +4,8 @@
         "firebase/php-jwt": "6.10.0"
     },
     "require-dev": {
-        "php-stubs/wordpress-stubs": "^6.9"
+        "php-stubs/wordpress-stubs": "^6.9",
+        "php-stubs/woocommerce-stubs": "^10.7"
     },
     "scripts": {
         "build": [
