@@ -147,7 +147,8 @@ class Culqi_Logger
 
     private function should_sanitize(): bool
     {
-        return !(defined('CULQI_DEBUG_SANITIZE') && CULQI_DEBUG_SANITIZE);
+        // Change if you need to debug
+        return true;
     }
 
     private function format_context(array $context): array
