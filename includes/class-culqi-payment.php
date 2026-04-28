@@ -7,6 +7,8 @@ if (!defined('ABSPATH')) {
 class WC_Gateway_Culqi extends WC_Payment_Gateway
 {
     protected $culqi_logo, $payment_methods;
+    private $logger_module = 'PAYMENT GATEWAY';
+
     public function __construct()
     {
         $this->id = 'culqi';
@@ -51,11 +53,19 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
                 'type' => 'textarea',
                 'default' => 'Pay securely using your Culqi account.',
             ),
+            'debug_mode' => array(
+                'title' => __('Debug Mode', 'culqi'),
+                'type' => 'checkbox',
+                'label' => __('Enable debug mode for detailed logging', 'culqi'),
+                'default' => 'no',
+                'description' => __('Only enable during development.', 'culqi'),
+            ),
         );
     }
 
     public function process_payment($order_id)
     {
+        $logger = Culqi_Logger::get_instance();
         $token = culqi_generate_token();
         $order = wc_get_order($order_id);
         $items = $order->get_items('line_item');
@@ -155,6 +165,8 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             ),
         );
 
+        $logger->info($this->logger_module, 'Send ' . $api_url);
+        $logger->info($this->logger_module, 'Body to send ', $body);
         $response = wp_remote_post($api_url, array(
             'method'    => 'POST',
             'body'      => wp_json_encode($body),
@@ -167,12 +179,18 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         ));
 
         if (is_wp_error($response)) {
+            $logger->error($this->logger_module, 'Error ' . $response);
+            $logger->error($this->logger_module, 'Error Body ' . json_decode(wp_remote_retrieve_body($response)));
             wc_add_notice(__('Payment error: Could not connect to the payment gateway.', 'culqi'), 'error');
             return;
         }
 
+
         $response_body = wp_remote_retrieve_body($response);
         $result = json_decode($response_body, true);
+
+        $logger->info($this->logger_module, 'Status: ' . wp_remote_retrieve_response_code( $response ));
+        $logger->info($this->logger_module, 'Body: ', $result);
 
         if (isset($result['redirect_url'])) {
             $gateway_url = $result['redirect_url'];

@@ -35,6 +35,7 @@ require_once plugin_dir_path(__FILE__) . 'includes/functions/iframe-modal.php';
 require_once plugin_dir_path(__FILE__) . 'includes/functions/get-config.php';
 require_once plugin_dir_path(__FILE__) . 'includes/functions/generate-token.php';
 require_once plugin_dir_path(__FILE__) . 'includes/functions/get-config-url.php';
+require_once plugin_dir_path(__FILE__) . 'includes/class-culqi-logger.php';
 
 // Activation Hook
 register_activation_hook(__FILE__, 'culqi_payment_activate');
