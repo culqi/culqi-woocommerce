@@ -13,6 +13,6 @@
             "@package"
         ],
         "install-prod": "composer install --no-dev --optimize-autoloader --no-interaction",
-        "package": "bash build/build.sh"
+        "package": "php build/build.php"
     }
 }
