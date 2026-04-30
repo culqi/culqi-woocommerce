@@ -4,7 +4,7 @@ Tags: culqi, checkout, payment method, woocommerce, peru
 Donate link: https://culqi.com/
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 4.0.0
+Stable tag: 4.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -89,6 +89,12 @@ Yes. These require purchase orders, which are generated automatically. You must 
 5. Webhook configuration
 
 == Changelog ==
+
+= 4.0.1 =
+* Add build script with versioned ZIP output
+* Add bilingual readme (English/Spanish)
+* Add local screenshots for documentation
+* Update README with installation options
 
 = 4.0.0 =
 * Updated to WooCommerce latest version
