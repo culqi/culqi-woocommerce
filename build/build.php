@@ -3,7 +3,8 @@
 $root = dirname(__DIR__);
 $dist = "$root/dist";
 $temp = "$dist/tmp/culqi";
-$zipOut = "$dist/culqi.zip";
+$version = getVersion($root);
+$zipOut = "$dist/culqi-{$version}.zip";
 $excludes = array_filter(
     array_map('trim', file("$root/build/exclude.txt")),
     fn($l) => $l !== '' && !str_starts_with($l, '#')
@@ -24,7 +25,7 @@ $zip->close();
 
 deleteDir("$dist/tmp");
 
-echo "✅ Build generado en dist/culqi.zip\n";
+echo "✅ Build generado en dist/culqi-{$version}.zip\n";
 
 function isExcluded(string $rel, array $excludes): bool
 {
@@ -86,4 +87,13 @@ function deleteDir(string $path): void
         $item->isDir() ? rmdir($item->getPathname()) : unlink($item->getPathname());
     }
     rmdir($path);
+}
+
+function getVersion(string $root): string
+{
+    $header = file_get_contents($root . '/index.php');
+    if (preg_match('/Version:\s*(\d+\.\d+\.\d+)/', $header, $matches)) {
+        return $matches[1];
+    }
+    return '0.0.0';
 }

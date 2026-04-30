@@ -1,8 +1,11 @@
 .git/
 dist/
 build/
+.github/
+screenshots/
 .editorconfig
 mise.toml
 .prettierrc
 .gitignore
 constants-dev.php
+readme.es.txt
