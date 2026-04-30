@@ -4,39 +4,69 @@ Nuestro plugin integra por tí nuestro Checkout v4 y nuestra librería JS 3DS, c
 
 > Recuerda que para usar cualquier plugins necesitas tener tu llave pública y llave privada (test o live), los cuales los puedes generar a través de tu Culqipanel.
 
-## Requisitos ##
+## Requisitos
 
 - PHP 7.0+
-- WooCommerce 3.0+
-- Wordpress 5.5+
+- WooCommerce 7.0+
+- Wordpress 6.1+
 - [Credenciales de Culqi](https://www.culqi.com)
-
 
 ## Instalación y activación
 
-Contamos con 2 formas de instalar nuestro complemento en tu tienda virtual:
+Contamos con 3 formas de instalar nuestro complemento en tu tienda virtual:
 
-1. Instalar automáticamente el complemento desde el MarketPlace de WordPress.
+### Opción 1: Instalar desde el MarketPlace de WordPress
 
-    Debes buscar nuestro complemento **Culqi**, pulsar instalar y luego procede a activarlo.
+Esta es la forma más sencilla:
 
-    ![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-instalar.png)
+1. En tu panel de WordPress, dirígete a **Plugins → Añadir nuevo**
+2. En el buscador de la derecha, escribe **Culqi**
+3. Cuando aparezca nuestro plugin en los resultados, haz clic en **Instalar ahora**
+4. Una vez que termine la instalación, haz clic en **Activar**
+5. Ahora podrás encontrar el plugin en **Plugins** dentro de tu panel de WordPress
 
-2. Instalar manualmente el .zip de nuestro complemento.
+### Opción 2: Instalación manual con archivo ZIP
 
-    Debes descargar el zip (.zip) de nuestro complemento desde [aquí](https://github.com/culqi/culqi-woocommerce/releases/download/vCulqi-WooCommerce/culqi-woocommerce.zip "download") y subirlo como plugin.
+Si descargaste el archivo ZIP previamente o prefieres instalar manualmente:
 
-![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-instalar-zip.png)
+1. En tu panel de WordPress, dirígete a **Plugins → Añadir nuevo**
+2. Haz clic en el botón **Subir plugin** ubicado en la parte superior de la página
+3. Selecciona el archivo ZIP del complemento que descargaste (por ejemplo, `culqi-4.0.0.zip`)
+4. Haz clic en **Instalar ahora**
+5. Una vez que termine la instalación, haz clic en **Activar plugin**
+6. Ahora podrás encontrar el plugin en **Plugins** dentro de tu panel de WordPress
 
-Luego busca el plugin instalado con el nombre de **Culqi** y procedes a activarlo.
+![Woocommerce](screenshots/woocommerce-instalar-zip.jpg)
 
-![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-activar.png)
+### Opción 3: Instalación desde código fuente
+
+Si prefieres usar el código fuente en lugar de descargar un ZIP pre-compilado, puedes construir el plugin manualmente.
+
+**Requisitos:**
+
+- [Composer](https://getcomposer.org/) instalado en tu computadora
+- PHP 7.4 o superior
+
+**Pasos:**
+
+1. Descarga o clona el código fuente del plugin desde este repositorio
+2. Abre una terminal en la carpeta raíz del proyecto
+3. Ejecuta el comando:
+
+    ```bash
+    composer run build
+    ```
+
+4. Se generará un archivo `dist/culqi-X.X.X.zip` (por ejemplo, `dist/culqi-4.0.0.zip`)
+5. Sigue los mismos pasos de la **Opción 2** para subir el ZIP a WordPress
+
+> **Nota:** Si ya tienes una versión anterior del plugin instalada, te recomendamos desactivarla y eliminarla antes de instalar la nueva versión.
 
 ## Configuración
 
 A continuación se presenta una imagen de la pantalla de configuración:
 
-![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-conf.jpg)
+![Woocommerce](screenshots/plugin-conf.jpg)
 
 Ingresa en la sección "Settings" para configurar el plugin.
 Independiente del mecanismo de instalación, los pasos para configurar el plugin son los mismos.
@@ -61,16 +91,13 @@ Independiente del mecanismo de instalación, los pasos para configurar el plugin
 
 7. Registra notificaciones de pago (Webhook): Valida en tu CulqiPanel que la URL de notificaciones de pago sea correcta.
 
-
 > Recuerda que si no iniciaste sesión en el Culqipanel desde el plugin, debes configurar manualmente la URL de Webhook con el <b>evento (order.status.changed)</b>. Sigue los pasos [aquí](https://docs.culqi.com/es/documentacion/pagos-online/webhooks/).
 
 8. Personaliza tu checkout: Con esta opción puedes cambiar los colores preestablecidos por los colores de tu marca, así como el logo.
 
-![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-preview-checkout.png)
+![Woocommerce](screenshots/plugin-preview-checkout.jpg)
 
 9. Finalmente guarda tu configuración: ¡Listo!, Tus clientes ya pueden realizar pagos a través de tu tienda virtual.
-
-![Woocommerce](https://docs.culqi.com/images/plugins/woocommerce-save.png)
 
 ## Pruebas
 
@@ -99,10 +126,10 @@ Contamos con las siguientes versiones:
         <img src="https://docs.culqi.com/images/plugins/woocommerce.svg" alt="woocommerce" /></br>
       </td>
       <td class = "px-3 py-4 font-bold text-sm">
-        2.6.11+
+        7.0+
       </td>
       <td class = "px-3 py-4 text-sm">
-        <a href='https://github.com/culqi/culqi-woocommerce/releases/download/vCulqi-WooCommerce/culqi-woocommerce.zip'>
+        <a href='https://github.com/culqi/culqi-woocommerce/releases/download/vCulqi-WooCommerce/culqi.zip'>
           Descargar
         </a>
       </td>

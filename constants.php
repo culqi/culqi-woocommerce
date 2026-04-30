@@ -14,3 +14,4 @@ define( 'TEST', 'test');
 define( 'LIVE', 'live');
 define( 'CHECKOUT_VERSION', 'custom_checkout');
 define( 'CULQI_3DS', 'culqi_3ds');
+define( 'CULQI_DEBUG', false);

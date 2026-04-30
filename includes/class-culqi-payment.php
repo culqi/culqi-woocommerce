@@ -7,8 +7,12 @@ if (!defined('ABSPATH')) {
 class WC_Gateway_Culqi extends WC_Payment_Gateway
 {
     protected $culqi_logo, $payment_methods;
+    private $logger_module = 'PAYMENT GATEWAY';
+    private $logger;
+
     public function __construct()
     {
+        $this->logger = Culqi_Logger::get_instance();
         $this->id = 'culqi';
         $this->icon = PLUGIN_CULQI_URL . 'assets/images/cards.svg';
 		$this->culqi_logo = PLUGIN_CULQI_URL . 'assets/images/culqi-logo.svg';
@@ -26,7 +30,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         add_filter('woocommerce_blocks_payment_gateway_support', array($this, 'add_blocks_support'));
     }
 
-    public function add_blocks_support($gateways) 
+    public function add_blocks_support($gateways)
     {
         $gateways[] = $this->id;
         return $gateways;
@@ -51,11 +55,23 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
                 'type' => 'textarea',
                 'default' => 'Pay securely using your Culqi account.',
             ),
+            'debug_mode' => array(
+                'title' => __('Debug Mode', 'culqi'),
+                'type' => 'checkbox',
+                'label' => __('Enable debug mode for detailed logging', 'culqi'),
+                'default' => 'no',
+                'description' => __('Only enable during development.', 'culqi'),
+            ),
         );
     }
 
     public function process_payment($order_id)
     {
+        $this->logger->info($this->logger_module, 'Starting payment process', [
+            'order_id' => $order_id,
+            'amount' => wc_get_order($order_id)->get_total(),
+            'currency' => wc_get_order($order_id)->get_currency()
+        ]);
         $token = culqi_generate_token();
         $order = wc_get_order($order_id);
         $items = $order->get_items('line_item');
@@ -143,7 +159,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
                 "ip"=>  $this->obtener_ip_real(),
                 "user_agent" =>  $user_agent,
                 "checkout_version" => $checkout_version,
-                "3ds" => $culqi_3ds,
+                "threeds" => $culqi_3ds,
                 "plugin_version" => $platform_version,
                 "cms" => $platform,
                 "cms_version" => WC()->version,
@@ -155,6 +171,8 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             ),
         );
 
+        $this->logger->info($this->logger_module, 'Send ' . $api_url);
+        $this->logger->info($this->logger_module, 'Body to send ', $body);
         $response = wp_remote_post($api_url, array(
             'method'    => 'POST',
             'body'      => wp_json_encode($body),
@@ -167,23 +185,36 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         ));
 
         if (is_wp_error($response)) {
+            $this->logger->error($this->logger_module, 'Error ' . $response);
+            $this->logger->error($this->logger_module, 'Error Body ' . json_decode(wp_remote_retrieve_body($response)));
             wc_add_notice(__('Payment error: Could not connect to the payment gateway.', 'culqi'), 'error');
             return;
         }
 
+
         $response_body = wp_remote_retrieve_body($response);
         $result = json_decode($response_body, true);
+
+        $this->logger->info($this->logger_module, 'Status: ' . wp_remote_retrieve_response_code( $response ));
+        $this->logger->info($this->logger_module, 'Body: ', $result);
 
         if (isset($result['redirect_url'])) {
             $gateway_url = $result['redirect_url'];
         } else {
+            $this->logger->warning($this->logger_module, 'Invalid gateway response - no redirect_url', [
+                'order_id' => $order_id
+            ]);
             wc_add_notice(__('Payment error: Invalid response from payment gateway.', 'culqi'), 'error');
             return;
         }
 
         $order->update_status('pending', __('Payment pending, redirecting to gateway.', 'culqi'));
         $order->save();
-        
+
+        $this->logger->info($this->logger_module, 'Order status updated to pending', [
+            'order_id' => $order_id
+        ]);
+
         return array(
             'result'     => 'success',
             'show_modal' => true,
@@ -236,7 +267,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 		return wp_kses($translated_string, $allowed_html);
 	}
 
-    public function get_icon() 
+    public function get_icon()
     {
 		?>
 			<script>
@@ -252,7 +283,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 					width: 100%;
 					align-items: center;
 					justify-content: space-between;
-					
+
 					display: inline-grid !important;
 					grid-template-columns: auto auto;
     				grid-template-rows: auto;
@@ -312,7 +343,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             $cards_img = PLUGIN_CULQI_URL . 'assets/images/cards.svg';
             $yape_img = PLUGIN_CULQI_URL . 'assets/images/yape.svg';
             $pagoefectivo_img = PLUGIN_CULQI_URL . 'assets/images/pagoefectivo.svg';
-        
+
 		?>
 
 		<div class="wc-culqi-container">
@@ -340,13 +371,17 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
     private function get_env()
     {
+        $this->logger->debug($this->logger_module, 'Getting environment from config');
         $config = culqi_get_config();
         if(!$config->env) {
+            $this->logger->warning($this->logger_module, 'Environment not configured, prompt shown to user');
             wc_add_notice(__('Debes guardar tu configuración.', 'culqi'), 'error');
             return false;
         }
 
-        return $this->getKeyType($config->env);
+        $env = $this->getKeyType($config->env);
+        $this->logger->debug($this->logger_module, 'Environment determined', ['env' => $env]);
+        return $env;
     }
 
     private function getKeyType(string $key): string {
@@ -362,14 +397,19 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         return $url . '&culqiPluginVersion=' . PLUGIN_VERSION . '&culqiClientVersion=' . WC()->version;
     }
 
-    private function obtener_ip_real() {
-        if ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-            $ip = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] )[0];
-        } elseif ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
+    private function obtener_ip_real(): string
+    {
+        $ip = '';
+
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $forwarded = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_FORWARDED_FOR']));
+            $ip = explode(',', $forwarded)[0] ?? '';
+        } elseif (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = sanitize_text_field(wp_unslash($_SERVER['HTTP_CLIENT_IP']));
+        } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
+            $ip = sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR']));
         }
-        return sanitize_text_field( $ip );
+
+        return $ip ?: 'unknown';
     }
 }
