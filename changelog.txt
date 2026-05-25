@@ -1,5 +1,14 @@
 2026-04-13 - version 4.0.1
-Fix: Include MDD fields
+Feature: Add logger for payment activity tracking
+Feature: Show friendly error message when payment fails
+Feature: Update 3DS field name for better compatibility
+Feature: Regenerate config URL on iframe reload to prevent caching
+Feature: Add build script with versioned ZIP output
+Feature: Add bilingual readme (English/Spanish)
+Fix: Include MDD fields for improved antifraud detection
+Fix: Add ignore to insert query for plugin verification
+Fix: Sanitize log outputs for security
+Refactor: Extract config URL logic into single function
 
 2026-03-01 - version 4.0.0
 Fix: New version of the plugin

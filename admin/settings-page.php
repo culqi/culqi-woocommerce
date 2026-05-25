@@ -1,6 +1,6 @@
-<?php if (!defined('ABSPATH')) exit; 
+<?php if (!defined('ABSPATH')) exit;
 
-$culqi_token = culqi_generate_token(true);
+$culqi_config_url = culqi_get_config_url();
 ?>
 
 <style>
@@ -26,8 +26,8 @@ $culqi_token = culqi_generate_token(true);
 
 <div class="wrap">
     <div class="iframe-container">
-        <iframe 
-            src="<?php echo esc_url( CULQI_CONFIG_URL . '?platform=' . PLATFORM . '&shop=' . get_site_url() . '&token=' . urlencode($culqi_token) ); ?>" 
+        <iframe
+            src="<?php echo esc_url($culqi_config_url); ?>"
             width="100%">
         </iframe>
     </div>

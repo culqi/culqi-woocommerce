@@ -2,5 +2,17 @@
     "require": {
         "phpseclib/phpseclib": "^3.0",
         "firebase/php-jwt": "6.10.0"
+    },
+    "require-dev": {
+        "php-stubs/wordpress-stubs": "^6.9",
+        "php-stubs/woocommerce-stubs": "^10.7"
+    },
+    "scripts": {
+        "build": [
+            "@install-prod",
+            "@package"
+        ],
+        "install-prod": "composer install --no-dev --optimize-autoloader --no-interaction",
+        "package": "php build/build.php"
     }
 }
