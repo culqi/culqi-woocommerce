@@ -4,8 +4,12 @@ if (!defined('ABSPATH')) {
 }
 
 define( 'PLUGIN_CULQI_URL' , plugin_dir_url(__FILE__) );
+
+define( 'PLUGIN_CULQI_PATH', plugin_dir_path(__FILE__) );
+
 define( 'CULQI_API_URL' , 'https://ag-online.culqi.com/gateway/' );
 define( 'CULQI_CONFIG_URL' , 'https://configonlineplatform.culqi.com' );
+
 define( 'EXPIRATION_TIME' , 24 );
 define( 'PLUGIN_VERSION', 'v4.0.1');
 define( 'PROCESSING', 'processing');
@@ -15,3 +19,4 @@ define( 'LIVE', 'live');
 define( 'CHECKOUT_VERSION', 'custom_checkout');
 define( 'CULQI_3DS', 'culqi_3ds');
 define( 'CULQI_DEBUG', false);
+
