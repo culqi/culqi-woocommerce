@@ -13,7 +13,7 @@
 
 jQuery(function ($) {
     $('form.checkout').on('checkout_place_order', function (e) {
-        var paymentGateway = jQuery('input[name="payment_method"]:checked').val();
+        const paymentGateway = jQuery('input[name="payment_method"]:checked').val();
 
         if (paymentGateway !== 'culqi') {
             return true; // dejar que otros gateways funcionen normal
@@ -65,7 +65,7 @@ jQuery(function ($) {
 // Habilitar botón cuando el checkout clásico termina de cargar
 jQuery(function ($) {
     $(document.body).on('updated_checkout', function () {
-        var checkoutIsReady = function () {
+        const checkoutIsReady = function () {
             return (
                 $('#place_order').length &&
                 $('.woocommerce-checkout').length &&
@@ -73,10 +73,10 @@ jQuery(function ($) {
             );
         };
 
-        var maxAttempts = 10;
-        var attempts    = 0;
+        const maxAttempts = 10;
+        let attempts     = 0;
 
-        var checkReadyState = setInterval(function () {
+        const checkReadyState = setInterval(function () {
             attempts++;
 
             if (checkoutIsReady()) {
@@ -135,7 +135,7 @@ window.addEventListener(
 );
 
 function customRedirect() {
-    var redirectUrl = window.redirectUrl;
+    const redirectUrl = window.redirectUrl;
     delete window.redirectUrl;
     window.location.href = redirectUrl;
 }
@@ -144,7 +144,7 @@ function showWooCommerceError(htmlContent) {
     jQuery('.wc-block-components-notice-banner').remove();
     jQuery('#culqi-checkout-error').remove();
 
-    var errorContainer = jQuery('<div id="culqi-checkout-error"></div>');
+    const errorContainer = jQuery('<div id="culqi-checkout-error"></div>');
     errorContainer.html(htmlContent);
 
     // Funciona en classic checkout. En block checkout los errores

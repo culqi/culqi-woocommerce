@@ -7,21 +7,21 @@
 (function () {
     'use strict';
 
-    var registerPaymentMethod = window.wc.wcBlocksRegistry.registerPaymentMethod;
-    var getSetting            = window.wc.wcSettings.getSetting;
-    var createElement         = window.wp.element.createElement;
-    var useEffect             = window.wp.element.useEffect;
-    var decodeEntities        = window.wp.htmlEntities.decodeEntities;
+    const registerPaymentMethod = window.wc.wcBlocksRegistry.registerPaymentMethod;
+    const getSetting            = window.wc.wcSettings.getSetting;
+    const createElement         = window.wp.element.createElement;
+    const useEffect             = window.wp.element.useEffect;
+    const decodeEntities        = window.wp.htmlEntities.decodeEntities;
 
-    var settings    = getSetting('culqi_data', {});
-    var label       = decodeEntities(settings.title || 'Culqi');
-    var description = decodeEntities(settings.description || '');
-    var icons       = settings.icons || [];
-    var logoUrl     = settings.logo_url || '';
+    const settings    = getSetting('culqi_data', {});
+    const label       = decodeEntities(settings.title || 'Culqi');
+    const description = decodeEntities(settings.description || '');
+    const icons       = settings.icons || [];
+    const logoUrl     = settings.logo_url || '';
 
     function abrirModalCulqi(url) {
-        var modal  = document.getElementById('order-created-modal');
-        var iframe = modal && modal.querySelector('iframe');
+        const modal  = document.getElementById('order-created-modal');
+        const iframe = modal && modal.querySelector('iframe');
 
         if (!modal || !iframe) {
             console.error('[Culqi Block] Modal #order-created-modal no encontrado. Redirigiendo...');
@@ -35,7 +35,7 @@
     }
 
     function CulqiLabel(props) {
-        var PaymentMethodLabel = props.components.PaymentMethodLabel;
+        const PaymentMethodLabel = props.components.PaymentMethodLabel;
 
         return createElement(
             'span',
@@ -77,13 +77,13 @@
     }
 
     function CulqiContent(props) {
-        var eventRegistration           = props.eventRegistration;
-        var emitResponse                = props.emitResponse;
-        var onPaymentSetup              = eventRegistration.onPaymentSetup;
-        var onAfterProcessingWithSuccess = eventRegistration.onCheckoutAfterProcessingWithSuccess;
+        const eventRegistration           = props.eventRegistration;
+        const emitResponse                = props.emitResponse;
+        const onPaymentSetup              = eventRegistration.onPaymentSetup;
+        const onAfterProcessingWithSuccess = eventRegistration.onCheckoutAfterProcessingWithSuccess;
 
         useEffect(function () {
-            var unsubscribe = onPaymentSetup(function () {
+            const unsubscribe = onPaymentSetup(function () {
                 return {
                     type: emitResponse.responseTypes.SUCCESS,
                     meta: {
@@ -98,14 +98,14 @@
         }, [onPaymentSetup, emitResponse.responseTypes.SUCCESS]);
 
         useEffect(function () {
-            var unsubscribe = onAfterProcessingWithSuccess(function (checkoutResponse) {
-                var redirectUrl = checkoutResponse && checkoutResponse.redirectUrl;
-                var orderId     = checkoutResponse && checkoutResponse.orderId;
+            const unsubscribe = onAfterProcessingWithSuccess(function (checkoutResponse) {
+                const redirectUrl = checkoutResponse && checkoutResponse.redirectUrl;
+                const orderId     = checkoutResponse && checkoutResponse.orderId;
 
                 // Fallback: si hay redirectUrl (puede llegar del Store API)
                 if (redirectUrl && redirectUrl !== window.location.href) {
                     try {
-                        var parsed = new URL(redirectUrl);
+                        const parsed = new URL(redirectUrl);
                         if (
                             parsed.hostname.indexOf('culqi.com') !== -1 ||
                             parsed.hostname.indexOf('nonprodculqi.com') !== -1
@@ -120,7 +120,7 @@
 
                 // Flujo principal: sin redirect, obtener URL via REST
                 if (orderId) {
-                    var url = settings.ajax_url + '?order_id=' + orderId;
+                    const url = settings.ajax_url + '?order_id=' + orderId;
                     fetch(url)
                         .then(function (r) { return r.json(); })
                         .then(function (data) {
