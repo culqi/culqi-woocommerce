@@ -208,12 +208,23 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             return;
         }
 
+        $is_block = isset($_POST['culqi_checkout_type']) && $_POST['culqi_checkout_type'] === 'block';
+
         $order->update_status('pending', __('Payment pending, redirecting to gateway.', 'culqi'));
+        $order->update_meta_data('_culqi_payment_url', $gateway_url);
         $order->save();
 
         $this->logger->info($this->logger_module, 'Order status updated to pending', [
             'order_id' => $order_id
         ]);
+
+        if ($is_block) {
+            return array(
+                'result' => 'success',
+                // Sin 'redirect' — WooCommerce Blocks no redirigirá.
+                // La URL se pasa via order meta + endpoint REST.
+            );
+        }
 
         return array(
             'result'     => 'success',

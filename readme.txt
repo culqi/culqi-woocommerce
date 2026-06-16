@@ -4,7 +4,7 @@ Tags: culqi, checkout, payment method, woocommerce, peru
 Donate link: https://culqi.com/
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 4.0.1
+Stable tag: 4.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -89,6 +89,12 @@ Yes. These require purchase orders, which are generated automatically. You must 
 5. Webhook configuration
 
 == Changelog ==
+
+= 4.1.0 =
+* Full compatibility with WooCommerce Block Checkout (Cart/Checkout Blocks)
+* Dynamic payment method icons (cards, Yape, PagoEfectivo) in block checkout
+* REST API endpoint to retrieve payment URL from order meta for block checkout flow
+* iframe payment modal now works on both classic and block checkout
 
 = 4.0.1 =
 * Add build script with versioned ZIP output

@@ -4,7 +4,7 @@ Tags: culqi, checkout, payment method, Perú, woocommerce
 Donate link: https://culqi.com/
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 4.0.1
+Stable tag: 4.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -98,6 +98,12 @@ Sí, para trabajar con estas opciones de pago se requiere de ordenes de compra, 
 
 
 == Changelog ==
+
+= 4.1.0 =
+* Compatibilidad completa con WooCommerce Block Checkout (Cart/Checkout Blocks)
+* Iconos dinámicos de métodos de pago (tarjetas, Yape, PagoEfectivo) en block checkout
+* Endpoint REST API para recuperar URL de pago desde los metadatos del pedido
+* El modal iframe ahora funciona tanto en checkout clásico como en block
 
 = 4.0.1 =
 * Agregar script de build con ZIP versionado
