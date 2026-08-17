@@ -95,6 +95,10 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
         $order_key = $order->get_order_key();
         $shop_domain = get_site_url();
         $api_url = CULQI_API_URL . 'shopify/public/save-order';
+
+        $checkout_url = wc_get_checkout_url();
+        $success_url = wc_get_endpoint_url('order-received', $order_id, $checkout_url);
+        $success_url = add_query_arg('key', $order_key, $success_url);
         $platform = PLATFORM;
         $platform_version = PLUGIN_VERSION;
         $checkout_version = CHECKOUT_VERSION;
@@ -115,7 +119,8 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             "payment_method" => array(
                 "type" => "offsite",
                 "data" => array(
-                    "cancel_url" => wc_get_checkout_url()
+                    "cancel_url" => wc_get_checkout_url(),
+                    "success_url" => $success_url
                 )
             ),
             "customer" => array(
@@ -148,6 +153,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
                 "locale" => "en-PE"
             ),
             "cancel_url" => wc_get_checkout_url(),
+            "success_url" => $success_url,
             "merchant_locale" => "en-PE",
             "shop_domain" =>  str_replace(['http://', 'https://'], '', $shop_domain),
             "order_key" => $order_key,
