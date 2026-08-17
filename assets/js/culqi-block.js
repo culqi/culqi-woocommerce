@@ -120,8 +120,9 @@
 
                 // Flujo principal: sin redirect, obtener URL via REST
                 if (orderId) {
-                    const url = settings.ajax_url + '?order_id=' + orderId;
-                    fetch(url)
+                    const paymentUrl = new URL(settings.ajax_url);
+                    paymentUrl.searchParams.append('order_id', orderId);
+                    fetch(paymentUrl.toString())
                         .then(function (r) { return r.json(); })
                         .then(function (data) {
                             if (data && data.url) {
