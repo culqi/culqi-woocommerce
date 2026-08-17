@@ -214,7 +214,17 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             return;
         }
 
-        $is_block = isset($_POST['culqi_checkout_type']) && $_POST['culqi_checkout_type'] === 'block';
+        $nonce = isset($_POST['woocommerce-process-checkout-nonce'])
+            ? sanitize_text_field(wp_unslash($_POST['woocommerce-process-checkout-nonce']))
+            : '';
+
+        if (!wp_verify_nonce($nonce, 'woocommerce-process-checkout')) {
+            wc_add_notice(__('Payment security check failed.', 'culqi'), 'error');
+            return;
+        }
+
+        $is_block = isset($_POST['culqi_checkout_type'])
+            && sanitize_text_field(wp_unslash($_POST['culqi_checkout_type'])) === 'block';
 
         $order->update_status('pending', __('Payment pending, redirecting to gateway.', 'culqi'));
         $order->update_meta_data('_culqi_payment_url', $gateway_url);
