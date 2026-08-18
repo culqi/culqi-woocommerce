@@ -4,17 +4,21 @@ if (!defined('ABSPATH')) {
 }
 add_action('wp_ajax_culqi_save_config', 'culqi_save_config');
 
-function culqi_save_config() 
+function culqi_save_config()
 {
+    $logger = Culqi_Logger::get_instance();
+    $logger->debug('Config', 'Config save initiated');
+
     $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
     if (empty($nonce) || !wp_verify_nonce($nonce, 'culqi_gateway_toggle')) {
+        $logger->warning('Config', 'Nonce verification failed');
         wp_send_json_error(['message' => 'Nonce verification failed.'], 403);
     }
     global $wpdb;
     $table_name = $wpdb->prefix . 'culqi_merchant_data';
 
     $data = $_POST;
-    
+
     $plugin_status = isset($data['pluginStatus']) ? $data['pluginStatus'] : null;
     $plugin_status = (bool) ($plugin_status == "true");
     $env = sanitize_text_field($data['env']);
@@ -47,7 +51,7 @@ function culqi_save_config()
             $update_data['payment_methods'] = $payment_methods;
         }
         $update_data['created_at'] = current_time('mysql');
-        
+
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
         $wpdb->update(
             $table_name,
@@ -56,21 +60,35 @@ function culqi_save_config()
         );
 
         wp_cache_delete($cache_key, 'culqi');
+
+        $logger->info('Config', 'Updating existing config', [
+            'env' => $env,
+            'fields_updated' => $update_data,
+            'table_name' => $table_name,
+        ]);
     } else {
         // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery
         $wpdb->query("TRUNCATE TABLE {$wpdb->prefix}culqi_merchant_data");
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $data = [
+            'plugin_status' => true,
+            'env' => $env,
+            'rsa_pk_culqi' => $rsa_pk_culqi,
+            'rsa_sk_plugin' => $rsa_sk_plugin,
+            'payment_methods' => $payment_methods,
+            'created_at' => current_time('mysql'),
+        ];
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery
         $wpdb->insert(
             $table_name,
-            [
-                'plugin_status' => true,
-                'env' => $env,
-                'rsa_pk_culqi' => $rsa_pk_culqi,
-                'rsa_sk_plugin' => $rsa_sk_plugin,
-                'payment_methods' => $payment_methods,
-                'created_at' => current_time('mysql'),
-            ]
+            $data
         );
+        $logger->info('Config', 'Inserting new config record', [
+            'env' => $env,
+            'data' => $data,
+            'table' => $table_name,
+        ]);
     }
 
     $available_gateways = get_option('woocommerce_gateway_order') ? get_option('woocommerce_gateway_order') : [];
@@ -88,6 +106,14 @@ function culqi_save_config()
     $culqi_settings['enabled'] = $plugin_status ? 'yes' : 'no';
 
     update_option('woocommerce_culqi_settings', $culqi_settings);
+
+    $logger->info('Config', 'Plugin status changed', [
+        'enabled' => $plugin_status
+    ]);
+
+    $logger->info('Config', 'WooCommerce settings updated', [
+        'culqi_enabled' => $plugin_status ? 'yes' : 'no'
+    ]);
 
     wp_send_json_success(['message' => 'Payment gateway updated.']);
 }

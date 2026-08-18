@@ -3,7 +3,7 @@
 Plugin Name: Culqi
 Plugin URI:https://wordpress.org/plugins/culqi-checkout
 Description: Culqi acepta pagos con tarjetas de débito y crédito, Yape, Cuotéalo BCP y PagoEfectivo (billeteras móviles, agentes y bodegas).
-Version: 4.0.0
+Version: 4.1.0
 Author: Culqi
 Author URI: https://culqi.com/
 Developer: Culqi Team
@@ -11,11 +11,11 @@ Developer URI: https://culqi.com/
 License: GPLv2 or later
 Text Domain: culqi
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 5.6
-Requires PHP: 7.0
+Tested up to: 7.0
+Stable tag: 4.1.0
+Requires PHP: 7.4
 WC requires at least: 2.6.11
-WC tested up to: 3.0.0
+WC tested up to: 9.0.0
 */
 
 if (!defined('ABSPATH')) {
@@ -26,6 +26,9 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
+if (file_exists(plugin_dir_path(__FILE__) . 'constants-dev.php')) {
+    require_once plugin_dir_path(__FILE__) . 'constants-dev.php';
+}
 require_once plugin_dir_path(__FILE__) . 'constants.php';
 require_once plugin_dir_path(__FILE__) . 'includes/db-tables.php';
 require_once plugin_dir_path(__FILE__) . 'includes/routes.php';
@@ -34,6 +37,8 @@ require_once plugin_dir_path(__FILE__) . 'includes/functions/gateway-scripts.php
 require_once plugin_dir_path(__FILE__) . 'includes/functions/iframe-modal.php';
 require_once plugin_dir_path(__FILE__) . 'includes/functions/get-config.php';
 require_once plugin_dir_path(__FILE__) . 'includes/functions/generate-token.php';
+require_once plugin_dir_path(__FILE__) . 'includes/functions/get-config-url.php';
+require_once plugin_dir_path(__FILE__) . 'includes/class-culqi-logger.php';
 
 // Activation Hook
 register_activation_hook(__FILE__, 'culqi_payment_activate');
@@ -42,7 +47,7 @@ function culqi_payment_activate() {
         deactivate_plugins(plugin_basename(__FILE__));
         wp_die('WooCommerce is required to use the Culqi Payment Gateway plugin. Please install and activate WooCommerce.');
     }
-    
+
     culqi_create_table();
 }
 
@@ -59,17 +64,19 @@ function culqi_gateway_init() {
         return;
     }
 
-    // Include the Culqi Payment Gateway Class
+    // Gateway clásico (shortcode checkout)
     require_once plugin_dir_path(__FILE__) . 'includes/class-culqi-payment.php';
-    require_once plugin_dir_path( __FILE__ ) . 'includes/block-support/class-culqi-integration.php';
-    require_once plugin_dir_path( __FILE__ ) . 'includes/block-support/class-culqi-block.php';
 
-    // Add the gateway to WooCommerce
+    // Integración con el Block Checkout
+    require_once plugin_dir_path(__FILE__) . 'includes/block-support/class-culqi-integration.php';
+    require_once plugin_dir_path(__FILE__) . 'includes/block-support/class-culqi-block.php';
+
+    // Registrar el gateway con WooCommerce
     add_filter('woocommerce_payment_gateways', 'culqi_add_culqi_gateway');
-    
+
     function culqi_add_culqi_gateway($methods)
     {
-        $methods[] = 'WC_Gateway_Culqi'; // Payment Gateway class
+        $methods[] = 'WC_Gateway_Culqi';
         return $methods;
     }
 }
@@ -82,7 +89,8 @@ add_action('before_woocommerce_init', function () {
     }
 
     if (class_exists(FeaturesUtil::class)) {
-        FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__);
+        // true = compatible con Cart/Checkout Blocks
+        FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__, true);
     }
 });
 
@@ -92,15 +100,3 @@ require_once plugin_dir_path(__FILE__) . 'includes/functions/disable-reduce-stoc
 
 // Loader
 require_once plugin_dir_path(__FILE__) . 'admin/loader.php';
-
-function culqi_enqueue_culqi_block() {
-    wp_enqueue_script(
-        'culqi-block',
-        plugins_url( 'assets/js/culqi-block.js', __FILE__ ),
-        [ 'wp-element', 'wc-blocks-registry' ],
-        '1.0.0',
-        true
-    );
-}
-add_action( 'enqueue_block_editor_assets', 'culqi_enqueue_culqi_block' );
-add_action( 'wp_enqueue_scripts', 'culqi_enqueue_culqi_block' );

@@ -1,108 +1,116 @@
 === Culqi ===
 Contributors: culqionline
-Tags: culqi, checkout, payment method, Perú, woocommerce
+Tags: culqi, checkout, payment method, woocommerce, peru
 Donate link: https://culqi.com/
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 4.0.0
+Tested up to: 7.0
+Stable tag: 4.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Short Description: Culqi accepts payments with debit and credit cards, Yape, Cuotéalo BCP, and PagoEfectivo.
+Text Domain: culqi
+Domain Path: /languages
+
+Accept payments with debit and credit cards, Yape, Cuotéalo BCP, and PagoEfectivo on WooCommerce.
 
 == Description ==
-Culqi accepts payments with debit and credit cards, Yape, Cuotéalo BCP, and PagoEfectivo (mobile wallets, agents, and stores).
+Spanish: https://github.com/culqi/culqi-woocommerce
 
-== Description ==
+Sell securely and steadily with our CulqiOnline payment gateway from your online store! We accept all cards, PagoEfectivo, major mobile wallets, and Cuotéalo BCP so your clients have all payment methods available in a single checkout.
 
-¡Vende de forma segura y estable con nuestra pasarela de pago CulqiOnline desde tu tienda virtual! Aceptamos todas las tarjetas, PagoEfectivo, las principales billeteras móviles y Cuotéalo BCP para que tus clientes tengan todos los métodos de pago disponibles en un solo checkout.
+= Benefits =
 
-<strong> Beneficios de CulqiOnline </strong>
+* **Integrate in a few steps:** Enter your CulqiPanel credentials and choose the environment where you will activate the checkout. Test as many times as you need in the integration environment with our test cards.
+* **Stability and security:** PCI-DSS certification and double security layer with our antifraud engine and 3DS authentication.
+* Personalize your checkout with your business logo and colors.
+* Control your sales through CulqiPanel.
+* Better shopping experience for your customers with our new checkout version on desktop and mobile.
 
-* <strong>Intégrate en pocos pasos: ingresa tus credenciales del CulqiPanel</strong> y elige el entorno donde activarás el checkout. Antes de habilitarlo a tus clientes, podrás probar todas las veces que necesites en el ambiente de integración con nuestras tarjetas de pruebas.
-* <strong>Estabilidad y seguridad:</strong> Contamos con certificación PCI- DSS y doble capa de seguridad con nuestro motor antifraude y autenticación 3DS.
-* Personaliza tu checkout con el logo y colores de tu negocio.
-* <strong>Control de tus ventas a través del CulqiPanel.</strong>
-* <strong>Mejor experiencia de compra para tus clientes con nuestra nueva versión de checkout en desktop y mobile.</strong>
+= Features =
 
-<strong> Funcionalidades de nuestro plugin </strong>
+Start your Culqi plugin configuration by activating Culqi Checkout. Select the environment and enter your CulqiPanel credentials. Your keys will be loaded automatically.
 
-Inicia tu configuración del plugin de Culqi activando el Culqi Checkout. Selecciona el entorno donde habilitarás el checkout e ingresa tus credenciales del CulqiPanel. Se cargarán tus llaves automáticamente. 
-Luego, marca los métodos de pagos que mostrarás en tu tienda virtual:
+Available payment methods:
 
-* Tarjetas de crédito y débito: Tus clientes solo deben deben ingresar los datos de su tarjeta y proceder a pagar.
-* Botón de pago Yape: Tus clientes podrán pagar con su número de celular.
-* Billeteras móviles. Generamos un código QR para que tus clientes paguen con su billetera electrónica.
-* Banca móvil o internet / Agentes o bodegas: Generamos un código único CIP, el cual tus clientes podrán pagar en los centros autorizados.
-* Cuotéalo BCP: Financia los pagos de tus clientes en cuotas.
+* Credit and debit cards
+* Yape payment button
+* Mobile wallets (QR code)
+* Mobile or internet banking / Agents (CIP code)
+* Cuotéalo BCP (installments)
 
-<strong>Con este plugin podrás</strong>
+With this plugin you can:
 
-* Administrar los cargos.
-* Administrar las órdenes de pago (PagoEfectivo, Billeteras Móviles, Cuotéalo).
-* Activar el checkout de Culqi como una forma de pago en tu tienda virtual.
-* Realizar reembolsos con tan solo un click desde el pedido de WooCommerce.
-* Contar con un log de actividades de Culqi para cada pedido de WooCommerce.
-* Personalizar tu Culqi checkout con los colores y logo de tu marca.
-
-
-= Available Languages =
-
-* Spanish
-
+* Manage charges
+* Manage payment orders (PagoEfectivo, Mobile Wallets, Cuotéalo)
+* Activate Culqi checkout as a payment method
+* Process refunds with one click from WooCommerce orders
+* Have an activity log for each WooCommerce order
+* Customize your checkout with your brand colors and logo
 
 == Installation ==
 
-Para iniciar la integración con CulqiOnline, realiza lo siguiente:
+1. Go to **Plugins → Add New** in your WordPress dashboard
+2. Search for **Culqi** and click Install
+3. Activate the plugin
+4. Go to **WooCommerce → Settings → Culqi**
+5. Activate Culqi Checkout, select your environment (test/live), and enter your CulqiPanel credentials
+6. Select the payment methods you want to offer
+7. Customize the checkout with your brand colors and logo
+8. Save your changes
 
-1. Selecciona la pestaña de "plugins", dirígete al buscador y digita "<strong>Culqi</strong>".
-2. Instala el plugin de <strong>Culqi</strong> y actívalo.
-3. Dirígete a la pestaña "Woocommerce", opción "Culqi", "Settings".
-4. Activa la opción de CulqiCheckout, elige el entorno donde activarás el checkout e ingresa las credenciales del CulqiPanel.
-5. Selecciona el comercio que deseas integrar y se cargarán la llave pública y privada.
-6. Selecciona los métodos de pagos que deseas mostrar en tu tienda virtual.
-7. Digita el plazo máximo que tendrá el cliente para pagar con pagoefectivo, billeteras móviles y cuotéalo BCP.
-8. Personaliza el checkout con los colores y logo de tu negocio.
-9. Guarda los cambios para visualizarlo en tu tienda virtual.
-
-
-Si necesitas ayuda durante el proceso de integración, contáctate con nuestros especialistas: team.integración@culqi.com o escríbenos al WhatsApp: 996373833
+For help, contact: team.integration@culqi.com or WhatsApp: 996373833
 
 == FAQ ==
 
-= Cómo obtengo las llaves de Culqi ? =
+= How do I get Culqi keys? =
 
-para obtener tus llaves sólo debes registrarte aqui : [https://www.culqi.com/](https://www.culqi.com/)
+Register at [https://www.culqi.com/](https://www.culqi.com/) to get your public and private keys.
 
-= Es compatible con WooCommerce ? =
+= Is it compatible with WooCommerce? =
 
-Sí, podrás hacer pagos, ordenes y reembolsos usando WooCommerce.
+Yes, you can process payments, orders, and refunds using WooCommerce.
 
-= Puedo usar PagoEfectivo, Billeteras Móviles y Cuotéalo ? =
+= Can I use PagoEfectivo, Mobile Wallets, and Cuotéalo? =
 
-Sí, para trabajar con estas opciones de pago se requiere de ordenes de compra, estos se generán en automático. Pero debes configurar un webhook para recibir las notificaciones de pago.
+Yes. These require purchase orders, which are generated automatically. You must configure a webhook to receive payment notifications.
 
-= Cómo configurar el webhook de Culqi para Multipago ? =
+= How do I configure the webhook? =
 
-- Debemos entrar al panel de Culqi e ir a la sección de `eventos` y al submenu de `webhooks`
-- Debes elegir el evento : `order.status.changed`
-- La URL que debes poner es: `https://{tuweb}/fullculqi-api/webhooks`
+1. Go to CulqiPanel → Events → Webhooks
+2. Select the event: `order.status.changed`
+3. Set the URL to: `https://yourdomain.com/fullculqi-api/webhooks`
 
 == Screenshots ==
 
-1. Configuración del plugin
-2. Personaliza tu checkout
-3. Cargos
-4. órdenes
-5. Configurar Webhook
-
+1. Plugin configuration
+2. Checkout customization
+3. Payment charges
+4. Order management
+5. Webhook configuration
 
 == Changelog ==
 
+= 4.1.0 =
+* Full compatibility with WooCommerce Block Checkout (Cart/Checkout Blocks)
+* Dynamic payment method icons (cards, Yape, PagoEfectivo) in block checkout
+* REST API endpoint to retrieve payment URL from order meta for block checkout flow
+* iframe payment modal now works on both classic and block checkout
+
+= 4.0.1 =
+* Add build script with versioned ZIP output
+* Add bilingual readme (English/Spanish)
+* Add local screenshots for documentation
+* Update README with installation options
+
+= 4.0.0 =
+* Updated to WooCommerce latest version
+* Improved checkout experience
+
 = 1.0.0 =
-* Feature: Custom Checkout V4
-* Feature: 3DS
+* Initial release
+* Custom Checkout V4
+* 3DS support
 
 == Upgrade Notice ==
 
-El plugin cuenta con la integración de Culqi Custom Checkout y Culqi 3DS
+This plugin requires WooCommerce 2.6.11 or higher.

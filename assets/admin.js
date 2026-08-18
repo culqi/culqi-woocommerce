@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
                 }
             });
         }, 500)
-       
+
     });
     //
     window.addEventListener('message', function(event) {
@@ -72,8 +72,26 @@ jQuery(document).ready(function($) {
             });
         }
         //if (event.origin !== 'http://localhost:5173') return;
-        if (event.data.action === 'reload') {
-            location.reload();
+        if (event.data.action === "reload") {
+            var iframe = document.querySelector(".iframe-container iframe");
+            jQuery.ajax({
+                url: culqiGatewayAjax.ajax_url,
+                type: "POST",
+                data: {
+                    action: "culqi_get_config_url",
+                    nonce: culqiGatewayAjax.nonce,
+                },
+                success: function (response) {
+                    if (response.success && response.data.url) {
+                        iframe.src = response.data.url;
+                    } else {
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    location.reload();
+                },
+            });
         }
     }, false);
 });
