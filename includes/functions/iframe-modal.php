@@ -17,6 +17,9 @@ if (!defined('ABSPATH')) {
  * El iframe arranca con src="#" y gateway.js / culqi-block.js asignan la URL real.
  */
 function culqi_custom_order_created_modal() {
+    static $rendered = false;
+    if ($rendered) { return; }
+    $rendered = true;
     ?>
     <div id="order-created-modal" style="display:none;">
         <div class="modal-content">
