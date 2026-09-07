@@ -206,6 +206,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
         if (isset($result['redirect_url'])) {
             $gateway_url = $result['redirect_url'];
+            $gateway_url = add_query_arg('shop_name', urlencode(get_bloginfo('name')), $gateway_url);
         } else {
             $this->logger->warning($this->logger_module, 'Invalid gateway response - no redirect_url', [
                 'order_id' => $order_id
