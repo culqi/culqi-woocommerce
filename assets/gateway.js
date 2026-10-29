@@ -130,6 +130,49 @@ function enableButton() {
     jQuery('#place_order').prop('disabled', false);
 }
 
+function culqiIsBlockCheckout() {
+    return !!(
+        document.querySelector('.wc-block-checkout') ||
+        document.querySelector('.wc-block-checkout__actions_row')
+    );
+}
+
+function culqiResetBlockCheckout() {
+    const wpData = window.wp && window.wp.data;
+
+    if (!wpData || typeof wpData.dispatch !== 'function') {
+        return false;
+    }
+
+    const blocksData = window.wc && window.wc.wcBlocksData;
+    const storeKey =
+        (blocksData && (blocksData.checkoutStore || blocksData.CHECKOUT_STORE_KEY)) ||
+        'wc/store/checkout';
+
+    try {
+        const store = wpData.dispatch(storeKey);
+
+        if (!store) {
+            return false;
+        }
+
+        const setIdle =
+            typeof store.__internalSetIdle === 'function'
+                ? store.__internalSetIdle
+                : store.setIdle;
+
+        if (typeof setIdle !== 'function') {
+            return false;
+        }
+
+        setIdle.call(store);
+        return true;
+    } catch (error) {
+        console.warn('[Culqi] No se pudo reiniciar el checkout Block:', error);
+        return false;
+    }
+}
+
 // postMessage listener — compartido por Classic y Block Checkout
 //
 // El iframe de Culqi envía mensajes via postMessage para comunicar eventos:
@@ -166,6 +209,10 @@ window.addEventListener(
             jQuery('.woocommerce-loader').removeClass('flex');
             if (window.redirectUrl) {
                 customRedirect();
+                return;
+            }
+            if (culqiIsBlockCheckout() && !culqiResetBlockCheckout()) {
+                window.location.reload();
             }
         }
     },
