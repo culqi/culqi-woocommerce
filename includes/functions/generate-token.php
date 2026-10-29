@@ -83,7 +83,7 @@ function culqi_verify_jwt_token($token)
             throw new Exception('Invalid Base64 token.');
         }
         $decrypted = '';
-        $success = openssl_private_decrypt($encryptedToken, $decrypted, $config->rsa_sk_plugin, OPENSSL_PKCS1_OAEP_PADDING);
+        $success = openssl_private_decrypt($encryptedToken, $decrypted, $config->rsa_sk_plugin ?? '', OPENSSL_PKCS1_OAEP_PADDING);
         if (!$success) {
             throw new Exception('Failed to decrypt the token.');
         }

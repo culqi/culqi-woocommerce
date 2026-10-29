@@ -17,6 +17,10 @@ add_action('wp_ajax_culqi_gateway_toggle', 'culqi_gateway_toggle_action');
 
 function culqi_gateway_toggle_action() 
 {
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error(['message' => 'No permission.'], 403);
+    }
+
     $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
     if (empty($nonce) || !wp_verify_nonce($nonce, 'culqi_gateway_toggle')) {
         wp_send_json_error(['message' => 'Nonce verification failed.'], 403);
@@ -28,30 +32,32 @@ function culqi_gateway_toggle_action()
 
     $plugin_status = ($enabled === 'yes');
     $table_name = esc_sql($wpdb->prefix . 'culqi_merchant_data');
-    $limit = 1;
-    $cache_key = 'culqi_merchant_data_' . $limit;
-    $existing_user = wp_cache_get($cache_key, 'culqi');
+    $existing_user = culqi_get_config();
 
-    if ($existing_user === false) {
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $existing_user = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM {$wpdb->prefix}culqi_merchant_data LIMIT %d", $limit)
-        );
-        wp_cache_set($cache_key, $existing_user, 'culqi', HOUR_IN_SECONDS);
+    if (!isset($existing_user->id)) {
+        wp_send_json_error(['message' => 'Config not found.'], 404);
     }
-    
+
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-    $wpdb->update(
+    $updated = $wpdb->update(
         $table_name,
         [
             'plugin_status' => $plugin_status,
             'updated_at' => current_time('mysql'),
         ],
-        ['id' => $existing_user[0]->id],
+        ['id' => (int) $existing_user->id],
         ['%d', '%s'],
         ['%d']
     );
-    wp_cache_delete($cache_key, 'culqi');
+
+    if ($updated === false) {
+        $logger = Culqi_Logger::get_instance();
+        $logger->error('Config', 'Failed to update plugin status', [
+            'id' => (int) $existing_user->id,
+            'error' => $wpdb->last_error,
+        ]);
+        wp_send_json_error(['message' => 'Failed to update plugin status.'], 500);
+    }
 
     wp_send_json_success(['message' => 'Toggle state updated to ' . $enabled]);
 }

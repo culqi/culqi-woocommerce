@@ -6,6 +6,10 @@ add_action('wp_ajax_culqi_save_config', 'culqi_save_config');
 
 function culqi_save_config()
 {
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error(['message' => 'No permission.'], 403);
+    }
+
     $logger = Culqi_Logger::get_instance();
     $logger->debug('Config', 'Config save initiated');
 
@@ -21,75 +25,88 @@ function culqi_save_config()
 
     $plugin_status = isset($data['pluginStatus']) ? $data['pluginStatus'] : null;
     $plugin_status = (bool) ($plugin_status == "true");
-    $env = sanitize_text_field($data['env']);
+    $env = sanitize_text_field($data['env'] ?? '');
     $rsa_pk_culqi = isset($data['rsa_pk_culqi']) ? $data['rsa_pk_culqi'] : null;
     $rsa_sk_plugin = isset($data['rsa_sk_plugin']) ? $data['rsa_sk_plugin'] : null;
     $payment_methods = isset($data['payment_methods']) ? sanitize_text_field($data['payment_methods']) : null;
 
-    $limit = 1;
-    $cache_key = 'culqi_merchant_data_' . $limit;
-    $existing_entry = wp_cache_get($cache_key, 'culqi');
-    if ($existing_entry === false || is_null($existing_entry)) {
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $existing_entry = $wpdb->get_var(
-            $wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->prefix}culqi_merchant_data WHERE env = %s", $env)
-        );
-        wp_cache_set($cache_key, $existing_entry, 'culqi', HOUR_IN_SECONDS);
+    if (empty($env)) {
+        $logger->warning('Config', 'Missing env/public key, config not saved');
+        wp_send_json_error(['message' => 'Missing env/public key.'], 400);
     }
-    if ($existing_entry > 0) {
-        $update_data = [];
-        if (!is_null($plugin_status)) {
-            $update_data['plugin_status'] = $plugin_status;
-        }
-        if (!is_null($rsa_pk_culqi)) {
-            $update_data['rsa_pk_culqi'] = $rsa_pk_culqi;
-        }
-        if (!is_null($rsa_sk_plugin)) {
-            $update_data['rsa_sk_plugin'] = $rsa_sk_plugin;
-        }
-        if (!is_null($payment_methods)) {
-            $update_data['payment_methods'] = $payment_methods;
-        }
-        $update_data['created_at'] = current_time('mysql');
 
+    $existing_config = culqi_get_config();
+
+    if (empty($rsa_pk_culqi) && !empty($existing_config->rsa_pk_culqi)) {
+        $rsa_pk_culqi = $existing_config->rsa_pk_culqi;
+    }
+    if (empty($rsa_sk_plugin) && !empty($existing_config->rsa_sk_plugin)) {
+        $rsa_sk_plugin = $existing_config->rsa_sk_plugin;
+    }
+    if (empty($payment_methods) && !empty($existing_config->payment_methods)) {
+        $payment_methods = $existing_config->payment_methods;
+    }
+
+    $data = [
+        'plugin_status' => (int) $plugin_status,
+        'env' => $env,
+        'rsa_pk_culqi' => $rsa_pk_culqi,
+        'rsa_sk_plugin' => $rsa_sk_plugin,
+        'payment_methods' => $payment_methods,
+        'created_at' => current_time('mysql'),
+    ];
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+    $wpdb->query('START TRANSACTION');
+
+    // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery
+    $deleted = $wpdb->query("DELETE FROM {$wpdb->prefix}culqi_merchant_data");
+
+    if ($deleted === false) {
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $wpdb->update(
-            $table_name,
-            $update_data,
-            ['env' => $env]
-        );
-
-        wp_cache_delete($cache_key, 'culqi');
-
-        $logger->info('Config', 'Updating existing config', [
+        $wpdb->query('ROLLBACK');
+        $logger->error('Config', 'Failed to delete previous config record', [
             'env' => $env,
-            'fields_updated' => $update_data,
-            'table_name' => $table_name,
-        ]);
-    } else {
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $wpdb->query("TRUNCATE TABLE {$wpdb->prefix}culqi_merchant_data");
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $data = [
-            'plugin_status' => true,
-            'env' => $env,
-            'rsa_pk_culqi' => $rsa_pk_culqi,
-            'rsa_sk_plugin' => $rsa_sk_plugin,
-            'payment_methods' => $payment_methods,
-            'created_at' => current_time('mysql'),
-        ];
-
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery
-        $wpdb->insert(
-            $table_name,
-            $data
-        );
-        $logger->info('Config', 'Inserting new config record', [
-            'env' => $env,
-            'data' => $data,
+            'error' => $wpdb->last_error,
             'table' => $table_name,
         ]);
+        wp_send_json_error(['message' => 'Failed to save config.'], 500);
     }
+
+    $inserted = $wpdb->insert(
+        $table_name,
+        $data,
+        ['%d', '%s', '%s', '%s', '%s', '%s']
+    );
+
+    if ($inserted === false) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $wpdb->query('ROLLBACK');
+        $logger->error('Config', 'Failed to insert config record', [
+            'env' => $env,
+            'error' => $wpdb->last_error,
+            'table' => $table_name,
+        ]);
+        wp_send_json_error(['message' => 'Failed to save config.'], 500);
+    }
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+    $committed = $wpdb->query('COMMIT');
+
+    if ($committed === false) {
+        $logger->error('Config', 'Failed to commit config record', [
+            'env' => $env,
+            'error' => $wpdb->last_error,
+            'table' => $table_name,
+        ]);
+        wp_send_json_error(['message' => 'Failed to save config.'], 500);
+    }
+
+    $logger->info('Config', 'Config record saved', [
+        'env' => $env,
+        'fields' => array_keys($data),
+        'table' => $table_name,
+    ]);
 
     $available_gateways = get_option('woocommerce_gateway_order') ? get_option('woocommerce_gateway_order') : [];
     if ($plugin_status) {
