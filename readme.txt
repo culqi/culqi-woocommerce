@@ -4,7 +4,7 @@ Tags: culqi, checkout, payment method, woocommerce, peru
 Donate link: https://culqi.com/
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 4.1.0
+Stable tag: 4.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -90,11 +90,22 @@ Yes. These require purchase orders, which are generated automatically. You must 
 
 == Changelog ==
 
+= 4.1.1 =
+* Store name is now displayed in the checkout
+* Bug fixes for the new WooCommerce Block Checkout
+* Added a fallback to render the checkout when the theme overrides WooCommerce hooks
+* Added success_url so customers return to the order received page after payment
+* Hardened merchant configuration persistence and access control
+* Prevented duplicate requests and duplicate modal markup in classic checkout
+* Block Checkout payment URL is now built using the URL API
+
 = 4.1.0 =
 * Full compatibility with WooCommerce Block Checkout (Cart/Checkout Blocks)
 * Dynamic payment method icons (cards, Yape, PagoEfectivo) in block checkout
 * REST API endpoint to retrieve payment URL from order meta for block checkout flow
 * iframe payment modal now works on both classic and block checkout
+* Confirmed payments now use WooCommerce native payment_complete() flow, with idempotency to avoid duplicate processing and stock reduction
+* Improved webhook status validation
 
 = 4.0.1 =
 * Add build script with versioned ZIP output
