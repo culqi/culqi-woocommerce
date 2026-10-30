@@ -20,6 +20,11 @@
     const logoUrl     = settings.logo_url || '';
 
     function abrirModalCulqi(url) {
+        // Fallback: crear modal dinámicamente si no existe (theme conflict)
+        if (typeof window.culqiEnsureModal === 'function') {
+            window.culqiEnsureModal('#');
+        }
+
         const modal  = document.getElementById('order-created-modal');
         const iframe = modal && modal.querySelector('iframe');
 

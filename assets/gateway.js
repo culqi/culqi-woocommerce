@@ -11,6 +11,40 @@
  * @package Culqi
  */
 
+/**
+ * Crea el modal #order-created-modal dinámicamente si no existe en el DOM.
+ * Acts as fallback para themes (ej: Woodmart/WPBakery) que no ejecutan
+ * woocommerce_before_checkout_form, evitando que el modal no esté presente.
+ *
+ * Es idempotente: si el PHP ya lo insertó via hook, no duplica.
+ *
+ * @param {string} iframeSrc URL inicial del iframe (default "#")
+ */
+window.culqiEnsureModal = function culqiEnsureModal(iframeSrc) {
+    if (document.getElementById('order-created-modal')) {
+        return;
+    }
+    var modal = document.createElement('div');
+    modal.id = 'order-created-modal';
+    modal.style.cssText = [
+        'position:fixed',
+        'top:0',
+        'left:0',
+        'width:100%',
+        'height:100%',
+        'background:rgba(0,0,0,0.6)',
+        'display:flex',
+        'justify-content:center',
+        'align-items:center',
+        'z-index:999999'
+    ].join(';');
+    modal.innerHTML = '<div class="modal-content" style="width:90%;height:90%;background:#fff;border-radius:8px;overflow:hidden;">'
+        + '<iframe allowtransparency="true" style="background:transparent;width:100%;height:100%;border:none;border-radius:8px;" src="'
+        + (iframeSrc || '#')
+        + '"></iframe></div>';
+    document.body.appendChild(modal);
+}
+
 jQuery(function ($) {
     $('form.checkout').on('checkout_place_order', function (e) {
         const paymentGateway = jQuery('input[name="payment_method"]:checked').val();
@@ -30,9 +64,10 @@ jQuery(function ($) {
             success: function (response) {
                 if (response.result === 'success') {
                     if (response.show_modal) {
-                        // Abrir iframe modal con la URL de Culqi
-                        $('#order-created-modal').fadeIn();
+                        // Fallback: crear modal dinámicamente si no existe (theme conflict)
+                        culqiEnsureModal('#');
                         $('#order-created-modal iframe').attr('src', response.redirect);
+                        $('#order-created-modal').fadeIn();
                         $('body').addClass('no-scroll');
                     } else {
                         window.location.href = response.redirect;
@@ -95,6 +130,49 @@ function enableButton() {
     jQuery('#place_order').prop('disabled', false);
 }
 
+function culqiIsBlockCheckout() {
+    return !!(
+        document.querySelector('.wc-block-checkout') ||
+        document.querySelector('.wc-block-checkout__actions_row')
+    );
+}
+
+function culqiResetBlockCheckout() {
+    const wpData = window.wp && window.wp.data;
+
+    if (!wpData || typeof wpData.dispatch !== 'function') {
+        return false;
+    }
+
+    const blocksData = window.wc && window.wc.wcBlocksData;
+    const storeKey =
+        (blocksData && (blocksData.checkoutStore || blocksData.CHECKOUT_STORE_KEY)) ||
+        'wc/store/checkout';
+
+    try {
+        const store = wpData.dispatch(storeKey);
+
+        if (!store) {
+            return false;
+        }
+
+        const setIdle =
+            typeof store.__internalSetIdle === 'function'
+                ? store.__internalSetIdle
+                : store.setIdle;
+
+        if (typeof setIdle !== 'function') {
+            return false;
+        }
+
+        setIdle.call(store);
+        return true;
+    } catch (error) {
+        console.warn('[Culqi] No se pudo reiniciar el checkout Block:', error);
+        return false;
+    }
+}
+
 // postMessage listener — compartido por Classic y Block Checkout
 //
 // El iframe de Culqi envía mensajes via postMessage para comunicar eventos:
@@ -123,11 +201,18 @@ window.addEventListener(
         }
 
         if (event.data.action === 'closeModal') {
-            jQuery('#order-created-modal').fadeOut();
+            const modal = document.getElementById('order-created-modal');
+            if (modal) {
+                jQuery(modal).fadeOut();
+            }
             jQuery('body').removeClass('no-scroll');
             jQuery('.woocommerce-loader').removeClass('flex');
             if (window.redirectUrl) {
                 customRedirect();
+                return;
+            }
+            if (culqiIsBlockCheckout() && !culqiResetBlockCheckout()) {
+                window.location.reload();
             }
         }
     },
