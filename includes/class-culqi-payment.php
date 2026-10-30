@@ -73,6 +73,13 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
             'currency' => wc_get_order($order_id)->get_currency()
         ]);
         $token = culqi_generate_token();
+        if (empty($token)) {
+            $this->logger->error($this->logger_module, 'Could not generate payment token', [
+                'order_id' => $order_id,
+            ]);
+            wc_add_notice(__('No se pudo generar el token de pago. Vuelve a guardar la configuración de Culqi.', 'culqi'), 'error');
+            return;
+        }
         $order = wc_get_order($order_id);
         $items = $order->get_items('line_item');
         $products = null;
@@ -206,6 +213,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
 
         if (isset($result['redirect_url'])) {
             $gateway_url = $result['redirect_url'];
+            $gateway_url = add_query_arg('shop_name', urlencode(get_bloginfo('name')), $gateway_url);
         } else {
             $this->logger->warning($this->logger_module, 'Invalid gateway response - no redirect_url', [
                 'order_id' => $order_id
@@ -391,7 +399,7 @@ class WC_Gateway_Culqi extends WC_Payment_Gateway
     {
         $this->logger->debug($this->logger_module, 'Getting environment from config');
         $config = culqi_get_config();
-        if(!$config->env) {
+        if(empty($config->env)) {
             $this->logger->warning($this->logger_module, 'Environment not configured, prompt shown to user');
             wc_add_notice(__('Debes guardar tu configuración.', 'culqi'), 'error');
             return false;

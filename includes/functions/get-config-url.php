@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 function culqi_get_config_url(): string
 {
     $culqi_token = culqi_generate_token(true);
-    return CULQI_CONFIG_URL . '?platform=' . PLATFORM . '&shop=' . get_site_url() . '&token=' . urlencode($culqi_token);
+    return CULQI_CONFIG_URL . '?platform=' . PLATFORM . '&shop=' . get_site_url() . '&shop_name=' . urlencode(get_bloginfo('name')) . '&token=' . urlencode($culqi_token);
 }
 
 function culqi_get_config_url_ajax()

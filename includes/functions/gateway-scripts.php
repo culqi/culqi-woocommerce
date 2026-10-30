@@ -10,7 +10,7 @@ function culqi_payment_enqueue_scripts() {
         wp_enqueue_script(
             'culqi-script',
             plugin_dir_url(__FILE__) . '../../assets/gateway.js',
-            ['wp-data', 'wc-blocks-checkout'],
+            [],
             PLUGIN_VERSION,
             true
         );
